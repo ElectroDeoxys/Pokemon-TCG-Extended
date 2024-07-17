@@ -1,4 +1,4 @@
-rom := poketcg.gbc
+rom := tinytcg.gbc
 
 rom_obj := \
 	src/main.o \
@@ -33,8 +33,8 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDARY:
 .PHONY: all tcg clean tidy compare tools
 
-all: $(rom) compare
-tcg: $(rom) compare
+all: $(rom)
+tcg: $(rom)
 
 clean: tidy
 	find src/gfx \
@@ -167,6 +167,5 @@ src/gfx/titlescreen/title_screen_cgb.2bpp: rgbgfx += -x 12
 %.bgmap: %.bin ../dimensions/%.dimensions
 	tools/bgmap $(tools/bgmap) $^ $@
 
-# remove -m if you don't care for matching
 %.lz: %
-	tools/compressor -m $(tools/compressor) $< $@
+	tools/compressor $(tools/compressor) $< $@
