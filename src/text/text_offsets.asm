@@ -811,7 +811,7 @@ TextOffsets::
 	textpointer AllDataWasDeletedText
 	textpointer DataExistsWhenPowerWasTurnedOFFDuringDuelText
 	textpointer ContinueFromDiaryText
-	textpointer YouCanAccessCardPopOnlyWithGameBoyColorsText
+	textpointer ExclusiveToGameBoyColorsText
 	textpointer IsCrazyAboutPokemonAndPokemonCardCollectingText
 	textpointer DebugMenuText
 	textpointer DebugDuelModeMenuText

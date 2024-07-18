@@ -1230,10 +1230,9 @@ ContinueFromDiaryText:
 	text "CONTINUE FROM DIARY?"
 	done
 
-YouCanAccessCardPopOnlyWithGameBoyColorsText:
-	text "You can access Card Pop! only"
-	line "with two Game Boy Colors."
-	line "Please play using a Game Boy Color."
+ExclusiveToGameBoyColorsText:
+	text "This game is exclusive"
+	line "to the Game Boy Color."
 	done
 
 IsCrazyAboutPokemonAndPokemonCardCollectingText:

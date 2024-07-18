@@ -351,29 +351,6 @@ AskToContinueFromDiaryWithDuelData:
 	or a
 	ret
 
-; shows disclaimer for Card Pop!
-; in case player is not playing in CGB
-; return carry if disclaimer was shown
-ShowCardPopCGBDisclaimer:
-; return if playing in CGB
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	ret z
-
-	lb de, 0, 10
-	lb bc, 20, 8
-	call DrawRegularTextBox
-	lb de, 1,12
-	call InitTextPrinting
-	ldtx hl, YouCanAccessCardPopOnlyWithGameBoyColorsText
-	call PrintTextNoDelay
-	lb bc, SYM_CURSOR_D, SYM_BOX_BOTTOM
-	lb de, 18, 17
-	call SetCursorParametersForTextBox
-	call WaitForButtonAorB
-	scf
-	ret
-
 DrawPlayerPortraitAndPrintNewGameText:
 	call DisableLCD
 	farcall LoadConsolePaletteData
