@@ -183,10 +183,6 @@ DiscardName:
 	text "Discard"
 	done
 
-IncompleteText:
-	text "Incomplete"
-	done
-
 UsedText:
 	text "Used <RAMTEXT>."
 	done

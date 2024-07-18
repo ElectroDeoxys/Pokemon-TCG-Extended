@@ -2083,24 +2083,6 @@ OpenCardPageFromCardList:
 	ld [wTempCardListCursorPos], a
 	ret
 
-; opens card page from the card list
-Func_9ced: ; unreferenced
-	ld hl, wVisibleListCardIDs
-	ld a, [wCardListCursorPos]
-	ld c, a
-	ld b, $00
-	add hl, bc
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	call LoadCardDataToBuffer1_FromCardID
-	ld de, $389f
-	call SetupText
-	bank1call OpenCardPage_FromHand
-	ld a, $01
-	ld [wVBlankOAMCopyToggle], a
-	ret
-
 ; adds card in register e to deck configuration
 ; and updates the values shown for its count
 ; in the card selection list

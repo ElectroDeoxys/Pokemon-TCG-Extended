@@ -1397,12 +1397,6 @@ DrawSymbolOnPlayAreaCursor:
 	call WriteByteToBGMap0
 	ret
 
-; possibly unreferenced
-Func_2c6d9:
-	ldtx hl, IncompleteText
-	call DrawWideTextBox_WaitForInput
-	ret
-
 PlayAreaSelectionMenuParameters:
 	db 0, 0 ; cursor x, cursor y
 	db 3 ; y displacement between items
@@ -3991,27 +3985,6 @@ FireSpin_DiscardEffect:
 	call PutCardInDiscardPile
 	ld a, [hli]
 	call PutCardInDiscardPile
-	ret
-
-; returns carry if Pkmn Power cannot be used
-; or if Arena card is not Charizard.
-; this is unused.
-EnergyBurnCheck_Unreferenced:
-	xor a
-	bank1call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
-	ret c
-	ld a, DUELVARS_ARENA_CARD
-	push de
-	call GetTurnDuelistVariable
-	call GetCardIDFromDeckIndex
-	ld a, e
-	pop de
-	cp CHARIZARD
-	jr nz, .not_charizard
-	or a
-	ret
-.not_charizard
-	scf
 	ret
 
 FlareonRage_AIEffect:
@@ -8528,34 +8501,6 @@ DragoniteLv41Slam_MultiplierEffect:
 	add c
 	call ATimes10
 	call SetDefiniteDamage
-	ret
-
-CopyPlayAreaHPToBackup_Unreferenced:
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld c, a
-	ld l, DUELVARS_ARENA_CARD_HP
-	ld de, wBackupPlayerAreaHP
-.loop_play_area
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop_play_area
-	ret
-
-CopyPlayAreaHPFromBackup_Unreferenced:
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ld c, a
-	ld l, DUELVARS_ARENA_CARD_HP
-	ld de, wBackupPlayerAreaHP
-.asm_2efd9
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	jr nz, .asm_2efd9
 	ret
 
 CatPunchEffect:

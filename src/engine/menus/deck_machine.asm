@@ -1107,30 +1107,6 @@ PrintNumSavedDecks:
 	call ProcessText
 	ret
 
-; prints "X/Y" where X is the current list index
-; and Y is the total number of saved decks
-; unreferenced?
-Func_b568:
-	ld a, [wCardListCursorPos]
-	ld b, a
-	ld a, [wCardListVisibleOffset]
-	add b
-	inc a
-	ld hl, wDefaultText
-	call ConvertToNumericalDigits
-	ld a, TX_SYMBOL
-	ld [hli], a
-	ld a, SYM_SLASH
-	ld [hli], a
-	ld a, [wNumSavedDecks]
-	call ConvertToNumericalDigits
-	ld [hl], TX_END
-	lb de, 14, 1
-	call InitTextPrinting
-	ld hl, wDefaultText
-	call ProcessText
-	ret
-
 ; handles player choice in what deck to save
 ; in the Deck Save Machine
 ; assumes the slot to save was selected and

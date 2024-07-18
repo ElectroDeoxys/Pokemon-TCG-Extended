@@ -71,7 +71,6 @@ DebugCredits:
 	ret
 
 DebugCGBTest:
-	farcall Func_1c865
 	scf
 	ret
 

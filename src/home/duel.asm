@@ -1583,17 +1583,6 @@ PlayAttackAnimation_DealAttackDamage::
 	call PrintKnockedOutIfHLZero
 	jr HandleAfterDamageEffects
 
-; unreferenced
-Func_17ed::
-	call DrawWideTextBox_WaitForInput
-	xor a
-	ld hl, wDamage
-	ld [hli], a
-	ld [hl], a
-	ld a, NO_DAMAGE_OR_EFFECT_AGILITY
-	ld [wNoDamageOrEffect], a
-;	fallthrough
-
 HandleAfterDamageEffects::
 	ld a, [wTempNonTurnDuelistCardID]
 	push af

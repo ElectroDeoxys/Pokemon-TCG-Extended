@@ -353,14 +353,6 @@ DuelMenuFunctionTable:
 	dw DuelMenu_Retreat
 	dw DuelMenu_Done
 
-; unreferenced
-UnreferencedDrawCardFromDeckToHand:
-	call DrawCardFromDeck
-	call nc, AddCardToHand
-	ld a, OPPACTION_DRAW_CARD
-	call SetOppAction_SerialSendDuelData
-	jp PrintDuelMenuAndHandleInput.menu_items_printed
-
 ; triggered by pressing B + UP in the duel menu
 DuelMenuShortcut_OpponentPlayArea:
 	call OpenNonTurnHolderPlayAreaScreen
@@ -3021,9 +3013,6 @@ DisplayDuelistTurnScreen:
 	call ExchangeRNG
 	ret
 
-Unknown_54e2: ; unreferenced
-	db $00, $0c, $06, $0f, $00, $00, $00
-
 DuelMenuData:
 	; x, y, text id
 	textitem 3,  14, HandText
@@ -5137,19 +5126,6 @@ SelectingBenchPokemonMenu:
 	ld e, 16
 	lb bc, SYM_CURSOR_R, SYM_SPACE
 	jp SetCursorParametersForTextBox
-
-; unreferenced
-Func_616e:
-	ldh [hTempPlayAreaLocation_ff9d], a
-	call ZeroObjectPositionsAndToggleOAMCopy
-	call EmptyScreen
-	call LoadDuelCardSymbolTiles
-	call LoadDuelCheckPokemonScreenTiles
-	xor a
-	ld [wExcludeArenaPokemon], a
-	call PrintPlayAreaCardList
-	call EnableLCD
-;	fallthrough
 
 Func_6186:
 	ld hl, wCurPlayAreaSlot
@@ -8114,88 +8090,6 @@ Func_7344:
 
 BuildVersion:
 	db "VER 12/20 09:36", TX_END
-
-; possibly unreferenced, used for testing
-; enters computer opponent selection screen
-; handles input to select/cancel/scroll through deck IDs
-; loads the NPC duel configurations if one was selected
-; returns carry if selection was cancelled
-Func_7364:
-	xor a
-	ld [wTileMapFill], a
-	call ZeroObjectPositionsAndToggleOAMCopy
-	call EmptyScreen
-	call LoadSymbolsFont
-	lb de, $38, $9f
-	call SetupText
-	call DrawWideTextBox
-	call EnableLCD
-
-	xor a
-	ld [wOpponentDeckID], a
-	call DrawOpponentSelectionScreen
-.wait_input
-	call DoFrame
-	ldh a, [hDPadHeld]
-	or a
-	jr z, .wait_input
-	ld b, a
-
-	; handle selection/cancellation buttons
-	and A_BUTTON | START
-	jr nz, .select_opp
-	bit B_BUTTON_F, b
-	jr nz, .cancel
-
-; handle D-pad inputs
-; check right
-	ld a, [wOpponentDeckID]
-	bit D_RIGHT_F, b
-	jr z, .check_left
-	inc a ; next deck ID
-	cp NUM_DECK_IDS
-	jr c, .check_left
-	xor a ; wrap around to first deck ID
-
-.check_left
-	bit D_LEFT_F, b
-	jr z, .check_up
-	or a
-	jr nz, .not_first_deck_id
-	ld a, NUM_DECK_IDS - 1 ; wrap around to last deck ID
-	jr .check_up
-.not_first_deck_id
-	dec a ; previous deck ID
-
-.check_up
-	bit D_UP_F, b
-	jr z, .check_down
-	add 10
-	cp NUM_DECK_IDS
-	jr c, .check_down
-	xor a ; wrap around to first deck ID
-
-.check_down
-	bit D_DOWN_F, b
-	jr z, .got_deck_id
-	sub 10
-	jr nc, .got_deck_id
-	ld a, NUM_DECK_IDS - 1; wrap around to last deck ID
-
-.got_deck_id
-	ld [wOpponentDeckID], a
-	call DrawOpponentSelectionScreen
-	jr .wait_input
-
-.cancel
-	scf
-	ret
-.select_opp
-	ld a, [wOpponentDeckID]
-	ld [wNPCDuelDeckID], a
-	call GetNPCDuelConfigurations
-	or a
-	ret
 
 ; draws the current opponent to be selected
 ; (his/her portrait and name)

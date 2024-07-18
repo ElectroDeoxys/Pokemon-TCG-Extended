@@ -473,19 +473,6 @@ CheckIfCurDeckIsValid:
 	scf
 	ret ; is not valid
 
-; write to $d00a the decimal representation (number characters)
-; of the value in hl
-; unreferenced?
-Func_9001:
-	ld de, $d00a
-	ld bc, -100
-	call .GetNumberChar
-	ld bc, -10
-	call .GetNumberChar
-	ld bc, -1
-	call .GetNumberChar
-	ret
-
 .GetNumberChar
 	ld a, SYM_0 - 1
 .loop

@@ -1510,11 +1510,6 @@ wPrizeCardSelectionFrameCounter:: ; ce9a
 wPrintOnlyStarRarity:: ; ce9c
 	ds $1
 
-; only used in unreferenced function Func_1a14b
-; otherwise unused
-wce9d:: ; ce9d
-	ds $1
-
 wce9f:: ; ce9f
 	ds $1
 
@@ -2388,16 +2383,7 @@ wDebugSGBBorder:: ; d419
 wDebugBoosterSelection:: ; d41a
 	ds $1
 
-; used in unreferenced function Func_1c890
-; otherwise unused
-wd41b:: ; d41b
-	ds $1
-
-; used in unreferenced function Func_1c890
-; otherwise unused
-; is read like a sprite index
-wd41c:: ; d41c
-	ds $1
+	ds $2
 
 wd41d:: ; d41d
 	ds $1
