@@ -1479,33 +1479,7 @@ wPrizeCardCursorTemporaryPosition:: ; ce61
 wGlossaryPageNo:: ; ce62
 	ds $1
 
-; which routine in ExecutePrinterPacketSequence to run
-wPrinterPacketSequence:: ; ce63
-	ds $1
-
-wPrinterPacket:: ; ce64
-
-wPrinterPacketPreamble::
-	ds $2
-
-wPrinterPacketInstructions:: ; ce66
-	ds $2
-
-wPrinterPacketDataSize:: ; ce68
-	ds $2
-
-; pointer to memory of data to send
-; in the data packet to the printer
-wPrinterPacketDataPtr:: ; ce6a
-	ds $2
-
-wPrinterPacketChecksum:: ; ce6c
-	ds $2
-
 wSerialTransferData:: ; ce6e
-	ds $1
-
-wPrinterStatus:: ; ce6f
 	ds $1
 
 ; pointer to packet data that is
@@ -1562,44 +1536,7 @@ wIRDataBuffer:: ; ce85
 wVBlankFunctionTrampolineBackup:: ; ce8d
 	ds $2
 
-wTempPrinterSRAM:: ; ce8f
-	ds $1
-
-wPrinterHorizontalOffset:: ; ce90
-	ds $1
-
-; the count of some card ID in the deck to be printed
-wPrinterCardCount:: ; ce91
-	ds $1
-
-; total card count of list to be printed
-wPrinterTotalCardCount:: ; ce92
-	ds $2
-
-wCurPrinterCardType:: ; ce94
-	ds $1
-
-; total card count of the current card type
-; in list to be printed
-wPrinterCurCardTypeCount:: ; ce95
-	ds $2
-
-wPrinterNumCardTypes:: ; ce97
-	ds $1
-
-; related to printer functions
-; only written to but never read
-wce98:: ; ce98
-	ds $1
-
-wPrinterContrastLevel:: ; ce99
-	ds $1
-
 wPrizeCardSelectionFrameCounter:: ; ce9a
-	ds $1
-
-; related to printer serial stuff
-wPrinterNumberLineFeeds:: ; ce9b
 	ds $1
 
 wPrintOnlyStarRarity:: ; ce9c
@@ -1608,9 +1545,6 @@ wPrintOnlyStarRarity:: ; ce9c
 ; only used in unreferenced function Func_1a14b
 ; otherwise unused
 wce9d:: ; ce9d
-	ds $1
-
-wPrinterInitAttempts:: ; ce9e
 	ds $1
 
 wce9f:: ; ce9f
@@ -1876,9 +1810,6 @@ wOwnedPhantomCardFlags:: ; cfe2
 ; value containing a SFX to play
 ; due to a menu input
 wMenuInputSFX:: ; cfe3
-	ds $1
-
-wSelectedPrinterMenuItem:: ; cfe4
 	ds $1
 
 ; collection index of the first owned card

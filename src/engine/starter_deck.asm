@@ -114,8 +114,6 @@ InitSaveData:
 	jr nz, .loop_card_pop_names
 
 ; saved configuration options
-	ld a, 2
-	ld [sPrinterContrastLevel], a
 	ld a, $2
 	ld [sTextSpeed], a
 	ld [wTextSpeed], a

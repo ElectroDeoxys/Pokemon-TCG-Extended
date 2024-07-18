@@ -197,29 +197,6 @@ LoadScene_LoadSGBPacket:
 	pop hl
 	ret
 
-LoadScene_SetGameBoyPrinterAttrBlk:
-	push hl
-	push bc
-	push de
-	ld hl, SGBPacket_GameBoyPrinter
-	call SendSGB
-	pop de
-	pop bc
-	pop hl
-	ret
-
-SGBPacket_GameBoyPrinter:
-	sgb ATTR_BLK, 1
-	db 1 ; number of data sets
-	db ATTR_BLK_CTRL_OUTSIDE | ATTR_BLK_CTRL_LINE | ATTR_BLK_CTRL_INSIDE
-	db %101111 ; Color Palette Designation
-	db 11 ; x1
-	db 0  ; y1
-	db 16 ; x2
-	db 9  ; y2
-	ds 6 ; data set 2
-	ds 2 ; data set 3
-
 LoadScene_SetCardPopAttrBlk:
 	push hl
 	push bc

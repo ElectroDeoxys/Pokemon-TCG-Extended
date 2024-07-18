@@ -122,10 +122,6 @@ EnergyCardText:
 	text "Energy Card"
 	done
 
-DeckPrinterText:
-	text "Deck"
-	done
-
 NoPokemonOnTheBenchText:
 	text "No Pokémon on the Bench."
 	done
@@ -844,29 +840,9 @@ BackUpIsBrokenText:
 	text "Back Up is broken."
 	done
 
-PrinterIsNotConnectedText:
-	text "Error No. 02:"
-	line "Printer is not connected."
-	done
-
 BatteriesHaveLostTheirChargeText:
 	text "Error No. 01:"
 	line "Batteries have lost their charge."
-	done
-
-PrinterPaperIsJammedText:
-	text "Error No. 03:"
-	line "Printer paper is jammed."
-	done
-
-CheckCableOrPrinterSwitchText:
-	text "Error No. 02:"
-	line "Check cable or printer switch."
-	done
-
-PrinterPacketErrorText:
-	text "Error No. 04:"
-	line "Printer Packet Error."
 	done
 
 PrintingWasInterruptedText:

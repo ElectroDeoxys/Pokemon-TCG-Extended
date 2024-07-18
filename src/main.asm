@@ -16,7 +16,6 @@ INCLUDE "engine/menus/deck_selection.asm"
 INCLUDE "engine/menus/deck_check.asm"
 INCLUDE "engine/menus/deck_configuration.asm"
 INCLUDE "engine/menus/card_album.asm"
-INCLUDE "engine/menus/printer.asm"
 INCLUDE "engine/menus/deck_machine.asm"
 
 SECTION "Overworld Scripting", ROMX
@@ -105,7 +104,6 @@ INCLUDE "engine/starter_deck.asm"
 SECTION "Link Functions", ROMX
 INCLUDE "engine/link/ir_functions.asm"
 INCLUDE "engine/link/card_pop.asm"
-INCLUDE "engine/link/printer.asm"
 INCLUDE "engine/link/link_duel.asm"
 
 SECTION "Promotional Card", ROMX

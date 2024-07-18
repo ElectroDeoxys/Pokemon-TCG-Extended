@@ -27,7 +27,6 @@ Tilesets:
 	tileset CardPopGfx,                    189 ; TILESET_CARD_POP
 	tileset MedalGfx,                       72 ; TILESET_MEDAL
 	tileset GameBoyLinkGfx,                109 ; TILESET_GAMEBOY_LINK
-	tileset GameBoyPrinterGfx,              93 ; TILESET_GAMEBOY_PRINTER
 	tileset ColosseumGfx,                   86 ; TILESET_COLOSSEUM
 	tileset EvolutionGfx,                   86 ; TILESET_EVOLUTION
 	tileset MysteryGfx,                     86 ; TILESET_MYSTERY

@@ -23,22 +23,6 @@ AddStarterDeck:
 	farcall _AddStarterDeck
 	ret
 
-PreparePrinterConnection:
-	farcall _PreparePrinterConnection
-	ret
-
-PrintDeckConfiguration:
-	farcall _PrintDeckConfiguration
-	ret
-
-PrintCardList:
-	farcall _PrintCardList
-	ret
-
-RequestToPrintCard:
-	farcall _RequestToPrintCard
-	ret
-
 SetUpAndStartLinkDuel::
 	farcall _SetUpAndStartLinkDuel
 	ret

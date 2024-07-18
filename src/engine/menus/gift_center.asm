@@ -15,7 +15,7 @@ Unknown_10d98:
 
 Unknown_10da9:
 	db 10,  0 ; start menu coords
-	db 10, 12 ; start menu text box dimensions
+	db 10, 11 ; start menu text box dimensions
 
 	db 12, 2 ; text alignment for InitTextPrinting
 	tx PCMenuOptionsText
@@ -23,7 +23,7 @@ Unknown_10da9:
 
 	db 11, 2 ; cursor x, cursor y
 	db 2 ; y displacement between items
-	db 5 ; number of items
+	db 4 ; number of items
 	db SYM_CURSOR_R ; cursor tile number
 	db SYM_SPACE ; tile behind cursor
 	dw NULL ; function pointer if non-0

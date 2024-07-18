@@ -17,8 +17,6 @@ ScenePointers:
 	dw Scene_GameBoyLinkConnecting
 	dw Scene_GameBoyLinkTransmitting
 	dw Scene_GameBoyLinkNotConnected
-	dw Scene_GameBoyPrinterTransmitting
-	dw Scene_GameBoyPrinterNotConnected
 	dw Scene_CardPop
 	dw Scene_CardPopError
 	dw Scene_Nintendo
@@ -181,26 +179,6 @@ Scene_GameBoyLinkNotConnected:
 	db SPRITE_LINK
 	db PALETTE_114, PALETTE_114, $00
 	db SPRITE_ANIM_180, SPRITE_ANIM_177, $50, $50
-	dw $00
-
-Scene_GameBoyPrinterTransmitting:
-	dw SGBData_GameBoyPrinter
-	dw LoadScene_SetGameBoyPrinterAttrBlk
-	db PALETTE_112, PALETTE_112, $00
-	db TILEMAP_GAMEBOY_PRINTER, TILEMAP_GAMEBOY_PRINTER, $90, $00
-	db SPRITE_PRINTER
-	db PALETTE_115, PALETTE_115, $00
-	db SPRITE_ANIM_183, SPRITE_ANIM_181, $50, $30
-	dw $00
-
-Scene_GameBoyPrinterNotConnected:
-	dw SGBData_GameBoyPrinter
-	dw LoadScene_SetGameBoyPrinterAttrBlk
-	db PALETTE_112, PALETTE_112, $00
-	db TILEMAP_GAMEBOY_PRINTER, TILEMAP_GAMEBOY_PRINTER, $90, $00
-	db SPRITE_PRINTER
-	db PALETTE_115, PALETTE_115, $00
-	db SPRITE_ANIM_184, SPRITE_ANIM_182, $50, $30
 	dw $00
 
 Scene_CardPop:

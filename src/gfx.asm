@@ -183,12 +183,6 @@ GameBoyLinkConnectingTilemap::
 	db TRUE ; cgb mode
 	INCBIN "data/maps/tiles/cgb/gameboy_link_connecting.bgmap.lz"
 
-GameBoyPrinterTilemap::
-	INCBIN "data/maps/tiles/dimensions/gameboy_printer.dimensions"
-	dw NULL
-	db TRUE ; cgb mode
-	INCBIN "data/maps/tiles/cgb/gameboy_printer.bgmap.lz"
-
 ColosseumTilemap::
 	INCBIN "data/maps/tiles/dimensions/colosseum.dimensions"
 	dw NULL
@@ -457,10 +451,6 @@ CardPopGfx::
 GameBoyLinkGfx::
 	dw 109
 	INCBIN "gfx/link/link_scene.2bpp"
-
-GameBoyPrinterGfx::
-	dw 93
-	INCBIN "gfx/link/printer_scene.2bpp"
 
 ColosseumGfx::
 	dw 86
@@ -1088,10 +1078,6 @@ DuelResultGfx::
 LinkOAMGfx::
 	dw $0b
 	INCBIN "gfx/link/link_oam.2bpp"
-
-PrinterOAMGfx::
-	dw $06
-	INCBIN "gfx/link/printer_oam.2bpp"
 
 CardPopOAMGfx::
 	dw $16

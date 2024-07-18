@@ -1018,10 +1018,6 @@ SGBData_CardPop:
 	dw $40 ; length
 	INCBIN "data/sgb_data/card_pop_pals.bin.lz"
 
-SGBData_GameBoyPrinter:
-	dw $40 ; length
-	INCBIN "data/sgb_data/gameboy_printer_pals.bin.lz"
-
 SGBData_TitleScreen:
 	dw $40 ; length
 	INCBIN "data/sgb_data/title_screen_pals.bin.lz"

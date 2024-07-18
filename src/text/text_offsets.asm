@@ -33,7 +33,6 @@ TextOffsets::
 	textpointer ColorlessPokemonText
 	textpointer TrainerCardText
 	textpointer EnergyCardText
-	textpointer DeckPrinterText
 	textpointer NoPokemonOnTheBenchText
 	textpointer UnableDueToSleepText
 	textpointer UnableDueToParalysisText
@@ -189,11 +188,7 @@ TextOffsets::
 	textpointer OpponentIsNotAsleepText
 	textpointer UnableDueToToxicGasText
 	textpointer BackUpIsBrokenText
-	textpointer PrinterIsNotConnectedText
 	textpointer BatteriesHaveLostTheirChargeText
-	textpointer PrinterPaperIsJammedText
-	textpointer CheckCableOrPrinterSwitchText
-	textpointer PrinterPacketErrorText
 	textpointer PrintingWasInterruptedText
 	textpointer CardPopCannotBePlayedWithTheGameBoyText
 	textpointer SandAttackCheckText
@@ -577,14 +572,6 @@ TextOffsets::
 	textpointer DismantledTheDeckText
 	textpointer OKIfFileDeletedText
 	textpointer ReadTheInstructionsText
-	textpointer PrintThisCardYesNoText
-	textpointer PleaseChooseDeckConfigurationToPrintText
-	textpointer PrintThisDeckText
-	textpointer PrintTheCardListText
-	textpointer PrintMenuItemsText
-	textpointer WhatWouldYouLikeToPrintText
-	textpointer PleaseSetTheContrastText
-	textpointer PleaseMakeSureToTurnGameBoyPrinterOffText
 	textpointer ProceduresForSendingCardsText
 	textpointer CardSendingProceduresText
 	textpointer PleaseReadTheProceduresForSendingCardsText

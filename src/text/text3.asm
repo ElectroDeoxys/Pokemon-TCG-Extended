@@ -29,47 +29,6 @@ ReadTheInstructionsText:
 	text "Read the Instructions"
 	done
 
-PrintThisCardYesNoText:
-	text "Print this card?"
-	line "      Yes     No"
-	done
-
-PleaseChooseDeckConfigurationToPrintText:
-	text "Please choose a Deck configuration"
-	line "to print."
-	done
-
-PrintThisDeckText:
-	text "Print this Deck?"
-	done
-
-PrintTheCardListText:
-	text "Print the card list?"
-	line "      Yes     No"
-	done
-
-PrintMenuItemsText:
-	text "Pokémon Cards"
-	line "Deck Configuration"
-	line "Card List"
-	line "Print Quality"
-	line "Quit Print"
-	done
-
-WhatWouldYouLikeToPrintText:
-	text "What would you like to print?"
-	done
-
-PleaseSetTheContrastText:
-	text "Please set the contrast:"
-	line "  Light   1   2   3   4   5   Dark"
-	done
-
-PleaseMakeSureToTurnGameBoyPrinterOffText:
-	text "Please make sure to turn"
-	line "the Game Boy Printer OFF."
-	done
-
 ProceduresForSendingCardsText:
 	text "Procedures for sending cards:"
 	done
@@ -1083,7 +1042,6 @@ PCMenuOptionsText:
 	text "Card Album"
 	line "Read Mail"
 	line "Glossary"
-	line "Print"
 	line "Shut Down"
 	done
 

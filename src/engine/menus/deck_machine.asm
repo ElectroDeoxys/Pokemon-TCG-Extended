@@ -1816,59 +1816,6 @@ TryBuildDeckMachineDeck:
 	pop af
 	ret
 
-PrinterMenu_DeckConfiguration:
-	xor a
-	ld [wCardListVisibleOffset], a
-	call ClearScreenAndDrawDeckMachineScreen
-	ld a, DECK_SIZE
-	ld [wNumDeckMachineEntries], a
-
-	xor a
-.start_selection
-	ld hl, DeckMachineSelectionParams
-	call InitCardSelectionParams
-	call DrawListScrollArrows
-	call PrintNumSavedDecks
-	ldtx hl, PleaseChooseDeckConfigurationToPrintText
-	call DrawWideTextBox_PrintText
-	ldtx de, PleaseChooseDeckConfigurationToPrintText
-	call InitDeckMachineDrawingParams
-.loop_input
-	call HandleDeckMachineSelection
-	jr c, .start_selection
-	cp $ff
-	ret z
-
-	ld b, a
-	ld a, [wCardListVisibleOffset]
-	add b
-	ld [wSelectedDeckMachineEntry], a
-	call CheckIfSelectedDeckMachineEntryIsEmpty
-	jr c, .loop_input
-	call DrawWideTextBox
-	ldtx hl, PrintThisDeckText
-	call YesOrNoMenuWithText
-	jr c, .no
-	call GetSelectedSavedDeckPtr
-	ld hl, DECK_NAME_SIZE
-	add hl, de
-	ld de, wCurDeckCards
-	ld b, DECK_SIZE
-	call EnableSRAM
-	call CopyNBytesFromHLToDE
-	call DisableSRAM
-	xor a ; terminator byte for deck
-	ld [wCurDeckCards + DECK_SIZE], a
-	call SortCurDeckCardsByID
-	ld a, [wSelectedDeckMachineEntry]
-	bank1call PrintDeckConfiguration
-	call ClearScreenAndDrawDeckMachineScreen
-
-.no
-	ld a, [wTempDeckMachineCursorPos]
-	ld [wCardListCursorPos], a
-	jp .start_selection
-
 HandleAutoDeckMenu:
 	ld a, [wCurAutoDeckMachine]
 	ld hl, .DeckMachineTitleTextList

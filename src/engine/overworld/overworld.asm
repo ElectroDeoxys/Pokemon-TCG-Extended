@@ -1218,7 +1218,7 @@ PCMenu:
 	ldh a, [hCurMenuItem]
 	cp e
 	jr nz, .exit
-	cp $4
+	cp $3
 	jr z, .exit
 	call Func_c2a3
 	ld a, [wSelectedPCMenuItem]
@@ -1242,7 +1242,6 @@ PointerTable_c846:
 	dw PCMenu_CardAlbum
 	dw PCMenu_ReadMail
 	dw PCMenu_Glossary
-	dw PCMenu_Print
 
 DisplayPCMenu:
 	ld a, [wSelectedPCMenuItem]
@@ -1266,18 +1265,6 @@ PCMenu_ReadMail:
 
 PCMenu_Glossary:
 	farcall _PCMenu_Glossary
-	ret
-
-PCMenu_Print:
-	xor a
-	ldh [hSCX], a
-	ldh [hSCY], a
-	call Set_OBJ_8x16
-	farcall SetDefaultPalettes
-	farcall HandlePrinterMenu
-	call Set_OBJ_8x8
-	call WhiteOutDMGPals
-	call DoFrameIfLCDEnabled
 	ret
 
 Func_c891:

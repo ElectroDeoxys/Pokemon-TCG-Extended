@@ -48,7 +48,6 @@ Tilemaps:
 	tilemap PsychicMedalTilemap,               TILESET_MEDAL                       ; TILEMAP_PSYCHIC_MEDAL
 	tilemap GameBoyLinkTilemap,                TILESET_GAMEBOY_LINK                ; TILEMAP_GAMEBOY_LINK
 	tilemap GameBoyLinkConnectingTilemap,      TILESET_GAMEBOY_LINK                ; TILEMAP_GAMEBOY_LINK_CONNECTING
-	tilemap GameBoyPrinterTilemap,             TILESET_GAMEBOY_PRINTER             ; TILEMAP_GAMEBOY_PRINTER
 	tilemap ColosseumTilemap,                  TILESET_COLOSSEUM                   ; TILEMAP_COLOSSEUM
 	tilemap EvolutionTilemap,                  TILESET_EVOLUTION                   ; TILEMAP_EVOLUTION
 	tilemap MysteryTilemap,                    TILESET_MYSTERY                     ; TILEMAP_MYSTERY
