@@ -1185,5 +1185,3 @@ Text05da:
 	line "Powers, so read each card's text"
 	line "carefully."
 	done
-
-	ds $bc

@@ -120,10 +120,6 @@ PleaseChooseASaveSlotText:
 	text "Please choose a Save Slot."
 	done
 
-UnusedText0286: ; Unused
-	text "Receive configuration."
-	done
-
 ReceivedADeckConfigurationFromText:
 	text "Received a deck configuration"
 	line "from  <RAMTEXT>!"
@@ -902,46 +898,6 @@ RetreatingDescriptionText:
 	line "of the retreating Pokémon."
 	done
 
-UnusedText031e: ; Unused
-	text "Modify Deck"
-	line "Card List"
-	line "Album List"
-	line "Deck Save Machine"
-	line "Printing Menu"
-	line "Auto Deck Machine"
-	line "Gift Center"
-	line "Name Input"
-	done
-
-UnusedText031f: ; Unused
-	text "Fighting Machine"
-	line "Rock Machine"
-	line "Water Machine"
-	line "Lightning Machine"
-	line "Grass Machine"
-	line "Psychic Machine"
-	line "Science Machine"
-	line "Fire Machine"
-	line "Auto Machine"
-	line "Legendary Machine"
-	done
-
-UnusedText0320: ; Unused
-	text "Send a Card"
-	line "Receive a Card"
-	line "Give Deck Instructions"
-	line "Receive Deck Instructions"
-	done
-
-UnusedText0321: ; Unused
-	text "Lecture Duel"
-	done
-
-UnusedText0322: ; Unused
-	text "First Strike Deck"
-	line ""
-	done
-
 OverworldMapMasonLaboratoryText:
 	text "  Mason Laboratory  "
 	done
@@ -1042,10 +998,6 @@ PokemonDomeMapName:
 	text "Pokémon Dome"
 	done
 
-UnusedText033c: ; Unused
-	text "??'s House"
-	done
-
 PauseMenuOptionsText:
 	text "Status"
 	line "Diary"
@@ -1125,30 +1077,6 @@ ConfigMenuDuelAnimationText:
 
 ConfigMenuExitText:
 	text "   Exit Settings"
-	done
-
-UnusedText034c: ; Unused
-	text "Duel           [<RAMTEXT>]"
-	line "SELECT         [<RAMTEXT>]"
-	line "Receive many cards"
-	line "To Pokémon Dome 1"
-	line "To Pokémon Dome 2"
-	done
-
-UnusedText034d: ; Unused
-	text "Normal Duel"
-	done
-
-UnusedText034e: ; Unused
-	text "Skip"
-	done
-
-UnusedText034f: ; Unused
-	text "Normal"
-	done
-
-UnusedText0350: ; Unused
-	text "Freeze Screen"
 	done
 
 PCMenuOptionsText:
@@ -1435,21 +1363,6 @@ DebugBoosterPackEnergyMenuText:
 	line "4"
 	done
 
-UnusedText0381: ; Unused
-	text "A                   TIME"
-	line "     TO      (Change with Start)"
-	line "            A+B: Stop Animation"
-	line "            Select: Exit"
-	done
-
-UnusedText0382: ; Unused
-	text "Left"
-	done
-
-UnusedText0383: ; Unused
-	text "Right"
-	done
-
 SPRText:
 	text "SPR_"
 	done
@@ -1478,55 +1391,9 @@ CheckedCardsInBoosterPackText:
 	line "in the Booster Pack!!"
 	done
 
-UnusedText038a: ; Unused
-	text "Substitute screen for"
-	line "receiving cards."
-	done
-
 WonTheMedalText:
 	text "<RAMNAME>"
 	line "Won the <RAMTEXT> Medal!"
-	done
-
-UnusedText038c: ; Unused
-	text "Substitute screen for sending"
-	line "cards by Link cable."
-	done
-
-UnusedText038d: ; Unused
-	text "Substitute screen for receiving"
-	line "cards by Link cable."
-	done
-
-UnusedText038e: ; Unused
-	text "Substitute screen for sending"
-	line "a Deck design."
-	done
-
-UnusedText038f: ; Unused
-	text "Substitute screen for receiving"
-	line "a Deck design."
-	done
-
-UnusedText0390: ; Unused
-	text "????"
-	done
-
-UnusedText0391: ; Unused
-	text "Ending Screen"
-	line "THE END"
-	done
-
-UnusedText0392: ; Unused
-	text "Was the data transfer successful?"
-	done
-
-UnusedText0393: ; Unused
-	text "(Person transferring data to)"
-	done
-
-UnusedText0394: ; Unused
-	text "(Name of Deck transferring)"
 	done
 
 OpponentTitleAndNameText:
@@ -2030,5 +1897,3 @@ Mail2Part2Text:
 	line "Mason Laboratory"
 	line "      Doctor Mason ;)"
 	done
-
-	ds $57

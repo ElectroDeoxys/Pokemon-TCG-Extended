@@ -202,11 +202,6 @@ ChoosePokemonToAttachEnergyCardText:
 	line "the Energy card to."
 	done
 
-UnusedText011e: ; Unused
-	text "Choose and Discard"
-	line "1 Fire Energy card."
-	done
-
 ChooseAndDiscard2FireEnergyCardsText:
 	text "Choose and Discard"
 	line "2 Fire Energy cards."
@@ -498,11 +493,6 @@ ThePkmnCardsInHandAndDeckWereShuffledText:
 	line "Hand and Deck were shuffled"
 	done
 
-UnusedText014f: ; Unused
-	text "Remove Damage counter each time the"
-	line "A Button is pressed. B Button quits."
-	done
-
 ChoosePokemonToRemoveDamageCounterFromText:
 	text "Choose a Pokémon to remove"
 	line "the Damage counter from."
@@ -523,11 +513,6 @@ Choose2BasicEnergyCardsFromDiscardPileText:
 	line "from the Discard Pile."
 	done
 
-UnusedText0154: ; Unused
-	text "Choose a Pokémon and press the A"
-	line "Button to remove Damage counters."
-	done
-
 Choose2CardsFromHandToDiscardText:
 	text "Choose 2 cards from the Hand"
 	line "to Discard."
@@ -546,11 +531,6 @@ ChooseCardToPlaceInHandText:
 ChoosePokemonToAttachDefenderToText:
 	text "Choose a Pokémon to"
 	line "attach Defender to."
-	done
-
-UnusedText0159: ; Unused
-	text "You can draw up to <RAMNUM> cards."
-	line "A to Draw, B to End."
 	done
 
 ChoosePokemonToReturnToTheDeckText:
@@ -684,10 +664,6 @@ DiscardedCardsFromDeckText:
 	line "from <RAMNAME>'s Deck."
 	done
 
-UnusedText0175: ; Unused
-	text "Discarded <RAMTEXT>"
-	line "from the Hand."
-	done
 
 NoneCameText:
 	text "None came!"
@@ -760,10 +736,6 @@ ExchangedCardsInDuelistsHandText:
 	line "in <RAMNAME>'s Hand."
 	done
 
-UnusedText0185: ; Unused
-	text "Battle Center"
-	done
-
 PrizesCardsText:
 	text "Prizes"
 	line "       cards"
@@ -834,11 +806,6 @@ ReceivedPromotionalSurfingPikachuText:
 	line "card Surfin' Pikachu!"
 	done
 
-UnusedText0194: ; Unused
-	text "Received a Flareon!!!"
-	line "Looked at the card list!"
-	done
-
 NowPrintingPleaseWaitText:
 	text "Now printing."
 	line "Please wait..."
@@ -850,14 +817,6 @@ BoosterPackText:
 
 WouldYouLikeToTryAgainText:
 	text "Would you like to try again?"
-	done
-
-UnusedText0198: ; Unused
-	text "Sent to <RAMNAME>."
-	done
-
-UnusedText0199: ; Unused
-	text "Received from <RAMNAME>."
 	done
 
 SendingACardText:
@@ -1267,10 +1226,6 @@ ReplaceDueToKnockoutPracticeDuelText:
 	text " Replace due to Knockout "
 	done
 
-UnusedText01dd: ; Unused
-	text "Dummy"
-	done
-
 PracticePlayerDeckName:
 	text "Practice Player"
 	done
@@ -1483,14 +1438,6 @@ RetreatCostText:
 	text "Retreat Cost"
 	done
 
-UnusedText0213: ; Unused
-	textfw "SWITCH TO UPPER"
-	done
-
-UnusedText0214: ; Unused
-	textfw "SWITCH TO LOWER"
-	done
-
 FeetText:
 	textfw "'"
 	done
@@ -1511,42 +1458,12 @@ DeckText:
 	text "Deck"
 	done
 
-UnusedText021a: ; Unused (Hiragana)
-	textfw "ひらがな"
-	done
-
-UnusedText021b: ; Unused (Katakana)
-	textfw "カタカナ"
-	done
-
-UnusedText021c: ; Unused
-	textfw "ABC"
-	done
-
 EndText:
 	text "End"
 	done
 
 WhatIsYourNameText:
 	text "What is your name?"
-	done
-
-UnusedText021f: ; Unused
-	textfw "あ か さ た な は ま や ら"
-	linefw "い き し ち に ひ み ゆ り"
-	linefw "う く す つ ぬ ふ む よ る"
-	linefw "え け せ て ね へ め わ れ"
-	linefw "お こ そ と の ほ も ん ろ"
-	linefw "ゃ ゅ ょ っ を ゛ ゜ ー"
-	done
-
-UnusedText0220: ; Unused
-	textfw "ア カ サ タ ナ ハ マ ヤ ラ"
-	linefw "イ キ シ チ ニ ヒ ミ ユ リ"
-	linefw "ウ ク ス ツ ヌ フ ム ヨ ル"
-	linefw "エ ケ セ テ ネ ヘ メ ワ レ"
-	linefw "オ コ ソ ト ノ ホ モ ン ロ"
-	linefw "ャ ュ ョ ッ ヲ ゛ ゜ ー"
 	done
 
 PlayerNameKeyboardText:
@@ -1589,10 +1506,6 @@ SelectDeckText:
 
 CancelText:
 	text "Cancel"
-	done
-
-UnusedText0229: ; Unused
-	text "as"
 	done
 
 ChosenAsDuelingDeckText:
@@ -1695,10 +1608,6 @@ YourHandText:
 	text "Your Hand"
 	done
 
-UnusedText0242: ; Unused
-	text "To Your Play Area"
-	done
-
 OpponentsPokemonText:
 	text "Opponent's Pokémon"
 	done
@@ -1709,10 +1618,6 @@ OpponentsDiscardPileText2:
 
 OpponentsHandText:
 	text "Opponent Hand"
-	done
-
-UnusedText0246: ; Unused
-	text "To Opponent's Play Area"
 	done
 
 DuelistsPlayAreaText:
@@ -1819,15 +1724,6 @@ ChooseADeckToSaveText:
 	text "Choose a Deck to Save."
 	done
 
-UnusedText0261: ; Unused
-	text "You may only Save 60 Decks."
-	line "Please Delete a Deck first."
-	done
-
-UnusedText0262: ; Unused
-	text "for"
-	done
-
 SavedTheConfigurationForText:
 	text "Saved the configuration for"
 	line ""
@@ -1836,11 +1732,6 @@ SavedTheConfigurationForText:
 
 NoDeckIsSavedText:
 	text "No Deck is saved."
-	done
-
-UnusedText0265: ; Unused
-	text "Please choose a Deck "
-	line "configuration to delete."
 	done
 
 DoYouReallyWishToDeleteText:
@@ -1867,14 +1758,7 @@ DismantledDeckText:
 	text "<RAMTEXT>."
 	done
 
-UnusedText026b: ; Unused
-	text "Please choose the Deck"
-	line "you wish to Build."
-	done
-
 ThisDeckCanOnlyBeBuiltIfYouDismantleText:
 	text "This Deck can only be built if"
 	line "you dismantle another Deck."
 	done
-
-	ds $26

@@ -38,10 +38,6 @@ PKMNPWRText:
 	text "PKMN PWR"
 	done
 
-UnusedText000b: ; Unused (Pokemon Card)
-	textfw "ポケモンカード"
-	done
-
 LengthText:
 	text "Length"
 	done
@@ -130,10 +126,6 @@ DeckPrinterText:
 	text "Deck"
 	done
 
-UnusedText0022: ; Unused
-	text "Attack"
-	done
-
 NoPokemonOnTheBenchText:
 	text "No Pokémon on the Bench."
 	done
@@ -199,16 +191,8 @@ IncompleteText:
 	text "Incomplete"
 	done
 
-UnusedText0032: ; Unused
-	text "Damage"
-	done
-
 UsedText:
 	text "Used <RAMTEXT>."
-	done
-
-UnusedText0034: ; Unused
-	text "Received damage"
 	done
 
 PokemonsAttackText:
@@ -601,10 +585,6 @@ SelectCheckText:
 	line "  Check"
 	done
 
-UnusedText0087: ; Unused
-	textfw "B", "<RAMNUM>", "S", "<RAMNUM>"
-	done
-
 DuelistIsThinkingText:
 	text "<RAMNAME> is thinking."
 	done
@@ -621,139 +601,8 @@ NumberOfPrizesText:
 	text "Number of Prizes"
 	done
 
-UnusedText008c: ; Unused
-	text "Random 1"
-	done
-
-UnusedText008d: ; Unused
-	text "Random 2"
-	done
-
-UnusedText008e: ; Unused
-	text "Random 3"
-	done
-
-UnusedText008f: ; Unused
-	text "Random 4"
-	done
-
-UnusedText0090: ; Unused
-	text "Training COM"
-	done
-
-UnusedText0091: ; Unused
-	text "Player 1"
-	done
-
 Player2Text:
 	text "Player 2"
-	done
-
-UnusedText0093: ; Unused
-	text "Left to Right"
-	done
-
-UnusedText0094: ; Unused
-	text "Right to Left"
-	done
-
-UnusedText0095: ; Unused
-	text "START: Change"
-	line "    A: Execute"
-	line "    B: End"
-	done
-
-UnusedText0096: ; Unused
-	text "Other"
-	line "Poison"
-	line "Sleep"
-	line "Payalysis"
-	line "Confusion"
-	line "Double Poison"
-	line "Clear"
-	line "Foul Gas"
-	line "Opponent's Hand"
-	line "Discard from Hand"
-	line "Select Deck"
-	line "Select Discard"
-	line "From Hand to Deck"
-	line "Take Prize"
-	line "Change Player"
-	line "Shuffle Deck"
-	line "Discard Bench"
-	line "Change Card"
-	done
-
-UnusedText0097: ; Unused
-	text "WIN GAME"
-	line "LOSE GAME"
-	line "DRAW GAME"
-	line "CHANGE CASE"
-	line "PAUSE MODE"
-	line "CHANGE COMPUTER OPPONENT"
-	line "CHANGE PLAYER 2 TO COM"
-	line "FLIP 20"
-	line "SAVE NOW"
-	line "LOAD FILE"
-	done
-
-UnusedText0098: ; Unused
-	text "Save File"
-	done
-
-UnusedText0099: ; Unused
-	text "Load File"
-	line "  "
-	half2full
-	textfw "0"
-	text "  Last Saved File"
-	done
-
-UnusedText009a: ; Unused
-	text "Pause Mode is ON"
-	line "Press SELECT to Pause"
-	done
-
-UnusedText009b: ; Unused
-	text "Pause Mode is OFF"
-	done
-
-UnusedText009c: ; Unused
-	text "Computer Mode is OFF"
-	done
-
-UnusedText009d: ; Unused
-	text "Computer Mode is ON"
-	done
-
-UnusedText009e: ; Unused
-	text "<GRASS> Pokémon"
-	line ""
-	text "<FIRE> Pokémon"
-	line ""
-	text "<WATER> Pokémon"
-	line ""
-	text "<LIGHTNING> Pokémon"
-	line ""
-	text "<FIGHTING> Pokémon"
-	line ""
-	text "<PSYCHIC> Pokémon"
-	line ""
-	text "<COLORLESS> Pokémon"
-	line "Trainer Card"
-	line "Energy Card"
-	done
-
-UnusedText009f: ; Unused
-	text "Card List"
-	done
-
-UnusedText00a0: ; Unused
-	text "Test Coin Flip"
-	done
-
-UnusedText00a1: ; Unused
-	text "End without Prizes?"
 	done
 
 ResetBackUpRamText:
@@ -991,10 +840,6 @@ UnableDueToToxicGasText:
 	line "effects of Toxic Gas."
 	done
 
-UnusedText00d5: ; Unused
-	text "A Transmission Error occured."
-	done
-
 BackUpIsBrokenText:
 	text "Back Up is broken."
 	done
@@ -1135,10 +980,6 @@ IfHeadsNoDamageNextTurnText:
 	line "damage during opponent's next turn!"
 	done
 
-UnusedText00f2: ; Unused
-	text "Damage check"
-	done
-
 DamageCheckIfHeadsPlusDamageText:
 	text "Damage check!"
 	line "If Heads, +<RAMNUM> damage!!"
@@ -1148,5 +989,3 @@ DamageCheckIfHeadsXDamageText:
 	text "Damage check!"
 	line "If Heads, x <RAMNUM> damage!!"
 	done
-
-	ds $d

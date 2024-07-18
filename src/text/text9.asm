@@ -1485,5 +1485,3 @@ KakunasStiffenDescription:
 	line "opponent's next turn. (Any other"
 	line "effects of attacks still happen.)"
 	done
-
-	ds $20

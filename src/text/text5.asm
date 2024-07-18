@@ -1020,5 +1020,3 @@ RonaldChallengeCup2Missed1Text:
 	text "Hey, <RAMNAME>!"
 	line "What are you doing here?"
 	done
-
-	ds $d6

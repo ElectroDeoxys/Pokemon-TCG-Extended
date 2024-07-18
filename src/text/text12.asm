@@ -1411,5 +1411,3 @@ PokeBallDescription:
 ScoopUpName:
 	text "Scoop Up"
 	done
-
-	ds $9

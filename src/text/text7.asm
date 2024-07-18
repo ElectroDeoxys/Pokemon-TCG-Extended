@@ -1132,5 +1132,3 @@ Text0683:
 	text "And here, take this"
 	line "LABORATORY Booster Pack!"
 	done
-
-	ds $29

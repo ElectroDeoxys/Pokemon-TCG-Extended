@@ -1428,5 +1428,3 @@ AlakazamName:
 DamageSwapName:
 	text "Damage Swap"
 	done
-
-	ds $31
