@@ -131,10 +131,6 @@ src/gfx/tilesets/rockclub.2bpp: rgbgfx += -x 4
 src/gfx/tilesets/scienceclub.2bpp: rgbgfx += -x 14
 src/gfx/tilesets/waterclub.2bpp: rgbgfx += -x 15
 
-src/gfx/titlescreen/japanese_title_screen.2bpp: rgbgfx += -x 15
-src/gfx/titlescreen/japanese_title_screen_cgb.2bpp: rgbgfx += -x 15
-src/gfx/titlescreen/japanese_title_screen_2.2bpp: rgbgfx += -x 12
-src/gfx/titlescreen/japanese_title_screen_2_cgb.2bpp: rgbgfx += -x 5
 src/gfx/titlescreen/title_screen.2bpp: rgbgfx += -x 4
 src/gfx/titlescreen/title_screen_cgb.2bpp: rgbgfx += -x 12
 
