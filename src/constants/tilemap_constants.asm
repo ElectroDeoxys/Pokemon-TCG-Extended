@@ -48,17 +48,15 @@
 	const TILEMAP_CHARIZARD_INTRO                  ; $2e
 	const TILEMAP_SCYTHER_INTRO                    ; $2f
 	const TILEMAP_AERODACTYL_INTRO                 ; $30
-	const TILEMAP_JAPANESE_TITLE_SCREEN            ; $31
-	const TILEMAP_SOLID_TILES_1                    ; $32
-	const TILEMAP_SOLID_TILES_2                    ; $33
-	const TILEMAP_SOLID_TILES_3                    ; $34
-	const TILEMAP_JAPANESE_TITLE_SCREEN_2          ; $35
-	const TILEMAP_SOLID_TILES_4                    ; $36
-	const TILEMAP_PLAYER                           ; $37
-	const TILEMAP_OPPONENT                         ; $38
-	const TILEMAP_TITLE_SCREEN                     ; $39
-	const TILEMAP_COPYRIGHT                        ; $3a
-	const TILEMAP_NINTENDO                         ; $3b
-	const TILEMAP_COMPANIES                        ; $3c
+	const TILEMAP_SOLID_TILES_1                    ; $31
+	const TILEMAP_SOLID_TILES_2                    ; $32
+	const TILEMAP_SOLID_TILES_3                    ; $33
+	const TILEMAP_SOLID_TILES_4                    ; $34
+	const TILEMAP_PLAYER                           ; $35
+	const TILEMAP_OPPONENT                         ; $36
+	const TILEMAP_TITLE_SCREEN                     ; $37
+	const TILEMAP_COPYRIGHT                        ; $38
+	const TILEMAP_NINTENDO                         ; $39
+	const TILEMAP_COMPANIES                        ; $3a
 
 DEF NUM_TILEMAPS EQU const_value

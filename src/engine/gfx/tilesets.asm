@@ -35,11 +35,7 @@ Tilesets:
 	tileset CharizardIntroGfx,              96 ; TILESET_CHARIZARD_INTRO
 	tileset ScytherIntroGfx,                96 ; TILESET_SCYTHER_INTRO
 	tileset AerodactylIntroGfx,             96 ; TILESET_AERODACTYL_INTRO
-	tileset JapaneseTitleScreenGfx,         97 ; TILESET_JAPANESE_TITLE_SCREEN
-	tileset JapaneseTitleScreenCGBGfx,      97 ; TILESET_JAPANESE_TITLE_SCREEN_CGB
 	tileset SolidTiles1,                     4 ; TILESET_SOLID_TILES_1
-	tileset JapaneseTitleScreen2Gfx,       244 ; TILESET_JAPANESE_TITLE_SCREEN_2
-	tileset JapaneseTitleScreen2CGBGfx,     59 ; TILESET_JAPANESE_TITLE_SCREEN_2_CGB
 	tileset SolidTiles2,                     4 ; TILESET_SOLID_TILES_2
 	tileset PlayerGfx,                      36 ; TILESET_PLAYER
 	tileset RonaldGfx,                      36 ; TILESET_RONALD

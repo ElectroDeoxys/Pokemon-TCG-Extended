@@ -20,12 +20,9 @@
 	const SCENE_GAMEBOY_PRINTER_NOT_CONNECTED ; $12
 	const SCENE_CARD_POP                      ; $13
 	const SCENE_CARD_POP_ERROR                ; $14
-	const SCENE_JAPANESE_TITLE_SCREEN         ; $15
-	const SCENE_NINTENDO                      ; $16
-	const SCENE_COMPANIES                     ; $17
-	const SCENE_JAPANESE_TITLE_SCREEN_2       ; $18
-	const SCENE_COPYRIGHT                     ; $19
-	const SCENE_JAPANESE_TITLE_SCREEN_2_COPY  ; $1a
-	const SCENE_COLOR_PALETTE                 ; $1b
+	const SCENE_NINTENDO                      ; $15
+	const SCENE_COMPANIES                     ; $16
+	const SCENE_COPYRIGHT                     ; $17
+	const SCENE_COLOR_PALETTE                 ; $18
 
 DEF NUM_SCENES EQU const_value

@@ -56,11 +56,9 @@ Tilemaps:
 	tilemap CharizardIntroTilemap,             TILESET_CHARIZARD_INTRO             ; TILEMAP_CHARIZARD_INTRO
 	tilemap ScytherIntroTilemap,               TILESET_SCYTHER_INTRO               ; TILEMAP_SCYTHER_INTRO
 	tilemap AerodactylIntroTilemap,            TILESET_AERODACTYL_INTRO            ; TILEMAP_AERODACTYL_INTRO
-	tilemap JapaneseTitleScreenTilemap,        TILESET_JAPANESE_TITLE_SCREEN       ; TILEMAP_JAPANESE_TITLE_SCREEN
 	tilemap SolidTiles1Tilemap,                TILESET_SOLID_TILES_1               ; TILEMAP_SOLID_TILES_1
 	tilemap SolidTiles2Tilemap,                TILESET_SOLID_TILES_1               ; TILEMAP_SOLID_TILES_2
 	tilemap SolidTiles3Tilemap,                TILESET_SOLID_TILES_1               ; TILEMAP_SOLID_TILES_3
-	tilemap JapaneseTitleScreen2Tilemap,       TILESET_JAPANESE_TITLE_SCREEN_2     ; TILEMAP_JAPANESE_TITLE_SCREEN_2
 	tilemap SolidTiles4Tilemap,                TILESET_SOLID_TILES_2               ; TILEMAP_SOLID_TILES_4
 	tilemap PlayerTilemap,                     TILESET_PLAYER                      ; TILEMAP_PLAYER
 	tilemap OpponentTilemap,                   TILESET_RONALD                      ; TILEMAP_OPPONENT

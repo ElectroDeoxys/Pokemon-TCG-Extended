@@ -21,12 +21,9 @@ ScenePointers:
 	dw Scene_GameBoyPrinterNotConnected
 	dw Scene_CardPop
 	dw Scene_CardPopError
-	dw Scene_JapaneseTitleScreen
 	dw Scene_Nintendo
 	dw Scene_Companies
-	dw Scene_JapaneseTitleScreen2
 	dw Scene_Copyright
-	dw Scene_JapaneseTitleScreen2
 	dw Scene_ColorPalette
 	assert_table_length NUM_SCENES
 
@@ -47,13 +44,6 @@ Scene_TitleScreen:
 	dw NULL
 	db PALETTE_25, PALETTE_25, $00
 	db TILEMAP_TITLE_SCREEN, TILEMAP_TITLE_SCREEN, $00, $00
-	db $00
-
-Scene_JapaneseTitleScreen:
-	dw SGBData_TitleScreen
-	dw NULL
-	db PALETTE_25, PALETTE_25, $00
-	db TILEMAP_JAPANESE_TITLE_SCREEN, TILEMAP_JAPANESE_TITLE_SCREEN, $80, $00
 	db $00
 
 Scene_ColosseumBooster:
@@ -252,11 +242,4 @@ Scene_Copyright:
 	dw NULL
 	db PALETTE_26, PALETTE_26, $00
 	db TILEMAP_COPYRIGHT, TILEMAP_COPYRIGHT, $00, $00
-	db $00
-
-Scene_JapaneseTitleScreen2:
-	dw NULL
-	dw NULL
-	db PALETTE_109, PALETTE_100, $00
-	db TILEMAP_JAPANESE_TITLE_SCREEN_2, TILEMAP_JAPANESE_TITLE_SCREEN_2, $01, $00
 	db $00
