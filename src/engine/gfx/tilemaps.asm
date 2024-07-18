@@ -37,7 +37,6 @@ Tilemaps:
 	tilemap PokemonDomeTilemap,                TILESET_POKEMON_DOME                ; TILEMAP_POKEMON_DOME
 	tilemap HallOfHonorDoorMapEventTilemap,    TILESET_POKEMON_DOME                ; TILEMAP_HALL_OF_HONOR_DOOR_MAP_EVENT
 	tilemap HallOfHonorTilemap,                TILESET_HALL_OF_HONOR               ; TILEMAP_HALL_OF_HONOR
-	tilemap CardPopTilemap,                    TILESET_CARD_POP                    ; TILEMAP_CARD_POP
 	tilemap GrassMedalTilemap,                 TILESET_MEDAL                       ; TILEMAP_GRASS_MEDAL
 	tilemap ScienceMedalTilemap,               TILESET_MEDAL                       ; TILEMAP_SCIENCE_MEDAL
 	tilemap FireMedalTilemap,                  TILESET_MEDAL                       ; TILEMAP_FIRE_MEDAL

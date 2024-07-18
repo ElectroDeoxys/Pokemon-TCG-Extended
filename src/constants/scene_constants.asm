@@ -16,11 +16,9 @@
 	const SCENE_GAMEBOY_LINK_CONNECTING       ; $0e
 	const SCENE_GAMEBOY_LINK_TRANSMITTING     ; $0f
 	const SCENE_GAMEBOY_LINK_NOT_CONNECTED    ; $10
-	const SCENE_CARD_POP                      ; $11
-	const SCENE_CARD_POP_ERROR                ; $12
-	const SCENE_NINTENDO                      ; $13
-	const SCENE_COMPANIES                     ; $14
-	const SCENE_COPYRIGHT                     ; $15
-	const SCENE_COLOR_PALETTE                 ; $16
+	const SCENE_NINTENDO                      ; $11
+	const SCENE_COMPANIES                     ; $12
+	const SCENE_COPYRIGHT                     ; $13
+	const SCENE_COLOR_PALETTE                 ; $14
 
 DEF NUM_SCENES EQU const_value

@@ -33,13 +33,6 @@ wDecompressionSecondaryBufferStart:: ; c0ef
 
 NEXTU
 
-; names of the last players who have done
-; Card Pop! with current save file
-wCardPopNameList:: ; c000
-	ds CARDPOP_NAME_LIST_SIZE
-
-NEXTU
-
 ; buffer used to store a deck that will be built
 wDeckToBuild:: ; c000
 	ds DECK_STRUCT_SIZE
@@ -49,9 +42,6 @@ ENDU
 	ds $100
 
 SECTION "WRAM0 Duels 1", WRAM0
-
-; this union spans from c200 to c3ff
-UNION
 
 ; In order to be identified during a duel, the 60 cards of each duelist are given an index between 0 and 59.
 ; These indexes are assigned following the order of the card list in wPlayerDeck or wOpponentDeck,
@@ -65,15 +55,6 @@ UNION
 ; check macros/wram.asm for information on each variable
 wPlayerDuelVariables::   duel_vars wPlayer   ; c200
 wOpponentDuelVariables:: duel_vars wOpponent ; c300
-
-NEXTU
-
-; buffer used to store the Card Pop! name list
-; that is received from the other player
-wOtherPlayerCardPopNameList:: ; c200
-	ds CARDPOP_NAME_LIST_SIZE
-
-ENDU
 
 UNION
 
@@ -89,13 +70,6 @@ wBoosterCardsDrawnEnd:: ; c416
 NEXTU
 
 wPlayerDeck:: ; c400
-	ds $80
-
-NEXTU
-
-; lists all the possible candidates of cards
-; that can be received through Card Pop!
-wCardPopCardCandidates:: ; c400
 	ds $80
 
 ENDU
@@ -145,13 +119,7 @@ wOwnIRCommunicationParams:: ; c5eb
 wOtherIRCommunicationParams:: ; c5ef
 	ds $4
 
-; stores the result from LookUpNameInCardPopNameList
-; is $ff if name was found in the Card Pop! list
-; is $00 otherwise
-wCardPopNameSearchResult:: ; c5f3
-	ds $1
-
-	ds $c
+	ds $d
 
 SECTION "WRAM0 Text Engine", WRAM0
 
@@ -1548,11 +1516,6 @@ wce9d:: ; ce9d
 	ds $1
 
 wce9f:: ; ce9f
-	ds $1
-
-; which song to play when obtaining the card from Card Pop!
-; the card's rarity determines which song to play
-wCardPopCardObtainSong:: ; cea0
 	ds $1
 
 ; first index in the current card list that is visible

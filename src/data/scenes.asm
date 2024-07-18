@@ -17,8 +17,6 @@ ScenePointers:
 	dw Scene_GameBoyLinkConnecting
 	dw Scene_GameBoyLinkTransmitting
 	dw Scene_GameBoyLinkNotConnected
-	dw Scene_CardPop
-	dw Scene_CardPopError
 	dw Scene_Nintendo
 	dw Scene_Companies
 	dw Scene_Copyright
@@ -179,26 +177,6 @@ Scene_GameBoyLinkNotConnected:
 	db SPRITE_LINK
 	db PALETTE_114, PALETTE_114, $00
 	db SPRITE_ANIM_180, SPRITE_ANIM_177, $50, $50
-	dw $00
-
-Scene_CardPop:
-	dw SGBData_CardPop
-	dw LoadScene_SetCardPopAttrBlk
-	db PALETTE_113, PALETTE_113, $00
-	db TILEMAP_CARD_POP, TILEMAP_CARD_POP, $80, $00
-	db SPRITE_CARD_POP
-	db PALETTE_116, PALETTE_116, $00
-	db SPRITE_ANIM_187, SPRITE_ANIM_185, $50, $40
-	dw $00
-
-Scene_CardPopError:
-	dw SGBData_CardPop
-	dw LoadScene_SetCardPopAttrBlk
-	db PALETTE_113, PALETTE_113, $00
-	db TILEMAP_CARD_POP, TILEMAP_CARD_POP, $80, $00
-	db SPRITE_CARD_POP
-	db PALETTE_116, PALETTE_116, $00
-	db SPRITE_ANIM_188, SPRITE_ANIM_186, $50, $40
 	dw $00
 
 Scene_Nintendo:

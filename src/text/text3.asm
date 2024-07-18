@@ -1159,22 +1159,15 @@ NewGameText:
 	text "NEW GAME"
 	done
 
-CardPopContinueDiaryNewGameText:
-	text "CARD POP!"
-	line "CONTINUE FROM DIARY"
+ContinueDiaryNewGameText:
+	text "CONTINUE FROM DIARY"
 	line "NEW GAME"
 	done
 
-CardPopContinueDiaryNewGameContinueDuelText:
-	text "CARD POP!"
-	line "CONTINUE FROM DIARY"
+ContinueDiaryNewGameContinueDuelText:
+	text "CONTINUE FROM DIARY"
 	line "New Game"
 	line "CONTINUE DUEL"
-	done
-
-WhenYouCardPopWithFriendText:
-	text "When you CARD POP! with a friend,"
-	line "you will each receive a new card!"
 	done
 
 ContinueFromDiarySummaryText:

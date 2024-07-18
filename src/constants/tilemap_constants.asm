@@ -29,33 +29,32 @@
 	const TILEMAP_POKEMON_DOME                     ; $1b
 	const TILEMAP_HALL_OF_HONOR_DOOR_MAP_EVENT     ; $1c
 	const TILEMAP_HALL_OF_HONOR                    ; $1d
-	const TILEMAP_CARD_POP                         ; $1e
-	const TILEMAP_GRASS_MEDAL                      ; $1f
-	const TILEMAP_SCIENCE_MEDAL                    ; $20
-	const TILEMAP_FIRE_MEDAL                       ; $21
-	const TILEMAP_WATER_MEDAL                      ; $22
-	const TILEMAP_LIGHTNING_MEDAL                  ; $23
-	const TILEMAP_FIGHTING_MEDAL                   ; $24
-	const TILEMAP_ROCK_MEDAL                       ; $25
-	const TILEMAP_PSYCHIC_MEDAL                    ; $26
-	const TILEMAP_GAMEBOY_LINK                     ; $27
-	const TILEMAP_GAMEBOY_LINK_CONNECTING          ; $28
-	const TILEMAP_COLOSSEUM                        ; $29
-	const TILEMAP_EVOLUTION                        ; $2a
-	const TILEMAP_MYSTERY                          ; $2b
-	const TILEMAP_LABORATORY                       ; $2c
-	const TILEMAP_CHARIZARD_INTRO                  ; $2d
-	const TILEMAP_SCYTHER_INTRO                    ; $2e
-	const TILEMAP_AERODACTYL_INTRO                 ; $2f
-	const TILEMAP_SOLID_TILES_1                    ; $30
-	const TILEMAP_SOLID_TILES_2                    ; $31
-	const TILEMAP_SOLID_TILES_3                    ; $32
-	const TILEMAP_SOLID_TILES_4                    ; $33
-	const TILEMAP_PLAYER                           ; $34
-	const TILEMAP_OPPONENT                         ; $35
-	const TILEMAP_TITLE_SCREEN                     ; $36
-	const TILEMAP_COPYRIGHT                        ; $37
-	const TILEMAP_NINTENDO                         ; $38
-	const TILEMAP_COMPANIES                        ; $39
+	const TILEMAP_GRASS_MEDAL                      ; $1e
+	const TILEMAP_SCIENCE_MEDAL                    ; $1f
+	const TILEMAP_FIRE_MEDAL                       ; $20
+	const TILEMAP_WATER_MEDAL                      ; $21
+	const TILEMAP_LIGHTNING_MEDAL                  ; $22
+	const TILEMAP_FIGHTING_MEDAL                   ; $23
+	const TILEMAP_ROCK_MEDAL                       ; $24
+	const TILEMAP_PSYCHIC_MEDAL                    ; $25
+	const TILEMAP_GAMEBOY_LINK                     ; $26
+	const TILEMAP_GAMEBOY_LINK_CONNECTING          ; $27
+	const TILEMAP_COLOSSEUM                        ; $28
+	const TILEMAP_EVOLUTION                        ; $29
+	const TILEMAP_MYSTERY                          ; $2a
+	const TILEMAP_LABORATORY                       ; $2b
+	const TILEMAP_CHARIZARD_INTRO                  ; $2c
+	const TILEMAP_SCYTHER_INTRO                    ; $2d
+	const TILEMAP_AERODACTYL_INTRO                 ; $2e
+	const TILEMAP_SOLID_TILES_1                    ; $2f
+	const TILEMAP_SOLID_TILES_2                    ; $30
+	const TILEMAP_SOLID_TILES_3                    ; $31
+	const TILEMAP_SOLID_TILES_4                    ; $32
+	const TILEMAP_PLAYER                           ; $33
+	const TILEMAP_OPPONENT                         ; $34
+	const TILEMAP_TITLE_SCREEN                     ; $35
+	const TILEMAP_COPYRIGHT                        ; $36
+	const TILEMAP_NINTENDO                         ; $37
+	const TILEMAP_COMPANIES                        ; $38
 
 DEF NUM_TILEMAPS EQU const_value

@@ -1,14 +1,6 @@
 ; plays the Opening sequence, and handles player selection
 ; in the Title Screen and Start Menu
 HandleTitleScreen:
-; if last selected item in Start Menu is 0 (Card Pop!)
-; then skip straight to the Start Menu
-; this makes it so that returning from Card Pop!
-; doesn't play the Opening sequence
-	ld a, [wLastSelectedStartMenuItem]
-	or a
-	jr z, .start_menu
-
 .play_opening
 	ld a, MUSIC_STOP
 	call PlaySong
@@ -51,7 +43,6 @@ HandleTitleScreen:
 	call PlaySFX
 	farcall FadeScreenToWhite
 
-.start_menu
 	call CheckIfHasSaveData
 	call HandleStartMenu
 
@@ -61,18 +52,12 @@ HandleTitleScreen:
 	jr nz, .continue_from_diary
 	call DeleteSaveDataForNewGame
 	jr c, HandleTitleScreen
-	jr .card_pop
+	jr .continue_duel
 .continue_from_diary
 	ld a, [wStartMenuChoice]
-	cp START_MENU_CONTINUE_FROM_DIARY
-	jr nz, .card_pop
-	call AskToContinueFromDiaryWithDuelData
-	jr c, HandleTitleScreen
-.card_pop
-	ld a, [wStartMenuChoice]
-	cp START_MENU_CARD_POP
+	or a ; cp START_MENU_CONTINUE_FROM_DIARY
 	jr nz, .continue_duel
-	call ShowCardPopCGBDisclaimer
+	call AskToContinueFromDiaryWithDuelData
 	jr c, HandleTitleScreen
 .continue_duel
 	call ResetDoFrameFunction
@@ -119,10 +104,7 @@ HandleStartMenu:
 	ld a, [wLastSelectedStartMenuItem]
 	cp $4
 	jr c, .init_menu
-	ld a, [wHasSaveData]
-	or a
-	jr z, .init_menu
-	ld a, 1 ; start at second menu option
+	xor a ; start at first menu option
 .init_menu
 	ld hl, wStartMenuParams
 	farcall InitAndPrintMenu
@@ -165,7 +147,7 @@ HandleStartMenu:
 	or a
 	jr z, .get_text_id ; New Game
 	inc e
-	ld a, 2
+	ld a, 1
 	call .AddItems
 	ld a, [wHasDuelSaveData]
 	or a
@@ -187,7 +169,7 @@ HandleStartMenu:
 	ld [wStartMenuParams + 7], a
 	ret
 
-; adds c items to start menu list
+; adds a items to start menu list
 ; this means adding 2 units per item to the text box height
 ; and adding to the number of items
 .AddItems
@@ -223,8 +205,8 @@ HandleStartMenu:
 
 .StartMenuTextIDs
 	tx NewGameText
-	tx CardPopContinueDiaryNewGameText
-	tx CardPopContinueDiaryNewGameContinueDuelText
+	tx ContinueDiaryNewGameText
+	tx ContinueDiaryNewGameContinueDuelText
 
 .DrawPlayerPortrait
 	lb bc, 14, 1
@@ -269,17 +251,9 @@ PrintStartMenuDescriptionText:
 	ret
 
 .StartMenuDescriptionFunctionTable
-	dw .CardPop
 	dw .ContinueFromDiary
 	dw .NewGame
 	dw .ContinueDuel
-
-.CardPop
-	lb de, 1, 12
-	call InitTextPrinting
-	ldtx hl, WhenYouCardPopWithFriendText
-	call PrintTextNoDelay
-	ret
 
 .ContinueDuel
 	lb de, 1, 12

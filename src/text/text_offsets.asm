@@ -801,9 +801,8 @@ TextOffsets::
 	textpointer Mail14Text
 	textpointer Mail15Text
 	textpointer NewGameText
-	textpointer CardPopContinueDiaryNewGameText
-	textpointer CardPopContinueDiaryNewGameContinueDuelText
-	textpointer WhenYouCardPopWithFriendText
+	textpointer ContinueDiaryNewGameText
+	textpointer ContinueDiaryNewGameContinueDuelText
 	textpointer ContinueFromDiarySummaryText
 	textpointer StartANewGameText
 	textpointer TheGameWillContinueFromThePointInTheDuelText

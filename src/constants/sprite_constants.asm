@@ -138,15 +138,14 @@ DEF SPRITE_FRAME_OFFSET_SIZE EQU 4
 	const SPRITE_DUEL_COIN          ; $64
 	const SPRITE_DUEL_RESULT        ; $65
 	const SPRITE_LINK               ; $66
-	const SPRITE_CARD_POP           ; $67
-	const SPRITE_BOOSTER_PACK_OAM   ; $68
-	const SPRITE_PRESS_START        ; $69
-	const SPRITE_GRASS              ; $6a
-	const SPRITE_FIRE               ; $6b
-	const SPRITE_WATER              ; $6c
-	const SPRITE_COLORLESS          ; $6d
-	const SPRITE_LIGHTNING          ; $6e
-	const SPRITE_PSYCHIC            ; $6f
-	const SPRITE_FIGHTING           ; $70
+	const SPRITE_BOOSTER_PACK_OAM   ; $67
+	const SPRITE_PRESS_START        ; $68
+	const SPRITE_GRASS              ; $69
+	const SPRITE_FIRE               ; $6a
+	const SPRITE_WATER              ; $6b
+	const SPRITE_COLORLESS          ; $6c
+	const SPRITE_LIGHTNING          ; $6d
+	const SPRITE_PSYCHIC            ; $6e
+	const SPRITE_FIGHTING           ; $6f
 
 DEF NUM_SPRITES EQU const_value

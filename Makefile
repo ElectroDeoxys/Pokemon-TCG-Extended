@@ -108,7 +108,6 @@ src/gfx/duel/other.2bpp: rgbgfx += -x 7
 
 src/gfx/fonts/full_width/4.1bpp: rgbgfx += -x 3
 
-src/gfx/link/card_pop_scene.2bpp: rgbgfx += -x 3
 src/gfx/link/link_scene.2bpp: rgbgfx += -x 3
 
 src/gfx/overworld_map.2bpp: rgbgfx += -x 15

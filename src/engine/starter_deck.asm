@@ -59,7 +59,7 @@ _AddStarterDeck:
 	db SQUIRTLE_AND_FRIENDS_DECK_ID,   SQUIRTLE_EXTRA_DECK_ID
 	db BULBASAUR_AND_FRIENDS_DECK_ID,  BULBASAUR_EXTRA_DECK_ID
 
-; clears saved data (card Collection/saved decks/Card Pop! data/etc)
+; clears saved data (card Collection/saved decks/etc)
 ; then adds the starter decks as saved decks
 ; marks all cards in Collection as not owned
 InitSaveData:
@@ -103,16 +103,6 @@ InitSaveData:
 	ld [hli], a ; sCurrentDuelChecksum
 	ld [hl], a
 
-; clears Card Pop! names
-	ld hl, sCardPopNameList
-	ld c, CARDPOP_NAME_LIST_MAX_ELEMS
-.loop_card_pop_names
-	ld [hl], $0
-	ld de, NAME_BUFFER_LENGTH
-	add hl, de
-	dec c
-	jr nz, .loop_card_pop_names
-
 ; saved configuration options
 	ld a, $2
 	ld [sTextSpeed], a
@@ -123,7 +113,6 @@ InitSaveData:
 	ld [sAnimationsDisabled], a
 	ld [sSkipDelayAllowed], a
 	ld [s0a004], a
-	ld [sTotalCardPopsDone], a
 	ld [sReceivedLegendaryCards], a
 	farcall InitPromotionalCardAndDeckCounterSaveData
 	call DisableSRAM

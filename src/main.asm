@@ -103,7 +103,6 @@ INCLUDE "engine/starter_deck.asm"
 
 SECTION "Link Functions", ROMX
 INCLUDE "engine/link/ir_functions.asm"
-INCLUDE "engine/link/card_pop.asm"
 INCLUDE "engine/link/link_duel.asm"
 
 SECTION "Promotional Card", ROMX

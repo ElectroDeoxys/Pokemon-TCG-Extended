@@ -24,7 +24,6 @@ Tilesets:
 	tileset PokemonDomeEntranceTilesetGfx,  78 ; TILESET_POKEMON_DOME_ENTRANCE
 	tileset PokemonDomeTilesetGfx,         207 ; TILESET_POKEMON_DOME
 	tileset HallOfHonorTilesetGfx,         121 ; TILESET_HALL_OF_HONOR
-	tileset CardPopGfx,                    189 ; TILESET_CARD_POP
 	tileset MedalGfx,                       72 ; TILESET_MEDAL
 	tileset GameBoyLinkGfx,                109 ; TILESET_GAMEBOY_LINK
 	tileset ColosseumGfx,                   86 ; TILESET_COLOSSEUM

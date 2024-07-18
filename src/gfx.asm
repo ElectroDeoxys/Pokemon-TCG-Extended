@@ -123,12 +123,6 @@ HallOfHonorTilemap::
 HallOfHonorCGBPermissions:
 	INCBIN "data/maps/permissions/hall_of_honor.bin.lz"
 
-CardPopTilemap::
-	INCBIN "data/maps/tiles/dimensions/card_pop.dimensions"
-	dw NULL
-	db TRUE ; cgb mode
-	INCBIN "data/maps/tiles/cgb/card_pop.bgmap.lz"
-
 ScienceMedalTilemap::
 	INCBIN "data/maps/tiles/dimensions/science_medal.dimensions"
 	dw NULL
@@ -443,10 +437,6 @@ AnimData11::
 	frame_data 0, 0, 0, 0
 
 SECTION "Gfx 6", ROMX
-
-CardPopGfx::
-	dw 189
-	INCBIN "gfx/link/card_pop_scene.2bpp"
 
 GameBoyLinkGfx::
 	dw 109
@@ -1078,10 +1068,6 @@ DuelResultGfx::
 LinkOAMGfx::
 	dw $0b
 	INCBIN "gfx/link/link_oam.2bpp"
-
-CardPopOAMGfx::
-	dw $16
-	INCBIN "gfx/link/card_pop_oam.2bpp"
 
 BoosterPackOAMGfx::
 	dw $20

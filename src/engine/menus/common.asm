@@ -14,11 +14,6 @@ SendCard:
 	farcall _SendCard
 	ret
 
-; handles all the Card Pop! functionality
-DoCardPop:
-	farcall _DoCardPop
-	ret
-
 AddStarterDeck:
 	farcall _AddStarterDeck
 	ret

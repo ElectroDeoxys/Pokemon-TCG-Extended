@@ -24,7 +24,6 @@ _GameLoop::
 	ret
 
 MainMenuFunctionTable:
-	dw MainMenu_CardPop
 	dw MainMenu_ContinueFromDiary
 	dw MainMenu_NewGame
 	dw MainMenu_ContinueDuel
@@ -67,17 +66,6 @@ MainMenu_ContinueFromDiary:
 	ld [wGameEvent], a
 	farcall $03, ExecuteGameEvent
 	or a
-	ret
-
-MainMenu_CardPop:
-	ld a, MUSIC_CARD_POP
-	call PlaySong
-	bank1call DoCardPop
-	farcall WhiteOutDMGPals
-	call DoFrameIfLCDEnabled
-	ld a, MUSIC_STOP
-	call PlaySong
-	scf
 	ret
 
 MainMenu_ContinueDuel:

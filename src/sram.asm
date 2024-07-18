@@ -8,9 +8,6 @@ s0a000:: ; a000
 s0a004:: ; a004
 	ds $1
 
-; keeps track of the number of times Card Pop!
-; was done successfully within this save file
-sTotalCardPopsDone:: ; a005
 	ds $1
 
 sTextSpeed:: ; a006
@@ -297,13 +294,6 @@ sConsecutiveWinRecordIncreased:: ; ba68
 	ds $1
 
 sChallengeMachineEnd:: ; ba69
-
-	ds $97
-
-; keeps track of last 16 player's names that
-; this save file has done Card Pop! with
-sCardPopNameList:: ; bb00
-	ds CARDPOP_NAME_LIST_SIZE
 
 SECTION "SRAM1", SRAM
 
