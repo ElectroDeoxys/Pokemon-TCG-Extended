@@ -41,19 +41,6 @@ DefaultOWFrameset:
 OverworldMapOWFrameset:
 	ow_frameset OverworldMapOWFrameset, .subgroup_1, .subgroup_2, .subgroup_3
 .subgroup_1
-	ow_frame 7, $f3, 0, OverworldMapTiles, $73
-	ow_frame 7, $f4, 0, OverworldMapTiles, $74
-	ow_frame 7, $f3, 0, OverworldMapTiles, $74
-	ow_frame 7, $f4, 0, OverworldMapTiles, $75
-	ow_frame 7, $f3, 0, OverworldMapTiles, $75
-	ow_frame 7, $f4, 0, OverworldMapTiles, $73
-.subgroup_2
-.subgroup_3
-	db -1 ; end
-
-OverworldMapCGBOWFrameset:
-	ow_frameset OverworldMapCGBOWFrameset, .subgroup_1, .subgroup_2, .subgroup_3
-.subgroup_1
 	ow_frame 4, $f3, 0, OverworldMapTiles, $73
 	ow_frame 4, $f4, 0, OverworldMapTiles, $74
 	ow_frame 4, $18, 1, OverworldMapTiles, $98
@@ -101,29 +88,6 @@ DeckMachineRoomOWFrameset:
 	ow_frame 0, $dd, 0, MasonLaboratoryTilesetGfx, $5d
 	ow_frame 3, $de, 0, MasonLaboratoryTilesetGfx, $5e
 	ow_frame 0, $df, 0, MasonLaboratoryTilesetGfx, $5f
-	ow_frame 5, $e4, 0, MasonLaboratoryTilesetGfx, $64
-	ow_frame 0, $e5, 0, MasonLaboratoryTilesetGfx, $65
-	ow_frame 0, $e6, 0, MasonLaboratoryTilesetGfx, $66
-	ow_frame 0, $e7, 0, MasonLaboratoryTilesetGfx, $67
-	ow_frame 3, $dc, 0, MasonLaboratoryTilesetGfx, $60
-	ow_frame 0, $dd, 0, MasonLaboratoryTilesetGfx, $61
-	ow_frame 3, $de, 0, MasonLaboratoryTilesetGfx, $62
-	ow_frame 0, $df, 0, MasonLaboratoryTilesetGfx, $63
-	ow_frame 5, $e4, 0, MasonLaboratoryTilesetGfx, $68
-	ow_frame 0, $e5, 0, MasonLaboratoryTilesetGfx, $69
-	ow_frame 0, $e6, 0, MasonLaboratoryTilesetGfx, $6a
-	ow_frame 0, $e7, 0, MasonLaboratoryTilesetGfx, $6b
-.subgroup_2
-.subgroup_3
-	db -1 ; end
-
-DeckMachineRoomCGBOWFrameset:
-	ow_frameset DeckMachineRoomCGBOWFrameset, .subgroup_1, .subgroup_2, .subgroup_3
-.subgroup_1
-	ow_frame 3, $dc, 0, MasonLaboratoryTilesetGfx, $5c
-	ow_frame 0, $dd, 0, MasonLaboratoryTilesetGfx, $5d
-	ow_frame 3, $de, 0, MasonLaboratoryTilesetGfx, $5e
-	ow_frame 0, $df, 0, MasonLaboratoryTilesetGfx, $5f
 	ow_frame 5, $03, 1, MasonLaboratoryTilesetGfx, $83
 	ow_frame 0, $04, 1, MasonLaboratoryTilesetGfx, $84
 	ow_frame 0, $05, 1, MasonLaboratoryTilesetGfx, $85
@@ -142,29 +106,6 @@ DeckMachineRoomCGBOWFrameset:
 
 FireClubOWFrameset:
 	ow_frameset FireClubOWFrameset, .subgroup_1, .subgroup_2, .subgroup_3
-.subgroup_1
-	ow_frame 5, $9f, 0, FireClubTilesetGfx, $1f
-	ow_frame 0, $a0, 0, FireClubTilesetGfx, $20
-	ow_frame 0, $a1, 0, FireClubTilesetGfx, $21
-	ow_frame 0, $a2, 0, FireClubTilesetGfx, $22
-	ow_frame 6, $a3, 0, FireClubTilesetGfx, $23
-	ow_frame 0, $a4, 0, FireClubTilesetGfx, $24
-	ow_frame 0, $a5, 0, FireClubTilesetGfx, $25
-	ow_frame 0, $a6, 0, FireClubTilesetGfx, $26
-	ow_frame 5, $9f, 0, FireClubTilesetGfx, $27
-	ow_frame 0, $a0, 0, FireClubTilesetGfx, $28
-	ow_frame 0, $a1, 0, FireClubTilesetGfx, $29
-	ow_frame 0, $a2, 0, FireClubTilesetGfx, $2a
-	ow_frame 6, $a3, 0, FireClubTilesetGfx, $2b
-	ow_frame 0, $a4, 0, FireClubTilesetGfx, $2c
-	ow_frame 0, $a5, 0, FireClubTilesetGfx, $2d
-	ow_frame 0, $a6, 0, FireClubTilesetGfx, $2e
-.subgroup_2
-.subgroup_3
-	db -1 ; end
-
-FireClubCGBOWFrameset:
-	ow_frameset FireClubCGBOWFrameset, .subgroup_1, .subgroup_2, .subgroup_3
 .subgroup_1
 	ow_frame 5, $bb, 0, FireClubTilesetGfx, $3b
 	ow_frame 0, $bc, 0, FireClubTilesetGfx, $3c
