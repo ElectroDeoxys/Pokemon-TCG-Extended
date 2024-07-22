@@ -264,12 +264,7 @@ LoadCardTypeHeaderTiles::
 
 ; loads the symbols that are displayed near the names of a list of cards in the hand or discard pile
 LoadDuelCardSymbolTiles::
-	ld hl, DuelDmgSgbSymbolGraphics - $4000
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .copy
 	ld hl, DuelCgbSymbolGraphics - $4000
-.copy
 	ld de, v0Tiles1 + $50 tiles
 	ld b, $30
 	jr CopyFontsOrDuelGraphicsTiles
@@ -277,12 +272,7 @@ LoadDuelCardSymbolTiles::
 ; loads the symbols for Stage 1 Pkmn card, Stage 2 Pkmn card, and Trainer card.
 ; unlike LoadDuelCardSymbolTiles excludes the symbols for Basic Pkmn and all energies.
 LoadDuelCardSymbolTiles2::
-	ld hl, DuelDmgSgbSymbolGraphics + $4 tiles - $4000
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .copy
 	ld hl, DuelCgbSymbolGraphics + $4 tiles - $4000
-.copy
 	ld de, v0Tiles1 + $54 tiles
 	ld b, $c
 	jr CopyFontsOrDuelGraphicsTiles
@@ -296,12 +286,7 @@ LoadDuelFaceDownCardTiles::
 LoadDuelCheckPokemonScreenTiles::
 	ld b, $24
 .got_num_tiles
-	ld hl, DuelDmgSgbSymbolGraphics + $30 tiles - $4000
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .copy
 	ld hl, DuelCgbSymbolGraphics + $30 tiles - $4000
-.copy
 	ld de, v0Tiles1 + $50 tiles
 	jr CopyFontsOrDuelGraphicsTiles
 
@@ -316,12 +301,7 @@ LoadPlacingThePrizesScreenTiles::
 
 ; load the Deck and the Discard Pile icons
 LoadDeckAndDiscardPileIcons::
-	ld hl, DuelDmgSgbSymbolGraphics + $54 tiles - $4000
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .copy
 	ld hl, DuelCgbSymbolGraphics + $54 tiles - $4000
-.copy
 	ld de, v0Tiles1 + $50 tiles
 	ld b, $30
 	jr CopyFontsOrDuelGraphicsTiles
@@ -363,23 +343,6 @@ Func_212f::
 	ld hl, DuelOtherGraphics + $15 tiles
 	ld de, sGfxBuffer1 + $30 tiles
 	ld b, $8
-	call CopyFontsOrDuelGraphicsTiles
-	call GetCardSymbolData
-	sub $d0
-	ld l, a
-	ld h, $00
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl ; *16
-	ld de, DuelDmgSgbSymbolGraphics - $4000
-	add hl, de
-	ld de, sGfxBuffer1 + $38 tiles
-	ld b, $4
-	call CopyFontsOrDuelGraphicsTiles
-	ld hl, DuelDmgSgbSymbolGraphics - $4000
-	ld de, sGfxBuffer4 + $10 tiles
-	ld b, $30
 	jr CopyFontsOrDuelGraphicsTiles
 
 ; load the graphics and draw the duel box message given a BOXMSG_* constant in a

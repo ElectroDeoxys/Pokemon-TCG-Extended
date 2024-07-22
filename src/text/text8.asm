@@ -518,16 +518,9 @@ Text06d5:
 	done
 
 Text06d6:
-	text "Welcome to the Gift Center!"
-	line "Here you can give or receive cards"
-	line "or deck configurations via the"
-	line "Infrared Link."
+	text "Welcome!"
 	line "Unfortunately, our service is"
-	line "only available for the"
-	line "Game Boy Color."
-	line ""
-	line "Please enjoy our service with"
-	line "a Game Boy Color."
+	line "no longer available."
 	done
 
 Text06d7:

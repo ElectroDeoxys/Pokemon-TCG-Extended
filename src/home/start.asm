@@ -23,7 +23,6 @@ Start::
 	call SetupPalettes
 	call SetupSound
 	call SetupTimer
-	call ResetSerial
 	call CopyDMAFunction
 	call ValidateSRAM
 	ld a, BANK(GameLoop)

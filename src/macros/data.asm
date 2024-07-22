@@ -32,10 +32,6 @@ MACRO bigdw ; big-endian word
 	dx 2, \1
 ENDM
 
-MACRO sgb
-	db (\1) << 3 + (\2) ; sgb_command * 8 + length
-ENDM
-
 MACRO rgb
 	dw ((\3) << 10 | (\2) << 5 | (\1))
 ENDM

@@ -1257,7 +1257,6 @@ DebugMenuText:
 	line "DUEL MODE"
 	line "CONTINUE FROM DIARY"
 	line "CGB TEST"
-	line "SGB FRAME"
 	line "STANDARD BG CHARACTER"
 	line "LOOK AT SPR"
 	line "V EFFECT"

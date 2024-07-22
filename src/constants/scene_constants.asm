@@ -13,12 +13,9 @@
 	const SCENE_GRADIENT_WHITE_AND_GREEN      ; $0b
 	const SCENE_COLOR_WHEEL                   ; $0c
 	const SCENE_COLOR_TEST                    ; $0d
-	const SCENE_GAMEBOY_LINK_CONNECTING       ; $0e
-	const SCENE_GAMEBOY_LINK_TRANSMITTING     ; $0f
-	const SCENE_GAMEBOY_LINK_NOT_CONNECTED    ; $10
-	const SCENE_NINTENDO                      ; $11
-	const SCENE_COMPANIES                     ; $12
-	const SCENE_COPYRIGHT                     ; $13
-	const SCENE_COLOR_PALETTE                 ; $14
+	const SCENE_NINTENDO                      ; $0e
+	const SCENE_COMPANIES                     ; $0f
+	const SCENE_COPYRIGHT                     ; $10
+	const SCENE_COLOR_PALETTE                 ; $11
 
 DEF NUM_SCENES EQU const_value

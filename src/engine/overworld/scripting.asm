@@ -72,13 +72,7 @@ Func_c998:
 	ld a, [wd3d0]
 	or a
 	ret z
-	ld b, $4
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-	ld b, $e
-.not_cgb
-	ld a, b
+	ld a, SPRITE_ANIM_BLUE_NPC_UP
 	ld [wNPCAnim], a
 	ld a, $0
 	ld [wNPCAnimFlags], a
@@ -501,11 +495,9 @@ EventVarMasks:
 	event_def $19, %00001000 ; EVENT_RECEIVED_ARTICUNO
 	event_def $19, %00000100 ; EVENT_RECEIVED_DRAGONITE
 	event_def $19, %00111100 ; EVENT_LEGENDARY_CARDS_RECEIVED_FLAGS
-	event_def $1a, %11111100 ; EVENT_GIFT_CENTER_MENU_CHOICE
 	event_def $1a, %00000011 ; EVENT_AARON_BOOSTER_REWARD
-	event_def $1b, %11111111 ; EVENT_CONSOLE
-	event_def $1c, %11110000 ; EVENT_SAM_MENU_CHOICE
-	event_def $1c, %00001111 ; EVENT_AARON_DECK_MENU_CHOICE
+	event_def $1b, %11110000 ; EVENT_SAM_MENU_CHOICE
+	event_def $1b, %00001111 ; EVENT_AARON_DECK_MENU_CHOICE
 	assert_table_length NUM_EVENT_FLAGS
 
 ; Used for basic level objects that just print text and quit
@@ -759,13 +751,6 @@ SetNPCDuelParams:
 	ld a, c
 	ld [wDuelTheme], a
 	ret
-
-ScriptCommand_BattleCenter:
-	ld a, GAME_EVENT_BATTLE_CENTER
-	ld [wGameEvent], a
-	ld hl, wOverworldTransition
-	set 6, [hl]
-	jp IncreaseScriptPointerBy1
 
 ; prints text arg 1 or arg 2 depending on wScriptControlByte.
 ScriptCommand_PrintVariableNPCText:
@@ -1286,13 +1271,7 @@ ScriptCommand_SetSpriteAttributes:
 	or c
 	ld [hl], a
 	pop bc
-	ld e, c
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-	ld e, b
-.not_cgb
-	ld a, e
+	ld a, b
 	farcall SetNPCAnimation
 	jp IncreaseScriptPointerBy4
 
@@ -1785,24 +1764,6 @@ ScriptCommand_SaveGame:
 	farcall _SaveGame
 	jp IncreaseScriptPointerBy2
 
-ScriptCommand_GiftCenter:
-	ld a, c
-	or a
-	jr nz, .load_gift_center
-	; show menu
-	farcall GiftCenterMenu
-	ld c, a
-	set_event_value EVENT_GIFT_CENTER_MENU_CHOICE
-	jr .done
-
-.load_gift_center
-	ld a, GAME_EVENT_GIFT_CENTER
-	ld [wGameEvent], a
-	ld hl, wOverworldTransition
-	set 6, [hl]
-.done
-	jp IncreaseScriptPointerBy2
-
 ScriptCommand_PlayCredits:
 	call GetReceivedLegendaryCards
 	ld a, GAME_EVENT_CREDITS
@@ -2090,5 +2051,4 @@ INCLUDE "scripts/pokemon_dome_entrance.asm"
 INCLUDE "scripts/pokemon_dome.asm"
 INCLUDE "scripts/hall_of_honor.asm"
 
-INCLUDE "scripts/battle_center.asm"
 INCLUDE "scripts/gift_center.asm"

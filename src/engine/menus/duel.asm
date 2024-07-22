@@ -630,7 +630,7 @@ DrawYourOrOppPlayArea_ActiveCardGfx:
 	ld l, a
 	lb bc, $30, TILE_SIZE
 	call LoadCardGfx
-	bank1call SetBGP6OrSGB3ToCardPalette
+	bank1call SetBGP6ToCardPalette
 	bank1call FlushAllPalettesOrSendPal23Packet
 	pop de
 
@@ -639,7 +639,7 @@ DrawYourOrOppPlayArea_ActiveCardGfx:
 	lb hl, 6, 1
 	lb bc, 8, 6
 	call FillRectangle
-	bank1call ApplyBGP6OrSGB3ToCardImage
+	bank1call ApplyBGP6ToCardImage
 	ret
 
 .no_pokemon
@@ -672,7 +672,7 @@ DrawInPlayArea_ActiveCardGfx:
 	ld l, a
 	lb bc, $30, TILE_SIZE
 	call LoadCardGfx
-	bank1call SetBGP6OrSGB3ToCardPalette
+	bank1call SetBGP6ToCardPalette
 
 .opponent1
 	ld a, DUELVARS_ARENA_CARD
@@ -696,7 +696,7 @@ DrawInPlayArea_ActiveCardGfx:
 	ld l, a
 	lb bc, $30, TILE_SIZE
 	call LoadCardGfx
-	bank1call SetBGP7OrSGB2ToCardPalette
+	bank1call SetBGP7ToCardPalette
 	call SwapTurn
 
 .draw
@@ -715,7 +715,7 @@ DrawInPlayArea_ActiveCardGfx:
 	lb hl, 6, 1
 	lb bc, 8, 6
 	call FillRectangle
-	bank1call ApplyBGP6OrSGB3ToCardImage
+	bank1call ApplyBGP6ToCardImage
 
 .opponent2
 	ld a, [wArenaCardsInPlayArea]
@@ -729,7 +729,7 @@ DrawInPlayArea_ActiveCardGfx:
 	lb hl, 6, 1
 	lb bc, 8, 6
 	call FillRectangle
-	bank1call ApplyBGP7OrSGB2ToCardImage
+	bank1call ApplyBGP7ToCardImage
 	call SwapTurn
 	ret
 
@@ -776,16 +776,12 @@ DrawPlayArea_PrizeCards:
 	lb bc, 2, 2 ; rectangle size
 	call FillRectangle
 
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
 	ld a, $02 ; blue colour
 	lb bc, 2, 2
 	lb hl, 0, 0
 	call BankswitchVRAM1
 	call FillRectangle
 	call BankswitchVRAM0
-.not_cgb
 	pop bc
 	pop hl
 	jr .loop
@@ -919,11 +915,7 @@ DrawPlayArea_BenchCards:
 	lb hl, 1, 2
 	lb bc, 2, 2
 	call FillRectangle
-
-	ld a, [wConsole]
-	cp CONSOLE_CGB
 	pop bc
-	jr nz, .next
 
 	ld a, b
 	cp $ec ; tile offset of 2 stage
@@ -941,10 +933,10 @@ DrawPlayArea_BenchCards:
 	call BankswitchVRAM1
 	call FillRectangle
 	call BankswitchVRAM0
-
-.next ; adjust coordinates for next card
 	pop bc
 	pop hl
+
+; adjust coordinates for next card
 	ld a, d
 	add c
 	ld d, a
@@ -971,19 +963,12 @@ DrawPlayArea_BenchCards:
 	lb hl, 1, 2
 	lb bc, 2, 2
 	call FillRectangle
-
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-
 	ld a, $02 ; colour
 	lb bc, 2, 2
 	lb hl, 0, 0
 	call BankswitchVRAM1
 	call FillRectangle
 	call BankswitchVRAM0
-
-.not_cgb
 	pop bc
 	ld a, d
 	add c
@@ -1056,10 +1041,6 @@ DrawPlayArea_IconWithValue:
 	lb bc, 2, 2
 	call FillRectangle
 
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .skip
-
 	ld a, $02
 	lb bc, 2, 2
 	lb hl, 0, 0
@@ -1067,7 +1048,6 @@ DrawPlayArea_IconWithValue:
 	call FillRectangle
 	call BankswitchVRAM0
 
-.skip
 ; adjust coordinate to the lower right
 	inc d
 	inc d

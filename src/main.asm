@@ -91,18 +91,11 @@ INCLUDE "engine/duel/effect_commands.asm"
 SECTION "Animation Commands", ROMX
 INCLUDE "engine/duel/animations/commands.asm"
 
-SECTION "IR Communications Core", ROMX
-INCLUDE "engine/link/ir_core.asm"
-
 SECTION "Sprite Animations VBlank", ROMX
 INCLUDE "engine/gfx/sprite_vblank.asm"
 
 SECTION "Starter Deck", ROMX
 INCLUDE "engine/starter_deck.asm"
-
-SECTION "Link Functions", ROMX
-INCLUDE "engine/link/ir_functions.asm"
-INCLUDE "engine/link/link_duel.asm"
 
 SECTION "Promotional Card", ROMX
 INCLUDE "engine/promotional_card.asm"
@@ -156,9 +149,6 @@ INCLUDE "data/decks.asm"
 
 SECTION "Cards", ROMX
 INCLUDE "data/cards.asm"
-
-SECTION "SGB", ROMX
-INCLUDE "engine/sgb.asm"
 
 SECTION "Bank 20", ROMX
 INCLUDE "engine/bank20.asm"

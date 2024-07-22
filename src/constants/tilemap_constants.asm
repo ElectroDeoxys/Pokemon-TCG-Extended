@@ -37,24 +37,22 @@
 	const TILEMAP_FIGHTING_MEDAL                   ; $23
 	const TILEMAP_ROCK_MEDAL                       ; $24
 	const TILEMAP_PSYCHIC_MEDAL                    ; $25
-	const TILEMAP_GAMEBOY_LINK                     ; $26
-	const TILEMAP_GAMEBOY_LINK_CONNECTING          ; $27
-	const TILEMAP_COLOSSEUM                        ; $28
-	const TILEMAP_EVOLUTION                        ; $29
-	const TILEMAP_MYSTERY                          ; $2a
-	const TILEMAP_LABORATORY                       ; $2b
-	const TILEMAP_CHARIZARD_INTRO                  ; $2c
-	const TILEMAP_SCYTHER_INTRO                    ; $2d
-	const TILEMAP_AERODACTYL_INTRO                 ; $2e
-	const TILEMAP_SOLID_TILES_1                    ; $2f
-	const TILEMAP_SOLID_TILES_2                    ; $30
-	const TILEMAP_SOLID_TILES_3                    ; $31
-	const TILEMAP_SOLID_TILES_4                    ; $32
-	const TILEMAP_PLAYER                           ; $33
-	const TILEMAP_OPPONENT                         ; $34
-	const TILEMAP_TITLE_SCREEN                     ; $35
-	const TILEMAP_COPYRIGHT                        ; $36
-	const TILEMAP_NINTENDO                         ; $37
-	const TILEMAP_COMPANIES                        ; $38
+	const TILEMAP_COLOSSEUM                        ; $26
+	const TILEMAP_EVOLUTION                        ; $27
+	const TILEMAP_MYSTERY                          ; $28
+	const TILEMAP_LABORATORY                       ; $29
+	const TILEMAP_CHARIZARD_INTRO                  ; $2a
+	const TILEMAP_SCYTHER_INTRO                    ; $2b
+	const TILEMAP_AERODACTYL_INTRO                 ; $2c
+	const TILEMAP_SOLID_TILES_1                    ; $2d
+	const TILEMAP_SOLID_TILES_2                    ; $2e
+	const TILEMAP_SOLID_TILES_3                    ; $2f
+	const TILEMAP_SOLID_TILES_4                    ; $30
+	const TILEMAP_PLAYER                           ; $31
+	const TILEMAP_OPPONENT                         ; $32
+	const TILEMAP_TITLE_SCREEN                     ; $33
+	const TILEMAP_COPYRIGHT                        ; $34
+	const TILEMAP_NINTENDO                         ; $35
+	const TILEMAP_COMPANIES                        ; $36
 
 DEF NUM_TILEMAPS EQU const_value

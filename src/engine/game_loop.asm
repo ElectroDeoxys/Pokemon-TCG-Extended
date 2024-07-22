@@ -3,7 +3,6 @@
 GameLoop::
 	di
 	ld sp, $e000
-	call ResetSerial
 	call EnableInt_VBlank
 	call EnableInt_Timer
 	call EnableSRAM

@@ -1,30 +1,8 @@
-; loads wConsolePaletteData depending on console
-; every entry in the list is $00
-LoadConsolePaletteData:
-	push hl
-	ld a, [wConsole]
-	add LOW(.PaletteDataTable)
-	ld l, a
-	ld a, HIGH(.PaletteDataTable)
-	adc 0
-	ld h, a
-	ld a, [hl]
-	ld [wConsolePaletteData], a
-	xor a
-	ld [wd317], a
-	pop hl
-	ret
-
-.PaletteDataTable:
-	db $00 ; CONSOLE_DMG
-	db $00 ; CONSOLE_SGB
-	db $00 ; CONSOLE_CGB
-
 FadeScreenToWhite:
 	ld a, [wLCDC]
 	bit LCDC_ENABLE_F, a
 	jr z, .lcd_off
-	ld a, [wConsolePaletteData]
+	xor a
 	ld [wTempBGP], a
 	ld [wTempOBP0], a
 	ld [wTempOBP1], a
@@ -38,7 +16,7 @@ FadeScreenToWhite:
 	ret
 
 .lcd_off
-	ld a, [wConsolePaletteData]
+	xor a
 	ld [wBGP], a
 	ld [wOBP0], a
 	ld [wOBP1], a
@@ -71,7 +49,7 @@ FadeScreenFromWhite:
 
 ; fills wBackgroundPalettesCGB with white pal
 SetWhitePalettes:
-	ld a, [wConsolePaletteData]
+	xor a
 	ld [wBGP], a
 	ld [wOBP0], a
 	ld [wOBP1], a
@@ -482,7 +460,7 @@ Func_10d17:
 	ld bc, NUM_BACKGROUND_PALETTES palettes + NUM_OBJECT_PALETTES palettes
 	call CopyDataHLtoDE_SaveRegisters
 
-	ld a, [wConsolePaletteData]
+	xor a
 	ld [wBGP], a
 	ld de, PALRGB_WHITE
 	ld hl, wBackgroundPalettesCGB
@@ -495,7 +473,7 @@ Func_10d17:
 	ret
 
 Func_10d50:
-	ld a, [wConsolePaletteData]
+	xor a
 	ld [wTempBGP], a
 	ld a, [wOBP0]
 	ld [wTempOBP0], a

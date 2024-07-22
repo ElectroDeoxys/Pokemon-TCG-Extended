@@ -25,9 +25,6 @@ DuelGraphics::
 DuelCardHeaderGraphics::
 INCBIN "gfx/duel/card_headers.2bpp"
 
-DuelDmgSgbSymbolGraphics::
-INCBIN "gfx/duel/dmg_sgb_symbols.2bpp"
-
 DuelCgbSymbolGraphics::
 INCBIN "gfx/duel/cgb_symbols.2bpp", $0, $808
 
@@ -165,18 +162,6 @@ PsychicMedalTilemap::
 	db TRUE ; cgb mode
 	INCBIN "data/maps/tiles/cgb/psychic_medal.bgmap.lz"
 
-GameBoyLinkTilemap::
-	INCBIN "data/maps/tiles/dimensions/gameboy_link.dimensions"
-	dw NULL
-	db TRUE ; cgb mode
-	INCBIN "data/maps/tiles/cgb/gameboy_link.bgmap.lz"
-
-GameBoyLinkConnectingTilemap::
-	INCBIN "data/maps/tiles/dimensions/gameboy_link_connecting.dimensions"
-	dw NULL
-	db TRUE ; cgb mode
-	INCBIN "data/maps/tiles/cgb/gameboy_link_connecting.bgmap.lz"
-
 ColosseumTilemap::
 	INCBIN "data/maps/tiles/dimensions/colosseum.dimensions"
 	dw NULL
@@ -303,11 +288,6 @@ DuelPowderGfx::
 	dw $1
 	INCBIN "gfx/duel/anims/powder.2bpp"
 
-AnimData12::
-	frame_table AnimFrameTable3
-	frame_data 2, 8, 0, 0
-	frame_data 0, 0, 0, 0
-
 SECTION "Gfx 4", ROMX
 
 OverworldMapTiles::
@@ -431,16 +411,7 @@ AnimData3::
 	frame_data 9, 16, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData11::
-	frame_table AnimFrameTable3
-	frame_data 1, 8, 0, 0
-	frame_data 0, 0, 0, 0
-
 SECTION "Gfx 6", ROMX
-
-GameBoyLinkGfx::
-	dw 109
-	INCBIN "gfx/link/link_scene.2bpp"
 
 ColosseumGfx::
 	dw 86
@@ -1064,10 +1035,6 @@ DuelCoinGfx::
 DuelResultGfx::
 	dw $36
 	INCBIN "gfx/duel/anims/result.2bpp"
-
-LinkOAMGfx::
-	dw $0b
-	INCBIN "gfx/link/link_oam.2bpp"
 
 BoosterPackOAMGfx::
 	dw $20

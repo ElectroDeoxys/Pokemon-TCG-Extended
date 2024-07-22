@@ -10,7 +10,6 @@ DEF PLAYER_TURN   EQUS "HIGH(wPlayerDuelVariables)"
 DEF OPPONENT_TURN EQUS "HIGH(wOpponentDuelVariables)"
 
 ; wDuelType constants
-DEF DUELTYPE_LINK     EQU $1
 DEF DUELTYPE_PRACTICE EQU $80
 ; for normal duels (vs AI), wDuelType is $80 + [wOpponentDeckID]
 
@@ -109,7 +108,6 @@ DEF PLAY_AREA_BENCH_5 EQU $5
 
 ; duelist types (DUELVARS_DUELIST_TYPE)
 DEF DUELIST_TYPE_PLAYER   EQU $00
-DEF DUELIST_TYPE_LINK_OPP EQU $01
 DEF DUELIST_TYPE_AI_OPP   EQU $80 ; $80 + [wOpponentDeckID]
 
 ; status conditions (DUELVARS_ARENA_CARD_STATUS)
@@ -213,29 +211,28 @@ DEF NO_DAMAGE_OR_EFFECT_NSHIELD      EQU $05
 
 ; OppAction_* constants (OppActionTable)
 	const_def
-	const OPPACTION_ERROR                     ; $00
-	const OPPACTION_PLAY_BASIC_PKMN           ; $01
-	const OPPACTION_EVOLVE_PKMN               ; $02
-	const OPPACTION_PLAY_ENERGY               ; $03
-	const OPPACTION_ATTEMPT_RETREAT           ; $04
-	const OPPACTION_FINISH_NO_ATTACK          ; $05
-	const OPPACTION_PLAY_TRAINER              ; $06
-	const OPPACTION_EXECUTE_TRAINER_EFFECTS   ; $07
-	const OPPACTION_BEGIN_ATTACK              ; $08
-	const OPPACTION_USE_ATTACK                ; $09
-	const OPPACTION_ATTACK_ANIM_AND_DAMAGE    ; $0a
-	const OPPACTION_DRAW_CARD                 ; $0b
-	const OPPACTION_USE_PKMN_POWER            ; $0c
-	const OPPACTION_EXECUTE_PKMN_POWER_EFFECT ; $0d
-	const OPPACTION_FORCE_SWITCH_ACTIVE       ; $0e
-	const OPPACTION_NO_ACTION_0F              ; $0f
-	const OPPACTION_NO_ACTION_10              ; $10
-	const OPPACTION_TOSS_COIN_A_TIMES         ; $11
-	const OPPACTION_6B30                      ; $12
-	const OPPACTION_NO_ACTION_13              ; $13
-	const OPPACTION_USE_METRONOME_ATTACK      ; $14
-	const OPPACTION_6B15                      ; $15
-	const OPPACTION_DUEL_MAIN_SCENE           ; $16
+	const OPPACTION_PLAY_BASIC_PKMN           ; $00
+	const OPPACTION_EVOLVE_PKMN               ; $01
+	const OPPACTION_PLAY_ENERGY               ; $02
+	const OPPACTION_ATTEMPT_RETREAT           ; $03
+	const OPPACTION_FINISH_NO_ATTACK          ; $04
+	const OPPACTION_PLAY_TRAINER              ; $05
+	const OPPACTION_EXECUTE_TRAINER_EFFECTS   ; $06
+	const OPPACTION_BEGIN_ATTACK              ; $07
+	const OPPACTION_USE_ATTACK                ; $08
+	const OPPACTION_ATTACK_ANIM_AND_DAMAGE    ; $09
+	const OPPACTION_DRAW_CARD                 ; $0a
+	const OPPACTION_USE_PKMN_POWER            ; $0b
+	const OPPACTION_EXECUTE_PKMN_POWER_EFFECT ; $0c
+	const OPPACTION_FORCE_SWITCH_ACTIVE       ; $0d
+	const OPPACTION_NO_ACTION_0F              ; $0e
+	const OPPACTION_NO_ACTION_10              ; $0f
+	const OPPACTION_TOSS_COIN_A_TIMES         ; $10
+	const OPPACTION_6B30                      ; $11
+	const OPPACTION_NO_ACTION_13              ; $12
+	const OPPACTION_USE_METRONOME_ATTACK      ; $13
+	const OPPACTION_6B15                      ; $14
+	const OPPACTION_DUEL_MAIN_SCENE           ; $15
 DEF NUM_OPP_ACTIONS EQU const_value
 
 ; constants for PracticeDuelActionTable entries

@@ -38,11 +38,9 @@ DEF FLUSH_ALL_PALS_F EQU 6
 	const_def
 	const GAME_EVENT_OVERWORLD         ; $0
 	const GAME_EVENT_DUEL              ; $1
-	const GAME_EVENT_BATTLE_CENTER     ; $2
-	const GAME_EVENT_GIFT_CENTER       ; $3
-	const GAME_EVENT_CREDITS           ; $4
-	const GAME_EVENT_CONTINUE_DUEL     ; $5
-	const GAME_EVENT_CHALLENGE_MACHINE ; $6
+	const GAME_EVENT_CREDITS           ; $2
+	const GAME_EVENT_CONTINUE_DUEL     ; $3
+	const GAME_EVENT_CHALLENGE_MACHINE ; $4
 DEF NUM_GAME_EVENTS EQU const_value
 
 DEF OWMODE_MAP            EQU 0

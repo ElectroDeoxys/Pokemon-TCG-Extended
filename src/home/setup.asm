@@ -36,11 +36,7 @@ DetectConsole::
 	ld b, CONSOLE_CGB
 	cp GBC
 	jr z, .got_console
-	call DetectSGB
 	ld b, CONSOLE_DMG
-	jr nc, .got_console
-	call InitSGB
-	ld b, CONSOLE_SGB
 .got_console
 	ld a, b
 	ld [wConsole], a

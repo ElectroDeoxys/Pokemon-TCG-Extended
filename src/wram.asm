@@ -300,7 +300,6 @@ wDecompRepeatSeqOffset:: ; cade
 wDecompSecondaryBufferPtrLow:: ; cadf
 	ds $1
 
-wTempSGBPacket:: ; cae0
 	ds $10
 
 ; temporary CGB palette data buffer to eventually save into BGPD registers.
@@ -502,19 +501,7 @@ wEnergyDiscardPlayAreaLocation:: ; cbe0
 wOpponentTurnEnded:: ; cbe1
 	ds $1
 
-wOppRNG1:: ; cbe2
-	ds $1
-
-wOppRNG2:: ; cbe3
-	ds $1
-
-wOppRNGCounter:: ; cbe4
-	ds $1
-
-; sp is saved here when starting a duel, in order to save the return address
-; however, it only seems to be read after a transmission error in a link duel
-wDuelReturnAddress:: ; cbe5
-	ds $2
+	ds $5
 
 ; if non-zero, duel menu input is not checked
 wDebugSkipDuelMenuInput:: ; cbe7
@@ -535,12 +522,7 @@ wNumCardsBeingDrawn:: ; cbe9
 wTempSerialBuf:: ; cbed
 	ds $8
 
-	ds $2
-
-; return address for when the Link Opponent has
-; made a decision on his turn, so that the duel continues
-wLinkOpponentTurnReturnAddress:: ; cbf7
-	ds $2
+	ds $4
 
 ; when non-0, AIMakeDecision doesn't wait 60 frames and print DuelistIsThinkingText
 wSkipDuelistIsThinkingDelay:: ; cbf9
@@ -823,7 +805,6 @@ wSkipDelayAllowed:: ; ccf2
 SECTION "WRAM0 2", WRAM0
 
 ; on CGB, attributes of the text box borders. (values 0-7 seem to be used, which only affect palette)
-; on SGB, colorize text box border with SGB1 if non-0
 wTextBoxFrameType:: ; ccf3
 	ds $1
 
@@ -1888,7 +1869,6 @@ wSelectedPauseMenuItem:: ; d0b8
 wSelectedPCMenuItem:: ; d0b9
 	ds $1
 
-wSelectedGiftCenterMenuItem:: ; d0ba
 	ds $1
 
 wTempMap:: ; d0bb
@@ -1917,7 +1897,7 @@ wOverworldModeBackup:: ; d0c0
 wOverworldNPCFlags:: ; d0c1
 	ds $1
 
-; only used with GAME_EVENT_DUEL, GAME_EVENT_BATTLE_CENTER, and GAME_EVENT_GIFT_CENTER
+; only used with GAME_EVENT_DUEL
 wActiveGameEvent:: ; d0c2
 	ds $1
 
@@ -1951,7 +1931,6 @@ wOBP0Backup:: ; d10c
 wOBP1Backup:: ; d10d
 	ds $1
 
-wGiftCenterChoice:: ; d10e
 	ds $1
 
 wReloadOverworldCallbackPtr:: ; d10f
@@ -2021,7 +2000,6 @@ wBGMapHeight:: ; d130
 wCurTilemap:: ; d131
 	ds $1
 
-wCurMapSGBPals:: ; d132
 	ds $1
 
 UNION
@@ -2111,9 +2089,6 @@ wd291:: ; d291
 wWriteBGMapToSRAM:: ; d292
 	ds $1
 
-; console-dependent palette data
-; for BGP and OBP
-wConsolePaletteData:: ; d293
 	ds $1
 
 wTempBGP:: ; d294
@@ -2377,7 +2352,6 @@ wd417:: ; d417
 wDebugMenuSelection:: ; d418
 	ds $1
 
-wDebugSGBBorder:: ; d419
 	ds $1
 
 wDebugBoosterSelection:: ; d41a
@@ -2638,11 +2612,7 @@ wCurPortrait:: ; d61e
 wd61f:: ; d61f
 	ds $1
 
-wSceneSGBPacketPtr:: ; d620
-	ds $2
-
-wSceneSGBRoutinePtr:: ; d622
-	ds $2
+	ds $4
 
 ; whether there exists valid save data
 wHasSaveData:: ; d624

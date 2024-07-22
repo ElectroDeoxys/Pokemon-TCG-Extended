@@ -109,10 +109,9 @@ Func_2c08c:
 	push de
 	push af
 	ld a, OPPACTION_TOSS_COIN_A_TIMES
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	pop af
 	pop de
-	call SerialSend8Bytes
 	call TossCoinATimes
 	ret
 
@@ -132,7 +131,7 @@ Func_2c0a8:
 	ldh a, [hWhoseTurn]
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_6B30
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	bank1call Func_4f2d
 	ld c, a
 	pop af
@@ -141,7 +140,6 @@ Func_2c0a8:
 	ret
 
 Func_2c0bd:
-	call ExchangeRNG
 	bank1call Func_4f2d
 	call ShuffleDeck
 	ret
@@ -979,14 +977,11 @@ AskWhetherToQuitSelectingCards:
 	call YesOrNoMenuWithText
 	ret
 
-; handles the selection of a forced switch by link/AI opponent or by the player.
+; handles the selection of a forced switch by AI opponent or by the player.
 ; outputs the Play Area location of the chosen bench card in hTempPlayAreaLocation_ff9d.
 DuelistSelectForcedSwitch:
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetNonTurnDuelistVariable
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .link_opp
-
 	cp DUELIST_TYPE_PLAYER
 	jr z, .player
 
@@ -1015,20 +1010,6 @@ DuelistSelectForcedSwitch:
 	bank1call OpenPlayAreaScreenForSelection
 	jr c, .asm_2c4c0
 	call SwapTurn
-	ret
-
-.link_opp
-; get selection from link opponent
-	ld a, OPPACTION_FORCE_SWITCH_ACTIVE
-	call SetOppAction_SerialSendDuelData
-.loop
-	call SerialRecvByte
-	jr nc, .received
-	halt
-	nop
-	jr .loop
-.received
-	ldh [hTempPlayAreaLocation_ff9d], a
 	ret
 
 ; returns in a the card index of energy card
@@ -1239,14 +1220,14 @@ HandleColorChangeScreen:
 	ld l, a
 	lb bc, $30, TILE_SIZE
 	call LoadCardGfx
-	bank1call SetBGP6OrSGB3ToCardPalette
+	bank1call SetBGP6ToCardPalette
 	bank1call FlushAllPalettesOrSendPal23Packet
 	ld a, $a0
 	lb hl, 6, 1
 	lb de, 9, 2
 	lb bc, 8, 6
 	call FillRectangle
-	bank1call ApplyBGP6OrSGB3ToCardImage
+	bank1call ApplyBGP6ToCardImage
 
 ; print card name and level at the top
 	ld a, 16
@@ -1300,10 +1281,6 @@ HandleColorChangeScreen:
 	lb hl, 1, 2
 	lb bc, 2, 2
 	call FillRectangle
-
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .skip_vram1
 	pop hl
 	push hl
 	call BankswitchVRAM1
@@ -2244,7 +2221,7 @@ EnergyTrans_TransferEffect:
 	ldh [hCurSelectionItem], a
 	ldh [hAIEnergyTransPlayAreaLocation], a
 	ld a, OPPACTION_6B15
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	ldh a, [hAIEnergyTransPlayAreaLocation]
 	ld e, a
 	ldh a, [hAIEnergyTransEnergyCard]
@@ -2578,8 +2555,6 @@ Heal_RemoveDamageEffect:
 
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .link_opp
 	and DUELIST_TYPE_AI_OPP
 	jr nz, .done
 
@@ -2596,14 +2571,6 @@ Heal_RemoveDamageEffect:
 	call GetCardDamageAndMaxHP
 	or a
 	jr z, .loop_input ; has no damage counters
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call SerialSend8Bytes
-	jr .done
-
-.link_opp
-	call SerialRecv8Bytes
-	ldh [hPlayAreaEffectTarget], a
-	; fallthrough
 
 .done
 ; flag Pkmn Power as being used regardless of coin outcome
@@ -2622,7 +2589,6 @@ Heal_RemoveDamageEffect:
 	ld [hl], a
 	ldh a, [hPlayAreaEffectTarget]
 	call Func_2c10b
-	call ExchangeRNG
 	ret
 
 PetalDance_AIEffect:
@@ -4487,7 +4453,6 @@ Curse_TransferDamageEffect:
 
 .done
 	call SwapTurn
-	call ExchangeRNG
 	bank1call Func_6e49
 	ret
 
@@ -5058,7 +5023,7 @@ DamageSwap_SelectAndSwapEffect:
 	jr c, .loop_input_second
 
 	ld a, OPPACTION_6B15
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 
 .update_ui
 	ldh a, [hTempPlayAreaLocation_ffa1]
@@ -5537,7 +5502,7 @@ StrangeBehavior_SelectAndSwapEffect:
 	call TryGiveDamageCounter_StrangeBehavior
 	jr c, .play_sfx
 	ld a, OPPACTION_6B15
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	jr .start
 
 .play_sfx
@@ -6220,8 +6185,6 @@ Peek_SelectEffect:
 
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .link_opp
 	and DUELIST_TYPE_AI_OPP
 	jr nz, .ai_opp
 
@@ -6229,12 +6192,7 @@ Peek_SelectEffect:
 	call FinishQueuedAnimations
 	call HandlePeekSelection
 	ldh [hAIPkmnPowerEffectParam], a
-	call SerialSend8Bytes
 	ret
-
-.link_opp
-	call SerialRecv8Bytes
-	ldh [hAIPkmnPowerEffectParam], a
 
 .ai_opp
 	ldh a, [hAIPkmnPowerEffectParam]
@@ -7034,7 +6992,6 @@ PealOfThunder_InitialEffect:
 	ret
 
 PealOfThunder_RandomlyDamageEffect:
-	call ExchangeRNG
 	ld de, 30 ; damage to inflict
 	call RandomlyDamagePlayAreaPokemon
 	bank1call Func_6e49
@@ -7085,7 +7042,6 @@ RandomlyDamagePlayAreaPokemon:
 	ret
 
 BigThunderEffect:
-	call ExchangeRNG
 	ld de, 70 ; damage to inflict
 	call RandomlyDamagePlayAreaPokemon
 	ret
@@ -8083,17 +8039,8 @@ HandlePlayerMetronomeEffect:
 	jr c, .set_carry
 	; successful
 
-; send data to link opponent
-	bank1call SendAttackDataToLinkOpponent
 	ld a, OPPACTION_USE_METRONOME_ATTACK
-	call SetOppAction_SerialSendDuelData
-	ld hl, wMetronomeSelectedAttack
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	ld a, [wMetronomeEnergyCost]
-	ld c, a
-	call SerialSend8Bytes
+	ldh [hOppActionTableIndex], a
 
 	ldh a, [hTempCardIndex_ff9f]
 	ld [wPlayerAttackingCardIndex], a
@@ -8515,7 +8462,6 @@ CatPunchEffect:
 	ret
 
 MorphEffect:
-	call ExchangeRNG
 	call .PickRandomBasicPokemonFromDeck
 	jr nc, .successful
 	ldtx hl, AttackUnsuccessfulText
@@ -10258,7 +10204,7 @@ LassEffect:
 	ldtx hl, PleaseCheckTheOpponentsHandText
 	call DrawWideTextBox_WaitForInput
 
-	call .DisplayLinkOrCPUHand
+	call .DisplayCPUHand
 	; do for non-Turn Duelist
 	call SwapTurn
 	call .ShuffleDuelistHandTrainerCardsInDeck
@@ -10299,22 +10245,7 @@ LassEffect:
 	call nz, Func_2c0bd ; only show list if there were any Trainer cards
 	ret
 
-.DisplayLinkOrCPUHand
-	ld a, [wDuelType]
-	or a
-	jr z, .cpu_opp
-
-; link duel
-	ldh a, [hWhoseTurn]
-	push af
-	ld a, OPPONENT_TURN
-	ldh [hWhoseTurn], a
-	call .DisplayOppHand
-	pop af
-	ldh [hWhoseTurn], a
-	ret
-
-.cpu_opp
+.DisplayCPUHand
 	call SwapTurn
 	call .DisplayOppHand
 	call SwapTurn

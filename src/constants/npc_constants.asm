@@ -21,7 +21,6 @@ DEF LOADED_NPC_LENGTH EQU const_value
 	const NPC_DATA_ID
 	const NPC_DATA_SPRITE_ID
 	const NPC_DATA_ANIM
-	const NPC_DATA_ANIM_CGB
 	const NPC_DATA_FLAGS
 	const NPC_DATA_SCRIPT_PTR
 	const_skip
@@ -76,7 +75,6 @@ DEF NPC_DATA_LENGTH EQU const_value
 	const JESSICA_PIC   ; $27
 	const STEPHANIE_PIC ; $28
 	const AARON_PIC     ; $29
-	const LINK_OPP_PIC  ; $2a
 DEF NUM_PICS EQU const_value
 
 	const_def 1

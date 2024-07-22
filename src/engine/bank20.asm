@@ -31,7 +31,6 @@ ReloadMapAfterTextClose:
 
 LoadMapTilesAndPals:
 	farcall LoadMapHeader
-	farcall SetSGB2AndSGB3MapPalette
 	lb bc, 0, 0
 	call LoadTilemap_ToSRAM
 

@@ -25,7 +25,6 @@ Tilesets:
 	tileset PokemonDomeTilesetGfx,         207 ; TILESET_POKEMON_DOME
 	tileset HallOfHonorTilesetGfx,         121 ; TILESET_HALL_OF_HONOR
 	tileset MedalGfx,                       72 ; TILESET_MEDAL
-	tileset GameBoyLinkGfx,                109 ; TILESET_GAMEBOY_LINK
 	tileset ColosseumGfx,                   86 ; TILESET_COLOSSEUM
 	tileset EvolutionGfx,                   86 ; TILESET_EVOLUTION
 	tileset MysteryGfx,                     86 ; TILESET_MYSTERY

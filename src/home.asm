@@ -39,8 +39,8 @@ SECTION "timer", ROM0
 	jp TimerHandler
 	ds 5
 SECTION "serial", ROM0
-	jp SerialHandler
-	ds 5
+	reti
+	ds 7
 SECTION "joypad", ROM0
 	reti
 	ds $9f
@@ -76,11 +76,9 @@ INCLUDE "home/random.asm"
 INCLUDE "home/decompress.asm"
 INCLUDE "home/objects.asm"
 INCLUDE "home/farcall.asm"
-INCLUDE "home/sgb.asm"
 INCLUDE "home/hblank.asm"
 INCLUDE "home/math.asm"
 INCLUDE "home/list.asm"
-INCLUDE "home/serial.asm"
 INCLUDE "home/duel.asm"
 INCLUDE "home/card_collection.asm"
 INCLUDE "home/text_box.asm"

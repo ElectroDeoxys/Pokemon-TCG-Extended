@@ -15,9 +15,9 @@ ChallengeMachine_Reset:
 ; if a challenge is already in progress, then resume
 ; otherwise, start a new 5 round challenge
 ChallengeMachine_Start::
-	ld a, 0
+	xor a
 	ld [wLineSeparation], a
-	call LoadConsolePaletteData
+	ld [wd317], a
 	call ChallengeMachine_Initialize
 
 	call EnableSRAM

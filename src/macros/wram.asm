@@ -199,7 +199,6 @@ MACRO duel_vars
 \1ArenaCardStatus::              ds $1
 
 ; $00   - player
-; $01   - link
 ; other - AI controlled
 \1DuelistType::                  ds $1
 

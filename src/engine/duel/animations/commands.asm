@@ -194,7 +194,7 @@ SetDuelAnimationScreen:
 	cp $00
 	jr z, .asm_50c6
 
-; link duel or vs. AI
+; vs. AI
 	bit 7, l
 	jr z, .asm_50e2
 	jr .asm_50d2

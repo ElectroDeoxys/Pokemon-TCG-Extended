@@ -45,8 +45,6 @@ Tilemaps:
 	tilemap FightingMedalTilemap,              TILESET_MEDAL                       ; TILEMAP_FIGHTING_MEDAL
 	tilemap RockMedalTilemap,                  TILESET_MEDAL                       ; TILEMAP_ROCK_MEDAL
 	tilemap PsychicMedalTilemap,               TILESET_MEDAL                       ; TILEMAP_PSYCHIC_MEDAL
-	tilemap GameBoyLinkTilemap,                TILESET_GAMEBOY_LINK                ; TILEMAP_GAMEBOY_LINK
-	tilemap GameBoyLinkConnectingTilemap,      TILESET_GAMEBOY_LINK                ; TILEMAP_GAMEBOY_LINK_CONNECTING
 	tilemap ColosseumTilemap,                  TILESET_COLOSSEUM                   ; TILEMAP_COLOSSEUM
 	tilemap EvolutionTilemap,                  TILESET_EVOLUTION                   ; TILEMAP_EVOLUTION
 	tilemap MysteryTilemap,                    TILESET_MYSTERY                     ; TILEMAP_MYSTERY

@@ -68,47 +68,45 @@ ENDM
 	const ScriptCommand_PickLegendaryCard_index                              ; $3c
 	const ScriptCommand_FlashScreen_index                                    ; $3d
 	const ScriptCommand_SaveGame_index                                       ; $3e
-	const ScriptCommand_BattleCenter_index                                   ; $3f
-	const ScriptCommand_GiftCenter_index                                     ; $40
-	const ScriptCommand_PlayCredits_index                                    ; $41
-	const ScriptCommand_TryGivePCPack_index                                  ; $42
-	const ScriptCommand_nop_index                                            ; $43
-	const ScriptCommand_GiveStarterDeck_index                                ; $44
-	const ScriptCommand_WalkPlayerToMasonLaboratory_index                    ; $45
-	const ScriptCommand_OverrideSong_index                                   ; $46
-	const ScriptCommand_SetDefaultSong_index                                 ; $47
-	const ScriptCommand_PlaySong_index                                       ; $48
-	const ScriptCommand_PlaySFX_index                                        ; $49
-	const ScriptCommand_PauseSong_index                                      ; $4a
-	const ScriptCommand_ResumeSong_index                                     ; $4b
-	const ScriptCommand_PlayDefaultSong_index                                ; $4c
-	const ScriptCommand_WaitForSongToFinish_index                            ; $4d
-	const ScriptCommand_RecordMasterWin_index                                ; $4e
-	const ScriptCommand_AskQuestionJumpDefaultYes_index                      ; $4f
-	const ScriptCommand_ShowSamNormalMultichoice_index                       ; $50
-	const ScriptCommand_ShowSamRulesMultichoice_index                        ; $51
-	const ScriptCommand_ChallengeMachine_index                               ; $52
-	const ScriptCommand_EndScript2_index                                     ; $53
-	const ScriptCommand_EndScript3_index                                     ; $54
-	const ScriptCommand_EndScript4_index                                     ; $55
-	const ScriptCommand_EndScript5_index                                     ; $56
-	const ScriptCommand_EndScript6_index                                     ; $57
-	const ScriptCommand_SetEventValue_index                                  ; $58
-	const ScriptCommand_JumpIfEventZero_index                                ; $59
-	const ScriptCommand_JumpIfEventNonzero_index                             ; $5a
-	const ScriptCommand_JumpIfEventEqual_index                               ; $5b
-	const ScriptCommand_JumpIfEventNotEqual_index                            ; $5c
-	const ScriptCommand_JumpIfEventGreaterOrEqual_index                      ; $5d
-	const ScriptCommand_JumpIfEventLessThan_index                            ; $5e
-	const ScriptCommand_MaxOutEventValue_index                               ; $5f
-	const ScriptCommand_ZeroOutEventValue_index                              ; $60
-	const ScriptCommand_JumpIfEventTrue_index                                ; $61
-	const ScriptCommand_JumpIfEventFalse_index                               ; $62
-	const ScriptCommand_IncrementEventValue_index                            ; $63
-	const ScriptCommand_EndScript7_index                                     ; $64
-	const ScriptCommand_EndScript8_index                                     ; $65
-	const ScriptCommand_EndScript9_index                                     ; $66
-	const ScriptCommand_EndScript10_index                                    ; $67
+	const ScriptCommand_PlayCredits_index                                    ; $3f
+	const ScriptCommand_TryGivePCPack_index                                  ; $40
+	const ScriptCommand_nop_index                                            ; $41
+	const ScriptCommand_GiveStarterDeck_index                                ; $42
+	const ScriptCommand_WalkPlayerToMasonLaboratory_index                    ; $43
+	const ScriptCommand_OverrideSong_index                                   ; $44
+	const ScriptCommand_SetDefaultSong_index                                 ; $45
+	const ScriptCommand_PlaySong_index                                       ; $46
+	const ScriptCommand_PlaySFX_index                                        ; $47
+	const ScriptCommand_PauseSong_index                                      ; $48
+	const ScriptCommand_ResumeSong_index                                     ; $49
+	const ScriptCommand_PlayDefaultSong_index                                ; $4a
+	const ScriptCommand_WaitForSongToFinish_index                            ; $4b
+	const ScriptCommand_RecordMasterWin_index                                ; $4c
+	const ScriptCommand_AskQuestionJumpDefaultYes_index                      ; $4d
+	const ScriptCommand_ShowSamNormalMultichoice_index                       ; $4e
+	const ScriptCommand_ShowSamRulesMultichoice_index                        ; $4f
+	const ScriptCommand_ChallengeMachine_index                               ; $50
+	const ScriptCommand_EndScript2_index                                     ; $51
+	const ScriptCommand_EndScript3_index                                     ; $52
+	const ScriptCommand_EndScript4_index                                     ; $53
+	const ScriptCommand_EndScript5_index                                     ; $54
+	const ScriptCommand_EndScript6_index                                     ; $55
+	const ScriptCommand_SetEventValue_index                                  ; $56
+	const ScriptCommand_JumpIfEventZero_index                                ; $57
+	const ScriptCommand_JumpIfEventNonzero_index                             ; $58
+	const ScriptCommand_JumpIfEventEqual_index                               ; $59
+	const ScriptCommand_JumpIfEventNotEqual_index                            ; $5a
+	const ScriptCommand_JumpIfEventGreaterOrEqual_index                      ; $5b
+	const ScriptCommand_JumpIfEventLessThan_index                            ; $5c
+	const ScriptCommand_MaxOutEventValue_index                               ; $5d
+	const ScriptCommand_ZeroOutEventValue_index                              ; $5e
+	const ScriptCommand_JumpIfEventTrue_index                                ; $5f
+	const ScriptCommand_JumpIfEventFalse_index                               ; $60
+	const ScriptCommand_IncrementEventValue_index                            ; $61
+	const ScriptCommand_EndScript7_index                                     ; $62
+	const ScriptCommand_EndScript8_index                                     ; $63
+	const ScriptCommand_EndScript9_index                                     ; $64
+	const ScriptCommand_EndScript10_index                                    ; $65
 
 DEF NUM_SCRIPT_COMMANDS EQU const_value
 
@@ -520,19 +518,6 @@ ENDM
 MACRO save_game
 	run_command ScriptCommand_SaveGame
 	db \1 ; send to MASON_LABORATORY?
-ENDM
-
-; Loads the Battle Center
-MACRO battle_center
-	run_command ScriptCommand_BattleCenter
-ENDM
-
-; Loads the Gift Center
-; if arg is zero, display the options selection menu
-; otherwise, execute the player's previously chosen selection
-MACRO gift_center
-	run_command ScriptCommand_GiftCenter
-	db \1 ; execute selection?
 ENDM
 
 ; Plays the credits

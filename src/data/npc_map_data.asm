@@ -64,7 +64,7 @@ FightingClubLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 FightingClubNPCS:
@@ -103,7 +103,7 @@ RockClubLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 RockClubNPCS:
@@ -140,7 +140,7 @@ WaterClubLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 WaterClubNPCS:
@@ -177,7 +177,7 @@ LightningClubLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 LightningClubNPCS:
@@ -216,7 +216,7 @@ GrassClubLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 GrassClubNPCS:
@@ -255,7 +255,7 @@ PsychicClubLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 PsychicClubNPCS:
@@ -294,7 +294,7 @@ ScienceClubLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 ScienceClubNPCS:
@@ -331,7 +331,7 @@ FireClubLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 FireClubNPCS:
@@ -368,7 +368,7 @@ ChallengeHallLobbyNPCS:
 	db NPC_CLERK10, $06, $04, SOUTH
 	dw NULL
 	db NPC_GIFT_CENTER_CLERK, $0a, $04, SOUTH
-	dw Preload_GiftCenterClerk
+	dw NULL
 	db $00
 
 ChallengeHallNPCS:

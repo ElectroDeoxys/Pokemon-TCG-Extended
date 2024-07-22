@@ -74,20 +74,6 @@ DebugCGBTest:
 	scf
 	ret
 
-DebugSGBFrame:
-	call DisableLCD
-	ld a, [wDebugSGBBorder]
-	farcall SetSGBBorder
-	ld a, [wDebugSGBBorder]
-	inc a
-	cp $04
-	jr c, .asm_1281f
-	xor a
-.asm_1281f
-	ld [wDebugSGBBorder], a
-	scf
-	ret
-
 DebugDuelMode:
 	call EnableSRAM
 	ld a, [sDebugDuelMode]

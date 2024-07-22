@@ -57,22 +57,6 @@ AdjustCoordinatesForBGScroll::
 ; The name's text id must be at hl when this function is called.
 ; Mostly used to print text boxes for talked-to NPCs, but occasionally used in duels as well.
 DrawLabeledTextBox::
-	ld a, [wConsole]
-	cp CONSOLE_SGB
-	jr nz, .draw_textbox
-	ld a, [wTextBoxFrameType]
-	or a
-	jr z, .draw_textbox
-; Console is SGB and frame type is != 0.
-; The text box will be colorized so a SGB command needs to be sent as well
-	push de
-	push bc
-	call .draw_textbox
-	pop bc
-	pop de
-	jp ColorizeTextBoxSGB
-
-.draw_textbox
 	push de
 	push bc
 	push hl
@@ -132,11 +116,11 @@ DrawLabeledTextBox::
 	ld a, [wConsole]
 	cp CONSOLE_CGB
 	jr z, .cgb
-; DMG or SGB
+; DMG
 	inc e
 	call DECoordToBGMap0Address
 	; top border done, draw the rest of the text box
-	jr ContinueDrawingTextBoxDMGorSGB
+	jr ContinueDrawingTextBoxDMG
 
 .cgb
 	call DECoordToBGMap0Address
@@ -154,8 +138,6 @@ DrawRegularTextBox::
 	ld a, [wConsole]
 	cp CONSOLE_CGB
 	jr z, DrawRegularTextBoxCGB
-	cp CONSOLE_SGB
-	jp z, DrawRegularTextBoxSGB
 ;	fallthrough
 
 DrawRegularTextBoxDMG::
@@ -166,9 +148,9 @@ DrawRegularTextBoxDMG::
 	call CopyLine
 ;	fallthrough
 
-; continue drawing a labeled or regular textbox on DMG or SGB:
+; continue drawing a labeled or regular textbox on DMG:
 ; body and bottom line of either type of textbox
-ContinueDrawingTextBoxDMGorSGB::
+ContinueDrawingTextBoxDMG::
 	dec c
 	dec c
 .draw_text_box_body_loop
@@ -271,65 +253,3 @@ CopyCurrentLineAttrCGB::
 	call CopyLine
 	call BankswitchVRAM0
 	ret
-
-; DrawRegularTextBox branches here on SGB console
-DrawRegularTextBoxSGB::
-	push bc
-	push de
-	call DrawRegularTextBoxDMG
-	pop de
-	pop bc
-	ld a, [wTextBoxFrameType]
-	or a
-	ret z
-;	fallthrough
-
-ColorizeTextBoxSGB::
-	push bc
-	push de
-	ld hl, wTempSGBPacket
-	ld de, AttrBlkPacket_TextBox
-	ld c, SGB_PACKET_SIZE
-.copy_sgb_command_loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	jr nz, .copy_sgb_command_loop
-	pop de
-	pop bc
-	ld hl, wTempSGBPacket + 4
-	; set X1, Y1 to d, e
-	ld [hl], d
-	inc hl
-	ld [hl], e
-	inc hl
-	; set X2, Y2 to d+b-1, e+c-1
-	ld a, d
-	add b
-	dec a
-	ld [hli], a
-	ld a, e
-	add c
-	dec a
-	ld [hli], a
-	ld a, [wTextBoxFrameType]
-	and $80
-	jr z, .send_packet
-	; reset ATTR_BLK_CTRL_INSIDE if bit 7 of wTextBoxFrameType is set.
-	; appears to be irrelevant, as the inside of a textbox uses the white color,
-	; which is the same in all four SGB palettes.
-	ld a, ATTR_BLK_CTRL_LINE
-	ld [wTempSGBPacket + 2], a
-.send_packet
-	ld hl, wTempSGBPacket
-	call SendSGB
-	ret
-
-AttrBlkPacket_TextBox::
-	sgb ATTR_BLK, 1 ; sgb_command, length
-	db 1 ; number of data sets
-	; Control Code, Color Palette Designation, X1, Y1, X2, Y2
-	db ATTR_BLK_CTRL_INSIDE + ATTR_BLK_CTRL_LINE, 0 << 0 + 1 << 2, 0, 0, 0, 0 ; data set 1
-	ds 6 ; data set 2
-	ds 2 ; data set 3

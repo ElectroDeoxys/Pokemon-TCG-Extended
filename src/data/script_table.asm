@@ -63,8 +63,6 @@ OverworldScriptTable::
 	dw ScriptCommand_PickLegendaryCard
 	dw ScriptCommand_FlashScreen
 	dw ScriptCommand_SaveGame
-	dw ScriptCommand_BattleCenter
-	dw ScriptCommand_GiftCenter
 	dw ScriptCommand_PlayCredits
 	dw ScriptCommand_TryGivePCPack
 	dw ScriptCommand_nop

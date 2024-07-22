@@ -57,10 +57,8 @@ ROMX $06
 	"Menus 4"
 	"Effect Commands"
 	"Animation Commands"
-	"IR Communications Core"
 	"Sprite Animations VBlank"
 	"Starter Deck"
-	"Link Functions"
 	"Promotional Card"
 	"Booster Pack Menu"
 	"Input Name"
@@ -105,8 +103,6 @@ ROMX $18
 	"Text 12"
 ROMX $19
 	"Text 13"
-ROMX $1c
-	"SGB"
 ROMX $1d
 	"Gfx 1"
 ROMX $1e

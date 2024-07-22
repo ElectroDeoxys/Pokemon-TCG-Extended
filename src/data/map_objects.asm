@@ -238,7 +238,7 @@ FightingClubLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 
@@ -272,7 +272,7 @@ RockClubLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 
@@ -306,7 +306,7 @@ WaterClubLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 
@@ -340,7 +340,7 @@ LightningClubLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 
@@ -374,7 +374,7 @@ GrassClubLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 
@@ -408,7 +408,7 @@ PsychicClubLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 
@@ -442,7 +442,7 @@ ScienceClubLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 
@@ -476,7 +476,7 @@ FireClubLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 
@@ -510,7 +510,7 @@ ChallengeHallLobbyObjects:
 	tx PokemonTradingCards101Text
 
 	db NORTH, 6, 6
-	dw Script_fc52
+	dw Func_fc7a
 	tx PlaceholderMessageText
 	tx ClerkNPCName
 

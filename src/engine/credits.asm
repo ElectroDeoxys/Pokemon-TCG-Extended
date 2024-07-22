@@ -35,7 +35,8 @@ PlayCreditsSequence::
 
 Func_1d705:
 	call DisableLCD
-	farcall LoadConsolePaletteData
+	xor a
+	ld [wd317], a
 	call EnableAndClearSpriteAnimations
 	farcall InitMenuScreen
 	call Func_1d7ee

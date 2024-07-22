@@ -124,7 +124,6 @@ NPCHeaderPointers:
 DrMasonNPCHeader:
 	db NPC_DRMASON
 	db SPRITE_OW_DRMASON
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_WHITE_NPC_UP
 	db $00
 	dw Script_DrMason
@@ -137,7 +136,6 @@ DrMasonNPCHeader:
 Ronald1NPCHeader:
 	db NPC_RONALD1
 	db SPRITE_OW_RONALD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Ronald
@@ -150,7 +148,6 @@ Ronald1NPCHeader:
 Ronald2NPCHeader:
 	db NPC_RONALD2
 	db SPRITE_OW_RONALD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Ronald
@@ -163,7 +160,6 @@ Ronald2NPCHeader:
 Ronald3NPCHeader:
 	db NPC_RONALD3
 	db SPRITE_OW_RONALD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Ronald
@@ -176,7 +172,6 @@ Ronald3NPCHeader:
 IshiharaNPCHeader:
 	db NPC_ISHIHARA
 	db SPRITE_OW_ISHIHARA
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Ishihara
@@ -189,7 +184,6 @@ IshiharaNPCHeader:
 ImakuniNPCHeader:
 	db NPC_IMAKUNI
 	db SPRITE_OW_IMAKUNI
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Imakuni
@@ -202,7 +196,6 @@ ImakuniNPCHeader:
 SamNPCHeader:
 	db NPC_SAM
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Sam
@@ -215,7 +208,6 @@ SamNPCHeader:
 Tech1NPCHeader:
 	db NPC_TECH1
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Tech1
@@ -228,7 +220,6 @@ Tech1NPCHeader:
 Tech2NPCHeader:
 	db NPC_TECH2
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Tech2
@@ -241,7 +232,6 @@ Tech2NPCHeader:
 Tech3NPCHeader:
 	db NPC_TECH3
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Tech3
@@ -254,7 +244,6 @@ Tech3NPCHeader:
 Tech4NPCHeader:
 	db NPC_TECH4
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Tech4
@@ -267,7 +256,6 @@ Tech4NPCHeader:
 Tech5NPCHeader:
 	db NPC_TECH5
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Tech5
@@ -280,7 +268,6 @@ Tech5NPCHeader:
 Tech6NPCHeader:
 	db NPC_TECH6
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Tech6
@@ -293,7 +280,6 @@ Tech6NPCHeader:
 Clerk1NPCHeader:
 	db NPC_CLERK1
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk1
@@ -306,7 +292,6 @@ Clerk1NPCHeader:
 Clerk2NPCHeader:
 	db NPC_CLERK2
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk2
@@ -319,7 +304,6 @@ Clerk2NPCHeader:
 Clerk3NPCHeader:
 	db NPC_CLERK3
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk3
@@ -332,7 +316,6 @@ Clerk3NPCHeader:
 Clerk4NPCHeader:
 	db NPC_CLERK4
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk4
@@ -345,7 +328,6 @@ Clerk4NPCHeader:
 Clerk5NPCHeader:
 	db NPC_CLERK5
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk5
@@ -358,7 +340,6 @@ Clerk5NPCHeader:
 Clerk6NPCHeader:
 	db NPC_CLERK6
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk6
@@ -371,7 +352,6 @@ Clerk6NPCHeader:
 Clerk7NPCHeader:
 	db NPC_CLERK7
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk7
@@ -384,7 +364,6 @@ Clerk7NPCHeader:
 Clerk8NPCHeader:
 	db NPC_CLERK8
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk8
@@ -397,7 +376,6 @@ Clerk8NPCHeader:
 Clerk9NPCHeader:
 	db NPC_CLERK9
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk9
@@ -410,7 +388,6 @@ Clerk9NPCHeader:
 ChrisNPCHeader:
 	db NPC_CHRIS
 	db SPRITE_OW_MANIA
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_WHITE_NPC_UP
 	db $00
 	dw Script_Chris
@@ -423,7 +400,6 @@ ChrisNPCHeader:
 MichaelNPCHeader:
 	db NPC_MICHAEL
 	db SPRITE_OW_MANIA
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_WHITE_NPC_UP
 	db $00
 	dw Script_Michael
@@ -436,7 +412,6 @@ MichaelNPCHeader:
 JessicaNPCHeader:
 	db NPC_JESSICA
 	db SPRITE_OW_LASS3
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Jessica
@@ -449,7 +424,6 @@ JessicaNPCHeader:
 MitchNPCHeader:
 	db NPC_MITCH
 	db SPRITE_OW_MITCH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Mitch
@@ -462,7 +436,6 @@ MitchNPCHeader:
 MatthewNPCHeader:
 	db NPC_MATTHEW
 	db SPRITE_OW_MANIA
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Matthew
@@ -475,7 +448,6 @@ MatthewNPCHeader:
 RyanNPCHeader:
 	db NPC_RYAN
 	db SPRITE_OW_BOY
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_WHITE_NPC_UP
 	db $00
 	dw Script_Ryan
@@ -488,7 +460,6 @@ RyanNPCHeader:
 AndrewNPCHeader:
 	db NPC_ANDREW
 	db SPRITE_OW_MAN
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Andrew
@@ -501,7 +472,6 @@ AndrewNPCHeader:
 GeneNPCHeader:
 	db NPC_GENE
 	db SPRITE_OW_GENE
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Gene
@@ -514,7 +484,6 @@ GeneNPCHeader:
 SaraNPCHeader:
 	db NPC_SARA
 	db SPRITE_OW_SWIMMER
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Sara
@@ -527,7 +496,6 @@ SaraNPCHeader:
 AmandaNPCHeader:
 	db NPC_AMANDA
 	db SPRITE_OW_SWIMMER
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Amanda
@@ -540,7 +508,6 @@ AmandaNPCHeader:
 JoshuaNPCHeader:
 	db NPC_JOSHUA
 	db SPRITE_OW_JOSHUA
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_WHITE_NPC_UP
 	db $00
 	dw Script_Joshua
@@ -553,7 +520,6 @@ JoshuaNPCHeader:
 AmyNPCHeader:
 	db NPC_AMY
 	db SPRITE_OW_AMY
-	db SPRITE_ANIM_SGB_AMY_LAYING
 	db SPRITE_ANIM_CGB_AMY_LAYING
 	db NPC_FLAG_DIRECTIONLESS
 	dw Script_Amy
@@ -566,7 +532,6 @@ AmyNPCHeader:
 JenniferNPCHeader:
 	db NPC_JENNIFER
 	db SPRITE_OW_GIRL
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Jennifer
@@ -579,7 +544,6 @@ JenniferNPCHeader:
 NicholasNPCHeader:
 	db NPC_NICHOLAS
 	db SPRITE_OW_HOOD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Nicholas
@@ -592,7 +556,6 @@ NicholasNPCHeader:
 BrandonNPCHeader:
 	db NPC_BRANDON
 	db SPRITE_OW_HOOD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Brandon
@@ -605,7 +568,6 @@ BrandonNPCHeader:
 IsaacNPCHeader:
 	db NPC_ISAAC
 	db SPRITE_OW_ISAAC
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Isaac
@@ -618,7 +580,6 @@ IsaacNPCHeader:
 BrittanyNPCHeader:
 	db NPC_BRITTANY
 	db SPRITE_OW_GIRL
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Brittany
@@ -631,7 +592,6 @@ BrittanyNPCHeader:
 KristinNPCHeader:
 	db NPC_KRISTIN
 	db SPRITE_OW_LASS2
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Kristin
@@ -644,7 +604,6 @@ KristinNPCHeader:
 HeatherNPCHeader:
 	db NPC_HEATHER
 	db SPRITE_OW_LASS1
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Heather
@@ -657,7 +616,6 @@ HeatherNPCHeader:
 NikkiNPCHeader:
 	db NPC_NIKKI
 	db SPRITE_OW_NIKKI
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Nikki
@@ -670,7 +628,6 @@ NikkiNPCHeader:
 RobertNPCHeader:
 	db NPC_ROBERT
 	db SPRITE_OW_BOY
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Robert
@@ -683,7 +640,6 @@ RobertNPCHeader:
 DanielNPCHeader:
 	db NPC_DANIEL
 	db SPRITE_OW_LAD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Daniel
@@ -696,7 +652,6 @@ DanielNPCHeader:
 StephanieNPCHeader:
 	db NPC_STEPHANIE
 	db SPRITE_OW_GIRL
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Stephanie
@@ -709,7 +664,6 @@ StephanieNPCHeader:
 Murray1NPCHeader:
 	db NPC_MURRAY1
 	db SPRITE_OW_MURRAY
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_PINK_NPC_UP
 	db $00
 	dw Script_Murray
@@ -722,7 +676,6 @@ Murray1NPCHeader:
 Murray2NPCHeader:
 	db NPC_MURRAY2
 	db SPRITE_OW_MURRAY
-	db SPRITE_ANIM_LIGHT_NPC_LEFT
 	db SPRITE_ANIM_PINK_NPC_LEFT
 	db NPC_FLAG_DIRECTIONLESS
 	dw Script_Murray
@@ -735,7 +688,6 @@ Murray2NPCHeader:
 JosephNPCHeader:
 	db NPC_JOSEPH
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Joseph
@@ -748,7 +700,6 @@ JosephNPCHeader:
 DavidNPCHeader:
 	db NPC_DAVID
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_David
@@ -761,7 +712,6 @@ DavidNPCHeader:
 ErikNPCHeader:
 	db NPC_ERIK
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Erik
@@ -774,7 +724,6 @@ ErikNPCHeader:
 RickNPCHeader:
 	db NPC_RICK
 	db SPRITE_OW_RICK
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Rick
@@ -787,7 +736,6 @@ RickNPCHeader:
 JohnNPCHeader:
 	db NPC_JOHN
 	db SPRITE_OW_LAD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_John
@@ -800,7 +748,6 @@ JohnNPCHeader:
 AdamNPCHeader:
 	db NPC_ADAM
 	db SPRITE_OW_SPECS
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Adam
@@ -813,7 +760,6 @@ AdamNPCHeader:
 JonathanNPCHeader:
 	db NPC_JONATHAN
 	db SPRITE_OW_BOY
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Jonathan
@@ -826,7 +772,6 @@ JonathanNPCHeader:
 KenNPCHeader:
 	db NPC_KEN
 	db SPRITE_OW_KEN
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Ken
@@ -839,7 +784,6 @@ KenNPCHeader:
 CourtneyNPCHeader:
 	db NPC_COURTNEY
 	db SPRITE_OW_COURTNEY
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_PINK_NPC_UP
 	db $00
 	dw Script_Courtney
@@ -852,7 +796,6 @@ CourtneyNPCHeader:
 SteveNPCHeader:
 	db NPC_STEVE
 	db SPRITE_OW_STEVE
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_INDIGO_NPC_UP
 	db $00
 	dw Script_Steve
@@ -865,7 +808,6 @@ SteveNPCHeader:
 JackNPCHeader:
 	db NPC_JACK
 	db SPRITE_OW_JACK
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_WHITE_NPC_UP
 	db $00
 	dw Script_Jack
@@ -878,7 +820,6 @@ JackNPCHeader:
 RodNPCHeader:
 	db NPC_ROD
 	db SPRITE_OW_ROD
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Rod
@@ -891,7 +832,6 @@ RodNPCHeader:
 Clerk10NPCHeader:
 	db NPC_CLERK10
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_Clerk10
@@ -904,7 +844,6 @@ Clerk10NPCHeader:
 GiftCenterClerkNPCHeader:
 	db NPC_GIFT_CENTER_CLERK
 	db SPRITE_OW_CLERK
-	db SPRITE_ANIM_SGB_CLERK_NPC_UP
 	db SPRITE_ANIM_CGB_CLERK_NPC_UP
 	db $00
 	dw Script_GiftCenterClerk
@@ -917,7 +856,6 @@ GiftCenterClerkNPCHeader:
 Man1NPCHeader:
 	db NPC_MAN1
 	db SPRITE_OW_MAN
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Man1
@@ -930,7 +868,6 @@ Man1NPCHeader:
 Woman1NPCHeader:
 	db NPC_WOMAN1
 	db SPRITE_OW_WOMAN
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Woman1
@@ -943,7 +880,6 @@ Woman1NPCHeader:
 Chap1NPCHeader:
 	db NPC_CHAP1
 	db SPRITE_OW_CHAP
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Chap1
@@ -956,7 +892,6 @@ Chap1NPCHeader:
 Gal1NPCHeader:
 	db NPC_GAL1
 	db SPRITE_OW_GAL
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Gal1
@@ -969,7 +904,6 @@ Gal1NPCHeader:
 Lass1NPCHeader:
 	db NPC_LASS1
 	db SPRITE_OW_LASS2
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Lass1
@@ -982,7 +916,6 @@ Lass1NPCHeader:
 Chap2NPCHeader:
 	db NPC_CHAP2
 	db SPRITE_OW_CHAP
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Chap2
@@ -995,7 +928,6 @@ Chap2NPCHeader:
 Lass2NPCHeader:
 	db NPC_LASS2
 	db SPRITE_OW_LASS2
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Lass2
@@ -1008,7 +940,6 @@ Lass2NPCHeader:
 Pappy1NPCHeader:
 	db NPC_PAPPY1
 	db SPRITE_OW_PAPPY
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Pappy1
@@ -1021,7 +952,6 @@ Pappy1NPCHeader:
 Lad1NPCHeader:
 	db NPC_LAD1
 	db SPRITE_OW_LAD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Lad1
@@ -1034,7 +964,6 @@ Lad1NPCHeader:
 Lad2NPCHeader:
 	db NPC_LAD2
 	db SPRITE_OW_BOY
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Lad2
@@ -1047,7 +976,6 @@ Lad2NPCHeader:
 Chap3NPCHeader:
 	db NPC_CHAP3
 	db SPRITE_OW_CHAP
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Chap3
@@ -1060,7 +988,6 @@ Chap3NPCHeader:
 Clerk12NPCHeader:
 	db NPC_CLERK12
 	db SPRITE_OW_GAL
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Clerk12
@@ -1073,7 +1000,6 @@ Clerk12NPCHeader:
 Clerk13NPCHeader:
 	db NPC_CLERK13
 	db SPRITE_OW_GAL
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Clerk13
@@ -1086,7 +1012,6 @@ Clerk13NPCHeader:
 HostNPCHeader:
 	db NPC_HOST
 	db SPRITE_OW_GAL
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Host
@@ -1099,7 +1024,6 @@ HostNPCHeader:
 Specs1NPCHeader:
 	db NPC_SPECS1
 	db SPRITE_OW_SPECS
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Specs1
@@ -1112,7 +1036,6 @@ Specs1NPCHeader:
 ButchNPCHeader:
 	db NPC_BUTCH
 	db SPRITE_OW_BUTCH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Butch
@@ -1125,7 +1048,6 @@ ButchNPCHeader:
 Granny1NPCHeader:
 	db NPC_GRANNY1
 	db SPRITE_OW_GRANNY
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Granny1
@@ -1138,7 +1060,6 @@ Granny1NPCHeader:
 Lass3NPCHeader:
 	db NPC_LASS3
 	db SPRITE_OW_LASS1
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Lass3
@@ -1151,7 +1072,6 @@ Lass3NPCHeader:
 Man2NPCHeader:
 	db NPC_MAN2
 	db SPRITE_OW_MAN
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Man2
@@ -1164,7 +1084,6 @@ Man2NPCHeader:
 Pappy2NPCHeader:
 	db NPC_PAPPY2
 	db SPRITE_OW_PAPPY
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Pappy2
@@ -1177,7 +1096,6 @@ Pappy2NPCHeader:
 Lass4NPCHeader:
 	db NPC_LASS4
 	db SPRITE_OW_LASS1
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Lass4
@@ -1190,7 +1108,6 @@ Lass4NPCHeader:
 Hood1NPCHeader:
 	db NPC_HOOD1
 	db SPRITE_OW_HOOD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Hood1
@@ -1203,7 +1120,6 @@ Hood1NPCHeader:
 Granny2NPCHeader:
 	db NPC_GRANNY2
 	db SPRITE_OW_GRANNY
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Granny2
@@ -1216,7 +1132,6 @@ Granny2NPCHeader:
 Gal2NPCHeader:
 	db NPC_GAL2
 	db SPRITE_OW_GAL
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Gal2
@@ -1229,7 +1144,6 @@ Gal2NPCHeader:
 Lad3NPCHeader:
 	db NPC_LAD3
 	db SPRITE_OW_LAD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Lad3
@@ -1242,7 +1156,6 @@ Lad3NPCHeader:
 Gal3NPCHeader:
 	db NPC_GAL3
 	db SPRITE_OW_GAL
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Gal3
@@ -1255,7 +1168,6 @@ Gal3NPCHeader:
 Chap4NPCHeader:
 	db NPC_CHAP4
 	db SPRITE_OW_CHAP
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Chap4
@@ -1268,7 +1180,6 @@ Chap4NPCHeader:
 Man3NPCHeader:
 	db NPC_MAN3
 	db SPRITE_OW_MAN
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Man3
@@ -1281,7 +1192,6 @@ Man3NPCHeader:
 Specs2NPCHeader:
 	db NPC_SPECS2
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Specs2
@@ -1294,7 +1204,6 @@ Specs2NPCHeader:
 Specs3NPCHeader:
 	db NPC_SPECS3
 	db SPRITE_OW_SPECS
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Specs3
@@ -1307,7 +1216,6 @@ Specs3NPCHeader:
 Woman2NPCHeader:
 	db NPC_WOMAN2
 	db SPRITE_OW_WOMAN
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Woman2
@@ -1320,7 +1228,6 @@ Woman2NPCHeader:
 ManiaNPCHeader:
 	db NPC_MANIA
 	db SPRITE_OW_MANIA
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_WHITE_NPC_UP
 	db $00
 	dw Script_Mania
@@ -1333,7 +1240,6 @@ ManiaNPCHeader:
 Pappy3NPCHeader:
 	db NPC_PAPPY3
 	db SPRITE_OW_PAPPY
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_PURPLE_NPC_UP
 	db $00
 	dw Script_Pappy3
@@ -1346,7 +1252,6 @@ Pappy3NPCHeader:
 Gal4NPCHeader:
 	db NPC_GAL4
 	db SPRITE_OW_GAL
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Gal4
@@ -1359,7 +1264,6 @@ Gal4NPCHeader:
 ChampNPCHeader:
 	db NPC_CHAMP
 	db SPRITE_OW_MANIA
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_WHITE_NPC_UP
 	db $00
 	dw Script_Champ
@@ -1372,7 +1276,6 @@ ChampNPCHeader:
 Hood2NPCHeader:
 	db NPC_HOOD2
 	db SPRITE_OW_HOOD
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00
 	dw Script_Hood2
@@ -1385,7 +1288,6 @@ Hood2NPCHeader:
 Lass5NPCHeader:
 	db NPC_LASS5
 	db SPRITE_OW_LASS3
-	db SPRITE_ANIM_DARK_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Lass5
@@ -1398,7 +1300,6 @@ Lass5NPCHeader:
 Chap5NPCHeader:
 	db NPC_CHAP5
 	db SPRITE_OW_CHAP
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_GREEN_NPC_UP
 	db $00
 	dw Script_Chap5
@@ -1411,7 +1312,6 @@ Chap5NPCHeader:
 AaronNPCHeader:
 	db NPC_AARON
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Aaron
@@ -1424,7 +1324,6 @@ AaronNPCHeader:
 GuideNPCHeader:
 	db NPC_GUIDE
 	db SPRITE_OW_MAN
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_YELLOW_NPC_UP
 	db $00
 	dw Script_Guide
@@ -1437,7 +1336,6 @@ GuideNPCHeader:
 Tech7NPCHeader:
 	db NPC_TECH7
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Tech7
@@ -1450,7 +1348,6 @@ Tech7NPCHeader:
 Tech8NPCHeader:
 	db NPC_TECH8
 	db SPRITE_OW_TECH
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_BLUE_NPC_UP
 	db $00
 	dw Script_Tech8
@@ -1464,14 +1361,12 @@ TorchNPCHeader:
 	db NPC_TORCH
 	db SPRITE_OW_TORCH
 	db SPRITE_ANIM_TORCH
-	db SPRITE_ANIM_TORCH
 	db NPC_FLAG_DIRECTIONLESS
 	dw Script_Torch
 
 LegendaryCardTopLeftNPCHeader:
 	db NPC_LEGENDARY_CARD_TOP_LEFT
 	db SPRITE_OW_LEGENDARY_CARD
-	db SPRITE_ANIM_SGB_CARD_TOP_LEFT
 	db SPRITE_ANIM_CGB_CARD_TOP_LEFT
 	db NPC_FLAG_DIRECTIONLESS | NPC_FLAG_UNKNOWN
 	dw Script_LegendaryCardTopLeft
@@ -1479,7 +1374,6 @@ LegendaryCardTopLeftNPCHeader:
 LegendaryCardTopRightNPCHeader:
 	db NPC_LEGENDARY_CARD_TOP_RIGHT
 	db SPRITE_OW_LEGENDARY_CARD
-	db SPRITE_ANIM_SGB_CARD_TOP_RIGHT
 	db SPRITE_ANIM_CGB_CARD_TOP_RIGHT
 	db NPC_FLAG_DIRECTIONLESS | NPC_FLAG_UNKNOWN
 	dw Script_LegendaryCardTopRight
@@ -1487,7 +1381,6 @@ LegendaryCardTopRightNPCHeader:
 LegendaryCardLeftSparkNPCHeader:
 	db NPC_LEGENDARY_CARD_LEFT_SPARK
 	db SPRITE_OW_LEGENDARY_CARD
-	db SPRITE_ANIM_SGB_CARD_LEFT_SPARK
 	db SPRITE_ANIM_CGB_CARD_LEFT_SPARK
 	db NPC_FLAG_DIRECTIONLESS | NPC_FLAG_UNKNOWN
 	dw Script_LegendaryCardLeftSpark
@@ -1495,7 +1388,6 @@ LegendaryCardLeftSparkNPCHeader:
 LegendaryCardBottomLeftNPCHeader:
 	db NPC_LEGENDARY_CARD_BOTTOM_LEFT
 	db SPRITE_OW_LEGENDARY_CARD
-	db SPRITE_ANIM_SGB_CARD_BOTTOM_LEFT
 	db SPRITE_ANIM_CGB_CARD_BOTTOM_LEFT
 	db NPC_FLAG_DIRECTIONLESS | NPC_FLAG_UNKNOWN
 	dw Script_LegendaryCardBottomLeft
@@ -1503,7 +1395,6 @@ LegendaryCardBottomLeftNPCHeader:
 LegendaryCardBottomRightNPCHeader:
 	db NPC_LEGENDARY_CARD_BOTTOM_RIGHT
 	db SPRITE_OW_LEGENDARY_CARD
-	db SPRITE_ANIM_SGB_CARD_BOTTOM_RIGHT
 	db SPRITE_ANIM_CGB_CARD_BOTTOM_RIGHT
 	db NPC_FLAG_DIRECTIONLESS | NPC_FLAG_UNKNOWN
 	dw Script_LegendaryCardBottomRight
@@ -1511,7 +1402,6 @@ LegendaryCardBottomRightNPCHeader:
 LegendaryCardRightSparkNPCHeader:
 	db NPC_LEGENDARY_CARD_RIGHT_SPARK
 	db SPRITE_OW_LEGENDARY_CARD
-	db SPRITE_ANIM_SGB_CARD_RIGHT_SPARK
 	db SPRITE_ANIM_CGB_CARD_RIGHT_SPARK
 	db NPC_FLAG_DIRECTIONLESS | NPC_FLAG_UNKNOWN
 	dw Script_LegendaryCardRightSpark
@@ -1519,6 +1409,5 @@ LegendaryCardRightSparkNPCHeader:
 DummyNPCHeader:
 	db $00
 	db SPRITE_OW_PLAYER
-	db SPRITE_ANIM_LIGHT_NPC_UP
 	db SPRITE_ANIM_RED_NPC_UP
 	db $00

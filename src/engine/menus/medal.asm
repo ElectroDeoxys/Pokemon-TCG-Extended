@@ -8,7 +8,6 @@ ShowMedalReceivedScreen:
 	call PauseSong
 	ld a, MUSIC_STOP
 	call PlaySong
-	farcall SetMainSGBBorder
 	call DisableLCD
 	call InitMenuScreen
 	ld a, -6

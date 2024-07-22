@@ -14,12 +14,6 @@ SpriteAnimations:
 	anim_data_pointer AnimData5   ; SPRITE_ANIM_DARK_NPC_RIGHT
 	anim_data_pointer AnimData6   ; SPRITE_ANIM_DARK_NPC_DOWN
 	anim_data_pointer AnimData7   ; SPRITE_ANIM_DARK_NPC_LEFT
-	anim_data_pointer AnimData8   ; SPRITE_ANIM_SGB_AMY_LAYING
-	anim_data_pointer AnimData9   ; SPRITE_ANIM_SGB_AMY_STAND
-	anim_data_pointer AnimData10  ; SPRITE_ANIM_SGB_CLERK_NPC_UP
-	anim_data_pointer AnimData11  ; SPRITE_ANIM_SGB_CLERK_NPC_RIGHT
-	anim_data_pointer AnimData12  ; SPRITE_ANIM_SGB_CLERK_NPC_DOWN
-	anim_data_pointer AnimData13  ; SPRITE_ANIM_SGB_CLERK_NPC_LEFT
 	anim_data_pointer AnimData14  ; SPRITE_ANIM_BLUE_NPC_UP
 	anim_data_pointer AnimData15  ; SPRITE_ANIM_BLUE_NPC_RIGHT
 	anim_data_pointer AnimData16  ; SPRITE_ANIM_BLUE_NPC_DOWN
@@ -58,19 +52,10 @@ SpriteAnimations:
 	anim_data_pointer AnimData49  ; SPRITE_ANIM_CGB_CLERK_NPC_RIGHT
 	anim_data_pointer AnimData50  ; SPRITE_ANIM_CGB_CLERK_NPC_DOWN
 	anim_data_pointer AnimData51  ; SPRITE_ANIM_CGB_CLERK_NPC_LEFT
-	anim_data_pointer AnimData52  ; SPRITE_ANIM_SGB_VOLCANO_SMOKE
-	anim_data_pointer AnimData53  ; SPRITE_ANIM_SGB_OWMAP_CURSOR
-	anim_data_pointer AnimData54  ; SPRITE_ANIM_SGB_OWMAP_CURSOR_FAST
 	anim_data_pointer AnimData55  ; SPRITE_ANIM_CGB_VOLCANO_SMOKE
 	anim_data_pointer AnimData56  ; SPRITE_ANIM_CGB_OWMAP_CURSOR
 	anim_data_pointer AnimData57  ; SPRITE_ANIM_CGB_OWMAP_CURSOR_FAST
 	anim_data_pointer AnimData58  ; SPRITE_ANIM_TORCH
-	anim_data_pointer AnimData59  ; SPRITE_ANIM_SGB_CARD_TOP_LEFT
-	anim_data_pointer AnimData60  ; SPRITE_ANIM_SGB_CARD_TOP_RIGHT
-	anim_data_pointer AnimData61  ; SPRITE_ANIM_SGB_CARD_LEFT_SPARK
-	anim_data_pointer AnimData62  ; SPRITE_ANIM_SGB_CARD_BOTTOM_LEFT
-	anim_data_pointer AnimData63  ; SPRITE_ANIM_SGB_CARD_BOTTOM_RIGHT
-	anim_data_pointer AnimData64  ; SPRITE_ANIM_SGB_CARD_RIGHT_SPARK
 	anim_data_pointer AnimData65  ; SPRITE_ANIM_CGB_CARD_TOP_LEFT
 	anim_data_pointer AnimData66  ; SPRITE_ANIM_CGB_CARD_TOP_RIGHT
 	anim_data_pointer AnimData67  ; SPRITE_ANIM_CGB_CARD_LEFT_SPARK

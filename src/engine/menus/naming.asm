@@ -41,7 +41,7 @@ DisplayPlayerNamingScreen:
 
 Unknown_128f7:
 	db  0,  0 ; start menu coords
-	db 16, 18 ; start menu text box dimensions
+	db 16, 17 ; start menu text box dimensions
 
 	db  2, 2 ; text alignment for InitTextPrinting
 	tx DebugMenuText
@@ -49,7 +49,7 @@ Unknown_128f7:
 
 	db 1, 2 ; cursor x, cursor y
 	db 1 ; y displacement between items
-	db 11 ; number of items
+	db 10 ; number of items
 	db SYM_CURSOR_R ; cursor tile number
 	db SYM_SPACE ; tile behind cursor
 	dw NULL ; function pointer if non-0

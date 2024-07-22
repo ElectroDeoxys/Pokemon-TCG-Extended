@@ -35,24 +35,9 @@ _LoadScene::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [hli]
-	ld [wSceneSGBPacketPtr], a
-	ld a, [hli]
-	ld [wSceneSGBPacketPtr + 1], a
-	ld a, [hli]
-	ld [wSceneSGBRoutinePtr], a
-	ld a, [hli]
-	ld [wSceneSGBRoutinePtr + 1], a
-	call LoadScene_LoadCompressedSGBPacket
 	ld a, %11100100
 	ld [wBGP], a
-	ld a, [wConsole]
-	cp CONSOLE_CGB
 	ld a, [hli]
-	jr nz, .not_cgb_1
-	ld a, [hl]
-.not_cgb_1
-	inc hl
 	push af ; palette
 	xor a
 	ld [wd4ca], a
@@ -61,19 +46,12 @@ _LoadScene::
 	ld [wd291], a ; palette offset
 	pop af ; palette
 	farcall SetBGPAndLoadedPal ; load palette
-	ld a, [wConsole]
-	cp CONSOLE_CGB
 	ld a, [hli]
-	jr nz, .not_cgb_2
-	ld a, [hl]
-.not_cgb_2
-	inc hl
 	ld [wCurTilemap], a
 	pop bc
 	push bc
 	farcall LoadTilemap_ToVRAM
 	pop bc ; base x,y
-	call LoadScene_LoadSGBPacket
 	ld a, [hli]
 	ld [wd4ca], a ; tile offset
 	ld a, [hli]
@@ -84,13 +62,7 @@ _LoadScene::
 	or a
 	jr z, .done ; no sprite
 	ld [wSceneSprite], a
-	ld a, [wConsole]
-	cp CONSOLE_CGB
 	ld a, [hli]
-	jr nz, .not_cgb_3
-	ld a, [hl]
-.not_cgb_3
-	inc hl
 	push af ; sprite palette
 	xor a
 	ld [wd4ca], a
@@ -103,13 +75,7 @@ _LoadScene::
 	or a
 	jr z, .next_sprite
 	dec hl
-	ld a, [wConsole]
-	cp CONSOLE_CGB
 	ld a, [hli]
-	jr nz, .not_cgb_4
-	ld a, [hl]
-.not_cgb_4
-	inc hl
 	ld [wSceneSpriteAnimation], a
 	ld a, [wSceneSprite]
 	farcall CreateSpriteAndAnimBufferEntry
@@ -148,78 +114,6 @@ _LoadScene::
 
 INCLUDE "data/scenes.asm"
 
-LoadScene_LoadCompressedSGBPacket:
-	ld a, [wConsole]
-	cp CONSOLE_SGB
-	ret nz
-	push hl
-	ld hl, wSceneSGBPacketPtr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	or h
-	jr z, .skip
-	farcall Func_703cb
-.skip
-	pop hl
-	ret
-
-LoadScene_LoadSGBPacket:
-	ld a, [wConsole]
-	cp CONSOLE_SGB
-	ret nz
-	push hl
-	push bc
-	push de
-	ld hl, wSceneSGBPacketPtr
-	ld a, [hli]
-	or [hl]
-	jr z, .done
-	ld hl, wSceneSGBRoutinePtr + 1
-	ld a, [hld]
-	or [hl]
-	jr z, .use_default
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call CallHL2
-	jr .done
-.use_default
-	ld l, %001010 ; outside, border, inside palette numbers
-	ld a, [wBGMapWidth]
-	ld d, a
-	ld a, [wBGMapHeight]
-	ld e, a
-	farcall Func_70498
-.done
-	pop de
-	pop bc
-	pop hl
-	ret
-
-LoadScene_SetCardPopAttrBlk:
-	push hl
-	push bc
-	push de
-	ld hl, SGBPacket_CardPop
-	call SendSGB
-	pop de
-	pop bc
-	pop hl
-	ret
-
-SGBPacket_CardPop:
-	sgb ATTR_BLK, 1
-	db 1 ; number of data sets
-	db ATTR_BLK_CTRL_OUTSIDE | ATTR_BLK_CTRL_LINE | ATTR_BLK_CTRL_INSIDE
-	db %101111 ; Color Palette Designation
-	db 0  ; x1
-	db 0  ; y1
-	db 19 ; x2
-	db 4  ; y3
-	ds 6 ; data set 2
-	ds 2 ; data set 3
-
 _DrawPortrait::
 	ld a, [wd291]
 	push af
@@ -235,7 +129,6 @@ _DrawPortrait::
 	ld [wd291], a
 	farcall LoadTilemap_ToVRAM
 	ld a, [wCurPortrait]
-	add a
 	add a
 	ld c, a
 	ld b, $00
@@ -255,14 +148,8 @@ _DrawPortrait::
 	ld a, [wd291]
 	ld [wd4cb], a
 	ld a, [hli]
-	push hl
 	farcall SetBGPAndLoadedPal
-	pop hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
 	pop bc
-	farcall SendSGBPortraitPalettes
 	pop de
 	pop af
 	ld [wd291], a
@@ -291,9 +178,6 @@ LoadBoosterGfx:
 	ret
 
 SetBoosterLogoOAM:
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	ret nz
 	push hl
 	push bc
 	push de

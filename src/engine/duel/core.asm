@@ -7,11 +7,6 @@ TryContinueDuel::
 ;	fallthrough
 
 _ContinueDuel::
-	ld hl, sp+$00
-	ld a, l
-	ld [wDuelReturnAddress], a
-	ld a, h
-	ld [wDuelReturnAddress + 1], a
 	call ClearJoypad
 	ld a, [wDuelTheme]
 	call PlaySong
@@ -22,7 +17,6 @@ _ContinueDuel::
 
 HandleFailedToContinueDuel:
 	call DrawWideTextBox_WaitForInput
-	call ResetSerial
 	scf
 	ret
 
@@ -39,24 +33,9 @@ StartDuel_VSAIOpp::
 	call SwapTurn
 	call LoadOpponentDeck
 	call SwapTurn
-	jr StartDuel
-
-StartDuel_VSLinkOpp:
-	ld a, MUSIC_DUEL_THEME_1
-	ld [wDuelTheme], a
-	ld hl, wOpponentName
-	xor a
-	ld [hli], a
-	ld [hl], a
-	ld [wIsPracticeDuel], a
 ;	fallthrough
 
 StartDuel:
-	ld hl, sp+$0
-	ld a, l
-	ld [wDuelReturnAddress], a
-	ld a, h
-	ld [wDuelReturnAddress + 1], a
 	xor a
 	ld [wCurrentDuelMenuItem], a
 	call SetupDuel
@@ -78,14 +57,12 @@ MainDuelLoop:
 	call HandleTurn
 
 .between_turns
-	call ExchangeRNG
 	ld a, [wDuelFinished]
 	or a
 	jr nz, .duel_finished
 	call UpdateSubstatusConditions_EndOfTurn
 	call HandleBetweenTurnsEvents
 	call FinishQueuedAnimations
-	call ExchangeRNG
 	ld a, [wDuelFinished]
 	or a
 	jr nz, .duel_finished
@@ -180,7 +157,6 @@ MainDuelLoop:
 	call PlayDefaultSong
 	call WaitForWideTextBoxInput
 	call FinishQueuedAnimations
-	call ResetSerial
 	ld a, PLAYER_TURN
 	ldh [hWhoseTurn], a
 	ret
@@ -195,26 +171,10 @@ MainDuelLoop:
 	ld a, 1
 	ld [wDuelInitialPrizes], a
 	call InitVariablesToBeginDuel
-	ld a, [wDuelType]
-	cp DUELTYPE_LINK
-	jr z, .link_duel
 	ld a, PLAYER_TURN
 	ldh [hWhoseTurn], a
 	call HandleDuelSetup
 	jp MainDuelLoop
-.link_duel
-	call ExchangeRNG
-	ld h, PLAYER_TURN
-	ld a, [wSerialOp]
-	cp $29
-	jr z, .got_turn
-	ld h, OPPONENT_TURN
-.got_turn
-	ld a, h
-	ldh [hWhoseTurn], a
-	call HandleDuelSetup
-	jp nc, MainDuelLoop
-	ret
 
 ; empty the screen, and setup text and graphics for a duel
 SetupDuel:
@@ -278,14 +238,12 @@ RestartPracticeDuelTurn:
 
 ; print the main interface during a duel, including background, Pokemon, HUDs and a text box.
 ; the bottom text box changes depending on whether the turn belongs to the player (show the duel menu),
-; an AI opponent (print "Waiting..." and a reduced menu) or a link opponent (print "<Duelist> is thinking").
+; or an AI opponent (print "<Duelist> is thinking").
 DuelMainInterface:
 	call DrawDuelMainScene
 	ld a, [wDuelistType]
 	cp DUELIST_TYPE_PLAYER
 	jr z, PrintDuelMenuAndHandleInput
-	cp DUELIST_TYPE_LINK_OPP
-	jp z, DoLinkOpponentTurn
 	; DUELIST_TYPE_AI_OPP
 	xor a
 	ld [wVBlankCounter], a
@@ -459,7 +417,7 @@ DuelMenu_Done:
 	; always jumps on practice duel (no action requires player to select Done)
 	jp c, RestartPracticeDuelTurn
 	ld a, OPPACTION_FINISH_NO_ATTACK
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	call ClearNonTurnTemporaryDuelvars
 	ret
 
@@ -486,7 +444,7 @@ DuelMenu_Retreat:
 	ld a, [wBenchSelectedPokemon] ; unnecessary
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, OPPACTION_ATTEMPT_RETREAT
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	call AttemptRetreat
 	jr nc, .done
 	call DrawDuelMainScene
@@ -518,7 +476,7 @@ DuelMenu_Retreat:
 	pop af
 	jp c, DuelMainInterface
 	ld a, OPPACTION_ATTEMPT_RETREAT
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	call AttemptRetreat
 
 .done
@@ -599,7 +557,7 @@ PlayEnergyCard:
 	call PutHandCardInPlayArea
 	call PrintPlayAreaCardList_EnableLCD
 	ld a, OPPACTION_PLAY_ENERGY
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	call PrintAttachedEnergyToPokemon
 	jp DuelMainInterface
 
@@ -648,7 +606,7 @@ PlayPokemonCard:
 	call GetTurnDuelistVariable
 	ld [hl], BASIC
 	ld a, OPPACTION_PLAY_BASIC_PKMN
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	ldh a, [hTempCardIndex_ff98]
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld a, 20
@@ -719,7 +677,7 @@ PlayPokemonCard:
 	call EvolvePokemonCardIfPossible
 	jr c, .try_evolve_loop ; jump if evolution wasn't successful somehow
 	ld a, OPPACTION_EVOLVE_PKMN
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	call PrintPlayAreaCardList_EnableLCD
 	call PrintPokemonEvolvedIntoPokemon
 	call ProcessPlayedPokemonCard
@@ -1057,13 +1015,13 @@ OpenAttackPage:
 	call FinishQueuedAnimations
 	ld de, v0Tiles1 + $20 tiles
 	call LoadLoaded1CardGfx
-	call SetOBP1OrSGB3ToCardPalette
-	call SetBGP6OrSGB3ToCardPalette
+	call SetOBP1ToCardPalette
+	call SetBGP6ToCardPalette
 	call FlushAllPalettesOrSendPal23Packet
 	lb de, $38, $30 ; X Position and Y Position of top-left corner
 	call PlaceCardImageOAM
 	lb de, 6, 4
-	call ApplyBGP6OrSGB3ToCardImage
+	call ApplyBGP6ToCardImage
 	ldh a, [hCurMenuItem]
 	ld [wSelectedDuelSubMenuItem], a
 	add a
@@ -1480,14 +1438,11 @@ PrintDeckAndHandIconsAndNumberOfCards:
 	call LoadDuelDrawCardsScreenTiles
 	ld hl, DeckAndHandIconsTileData
 	call WriteDataBlocksToBGMap0
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
 	call BankswitchVRAM1
 	ld hl, DeckAndHandIconsCGBPalData
 	call WriteDataBlocksToBGMap0
 	call BankswitchVRAM0
-.not_cgb
+.skip_load_cards
 	call PrintPlayerNumberOfHandAndDeckCards
 	call PrintOpponentNumberOfHandAndDeckCards
 	ret
@@ -1760,7 +1715,6 @@ HandleDuelSetup:
 	call DrawPlayAreaToPlacePrizeCards
 	ldtx hl, PlacingThePrizesText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 
 	ld a, [wDuelInitialPrizes]
 	ld l, a
@@ -1800,7 +1754,6 @@ HandleDuelSetup:
 	ldtx hl, YouPlaySecondText
 .play_first
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	or a
 	ret
 
@@ -1818,7 +1771,6 @@ HandleDuelSetup:
 	ldtx hl, YouPlayFirstText
 .play_second
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	or a
 	ret
 
@@ -1885,15 +1837,12 @@ HandleDuelSetup:
 
 ; have the turn duelist place, at the beginning of the duel, the active Pokemon
 ; and 0 more bench Pokemon, all of which must be basic Pokemon cards.
-; also transmits the turn holder's duelvars to the other duelist in a link duel.
 ; called twice, once for each duelist.
 ChooseInitialArenaAndBenchPokemon:
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
 	cp DUELIST_TYPE_PLAYER
 	jr z, .choose_arena
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .exchange_duelvars
 
 ; AI opponent's turn
 	push af
@@ -1905,28 +1854,6 @@ ChooseInitialArenaAndBenchPokemon:
 	or a
 	ret
 
-; link opponent's turn
-.exchange_duelvars
-	ldtx hl, TransmittingDataText
-	call DrawWideTextBox_PrintText
-	call ExchangeRNG
-	ld hl, wPlayerDuelVariables
-	ld de, wOpponentDuelVariables
-	ld c, (wOpponentDuelVariables - wPlayerDuelVariables) / 2
-	call SerialExchangeBytes
-	jr c, .error
-	ld c, (wOpponentDuelVariables - wPlayerDuelVariables) / 2
-	call SerialExchangeBytes
-	jr c, .error
-	ld a, DUELVARS_DUELIST_TYPE
-	call GetTurnDuelistVariable
-	ld [hl], DUELIST_TYPE_LINK_OPP
-	or a
-	ret
-.error
-	jp DuelTransmissionError
-
-; player's turn (either AI or link duel)
 ; prompt (force) the player to choose a basic Pokemon card to place in the arena
 .choose_arena
 	call EmptyScreen
@@ -2072,11 +1999,10 @@ DisplayNoBasicPokemonInHandScreenAndText:
 	call DisplayNoBasicPokemonInHandScreen
 ;	fallthrough
 
-; prints ReturnCardsToDeckAndDrawAgainText in a textbox and calls ExchangeRNG
+; prints ReturnCardsToDeckAndDrawAgainText in a textbox
 PrintReturnCardsToDeckDrawAgain:
 	ldtx hl, ReturnCardsToDeckAndDrawAgainText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	ret
 
 ; display a bare list of seven hand cards of the turn duelist, and the duelist's name above
@@ -2226,7 +2152,7 @@ PlayShuffleAndDrawCardsAnimation:
 	cp DUEL_ANIM_BOTH_DRAW
 	jr nz, .one_duelist_shuffled
 	; if both duelists shuffled
-	call PrintDeckAndHandIconsAndNumberOfCards.not_cgb
+	call PrintDeckAndHandIconsAndNumberOfCards.skip_load_cards
 	jr .check_num_cards
 .one_duelist_shuffled
 	call PrintNumberOfHandAndDeckCards
@@ -2347,13 +2273,13 @@ DrawDuelMainScene::
 	call GetTurnDuelistVariable
 	ld de, v0Tiles1 + $50 tiles
 	call LoadPlayAreaCardGfx
-	call SetBGP7OrSGB2ToCardPalette
+	call SetBGP7ToCardPalette
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ld de, v0Tiles1 + $20 tiles
 	call LoadPlayAreaCardGfx
-	call SetBGP6OrSGB3ToCardPalette
+	call SetBGP6ToCardPalette
 	call FlushAllPalettesOrSendPal23Packet
 	call SwapTurn
 ; next, draw the Pokemon in the arena
@@ -2367,7 +2293,7 @@ DrawDuelMainScene::
 	lb de, 0, 5
 	lb bc, 8, 6
 	call FillRectangle
-	call ApplyBGP7OrSGB2ToCardImage
+	call ApplyBGP7ToCardImage
 .place_opponent_arena_pkmn
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
@@ -2379,7 +2305,7 @@ DrawDuelMainScene::
 	lb de, 12, 1
 	lb bc, 8, 6
 	call FillRectangle
-	call ApplyBGP6OrSGB3ToCardImage
+	call ApplyBGP6ToCardImage
 .place_other_elements
 	call SwapTurn
 	ld hl, DuelEAndHPTileData
@@ -2573,9 +2499,6 @@ DrawDuelHUD:
 DrawDuelHorizontalSeparator:
 	ld hl, DuelHorizontalSeparatorTileData
 	call WriteDataBlocksToBGMap0
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	ret nz
 	call BankswitchVRAM1
 	ld hl, DuelHorizontalSeparatorCGBPalData
 	call WriteDataBlocksToBGMap0
@@ -2997,7 +2920,7 @@ ReturnWrongAction:
 	ret
 
 ; display BOXMSG_PLAYERS_TURN or BOXMSG_OPPONENTS_TURN and print
-; DuelistTurnText in a textbox. also call ExchangeRNG.
+; DuelistTurnText in a textbox.
 DisplayDuelistTurnScreen:
 	call EmptyScreen
 	ld c, BOXMSG_PLAYERS_TURN
@@ -3010,7 +2933,6 @@ DisplayDuelistTurnScreen:
 	call DrawDuelBoxMessage
 	ldtx hl, DuelistTurnText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	ret
 
 DuelMenuData:
@@ -3172,7 +3094,7 @@ DrawCardListScreenLayout:
 	lb de, 12, 12
 	lb bc, 8, 6
 	call FillRectangle
-	call ApplyBGP6OrSGB3ToCardImage
+	call ApplyBGP6ToCardImage
 	call Func_5744
 	ld a, [wDuelTempList]
 	cp $ff
@@ -3483,13 +3405,13 @@ OpenCardPage:
 	call LoadDuelCardSymbolTiles
 	ld de, v0Tiles1 + $20 tiles
 	call LoadLoaded1CardGfx
-	call SetOBP1OrSGB3ToCardPalette
-	call SetBGP6OrSGB3ToCardPalette
+	call SetOBP1ToCardPalette
+	call SetBGP6ToCardPalette
 	call FlushAllPalettesOrSendPal23Packet
 	lb de, $38, $30 ; X Position and Y Position of top-left corner
 	call PlaceCardImageOAM
 	lb de, 6, 4
-	call ApplyBGP6OrSGB3ToCardImage
+	call ApplyBGP6ToCardImage
 	; display the initial card page for the card at wLoadedCard1
 	xor a
 	ld [wCardPageNumber], a
@@ -3575,14 +3497,8 @@ TurnDuelistTakePrizes:
 	call DrawWideTextBox_WaitForInput
 	ld a, [wNumberPrizeCardsToTake]
 	call SelectPrizeCards
-	ld hl, hTemp_ffa0
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	call SerialSend8Bytes
 
 .return_has_prizes
-	call ExchangeRNG
 	ld a, DUELVARS_PRIZES
 	call GetTurnDuelistVariable
 	or a
@@ -3596,28 +3512,13 @@ TurnDuelistTakePrizes:
 	call DrawWideTextBox_PrintText
 	call CountPrizes
 	ld [wTempNumRemainingPrizeCards], a
-	ld a, DUELVARS_DUELIST_TYPE
-	call GetTurnDuelistVariable
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .link_opponent
 	call AIDoAction_TakePrize
 	ld c, 60
 .delay_loop
 	call DoFrame
 	dec c
 	jr nz, .delay_loop
-	jr .asm_586f
 
-.link_opponent
-	call SerialRecv8Bytes
-	ld a, DUELVARS_PRIZES
-	call GetTurnDuelistVariable
-	ld [hl], d
-	ld a, e
-	cp $ff
-	call nz, AddCardToHand
-
-.asm_586f
 	ld a, [wTempNumRemainingPrizeCards]
 	ld hl, wNumberPrizeCardsToTake
 	cp [hl]
@@ -3666,7 +3567,7 @@ LoadSelectedCardGfx:
 	ld de, v0Tiles1 + $20 tiles
 	call LoadLoaded1CardGfx
 	ld de, $c0c ; useless
-	call SetBGP6OrSGB3ToCardPalette
+	call SetBGP6ToCardPalette
 	call FlushAllPalettesOrSendPal23Packet
 	ret
 
@@ -3919,51 +3820,19 @@ LoadLoaded1CardGfx:
 	call LoadCardGfx
 	ret
 
-SetBGP7OrSGB2ToCardPalette:
-	ld a, [wConsole]
-	or a ; CONSOLE_DMG
-	ret z
-	cp CONSOLE_SGB
-	jr z, .sgb
+SetBGP7ToCardPalette:
 	ld a, $07 ; CGB BG Palette 7
 	call CopyCGBCardPalette
 	ret
-.sgb
-	ld hl, wCardPalette
-	ld de, wTempSGBPacket + 1 ; PAL Packet color #0 (PAL23's SGB2)
-	ld b, CGB_PAL_SIZE
-.copy_pal_loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .copy_pal_loop
-	ret
 
-SetBGP6OrSGB3ToCardPalette:
-	ld a, [wConsole]
-	or a ; CONSOLE_DMG
-	ret z
-	cp CONSOLE_SGB
-	jr z, SetSGB3ToCardPalette
+SetBGP6ToCardPalette:
 	ld a, $06 ; CGB BG Palette 6
 	call CopyCGBCardPalette
 	ret
 
-SetSGB3ToCardPalette:
-	ld hl, wCardPalette + 2
-	ld de, wTempSGBPacket + 9 ; Pal Packet color #4 (PAL23's SGB3)
-	ld b, 6
-	jr SetBGP7OrSGB2ToCardPalette.copy_pal_loop
-
-SetOBP1OrSGB3ToCardPalette:
+SetOBP1ToCardPalette:
 	ld a, %11100100
 	ld [wOBP0], a
-	ld a, [wConsole]
-	or a ; CONSOLE_DMG
-	ret z
-	cp CONSOLE_SGB
-	jr z, SetSGB3ToCardPalette
 	ld a, $09 ; CGB Object Palette 1
 ;	fallthrough
 
@@ -3986,122 +3855,24 @@ CopyCGBCardPalette:
 	ret
 
 FlushAllPalettesOrSendPal23Packet:
-	ld a, [wConsole]
-	or a ; CONSOLE_DMG
-	ret z
-	cp CONSOLE_SGB
-	jr z, .sgb
 	call FlushAllPalettes
 	ret
-.sgb
-; sgb PAL23, 1 ; sgb_command, length
-; rgb 28, 28, 24
-; colors 1-7 carried over
-	ld a, PAL23 << 3 + 1
-	ld hl, wTempSGBPacket
-	ld [hli], a
-	ld a, LOW(24 << 10 | 28 << 5 | 28)
-	ld [hli], a
-	ld a, HIGH(24 << 10 | 28 << 5 | 28)
-	ld [hld], a
-	dec hl
-	xor a
-	ld [wTempSGBPacket + $f], a
-	call SendSGB
-	ret
 
-ApplyBGP6OrSGB3ToCardImage:
-	ld a, [wConsole]
-	or a ; CONSOLE_DMG
-	ret z
-	cp CONSOLE_SGB
-	jr z, .sgb
+ApplyBGP6ToCardImage:
 	ld a, $06 ; CGB BG Palette 6
 	call ApplyCardCGBAttributes
 	ret
-.sgb
-	ld a, 3 << 0 + 3 << 2 ; Color Palette Designation
-;	fallthrough
 
-SendCardAttrBlkPacket:
-	call CreateCardAttrBlkPacket
-	call SendSGB
-	ret
-
-ApplyBGP7OrSGB2ToCardImage:
-	ld a, [wConsole]
-	or a ; CONSOLE_DMG
-	ret z
-	cp CONSOLE_SGB
-	jr z, .sgb
+ApplyBGP7ToCardImage:
 	ld a, $07 ; CGB BG Palette 7
 	call ApplyCardCGBAttributes
 	ret
-.sgb
-	ld a, 2 << 0 + 2 << 2 ; Color Palette Designation
-	jr SendCardAttrBlkPacket
 
 Func_5a81:
-	ld a, [wConsole]
-	or a ; CONSOLE_DMG
-	ret z
-	cp CONSOLE_SGB
-	jr z, .sgb
 	lb de, 0, 5
-	call ApplyBGP7OrSGB2ToCardImage
+	call ApplyBGP7ToCardImage
 	lb de, 12, 1
-	call ApplyBGP6OrSGB3ToCardImage
-	ret
-.sgb
-	ld a, 2 << 0 + 2 << 2 ; Data Set #1: Color Palette Designation
-	lb de, 0, 5 ; Data Set #1: X, Y
-	call CreateCardAttrBlkPacket
-	push hl
-	ld a, 2
-	ld [wTempSGBPacket + 1], a ; set number of data sets to 2
-	ld hl, wTempSGBPacket + 8
-	ld a, 3 << 0 + 3 << 2 ; Data Set #2: Color Palette Designation
-	lb de, 12, 1 ; Data Set #2: X, Y
-	call CreateCardAttrBlkPacket_DataSet
-	pop hl
-	call SendSGB
-	ret
-
-CreateCardAttrBlkPacket:
-; sgb ATTR_BLK, 1 ; sgb_command, length
-; db 1 ; number of data sets
-	ld hl, wTempSGBPacket
-	push hl
-	ld [hl], ATTR_BLK << 3 + 1
-	inc hl
-	ld [hl], 1
-	inc hl
-	call CreateCardAttrBlkPacket_DataSet
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	pop hl
-	ret
-
-CreateCardAttrBlkPacket_DataSet:
-; Control Code, Color Palette Designation, X1, Y1, X2, Y2
-; db ATTR_BLK_CTRL_INSIDE + ATTR_BLK_CTRL_LINE, a, d, e, d+7, e+5 ; data set 1
-	ld [hl], ATTR_BLK_CTRL_INSIDE + ATTR_BLK_CTRL_LINE
-	inc hl
-	ld [hl], a
-	inc hl
-	ld [hl], d
-	inc hl
-	ld [hl], e
-	inc hl
-	ld a, 7
-	add d
-	ld [hli], a
-	ld a, 5
-	add e
-	ld [hli], a
+	call ApplyBGP6ToCardImage
 	ret
 
 ; given the 8x6 card image with coordinates at de, fill its BGMap attributes with a
@@ -4115,21 +3886,8 @@ ApplyCardCGBAttributes:
 
 ; set the default game palettes for all three systems
 ; BGP and OBP0 on DMG
-; SGB0 and SGB1 on SGB
 ; BGP0 to BGP5 and OBP1 on CGB
 SetDefaultConsolePalettes:
-	ld a, [wConsole]
-	cp CONSOLE_SGB
-	jr z, .sgb
-	cp CONSOLE_CGB
-	jr z, .cgb
-	ld a, %11100100
-	ld [wOBP0], a
-	ld [wBGP], a
-	ld a, $01 ; equivalent to FLUSH_ONE_PAL
-	ld [wFlushPaletteFlags], a
-	ret
-.cgb
 	ld a, $04
 	ld [wTextBoxFrameType], a
 	ld de, CGBDefaultPalettes
@@ -4141,20 +3899,6 @@ SetDefaultConsolePalettes:
 	ld c, CGB_PAL_SIZE
 	call .copy_de_to_hl
 	call FlushAllPalettes
-	ret
-.sgb
-	ld a, $04
-	ld [wTextBoxFrameType], a
-	ld a, PAL01 << 3 + 1
-	ld hl, wTempSGBPacket
-	push hl
-	ld [hli], a
-	ld de, Pal01Packet_Default
-	ld c, $0e
-	call .copy_de_to_hl
-	ld [hl], c
-	pop hl
-	call SendSGB
 	ret
 
 .copy_de_to_hl
@@ -4188,18 +3932,6 @@ CGBDefaultPalettes:
 	rgb 0, 0, 0
 ; BGP4
 	rgb 28, 28, 24
-	rgb 26, 10, 0
-	rgb 28, 0, 0
-	rgb 0, 0, 0
-
-; first and last byte of the packet not contained here (see SetDefaultConsolePalettes.sgb)
-Pal01Packet_Default:
-; SGB0
-	rgb 28, 28, 24
-	rgb 21, 21, 16
-	rgb 10, 10, 8
-	rgb 0, 0, 0
-; SGB1
 	rgb 26, 10, 0
 	rgb 28, 0, 0
 	rgb 0, 0, 0
@@ -4466,16 +4198,11 @@ PrintPokemonCardPageGenericInformation:
 
 ; draws the 20x18 surrounding box and also colorizes the card image
 DrawCardPageSurroundingBox:
-	ld hl, wTextBoxFrameType
-	set 7, [hl] ; colorize textbox border also on SGB (with SGB1)
-	push hl
 	lb de, 0, 0
 	lb bc, 20, 18
 	call DrawRegularTextBox
-	pop hl
-	res 7, [hl]
 	lb de, 6, 4
-	call ApplyBGP6OrSGB3ToCardImage
+	call ApplyBGP6ToCardImage
 	ret
 
 CardPageRetreatWRTextData:
@@ -4677,7 +4404,7 @@ DisplayEnergyOrTrainerCardPage:
 	call InitTextPrinting_ProcessTextFromPointerToID
 	; colorize the card image
 	lb de, 6, 4
-	call ApplyBGP6OrSGB3ToCardImage
+	call ApplyBGP6ToCardImage
 	; display the card type header
 	ld a, $e0
 	lb hl, 1, 8
@@ -4727,12 +4454,12 @@ DrawLargePictureOfCard:
 	call LoadCardTypeHeaderTiles
 	ld de, v0Tiles1 + $20 tiles
 	call LoadLoaded1CardGfx
-	call SetBGP6OrSGB3ToCardPalette
+	call SetBGP6ToCardPalette
 	call FlushAllPalettesOrSendPal23Packet
 	ld hl, LargeCardTileData
 	call WriteDataBlocksToBGMap0
 	lb de, 6, 3
-	call ApplyBGP6OrSGB3ToCardImage
+	call ApplyBGP6ToCardImage
 	ret
 
 LargeCardTileData:
@@ -5420,10 +5147,7 @@ PrintPlayAreaCardHeader:
 	pop af
 	call FillRectangle
 	pop hl
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-	; in cgb, we have to take care of coloring it too
+
 	ld a, [hl]
 	lb hl, 0, 0
 	lb bc, 2, 2
@@ -5431,7 +5155,6 @@ PrintPlayAreaCardHeader:
 	call FillRectangle
 	call BankswitchVRAM0
 
-.not_cgb
 	; print the status condition symbol if any (only for the arena Pokemon card)
 	ld hl, wCurPlayAreaSlot
 	ld a, [hli]
@@ -6097,19 +5820,6 @@ DuelDataToSave:
 	dw wAIDuelVars,            wAIDuelVarsEnd - wAIDuelVars
 	dw NULL
 
-; return carry if there is no data saved at sCurrentDuel or if the checksum isn't correct,
-; or if the value saved from wDuelType is DUELTYPE_LINK
-ValidateSavedNonLinkDuelData:
-	call EnableSRAM
-	ld hl, sCurrentDuel
-	ld a, [sCurrentDuelData]
-	call DisableSRAM
-	cp DUELTYPE_LINK
-	jr nz, ValidateSavedDuelData
-	; ignore any saved data of a link duel
-	scf
-	ret
-
 ; return carry if there is no data saved at sCurrentDuel or if the checksum isn't correct
 ; input: hl = sCurrentDuel
 ValidateSavedDuelData:
@@ -6234,73 +5944,9 @@ AIMakeDecision:
 	scf
 	ret
 
-; handles menu for when player is waiting for
-; Link Opponent to make a decision, where it's
-; possible to examine the hand or duel main scene
-HandleWaitingLinkOpponentMenu:
-	ld a, 10
-.delay_loop
-	call DoFrame
-	dec a
-	jr nz, .delay_loop
-	ld [wCurrentDuelMenuItem], a ; 0
-.loop_outer
-	ld a, PLAYER_TURN
-	ldh [hWhoseTurn], a
-	ldtx hl, WaitingHandExamineText
-	call DrawWideTextBox_PrintTextNoDelay
-	call .InitTextBoxMenu
-.loop_inner
-	call DoFrame
-	call .HandleInput
-	call RefreshMenuCursor
-	ldh a, [hKeysPressed]
-	bit A_BUTTON_F, a
-	jr nz, .a_pressed
-	ld a, $01
-	call HandleSpecialDuelMainSceneHotkeys
-	jr nc, .loop_inner
-.duel_main_scene
-	call DrawDuelMainScene
-	jr .loop_outer
-.a_pressed
-	ld a, [wCurrentDuelMenuItem]
-	or a
-	jr z, .open_hand
-; duel check
-	call OpenDuelCheckMenu
-	jr .duel_main_scene
-.open_hand
-	call OpenTurnHolderHandScreen_Simple
-	jr .duel_main_scene
-
-.HandleInput:
-	ldh a, [hDPadHeld]
-	bit B_BUTTON_F, a
-	ret nz
-	and D_LEFT | D_RIGHT
-	ret z
-	call EraseCursor
-	ld hl, wCurrentDuelMenuItem
-	ld a, [hl]
-	xor $01
-	ld [hl], a
-
-.InitTextBoxMenu:
-	ld d, 2
-	ld a, [wCurrentDuelMenuItem]
-	or a
-	jr z, .set_cursor_params
-	ld d, 8
-.set_cursor_params
-	ld e, 16
-	lb bc, SYM_CURSOR_R, SYM_SPACE
-	jp SetCursorParametersForTextBox
-
 ; handles the key shortcuts to access some duel functions
 ; while inside the Duel Main scene in some situations
-; (while waiting for Link Opponent's turn & when
-; selecting a bench Pokémon, and choosing 'Examine')
+; (when selecting a bench Pokémon, and choosing 'Examine')
 ; hotkeys:
 ; - Start     = Arena's card page
 ; - Select    = if a == 0: In Play Area
@@ -6367,20 +6013,6 @@ HandleSpecialDuelMainSceneHotkeys:
 	call OpenNonTurnHolderDiscardPileScreen
 	jr .return_carry
 
-SetLinkDuelTransmissionFrameFunction:
-	call FinishQueuedAnimations
-	ld hl, sp+$00
-	ld a, l
-	ld [wLinkOpponentTurnReturnAddress], a
-	ld a, h
-	ld [wLinkOpponentTurnReturnAddress + 1], a
-	ld de, LinkOpponentTurnFrameFunction
-	ld hl, wDoFrameFunction
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
-
 ResetDoFrameFunction_Bank1:
 	xor a
 	ld hl, wDoFrameFunction
@@ -6414,51 +6046,10 @@ PrintPokemonEvolvedIntoPokemon:
 	call DrawWideTextBox_WaitForInput
 	ret
 
-; handle the opponent's turn in a link duel
-; loop until either [wOpponentTurnEnded] or [wDuelFinished] is non-0
-DoLinkOpponentTurn:
-	xor a
-	ld [wOpponentTurnEnded], a
-	xor a
-	ld [wSkipDuelistIsThinkingDelay], a
-.link_opp_turn_loop
-	ld a, [wSkipDuelistIsThinkingDelay]
-	or a
-	jr nz, .asm_6932
-	call SetLinkDuelTransmissionFrameFunction
-	call HandleWaitingLinkOpponentMenu
-	ld a, [wDuelDisplayedScreen]
-	cp CHECK_PLAY_AREA
-	jr nz, .asm_6932
-	lb de, $38, $9f
-	call SetupText
-.asm_6932
-	call ResetDoFrameFunction_Bank1
-	call SerialRecvDuelData
-	ld a, OPPONENT_TURN
-	ldh [hWhoseTurn], a
-	ld a, [wSerialFlags]
-	or a
-	jp nz, DuelTransmissionError
-	xor a
-	ld [wSkipDuelistIsThinkingDelay], a
-	ldh a, [hOppActionTableIndex]
-	cp NUM_OPP_ACTIONS
-	jp nc, DuelTransmissionError
-	ld hl, OppActionTable
-	call JumpToFunctionInTable
-	ld hl, wOpponentTurnEnded
-	ld a, [wDuelFinished]
-	or [hl]
-	jr z, .link_opp_turn_loop
-	ret
-
 ; actions for the opponent's turn
-; on a link duel, this is referenced by DoLinkOpponentTurn in a loop (on each opponent's HandleTurn)
-; on a non-link duel (vs AI opponent), this is referenced by AIMakeDecision
+; this is referenced by AIMakeDecision
 OppActionTable:
 	table_width 2, OppActionTable
-	dw DuelTransmissionError
 	dw OppAction_PlayBasicPokemonCard
 	dw OppAction_EvolvePokemonCard
 	dw OppAction_PlayEnergyCard
@@ -6573,7 +6164,6 @@ OppAction_PlayTrainerCard:
 	call LoadNonPokemonCardEffectCommands
 	call DisplayUsedTrainerCardDetailScreen
 	call PrintUsedTrainerCardDescription
-	call ExchangeRNG
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a
 	ret
@@ -6588,7 +6178,6 @@ OppAction_ExecuteTrainerCardEffectCommands:
 	call DrawDuelMainScene
 	ldh a, [hTempCardIndex_ff9f]
 	call MoveHandCardToDiscardPile
-	call ExchangeRNG
 	call DrawDuelMainScene
 	ret
 
@@ -6610,7 +6199,6 @@ OppAction_BeginUseAttack:
 	and CNF_SLP_PRZ
 	cp CONFUSED
 	jr z, .has_status
-	call ExchangeRNG
 	ret
 
 ; we make it here is attacker is affected by
@@ -6619,7 +6207,6 @@ OppAction_BeginUseAttack:
 	call DrawDuelMainScene
 	call PrintPokemonsAttackText
 	call WaitForWideTextBoxInput
-	call ExchangeRNG
 	call HandleSandAttackOrSmokescreenSubstatus
 	ret nc ; return if attack is successful (won the coin toss)
 	call ClearNonTurnTemporaryDuelvars
@@ -6638,7 +6225,6 @@ OppAction_UseAttack:
 	call DisplayOpponentUsedAttackScreen
 	call PrintPokemonsAttackText
 	call WaitForWideTextBoxInput
-	call ExchangeRNG
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a
 	ret
@@ -6667,8 +6253,6 @@ OppAction_ForceSwitchActive:
 	call OpenPlayAreaScreenForSelection
 	jr c, .force_selection
 	call SwapTurn
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call SerialSendByte
 	ret
 
 OppAction_UsePokemonPower:
@@ -6688,7 +6272,6 @@ OppAction_UsePokemonPower:
 	ld [wTxRam2_b + 1], a
 	ldtx hl, WillUseThePokemonPowerText
 	call DrawWideTextBox_WaitForInput_Bank1
-	call ExchangeRNG
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a
 	ret
@@ -6715,7 +6298,6 @@ OppAction_DrawDuelMainScene:
 	ret
 
 OppAction_TossCoinATimes:
-	call SerialRecv8Bytes
 	call TossCoinATimes
 	ld a, $01
 	ld [wSkipDuelistIsThinkingDelay], a
@@ -6743,7 +6325,6 @@ OppAction_UseMetronomeAttack:
 	call WaitForWideTextBoxInput
 	ret
 .asm_6b56
-	call SerialRecv8Bytes
 	push bc
 	call SwapTurn
 	call CopyAttackDataAndDamage_FromDeckIndex
@@ -6789,9 +6370,6 @@ DrawWideTextBox_WaitForInput_Bank1:
 
 Func_6ba2:
 	call DrawWideTextBox_PrintText
-	ld a, [wDuelistType]
-	cp DUELIST_TYPE_LINK_OPP
-	ret z
 	call WaitForWideTextBoxInput
 	ret
 
@@ -7365,7 +6943,6 @@ ReplaceKnockedOutPokemon:
 	bank1call DrawDuelMainScene
 	ldtx hl, ThereAreNoPokemonInPlayAreaText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	scf
 	ret
 
@@ -7386,8 +6963,6 @@ ReplaceKnockedOutPokemon:
 .select_pokemon
 	call OpenPlayAreaScreenForSelection
 	jr c, .select_pokemon
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call SerialSend8Bytes
 
 ; replace the arena Pokemon with the one at location [hTempPlayAreaLocation_ff9d]
 .replace_pokemon
@@ -7403,25 +6978,13 @@ ReplaceKnockedOutPokemon:
 	call GetTurnDuelistVariable
 	ldtx hl, DuelistPlacedACardText
 	bank1call DisplayCardDetailScreen
-	call ExchangeRNG
 	or a
 	ret
 
 ; the AI opponent replaces the knocked out Pokemon with one from bench
 .opponent
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .link_opponent
 	call AIDoAction_KOSwitch
 	ldh a, [hTemp_ffa0]
-	ldh [hTempPlayAreaLocation_ff9d], a
-	jr .replace_pokemon
-
-; wait for link opponent to replace the knocked out Pokemon with one from bench
-.link_opponent
-	bank1call DrawDuelMainScene
-	ldtx hl, DuelistIsSelectingPokemonToPlaceInArenaText
-	call DrawWideTextBox_PrintText
-	call SerialRecv8Bytes
 	ldh [hTempPlayAreaLocation_ff9d], a
 	jr .replace_pokemon
 
@@ -7437,7 +7000,6 @@ Func_6fa5:
 	bank1call DrawDuelMainScene
 	ldtx hl, TookAllThePrizesText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	call SwapTurn
 	scf
 	ret
@@ -7634,13 +7196,9 @@ InitVariablesToBeginDuel:
 	ld [wSkipDelayAllowed], a
 	call DisableSRAM
 	ld a, [wPlayerDuelistType]
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .set_duel_type
 	bit 7, a ; DUELIST_TYPE_AI_OPP
 	jr nz, .set_duel_type
 	ld a, [wOpponentDuelistType]
-	cp DUELIST_TYPE_LINK_OPP
-	jr z, .set_duel_type
 	bit 7, a ; DUELIST_TYPE_AI_OPP
 	jr nz, .set_duel_type
 	xor a
@@ -7858,7 +7416,6 @@ _TossCoin::
 	ld a, DUELVARS_DUELIST_TYPE
 	call GetTurnDuelistVariable
 	ld [wCoinTossDuelistType], a
-	call ExchangeRNG
 	xor a
 	ld [wCoinTossNumHeads], a
 
@@ -8021,7 +7578,6 @@ _TossCoin::
 	ld hl, wCoinTossTotalNum
 	cp [hl]
 	jp c, .print_coin_tally
-	call ExchangeRNG
 	call FinishQueuedAnimations
 	call ResetAnimationQueue
 
@@ -8034,19 +7590,10 @@ _TossCoin::
 
 Func_72ff:
 	ldh [hff96], a
-	ld a, [wDuelType]
-	cp DUELTYPE_LINK
-	ret nz
-	ldh a, [hff96]
-	call SerialSendByte
-	call Func_7344
 	ret
 
 Func_7310:
 	ldh [hff96], a
-	ld a, [wDuelType]
-	cp DUELTYPE_LINK
-	jr z, Func_7338
 .loop_anim
 	call DoFrame
 	call CheckAnyAnimationPlaying
@@ -8056,10 +7603,6 @@ Func_7310:
 
 Func_7324:
 	ldh [hff96], a
-	ld a, [wDuelType]
-	cp DUELTYPE_LINK
-	jr z, Func_7338
-
 ; delay coin flip for AI opponent
 	ld a, 30
 .asm_732f
@@ -8067,25 +7610,6 @@ Func_7324:
 	dec a
 	jr nz, .asm_732f
 	ldh a, [hff96]
-	ret
-
-Func_7338:
-	call DoFrame
-	call SerialRecvByte
-	jr c, Func_7338
-	call Func_7344
-	ret
-
-Func_7344:
-	push af
-	ld a, [wSerialFlags]
-	or a
-	jr nz, .asm_734d
-	pop af
-	ret
-.asm_734d
-	call FinishQueuedAnimations
-	call DuelTransmissionError
 	ret
 
 BuildVersion:
@@ -8265,37 +7789,3 @@ PlayAttackAnimation::
 	pop af
 	ldh [hWhoseTurn], a
 	ret
-
-; seems to communicate with other device
-; for starting a duel
-; outputs in hl either wPlayerDuelVariables
-; or wOpponentDuelVariables depending on wSerialOp
-DecideLinkDuelVariables:
-	call Func_0e8e
-	ldtx hl, PressStartWhenReadyText
-	call DrawWideTextBox_PrintText
-	call EnableLCD
-.input_loop
-	call DoFrame
-	ldh a, [hKeysPressed]
-	bit B_BUTTON_F, a
-	jr nz, .link_cancel
-	and START
-	call Func_0cc5
-	jr nc, .input_loop
-	ld hl, wPlayerDuelVariables
-	ld a, [wSerialOp]
-	cp $29
-	jr z, .link_continue
-	ld hl, wOpponentDuelVariables
-	cp $12
-	jr z, .link_continue
-.link_cancel
-	call ResetSerial
-	scf
-	ret
-.link_continue
-	or a
-	ret
-
-	ret ; stray ret

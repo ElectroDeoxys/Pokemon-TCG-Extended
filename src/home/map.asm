@@ -51,50 +51,12 @@ _ExecuteGameEvent::
 GameEventPointerTable::
 	dw GameEvent_Overworld
 	dw GameEvent_Duel
-	dw GameEvent_BattleCenter
-	dw GameEvent_GiftCenter
 	dw GameEvent_Credits
 	dw GameEvent_ContinueDuel
 	dw GameEvent_ChallengeMachine
 	dw GameEvent_Overworld
 
 GameEvent_Overworld::
-	scf
-	ret
-
-GameEvent_GiftCenter::
-	ldh a, [hBankROM]
-	push af
-	call PauseSong
-	ld a, MUSIC_CARD_POP
-	call PlaySong
-	ld a, GAME_EVENT_GIFT_CENTER
-	ld [wActiveGameEvent], a
-	ld a, [wGiftCenterChoice]
-	or $10
-	ld [wGiftCenterChoice], a
-	farcall Func_b177
-	ld a, [wGiftCenterChoice]
-	and $ef
-	ld [wGiftCenterChoice], a
-	call ResumeSong
-	pop af
-	call BankswitchROM
-	scf
-	ret
-
-GameEvent_BattleCenter::
-	ld a, GAME_EVENT_BATTLE_CENTER
-	ld [wActiveGameEvent], a
-	xor a
-	ld [wSongOverride], a
-	ld a, -1
-	ld [wDuelResult], a
-	ld a, MUSIC_DUEL_THEME_1
-	ld [wDuelTheme], a
-	ld a, MUSIC_CARD_POP
-	call PlaySong
-	bank1call SetUpAndStartLinkDuel
 	scf
 	ret
 

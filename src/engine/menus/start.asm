@@ -75,7 +75,8 @@ CheckIfHasSaveData:
 	ld [wHasSaveData], a
 	cp $00 ; or a
 	jr z, .write_has_duel_data
-	bank1call ValidateSavedNonLinkDuelData
+	ld hl, sCurrentDuel
+	bank1call ValidateSavedDuelData
 	ld a, TRUE
 	jr nc, .write_has_duel_data
 	ld a, FALSE
@@ -129,7 +130,6 @@ HandleStartMenu:
 	; New Game is 3rd option
 	; but when there's no save data,
 	; it's the 1st in menu list, so adjust it
-	inc e
 	inc e
 .no_adjustment
 	ld a, e
@@ -230,7 +230,6 @@ PrintStartMenuDescriptionText:
 	jr nz, .has_data
 	; New Game option is 3rd element
 	; in function table, so add 2
-	inc e
 	inc e
 .has_data
 
@@ -353,7 +352,8 @@ AskToContinueFromDiaryWithDuelData:
 
 DrawPlayerPortraitAndPrintNewGameText:
 	call DisableLCD
-	farcall LoadConsolePaletteData
+	xor a
+	ld [wd317], a
 	farcall InitMenuScreen
 	call EnableAndClearSpriteAnimations
 	ld hl, HandleAllSpriteAnimations

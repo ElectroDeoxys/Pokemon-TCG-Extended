@@ -200,9 +200,6 @@ sSelectedPCMenuItem:: ; b829
 sConfigCursorYPos:: ; b82a
 	ds $1
 
-sSelectedGiftCenterMenuItem:: ; b82b
-	ds $1
-
 sPCPackSelection:: ; b82c
 	ds $1
 
@@ -227,9 +224,6 @@ sNPCDuelistDirection:: ; b849
 sMultichoiceTextboxResult_ChooseDeckToDuelAgainst:: ; b84a
 	ds $1
 
-sGiftCenterChoice:: ; b84b
-	ds $1
-
 sb84c:: ; b84c
 	ds $f
 
@@ -242,7 +236,7 @@ sb86b:: ; b86b
 sEventVars:: ; b87b
 	ds $40
 
-	ds $45
+	ds $47
 sGeneralSaveDataEnd::
 
 	ds $141

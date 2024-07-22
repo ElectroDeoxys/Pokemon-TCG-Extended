@@ -21,53 +21,6 @@ DecrementDeckCardsInCollection:
 	pop hl
 	ret
 
-; like AddDeckToCollection, but takes care to
-; check if increasing the collection count would
-; go over MAX_AMOUNT_OF_CARD and caps it
-; this is because it's used within Gift Center,
-; so we cannot assume that the deck configuration
-; won't make it go over MAX_AMOUNT_OF_CARD
-; hl = deck configuration, with cards to add
-AddGiftCenterDeckCardsToCollection:
-	push hl
-	ld b, $0
-	ld d, DECK_SIZE
-.loop_deck
-	ld a, [hli]
-	or a
-	jr z, .done
-	ld c, a
-	push hl
-	push de
-	push bc
-	ld a, ALL_DECKS
-	call CreateCardCollectionListWithDeckCards
-	pop bc
-	pop de
-	ld hl, wTempCardCollection
-	add hl, bc
-	ld a, [hl]
-	cp MAX_AMOUNT_OF_CARD
-	jr z, .next_card ; capped
-	call EnableSRAM ; no DisableSRAM
-	ld hl, sCardCollection
-	add hl, bc
-	ld a, [hl]
-	cp CARD_NOT_OWNED
-	jr nz, .incr
-	; not owned
-	xor a
-	ld [hl], a
-.incr
-	inc [hl]
-.next_card
-	pop hl
-	dec d
-	jr nz, .loop_deck
-.done
-	pop hl
-	ret
-
 ; adds all cards in deck in hl to player's collection
 ; assumes SRAM is enabled
 ; hl = pointer to deck cards
@@ -915,9 +868,6 @@ FillBGMapLineWithA:
 	call BCCoordToBGMap0Address
 	ld b, SCREEN_WIDTH
 	call FillDEWithA
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	ret nz ; return if not CGB
 	ld a, $04
 	ld b, SCREEN_WIDTH
 	call BankswitchVRAM1
@@ -976,17 +926,11 @@ DrawCardTypeIcons:
 	call FillRectangle
 	pop af
 	call GetCardTypeIconPalette
-	ld b, a
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-	ld a, b
 	lb bc, 2, 2
 	lb hl, 0, 0
 	call BankswitchVRAM1
 	call FillRectangle
 	call BankswitchVRAM0
-.not_cgb
 	pop hl
 	ret
 
@@ -2905,17 +2849,11 @@ PrintConfirmationCardList:
 	pop af
 
 	call GetCardTypeIconPalette
-	ld b, a
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .skip_pal
-	ld a, b
 	lb bc, 2, 2
 	lb hl, 0, 0
 	call BankswitchVRAM1
 	call FillRectangle
 	call BankswitchVRAM0
-.skip_pal
 	pop bc
 	pop de
 	pop hl

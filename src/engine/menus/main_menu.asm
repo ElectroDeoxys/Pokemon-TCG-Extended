@@ -5,7 +5,6 @@ _GameLoop::
 	call ZeroObjectPositions
 	ld hl, wVBlankOAMCopyToggle
 	inc [hl]
-	farcall SetIntroSGBBorder
 	ld a, $ff
 	ld [wLastSelectedStartMenuItem], a
 .main_menu_loop
@@ -40,7 +39,6 @@ MainMenu_NewGame:
 	call DisableSRAM
 	ld a, MUSIC_STOP
 	call PlaySong
-	farcall SetMainSGBBorder
 	ld a, MUSIC_OVERWORLD
 	ld [wDefaultSong], a
 	call PlayDefaultSong
@@ -57,7 +55,6 @@ MainMenu_ContinueFromDiary:
 	call ValidateBackupGeneralSaveData
 	jr nc, MainMenu_NewGame
 	farcall Func_c1ed
-	farcall SetMainSGBBorder
 	call EnableSRAM
 	xor a
 	ld [sPlayerInChallengeMachine], a
@@ -73,7 +70,6 @@ MainMenu_ContinueDuel:
 	call PlaySong
 	farcall ClearEvents
 	farcall $04, LoadGeneralSaveData
-	farcall SetMainSGBBorder
 	ld a, GAME_EVENT_CONTINUE_DUEL
 	ld [wGameEvent], a
 	farcall $03, ExecuteGameEvent

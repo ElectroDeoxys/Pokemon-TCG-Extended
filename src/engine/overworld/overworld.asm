@@ -9,7 +9,7 @@ LoadMap::
 	ld [wReloadOverworldCallbackPtr], a
 	ld [wReloadOverworldCallbackPtr + 1], a
 	ld [wMatchStartTheme], a
-	farcall LoadConsolePaletteData
+	ld [wd317], a
 	call WhiteOutDMGPals
 	call ZeroObjectPositions
 	xor a
@@ -168,8 +168,6 @@ Func_c141:
 
 PointerTable_c152:
 	dw Func_c9bc ; GAME_EVENT_DUEL
-	dw Func_fc2b ; GAME_EVENT_BATTLE_CENTER
-	dw Func_fcad ; GAME_EVENT_GIFT_CENTER
 
 Func_c158:
 	ld a, [wActiveGameEvent]
@@ -261,7 +259,6 @@ Func_c1f8:
 	xor a
 	ld [wSelectedPauseMenuItem], a
 	ld [wSelectedPCMenuItem], a
-	ld [wSelectedGiftCenterMenuItem], a
 	ld [wConfigCursorYPos], a
 	ld [wActiveGameEvent], a
 	ld [wDefaultSong], a
@@ -702,13 +699,7 @@ Func_c4b9:
 	ld [wd4cb], a
 	ld a, PALETTE_29
 	farcall LoadPaletteData
-	ld b, SPRITE_ANIM_LIGHT_NPC_UP
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-	ld b, SPRITE_ANIM_RED_NPC_UP
-.not_cgb
-	ld a, b
+	ld a, SPRITE_ANIM_RED_NPC_UP
 	ld [wPlayerSpriteBaseAnimation], a
 
 	; load Player's sprite for overworld

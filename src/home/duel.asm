@@ -1363,7 +1363,6 @@ ProcessPlayedPokemonCard::
 	call LoadTxRam2
 	ldtx hl, HavePokemonPowerText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	ld a, [wLoadedCard1ID]
 	cp MUK
 	jr z, .use_pokemon_power
@@ -1373,7 +1372,6 @@ ProcessPlayedPokemonCard::
 	call DisplayUsePokemonPowerScreen
 	ldtx hl, UnableToUsePkmnPowerDueToToxicGasText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	ret
 
 .use_pokemon_power
@@ -1402,7 +1400,6 @@ ProcessPlayedPokemonCard::
 	ld [hl], a
 	ldtx hl, WillUseThePokemonPowerText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
 	call Func_7415
 	ld a, EFFECTCMDTYPE_PKMN_POWER_TRIGGER
 	call TryExecuteEffectCommandFunction
@@ -1516,10 +1513,8 @@ UseAttackOrPokemonPower::
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
 	jp c, ReturnCarry
-	call SendAttackDataToLinkOpponent
 	jr .next
 .sand_attack_smokescreen
-	call SendAttackDataToLinkOpponent
 	call HandleSandAttackOrSmokescreenSubstatus
 	jp c, ClearNonTurnTemporaryDuelvars_ResetCarry
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
@@ -1527,18 +1522,17 @@ UseAttackOrPokemonPower::
 	jp c, ReturnCarry
 .next
 	ld a, OPPACTION_USE_ATTACK
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	ld a, EFFECTCMDTYPE_DISCARD_ENERGY
 	call TryExecuteEffectCommandFunction
 	call CheckSelfConfusionDamage
 	jp c, HandleConfusionDamageToSelf
 	call DrawDuelMainScene_PrintPokemonsAttackText
 	call WaitForWideTextBoxInput
-	call ExchangeRNG
 	ld a, EFFECTCMDTYPE_REQUIRE_SELECTION
 	call TryExecuteEffectCommandFunction
 	ld a, OPPACTION_ATTACK_ANIM_AND_DAMAGE
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 ;	fallthrough
 
 PlayAttackAnimation_DealAttackDamage::
@@ -1645,40 +1639,13 @@ UsePokemonPower::
 	call TryExecuteEffectCommandFunction
 	jr c, ReturnCarry
 	ld a, OPPACTION_USE_PKMN_POWER
-	call SetOppAction_SerialSendDuelData
-	call ExchangeRNG
+	ldh [hOppActionTableIndex], a
 	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
 	call TryExecuteEffectCommandFunction
 	ld a, OPPACTION_DUEL_MAIN_SCENE
-	call SetOppAction_SerialSendDuelData
-	ret
-
-; called by UseAttackOrPokemonPower (on an attack only)
-; in a link duel, it's used to send the other game data about the
-; attack being in use, triggering a call to OppAction_BeginUseAttack in the receiver
-SendAttackDataToLinkOpponent::
-	ld a, [wccec]
-	or a
-	ret nz
-	ldh a, [hTemp_ffa0]
-	push af
-	ldh a, [hTempCardIndex_ff9f]
-	push af
-	ld a, $1
-	ld [wccec], a
-	ld a, [wPlayerAttackingCardIndex]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, [wPlayerAttackingAttackIndex]
-	ldh [hTemp_ffa0], a
-	ld a, OPPACTION_BEGIN_ATTACK
-	call SetOppAction_SerialSendDuelData
-	call ExchangeRNG
-	pop af
-	ldh [hTempCardIndex_ff9f], a
-	pop af
-	ldh [hTemp_ffa0], a
+	ldh [hOppActionTableIndex], a
 	ret
 
 Func_189d::
@@ -1760,23 +1727,23 @@ PlayTrainerCard::
 	call TryExecuteEffectCommandFunction
 	jr c, .done
 	ld a, OPPACTION_PLAY_TRAINER
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	call DisplayUsedTrainerCardDetailScreen
-	call ExchangeRNG
 	ld a, EFFECTCMDTYPE_DISCARD_ENERGY
 	call TryExecuteEffectCommandFunction
 	ld a, EFFECTCMDTYPE_REQUIRE_SELECTION
 	call TryExecuteEffectCommandFunction
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
-	call SetOppAction_SerialSendDuelData
+	ldh [hOppActionTableIndex], a
 	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
 	call TryExecuteEffectCommandFunction
 	ldh a, [hTempCardIndex_ff9f]
 	call MoveHandCardToDiscardPile
-	call ExchangeRNG
 .done
 	or a
 	ret
+
+
 
 ; loads the effect commands of a (trainer or energy) card with deck index (0-59) at hTempCardIndex_ff9f
 ; into wLoadedAttackEffectCommands. in practice, only used for trainer cards
@@ -2209,7 +2176,6 @@ Func_1bb4::
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call PrintFailedEffectText
 	call WaitForWideTextBoxInput
-	call ExchangeRNG
 	ret
 
 ; prints one of the ThereWasNoEffectFrom*Text if wEffectFailed contains EFFECT_FAILED_NO_EFFECT,

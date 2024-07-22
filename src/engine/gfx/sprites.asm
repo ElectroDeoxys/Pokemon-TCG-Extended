@@ -109,7 +109,6 @@ Sprites:
 	gfx_pointer DuelCardGfx,         $05 ; SPRITE_DUEL_CARD
 	gfx_pointer DuelCoinGfx,         $17 ; SPRITE_DUEL_COIN
 	gfx_pointer DuelResultGfx,       $36 ; SPRITE_DUEL_RESULT
-	gfx_pointer LinkOAMGfx,          $0b ; SPRITE_LINK
 	gfx_pointer BoosterPackOAMGfx,   $20 ; SPRITE_BOOSTER_PACK_OAM
 	gfx_pointer PressStartGfx,       $14 ; SPRITE_PRESS_START
 	gfx_pointer GrassGfx,            $04 ; SPRITE_GRASS

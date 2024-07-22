@@ -274,26 +274,17 @@ IntroSequenceCmd_FadeOut:
 IntroSequenceCmd_LoadCharizardScene:
 	lb bc, 6, 3
 	ld a, SCENE_CHARIZARD_INTRO
-	jr LoadOpeningSceneAndUpdateSGBBorder
+	jp LoadOpeningScene
 
 IntroSequenceCmd_LoadScytherScene:
 	lb bc, 6, 3
 	ld a, SCENE_SCYTHER_INTRO
-	jr LoadOpeningSceneAndUpdateSGBBorder
+	jp LoadOpeningScene
 
 IntroSequenceCmd_LoadAerodactylScene:
 	lb bc, 6, 3
 	ld a, SCENE_AERODACTYL_INTRO
-;	fallthrough
-
-LoadOpeningSceneAndUpdateSGBBorder:
-	call LoadOpeningScene
-	ld l, %001010
-	lb bc, 0, 0
-	lb de, 20, 18
-	farcall Func_70498
-	scf
-	ret
+	jp LoadOpeningScene
 
 IntroSequenceCmd_LoadTitleScreenScene:
 	lb bc, 0, 0
@@ -319,6 +310,7 @@ LoadOpeningScene:
 	ld [wIntroSequencePalsNeedUpdate], a
 	call AdvanceIntroSequenceCmdPtrBy2
 	call EnableLCD
+	scf
 	ret
 
 IntroSequenceEmptyFunc:
@@ -329,9 +321,7 @@ INCLUDE "data/sequences/intro.asm"
 ; once every 63 frames randomly choose an orb sprite
 ; to animate, i.e. circle around the screen
 AnimateRandomTitleScreenOrb:
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	call z, .UpdateSpriteAttributes
+	call .UpdateSpriteAttributes
 	ld a, [wTitleScreenOrbCounter]
 	and %111111
 	ret nz ; don't pick an orb now
@@ -351,23 +341,14 @@ AnimateRandomTitleScreenOrb:
 
 	ld c, SPRITE_ANIM_ATTRIBUTES
 	call GetSpriteAnimBufferProperty
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .set_coords
 	set SPRITE_ANIM_FLAG_UNSKIPPABLE, [hl]
 
-.set_coords
 	inc hl
 	ld a, 248
 	ld [hli], a ; SPRITE_ANIM_COORD_X
 	ld a, 14
 	ld [hl], a ; SPRITE_ANIM_COORD_Y
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	ld a, SPRITE_ANIM_215
-	jr nz, .start_anim
 	ld a, SPRITE_ANIM_216
-.start_anim
 	farcall StartSpriteAnimation
 	ret
 
