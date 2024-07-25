@@ -50,8 +50,7 @@ InitPromotionalCardAndDeckCounterSaveData:
 LoadHandCardsIcon:
 	ld hl, HandCardsGfx
 	ld de, v0Tiles2 + $38 tiles
-	call CopyListFromHLToDE
-	ret
+	jp CopyListFromHLToDE
 
 HandCardsGfx:
 	INCBIN "gfx/hand_cards.2bpp"
@@ -69,8 +68,7 @@ EmptyScreenAndLoadFontDuelAndHandCardsIcons:
 	call LoadHandCardsIcon
 	bank1call SetDefaultConsolePalettes
 	lb de, $3c, $bf
-	call SetupText
-	ret
+	jp SetupText
 
 ; empties screen, zeroes object positions,
 ; loads cursor tile, symbol fonts, duel card symbols
@@ -88,8 +86,7 @@ PrepareMenuGraphics:
 	call LoadHandCardsIcon
 	bank1call SetDefaultConsolePalettes
 	lb de, $3c, $bf
-	call SetupText
-	ret
+	jp SetupText
 
 ; inits the following deck building params from hl:
 ; wMaxNumCardsAllowed
@@ -203,8 +200,7 @@ OpenDeckConfirmationMenu:
 	ld [wTotalCardCount], a
 	ld hl, wCardFilterCounts
 	ld [hl], a
-	call HandleDeckConfirmationMenu
-	ret
+	jp HandleDeckConfirmationMenu
 
 ; handles the submenu when selecting a deck
 ; (Modify Deck, Select Deck, Change Name and Cancel)
@@ -396,8 +392,7 @@ InputCurDeckName:
 	ld [hl], d
 	dec hl
 	ld [hl], e
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; handle deck selection sub-menu
 ; the option is either "Select Deck" or "Cancel"

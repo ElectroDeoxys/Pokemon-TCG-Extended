@@ -8,8 +8,7 @@ Script_BeginGame:
 
 MasonLaboratoryAfterDuel:
 	ld hl, .after_duel_table
-	call FindEndOfDuelScript
-	ret
+	jp FindEndOfDuelScript
 
 .after_duel_table
 	db NPC_SAM
@@ -39,8 +38,7 @@ MasonLabPressedA:
 	or a
 	ret z
 	ld hl, ChallengeMachineObjectTable
-	call FindExtraInteractableObjects
-	ret
+	jp FindExtraInteractableObjects
 
 ChallengeMachineObjectTable:
 	db 10, 4, NORTH

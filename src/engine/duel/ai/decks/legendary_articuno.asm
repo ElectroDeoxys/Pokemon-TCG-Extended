@@ -7,8 +7,7 @@ AIActionTable_LegendaryArticuno:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_LegendaryArticuno
-	ret
+	jp AIDoTurn_LegendaryArticuno
 
 .start_duel
 	call InitAIDuelVars
@@ -16,20 +15,16 @@ AIActionTable_LegendaryArticuno:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
 	db CHANSEY
@@ -121,8 +116,7 @@ ScoreLegendaryArticunoCards:
 	cp 3
 	jr nc, .articuno
 	ld a, LAPRAS
-	call RaiseAIScoreToAllMatchingIDsInBench
-	ret
+	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .articuno
 	ld a, ARTICUNO_LV35
@@ -130,8 +124,7 @@ ScoreLegendaryArticunoCards:
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .dewgong
 	ld a, ARTICUNO_LV35
-	call RaiseAIScoreToAllMatchingIDsInBench
-	ret
+	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .dewgong
 	ld a, DEWGONG
@@ -139,8 +132,7 @@ ScoreLegendaryArticunoCards:
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .seel
 	ld a, DEWGONG
-	call RaiseAIScoreToAllMatchingIDsInBench
-	ret
+	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .seel
 	ld a, SEEL
@@ -148,8 +140,7 @@ ScoreLegendaryArticunoCards:
 	call LookForCardIDInPlayArea_Bank5
 	ret nc
 	ld a, SEEL
-	call RaiseAIScoreToAllMatchingIDsInBench
-	ret
+	jp RaiseAIScoreToAllMatchingIDsInBench
 
 AIDoTurn_LegendaryArticuno:
 ; initialize variables

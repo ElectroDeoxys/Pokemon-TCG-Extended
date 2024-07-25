@@ -531,8 +531,7 @@ AIDecideBenchPokemonToSwitchTo:
 	ld a, [wDamage]
 	call CalculateByteTensDigit
 	inc a
-	call AddToAIScore
-	ret
+	jp AddToAIScore
 
 ; if an energy card that is needed is found in hand
 ; calculate damage of the move and raise AI score

@@ -46,5 +46,4 @@ Func_1c003: ; unreferenced
 	ld a, $68
 	ldh [hWY], a
 .set_wd_on
-	call SetWindowOn
-	ret
+	jp SetWindowOn

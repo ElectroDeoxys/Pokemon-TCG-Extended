@@ -862,8 +862,7 @@ CardAlbum:
 	lb de, 0, 2
 	lb bc, 20, 16
 	call DrawRegularTextBox
-	call EnableLCD
-	ret
+	jp EnableLCD
 
 ; counts number of cards in wOwnedCardsCountList
 ; that is not set as CARD_NOT_OWNED
@@ -947,8 +946,7 @@ CardAlbum:
 .has_promotional
 	ldtx hl, ViewWhichCardFileText
 	call DrawWideTextBox_PrintText
-	call EnableLCD
-	ret
+	jp EnableLCD
 
 .BoosterPacksMenuData
 	textitem 7,  1, BoosterPackTitleText

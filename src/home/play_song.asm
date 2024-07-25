@@ -1,6 +1,5 @@
 ScriptPlaySong::
-	call PlaySong
-	ret
+	jp PlaySong
 
 Func_3c87::
 	push af
@@ -8,8 +7,7 @@ Func_3c87::
 	pop af
 	call PlaySong
 	call WaitForSongToFinish
-	call ResumeSong
-	ret
+	jp ResumeSong
 
 WaitForSongToFinish::
 	call DoFrameIfLCDEnabled

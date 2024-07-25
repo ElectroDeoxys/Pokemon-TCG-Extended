@@ -30,8 +30,7 @@ PlayCreditsSequence::
 	call DisableLCD
 	ld hl, wLCDC
 	set 1, [hl]
-	call ResetDoFrameFunction
-	ret
+	jp ResetDoFrameFunction
 
 Func_1d705:
 	call DisableLCD
@@ -186,5 +185,4 @@ Func_1d7ee:
 	lb de, 0, 32
 	lb bc, 20, 18
 	lb hl, 0, 0
-	call FillRectangle
-	ret
+	jp FillRectangle

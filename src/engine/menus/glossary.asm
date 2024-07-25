@@ -73,8 +73,7 @@ OpenGlossaryScreen:
 	call ProcessTextFromID
 	call .print_menu
 	ldtx hl, ChooseWordAndPressAButtonText
-	call DrawWideTextBox_PrintText
-	ret
+	jp DrawWideTextBox_PrintText
 
 ; print texts in glossary menu.
 .print_menu
@@ -118,8 +117,7 @@ OpenGlossaryScreen:
 .page_two
 	ldtx hl, GlossaryMenuPage2Text
 .page_one
-	call ProcessTextFromID
-	ret
+	jp ProcessTextFromID
 
 ; display glossary description.
 .print_description

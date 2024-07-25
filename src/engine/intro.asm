@@ -50,8 +50,7 @@ PlayIntroSequence:
 .asm_1d39f
 	call EnableAndClearSpriteAnimations
 	call .ShowPressStart
-	call EnableLCD
-	ret
+	jp EnableLCD
 
 .ShowPressStart
 	ld a, SPRITE_PRESS_START

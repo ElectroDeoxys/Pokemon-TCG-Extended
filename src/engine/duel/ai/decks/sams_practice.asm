@@ -12,37 +12,29 @@ AIActionTable_SamPractice:
 	call IsAIPracticeScriptedTurn
 	jr nc, .scripted_1
 ; not scripted, use AI main turn logic
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 .scripted_1 ; use scripted actions instead
-	call AIPerformScriptedTurn
-	ret
+	jp AIPerformScriptedTurn
 
 .start_duel
-	call SetSamsStartingPlayArea
-	ret
+	jp SetSamsStartingPlayArea
 
 .forced_switch
 	call IsAIPracticeScriptedTurn
 	jr nc, .scripted_2
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 .scripted_2
-	call PickRandomBenchPokemon
-	ret
+	jp PickRandomBenchPokemon
 
 .ko_switch:
 	call IsAIPracticeScriptedTurn
 	jr nc, .scripted_3
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 .scripted_3
-	call GetPlayAreaLocationOfRaticateOrRattata
-	ret
+	jp GetPlayAreaLocationOfRaticateOrRattata
 
 .take_prize:
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 ; returns carry if number of turns
 ; the AI has taken >= 7.
@@ -106,8 +98,7 @@ AIPerformScriptedTurn:
 	ld [wSelectedAttack], a
 	call CheckIfSelectedAttackIsUnusable
 	jr c, .unusable
-	call AITryUseAttack
-	ret
+	jp AITryUseAttack
 
 .unusable
 	ld a, OPPACTION_FINISH_NO_ATTACK
@@ -126,8 +117,7 @@ AIPerformScriptedTurn:
 .turn_1
 	ld d, MACHOP
 	ld e, FIGHTING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_2
 	ld a, RATTATA
@@ -137,8 +127,7 @@ AIPerformScriptedTurn:
 	bank1call AIMakeDecision
 	ld d, RATTATA
 	ld e, FIGHTING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_3
 	ld a, RATTATA
@@ -152,14 +141,12 @@ AIPerformScriptedTurn:
 	bank1call AIMakeDecision
 	ld d, RATICATE
 	ld e, LIGHTNING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_4
 	ld d, RATICATE
 	ld e, LIGHTNING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_5
 	ld a, MACHOP
@@ -179,17 +166,14 @@ AIPerformScriptedTurn:
 	inc a ; PLAY_AREA_BENCH_2
 
 .retreat
-	call AITryToRetreat
-	ret
+	jp AITryToRetreat
 
 .turn_6
 	ld d, MACHOP
 	ld e, FIGHTING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_7
 	ld d, MACHOP
 	ld e, FIGHTING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	jp AIAttachEnergyInHandToCardInPlayArea

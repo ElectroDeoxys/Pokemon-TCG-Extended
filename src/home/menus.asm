@@ -796,8 +796,7 @@ DrawNarrowTextBox::
 	lb de, 0, 12
 	lb bc, 12, 6
 	call AdjustCoordinatesForBGScroll
-	call DrawRegularTextBox
-	ret
+	jp DrawRegularTextBox
 
 ; draw a 12x6 text box aligned to the bottom left of the screen,
 ; print the text at hl without letter delay, and wait for A or B pressed
@@ -828,8 +827,7 @@ DrawWideTextBox::
 	lb de, 0, 12
 	lb bc, 20, 6
 	call AdjustCoordinatesForBGScroll
-	call DrawRegularTextBox
-	ret
+	jp DrawRegularTextBox
 
 ; draw a 20x6 text box aligned to the bottom of the screen,
 ; print the text at hl with letter delay, and wait for A or B pressed
@@ -849,8 +847,7 @@ WaitForWideTextBoxInput::
 	ldh a, [hKeysPressed]
 	and A_BUTTON | B_BUTTON
 	jr z, .wait_A_or_B_loop
-	call EraseCursor
-	ret
+	jp EraseCursor
 
 WideTextBoxMenuParameters::
 	db 18, 17 ; cursor x, cursor y
@@ -960,8 +957,7 @@ HandleYesOrNoMenu::
 PrintYesOrNoItems::
 	call AdjustCoordinatesForBGScroll
 	ldtx hl, YesOrNoText
-	call InitTextPrinting_ProcessTextFromID
-	ret
+	jp InitTextPrinting_ProcessTextFromID
 
 ContinueDuel::
 	ld a, BANK(_ContinueDuel)

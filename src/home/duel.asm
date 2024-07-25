@@ -53,8 +53,7 @@ SaveDuelStateToSRAM::
 	call DisableSRAM
 	bank1call SaveDuelDataToDE
 	xor a
-	call BankswitchSRAM
-	ret
+	jp BankswitchSRAM
 
 ; copies the deck pointed to by de to wPlayerDeck or wOpponentDeck (depending on whose turn it is)
 CopyDeckData::
@@ -133,8 +132,7 @@ ShuffleDeck::
 	add [hl]
 	ld l, a ; hl = DUELVARS_DECK_CARDS + [DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK]
 	ld a, b ; a = number of cards in the deck
-	call ShuffleCards
-	ret
+	jp ShuffleCards
 
 ; draw a card from the turn holder's deck, saving its location as CARD_LOCATION_JUST_DRAWN.
 ; returns carry if deck is empty, nc if a card was successfully drawn.
@@ -1116,8 +1114,7 @@ ShiftAllPokemonToFirstPlayAreaSlots::
 	call ShiftTurnPokemonToFirstPlayAreaSlots
 	call SwapTurn
 	call ShiftTurnPokemonToFirstPlayAreaSlots
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 ; shift play area Pokemon of the turn holder to the first available play area (arena + benchx) slots
 ShiftTurnPokemonToFirstPlayAreaSlots::
@@ -1371,8 +1368,7 @@ ProcessPlayedPokemonCard::
 	jr nc, .use_pokemon_power
 	call DisplayUsePokemonPowerScreen
 	ldtx hl, UnableToUsePkmnPowerDueToToxicGasText
-	call DrawWideTextBox_WaitForInput
-	ret
+	jp DrawWideTextBox_WaitForInput
 
 .use_pokemon_power
 	ld hl, wLoadedAttackEffectCommands
@@ -1402,8 +1398,7 @@ ProcessPlayedPokemonCard::
 	call DrawWideTextBox_WaitForInput
 	call Func_7415
 	ld a, EFFECTCMDTYPE_PKMN_POWER_TRIGGER
-	call TryExecuteEffectCommandFunction
-	ret
+	jp TryExecuteEffectCommandFunction
 
 ; copies, given a card identified by register a (card ID):
 ; - e into wSelectedAttack and d into hTempCardIndex_ff9f
@@ -1865,8 +1860,7 @@ ApplyDamageModifiers_DamageToTarget::
 	jr z, .no_underflow
 	ld de, 0
 .no_underflow
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 ; convert a color to its equivalent WR_* (weakness/resistance) value
 TranslateColorToWR::
@@ -2165,8 +2159,7 @@ PrintPokemonsAttackText::
 	ld a, [wLoadedAttackName + 1]
 	ld [hli], a
 	ldtx hl, PokemonsAttackText
-	call DrawWideTextBox_PrintText
-	ret
+	jp DrawWideTextBox_PrintText
 
 Func_1bb4::
 	call FinishQueuedAnimations
@@ -2175,8 +2168,7 @@ Func_1bb4::
 	xor a
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call PrintFailedEffectText
-	call WaitForWideTextBoxInput
-	ret
+	jp WaitForWideTextBoxInput
 
 ; prints one of the ThereWasNoEffectFrom*Text if wEffectFailed contains EFFECT_FAILED_NO_EFFECT,
 ; and prints WasUnsuccessfulText if wEffectFailed contains EFFECT_FAILED_UNSUCCESSFUL
@@ -2220,8 +2212,7 @@ GetPlayAreaCardRetreatCost::
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
-	call GetLoadedCard1RetreatCost
-	ret
+	jp GetLoadedCard1RetreatCost
 
 ; move the turn holder's card with ID at de to the discard pile
 ; if it's currently in the arena.
@@ -2337,8 +2328,7 @@ CopyPlayerName::
 	or a ; TX_END
 	jr nz, .loop
 	dec de
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; copy the opponent's name to de
 ; if text ID at wOpponentName is non-0, copy it from there

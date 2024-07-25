@@ -35,16 +35,13 @@ OverworldMap_Update:
 	ld a, [wOverworldMapPlayerAnimationState]
 	or a
 	jr nz, .player_walking
-	call OverworldMap_HandleKeyPress
-	ret
+	jp OverworldMap_HandleKeyPress
 .player_walking
 	cp 2
 	jr z, .player_finished_walking
-	call OverworldMap_UpdatePlayerWalkingAnimation
-	ret
+	jp OverworldMap_UpdatePlayerWalkingAnimation
 .player_finished_walking
-	call OverworldMap_LoadSelectedMap
-	ret
+	jp OverworldMap_LoadSelectedMap
 
 ; update the map selection if the DPad is pressed
 ; or finalize the selection if the A button is pressed
@@ -246,8 +243,7 @@ OverworldMap_UpdateCursorAnimation:
 	ld [wWhichSprite], a
 	ld a, [wOverworldMapCursorAnimation]
 	inc a
-	call StartNewSpriteAnimation
-	ret
+	jp StartNewSpriteAnimation
 
 ; begin walking the player across the overworld
 ; from wOverworldMapStartingPosition to wOverworldMapSelection
@@ -332,8 +328,7 @@ OverworldMap_UpdatePlayerWalkingAnimation:
 	ld [wOverworldMapPlayerMovementPtr], a
 	ld a, h
 	ld [wOverworldMapPlayerMovementPtr + 1], a
-	call OverworldMap_InitNextPlayerVelocity
-	ret
+	jp OverworldMap_InitNextPlayerVelocity
 
 .player_finished_walking
 	ld a, 2

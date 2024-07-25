@@ -335,8 +335,7 @@ GenerateBoosterEnergies:
 ; add the (energy) card at a to wBoosterTempNonEnergiesDrawn and wTempCardCollection
 AddBoosterEnergyToDrawnEnergies:
 	ld [wBoosterCurrentCard], a
-	call AddBoosterCardToDrawnEnergies
-	ret
+	jp AddBoosterCardToDrawnEnergies
 
 ; generates a random energy card
 GenerateRandomEnergy:

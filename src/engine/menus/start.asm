@@ -61,8 +61,7 @@ HandleTitleScreen:
 	jr c, HandleTitleScreen
 .continue_duel
 	call ResetDoFrameFunction
-	call EnableAndClearSpriteAnimations
-	ret
+	jp EnableAndClearSpriteAnimations
 
 ; updates wHasSaveData and wHasDuelSaveData
 ; depending on whether the save data is valid or not
@@ -258,15 +257,13 @@ PrintStartMenuDescriptionText:
 	lb de, 1, 12
 	call InitTextPrinting
 	ldtx hl, TheGameWillContinueFromThePointInTheDuelText
-	call PrintTextNoDelay
-	ret
+	jp PrintTextNoDelay
 
 .NewGame
 	lb de, 1, 12
 	call InitTextPrinting
 	ldtx hl, StartANewGameText
-	call PrintTextNoDelay
-	ret
+	jp PrintTextNoDelay
 
 .ContinueFromDiary
 	; get OW map name
@@ -365,5 +362,4 @@ DrawPlayerPortraitAndPrintNewGameText:
 	ldtx hl, IsCrazyAboutPokemonAndPokemonCardCollectingText
 	call PrintScrollableText_NoTextBoxLabel
 	call ResetDoFrameFunction
-	call EnableAndClearSpriteAnimations
-	ret
+	jp EnableAndClearSpriteAnimations

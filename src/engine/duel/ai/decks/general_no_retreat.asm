@@ -8,25 +8,20 @@ AIActionTable_GeneralNoRetreat:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_GeneralNoRetreat
-	ret
+	jp AIDoTurn_GeneralNoRetreat
 
 .start_duel
 	call InitAIDuelVars
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 AIDoTurn_GeneralNoRetreat:
 ; initialize variables

@@ -44,8 +44,7 @@ DetectConsole::
 	ret nz
 	ld a, $01
 	ldh [rSVBK], a
-	call SwitchToCGBDoubleSpeed
-	ret
+	jp SwitchToCGBDoubleSpeed
 
 ; initialize the palettes (both monochrome and color)
 SetupPalettes::
@@ -75,8 +74,7 @@ SetupPalettes::
 	jr nz, .copy_bytes_loop
 	dec c
 	jr nz, .copy_pals_loop
-	call FlushAllCGBPalettes
-	ret
+	jp FlushAllCGBPalettes
 
 InitialPalette::
 	rgb 28, 28, 24
@@ -129,8 +127,7 @@ FillTileMap::
 	ld a, c
 	or b
 	jr nz, .vram1_loop
-	call BankswitchVRAM0
-	ret
+	jp BankswitchVRAM0
 
 ; zero work RAM, stack area, and high RAM ($C000-$DFFF, $FF80-$FFEF)
 ZeroRAM::

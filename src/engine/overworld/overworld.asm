@@ -76,8 +76,7 @@ LoadMap::
 	call Func_c280
 	farcall Duel_Init
 .no_duel
-	call Func_c280
-	ret
+	jp Func_c280
 
 HandleOverworldMode:
 	ld a, [wOverworldMode]
@@ -104,8 +103,7 @@ UpdateOverworldMap:
 	ret
 
 CallHandlePlayerMoveMode:
-	call HandlePlayerMoveMode
-	ret
+	jp HandlePlayerMoveMode
 
 SetScriptData:
 	ld a, [wScriptNPC]
@@ -190,8 +188,7 @@ Func_c17a:
 	ld a, [wOverworldMode]
 	cp OWMODE_SCRIPT
 	ret z
-	call Func_c9b8
-	ret
+	jp Func_c9b8
 
 Func_c184:
 	push bc
@@ -209,12 +206,10 @@ Func_c184:
 
 SetOverworldDoFrameFunction:
 	ld hl, OverworldDoFrameFunction
-	call SetDoFrameFunction
-	ret
+	jp SetDoFrameFunction
 
 Func_c1a0:
-	call ResetDoFrameFunction
-	ret
+	jp ResetDoFrameFunction
 
 WhiteOutDMGPals:
 	xor a
@@ -222,8 +217,7 @@ WhiteOutDMGPals:
 	xor a
 	call SetOBP0
 	xor a
-	call SetOBP1
-	ret
+	jp SetOBP1
 
 Func_c1b1:
 	ld a, OWMAP_POKEMON_DOME
@@ -252,8 +246,7 @@ Func_c1b1:
 Func_c1ed:
 	call ClearEvents
 	farcall LoadBackupSaveData
-	call DetermineImakuniAndChallengeHall
-	ret
+	jp DetermineImakuniAndChallengeHall
 
 Func_c1f8:
 	xor a
@@ -440,8 +433,7 @@ BackupObjectPalettes:
 	ld hl, wObjectPalettesCGB
 	ld de, wObjectPalettesCGBBackup
 	ld bc, 8 palettes
-	call CopyDataHLtoDE_SaveRegisters
-	ret
+	jp CopyDataHLtoDE_SaveRegisters
 
 RestoreObjectPalettes:
 	ld a, [wOBP0Backup]
@@ -452,8 +444,7 @@ RestoreObjectPalettes:
 	ld de, wObjectPalettesCGB
 	ld bc, 8 palettes
 	call CopyDataHLtoDE_SaveRegisters
-	call FlushAllPalettes
-	ret
+	jp FlushAllPalettes
 
 Func_c36a:
 	xor a
@@ -592,8 +583,7 @@ Func_c3ff:
 	call Func_c41c
 	call Func_c469
 	call SetScreenScrollWram
-	call SetScreenScroll
-	ret
+	jp SetScreenScroll
 
 Func_c41c:
 	ld a, [wPlayerXCoordPixels]
@@ -602,8 +592,7 @@ Func_c41c:
 	ld a, [wPlayerYCoordPixels]
 	sub $40
 	ld [wSCYBuffer], a
-	call Func_c430
-	ret
+	jp Func_c430
 
 Func_c430:
 ; update wSCXBuffer
@@ -844,8 +833,7 @@ UpdatePlayerDirectionFromDPad:
 	call GetDirectionFromDPad
 UpdatePlayerDirection:
 	ld [wPlayerDirection], a
-	call UpdatePlayerSprite
-	ret
+	jp UpdatePlayerSprite
 
 GetDirectionFromDPad:
 	push hl
@@ -1135,8 +1123,7 @@ PauseMenu:
 	call ReturnToOverworldWithCallback
 	jr .loop
 .exit
-	call ResumeSong
-	ret
+	jp ResumeSong
 
 DisplayPauseMenu:
 	ld a, [wSelectedPauseMenuItem]
@@ -1167,8 +1154,7 @@ PauseMenu_Deck:
 	call Set_OBJ_8x16
 	farcall SetDefaultPalettes
 	farcall DeckSelectionMenu
-	call Set_OBJ_8x8
-	ret
+	jp Set_OBJ_8x8
 
 PauseMenu_Card:
 	xor a
@@ -1177,8 +1163,7 @@ PauseMenu_Card:
 	call Set_OBJ_8x16
 	farcall SetDefaultPalettes
 	farcall HandlePlayersCardsScreen
-	call Set_OBJ_8x8
-	ret
+	jp Set_OBJ_8x8
 
 PauseMenu_Config:
 	farcall _PauseMenu_Config
@@ -1226,8 +1211,7 @@ PCMenu:
 	call CloseAdvancedDialogueBox
 	xor a
 	ld [wSongOverride], a
-	call PlayDefaultSong
-	ret
+	jp PlayDefaultSong
 
 PointerTable_c846:
 	dw PCMenu_CardAlbum
@@ -1247,8 +1231,7 @@ PCMenu_CardAlbum:
 	call Set_OBJ_8x16
 	farcall SetDefaultPalettes
 	farcall CardAlbum
-	call Set_OBJ_8x8
-	ret
+	jp Set_OBJ_8x8
 
 PCMenu_ReadMail:
 	farcall _PCMenu_ReadMail
@@ -1279,8 +1262,7 @@ Func_c891:
 	call Func_c241
 	call Func_c915
 	call DoFrameIfLCDEnabled
-	call PrintScrollableText_NoTextBoxLabel
-	ret
+	jp PrintScrollableText_NoTextBoxLabel
 
 Func_c8ba:
 	ld a, e
@@ -1312,8 +1294,7 @@ Func_c8ba:
 	call Func_c241
 	call Func_c915
 	call DoFrameIfLCDEnabled
-	call PrintScrollableText_WithTextBoxLabel
-	ret
+	jp PrintScrollableText_WithTextBoxLabel
 
 Func_c8ed:
 	push hl

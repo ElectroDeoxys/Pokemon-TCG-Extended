@@ -168,8 +168,7 @@ OpenInPlayAreaScreen::
 	ld a, 18
 	call CopyCardNameAndLevel
 	ld hl, wDefaultText
-	call ProcessText
-	ret
+	jp ProcessText
 
 .print_hand_or_discard_pile
 ; if we make it here, cursor position is to Hand or Discard Pile
@@ -178,14 +177,12 @@ OpenInPlayAreaScreen::
 	ld a, [wInPlayAreaCurPosition]
 	cp INPLAYAREA_OPP_ACTIVE
 	jr nc, .opp_side_print_hand_or_discard_pile
-	call PrintTextNoDelay
-	ret
+	jp PrintTextNoDelay
 
 .opp_side_print_hand_or_discard_pile
 	call SwapTurn
 	call PrintTextNoDelay
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 .show_turn_holder_play_area
 	lb de, $38, $9f
@@ -271,8 +268,7 @@ OpenInPlayAreaScreen_NonTurnHolderPlayArea:
 	xor a
 	ld [wCurPlayAreaY], a
 	bank1call OpenCardPage_FromCheckPlayArea
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 OpenInPlayAreaScreen_TurnHolderHand:
 	ldh a, [hWhoseTurn]

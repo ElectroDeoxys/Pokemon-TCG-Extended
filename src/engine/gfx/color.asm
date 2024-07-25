@@ -12,8 +12,7 @@ FadeScreenToWhite:
 	call FillMemoryWithDE
 	call RestoreFirstColorInOBPals
 	call FadeScreenToTempPals
-	call DisableLCD
-	ret
+	jp DisableLCD
 
 .lcd_off
 	xor a
@@ -24,8 +23,7 @@ FadeScreenToWhite:
 	ld hl, wBackgroundPalettesCGB
 	ld bc, NUM_BACKGROUND_PALETTES palettes
 	call FillMemoryWithDE
-	call FlushAllPalettes
-	ret
+	jp FlushAllPalettes
 
 FadeScreenFromWhite:
 	call .BackupPalsAndSetWhite
@@ -56,8 +54,7 @@ SetWhitePalettes:
 	ld de, PALRGB_WHITE
 	ld hl, wBackgroundPalettesCGB
 	ld bc, NUM_BACKGROUND_PALETTES palettes
-	call FillMemoryWithDE
-	ret
+	jp FillMemoryWithDE
 
 ; gets from backup OB pals the first color
 ; of each pal and writes them in wObjectPalettesCGB
@@ -383,8 +380,7 @@ FlashScreenToWhite:
 	call EnableLCD
 	pop af
 	call BankswitchSRAM
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; copies current BG and OP pals,
 ; wBackgroundPalettesCGB and wObjectPalettesCGB
@@ -414,8 +410,7 @@ CopyPalsToSRAMBuffer:
 	pop af
 
 	call BankswitchSRAM
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; loads BG and OP pals,
 ; wBackgroundPalettesCGB and wObjectPalettesCGB
@@ -443,8 +438,7 @@ LoadPalsFromSRAMBuffer:
 	pop af
 
 	call BankswitchSRAM
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; backs up all palettes
 ; and writes 4 BG pals with white pal

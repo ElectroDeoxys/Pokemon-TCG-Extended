@@ -424,12 +424,10 @@ AIDecideSpecialEvolutions:
 	cp 6
 	jr c, .not_enough_energy
 	ld a, 3
-	call AddToAIScore
-	ret
+	jp AddToAIScore
 .not_enough_energy
 	ld a, 10
-	call SubFromAIScore
-	ret
+	jp SubFromAIScore
 
 ; check if Magikarp is not the active card
 ; and has at least 2 energy cards attached
@@ -442,8 +440,7 @@ AIDecideSpecialEvolutions:
 	cp 2
 	ret c
 	ld a, 3
-	call AddToAIScore
-	ret
+	jp AddToAIScore
 
 .invincible_ronald
 	ld a, [wLoadedCard2ID]
@@ -457,8 +454,7 @@ AIDecideSpecialEvolutions:
 	or a ; active card
 	ret z
 	ld a, 10
-	call AddToAIScore
-	ret
+	jp AddToAIScore
 
 .legendary_ronald
 	ld a, [wLoadedCard2ID]
@@ -495,8 +491,7 @@ AIDecideSpecialEvolutions:
 	jr c, .check_muk
 .lower_score
 	ld a, 10
-	call SubFromAIScore
-	ret
+	jp SubFromAIScore
 
 ; if there's no Muk, raise score
 .check_muk
@@ -504,8 +499,7 @@ AIDecideSpecialEvolutions:
 	call CountPokemonIDInBothPlayAreas
 	jr c, .lower_score
 	ld a, 10
-	call AddToAIScore
-	ret
+	jp AddToAIScore
 
 ; if Dragonair is active, check its damage in HP
 ; if this result is >= 50,
@@ -604,12 +598,10 @@ AIDecidePlayLegendaryBirds:
 
 ; add
 	ld a, 70
-	call AddToAIScore
-	ret
+	jp AddToAIScore
 .subtract
 	ld a, 100
-	call SubFromAIScore
-	ret
+	jp SubFromAIScore
 
 .moltres
 	; checks if there's enough cards in deck

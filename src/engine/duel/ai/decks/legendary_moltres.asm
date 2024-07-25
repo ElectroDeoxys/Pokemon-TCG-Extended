@@ -7,8 +7,7 @@ AIActionTable_LegendaryMoltres:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_LegendaryMoltres
-	ret
+	jp AIDoTurn_LegendaryMoltres
 
 .start_duel
 	call InitAIDuelVars
@@ -16,20 +15,16 @@ AIActionTable_LegendaryMoltres:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc ; Play Area set up was successful
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
 	db MAGMAR_LV31

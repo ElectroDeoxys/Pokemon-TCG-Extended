@@ -58,8 +58,7 @@ PlayDuelAnimation::
 	pop bc
 	pop hl
 	pop af
-	call BankswitchROM
-	ret
+	jp BankswitchROM
 
 UpdateQueuedAnimations::
 	ldh a, [hBankROM]
@@ -69,8 +68,7 @@ UpdateQueuedAnimations::
 	call _UpdateQueuedAnimations
 	call HandleAllSpriteAnimations
 	pop af
-	call BankswitchROM
-	ret
+	jp BankswitchROM
 
 Func_3bb5::
 	xor a

@@ -1,7 +1,6 @@
 FireClubLobbyAfterDuel:
 	ld hl, .after_duel_table
-	call FindEndOfDuelScript
-	ret
+	jp FindEndOfDuelScript
 
 .after_duel_table
 	db NPC_JESSICA
@@ -12,8 +11,7 @@ FireClubLobbyAfterDuel:
 
 FireClubPressedA:
 	ld hl, SlowpokePaintingObjectTable
-	call FindExtraInteractableObjects
-	ret
+	jp FindExtraInteractableObjects
 
 SlowpokePaintingObjectTable:
 	db 16, 2, NORTH

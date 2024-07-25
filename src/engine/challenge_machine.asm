@@ -9,8 +9,7 @@ ChallengeMachine_Reset:
 	ld [sPresentConsecutiveWinsBackup], a
 	ld [sPresentConsecutiveWinsBackup + 1], a
 	ld [sPlayerInChallengeMachine], a
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; if a challenge is already in progress, then resume
 ; otherwise, start a new 5 round challenge
@@ -144,8 +143,7 @@ ChallengeMachine_Start::
 	call ChallengeMachine_ShowNewRecord
 	call DisableSRAM
 	ldtx hl, WeAwaitYourNextChallengeText
-	call PrintScrollableText_NoTextBoxLabel
-	ret
+	jp PrintScrollableText_NoTextBoxLabel
 
 ; update wChallengeMachineOpponent with the current
 ; opponent in the sChallengeMachineOpponents list
@@ -158,8 +156,7 @@ ChallengeMachine_GetCurrentOpponent:
 	add hl, de
 	ld a, [hl]
 	ld [wChallengeMachineOpponent], a
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; play the appropriate match start theme
 ; then duel the current opponent
@@ -225,14 +222,12 @@ ChallengeMachine_RecordDuelResult:
 	ld [hl], a
 	call DisableSRAM
 	ld hl, sPresentConsecutiveWins
-	call ChallengeMachine_IncrementHLMax999
-	ret
+	jp ChallengeMachine_IncrementHLMax999
 
 .lost
 	ld a, 2 ; lost
 	ld [hl], a
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; increment the value at hl
 ; without going above 999
@@ -253,8 +248,7 @@ ChallengeMachine_IncrementHLMax999:
 	adc 0
 	ld [hl], a
 .skip
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; update sMaximumConsecutiveWins if the player set a new record
 ChallengeMachine_CheckForNewRecord:
@@ -284,8 +278,7 @@ ChallengeMachine_CheckForNewRecord:
 	ld a, TRUE
 	ld [sConsecutiveWinRecordIncreased], a
 .no_record
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; print the next opponent's name and ask the
 ; player if they want to begin the next duel
@@ -322,8 +315,7 @@ ChallengeMachine_AreYouReady:
 	pop hl ; text id
 	call PrintScrollableText_NoTextBoxLabel
 	ldtx hl, WouldYouLikeToBeginTheDuelText
-	call YesOrNoMenuWithText_SetCursorToYes
-	ret
+	jp YesOrNoMenuWithText_SetCursorToYes
 
 ; print opponent win count
 ; play a jingle for beating 5 opponents
@@ -339,8 +331,7 @@ ChallengeMachine_DuelWon:
 	call DisableSRAM
 	cp NUM_CHALLENGE_MACHINE_OPPONENTS - 1
 	jr z, .beat_five_opponents
-	call PrintScrollableText_NoTextBoxLabel
-	ret
+	jp PrintScrollableText_NoTextBoxLabel
 
 .beat_five_opponents
 	call PauseSong
@@ -349,8 +340,7 @@ ChallengeMachine_DuelWon:
 	ldtx hl, Defeated5OpponentsText
 	call PrintScrollableText_NoTextBoxLabel
 	call WaitForSongToFinish
-	call ResumeSong
-	ret
+	jp ResumeSong
 
 ; when a player's streak ends, print the final
 ; consecutive win count
@@ -369,8 +359,7 @@ ChallengeMachine_PrintFinalConsecutiveWinStreak:
 	ldtx hl, ConsecutiveWinsEndedAtText
 	call PrintScrollableText_NoTextBoxLabel
 .no_streak
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; if the player achieved a new record, play a jingle
 ; otherwise, do nothing
@@ -390,8 +379,7 @@ ChallengeMachine_ShowNewRecord:
 	ldtx hl, ConsecutiveWinRecordIncreasedText
 	call PrintScrollableText_NoTextBoxLabel
 	call WaitForSongToFinish
-	call ResumeSong
-	ret
+	jp ResumeSong
 
 ChallengeMachine_DrawScoreScreen:
 	call InitMenuScreen
@@ -415,8 +403,7 @@ ChallengeMachine_DrawScoreScreen:
 	ld hl, ChallengeMachine_PlayerScoreLabels
 	call PrintLabels
 	ld hl, ChallengeMachine_PlayerScoreValues
-	call ChallengeMachine_PrintScores
-	ret
+	jp ChallengeMachine_PrintScores
 
 ChallengeMachine_PlayerScoreLabels:
 	db 1, 0
@@ -466,8 +453,7 @@ ChallengeMachine_DrawOpponentList:
 	ld hl, ChallengeMachine_OpponentNumberLabels
 	call PrintLabels
 	call ChallengeMachine_PrintOpponentInfo
-	call ChallengeMachine_PrintDuelResultIcons
-	ret
+	jp ChallengeMachine_PrintDuelResultIcons
 
 ChallengeMachine_OpponentNumberLabels:
 	db 1, 0
@@ -515,8 +501,7 @@ ChallengeMachine_PrintOpponentInfo:
 
 	dec e
 	jr nz, .loop
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ChallengeMachine_PrintOpponentName:
 	push bc
@@ -608,8 +593,7 @@ ChallengeMachine_PrintDuelResultIcons:
 
 	dec c
 	jr nz, .print_loop
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ChallengeMachine_DuelResultIcons:
 	tx ChallengeMachineNotDuelledIconText
@@ -647,8 +631,7 @@ ChallengeMachine_PrintScores:
 	jr .loop
 
 .done
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ; if this is the first time the challenge machine has ever
 ; been used on this cartridge, then clear all vars and
@@ -687,8 +670,7 @@ ChallengeMachine_Initialize:
 
 .done
 	ld a, [sPlayerInChallengeMachine]
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ChallengeMachine_DrMasonText:
 	text "Dr. Mason", TX_END, TX_END, TX_END, TX_END, TX_END, TX_END
@@ -751,8 +733,7 @@ ChallengeMachine_PickOpponentSequence:
 	ld [sPresentConsecutiveWins], a
 	ld a, [sPresentConsecutiveWinsBackup + 1]
 	ld [sPresentConsecutiveWins + 1], a
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 ChallengeMachine_FinalOpponentProbabilities:
 	db  56, GRAND_MASTERS_START + 0 ; 56/256, courtney

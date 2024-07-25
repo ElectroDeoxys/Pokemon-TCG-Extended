@@ -207,8 +207,7 @@ Func_2057::
 	ld c, a
 	ld b, [hl]
 	ld a, e
-	call HblankWriteByteToBGMap0
-	ret
+	jp HblankWriteByteToBGMap0
 
 ; loads the four tiles of the card set 2 icon constant provided in register a
 ; returns carry if the specified set does not have an icon

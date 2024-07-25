@@ -46,8 +46,7 @@ ProcessTextFromID::
 	call GetTextOffsetFromTextID
 	call ProcessText
 	pop af
-	call BankswitchROM
-	ret
+	jp BankswitchROM
 
 ; return, in a, the number of lines of the text given in hl as an ID
 ; this is calculated by counting the amount of '\n' characters and adding 1 to the result
@@ -113,8 +112,7 @@ WaitForPlayerToAdvanceText::
 	lb bc, SYM_CURSOR_D, SYM_BOX_BOTTOM ; cursor tile, tile behind cursor
 	lb de, 18, 17 ; x, y
 	call SetCursorParametersForTextBox
-	call WaitForButtonAorB
-	ret
+	jp WaitForButtonAorB
 
 ; draws a text box, and prints the text with id at hl, with letter delay. unlike PrintText,
 ; PrintScrollableText also supports scrollable text, and prompts the user to press A or B
@@ -160,8 +158,7 @@ PrintScrollableText::
 	jr .print_char_loop
 .asm_2cc3
 	pop af
-	call BankswitchROM
-	ret
+	jp BankswitchROM
 
 ; zero wWhichTextHeader, wWhichTxRam2 and wWhichTxRam3, and set hJapaneseSyllabary to TX_KATAKANA
 ; fill wTextHeader1 with TX_KATAKANA, wFontWidth, hBankROM, and register bc for the text's pointer.
@@ -444,8 +441,7 @@ PrintText::
 	call GetTextOffsetFromTextID
 	call .print_text
 	pop af
-	call BankswitchROM
-	ret
+	jp BankswitchROM
 .from_ram
 	ld hl, wDefaultText
 .print_text
@@ -483,8 +479,7 @@ PrintTextNoDelay::
 	call ProcessTextHeader
 	jr nc, .next_tile_loop
 	pop af
-	call BankswitchROM
-	ret
+	jp BankswitchROM
 
 ; copies a text given its id at hl, to de
 ; if hl is 0, the name of the turn duelist is copied instead
@@ -523,8 +518,7 @@ CopyTextData_FromTextID::
 	ldh a, [hff96]
 	call CopyTextData
 	pop af
-	call BankswitchROM
-	ret
+	jp BankswitchROM
 
 ; text id (usually of a card name) for TX_RAM2
 LoadTxRam2::

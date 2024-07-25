@@ -521,8 +521,7 @@ _SaveGame::
 	ld [wOverworldMapSelection], a
 
 .save
-	call SaveAndBackupData
-	ret
+	jp SaveAndBackupData
 
 _AddCardToCollectionAndUpdateAlbumProgress::
 	ld [wCardToAddToCollection], a
@@ -582,8 +581,7 @@ WriteDataToBackup:
 	jr nz, .loop
 	pop af
 	call BankswitchSRAM
-	call DisableSRAM
-	ret
+	jp DisableSRAM
 
 LoadBackupCardAndDeckSaveData:
 	ld bc, sCardAndDeckSaveDataEnd - sCardAndDeckSaveData
@@ -616,5 +614,4 @@ LoadDataFromBackup:
 	jr nz, .loop
 	pop af
 	call BankswitchSRAM
-	call DisableSRAM
-	ret
+	jp DisableSRAM

@@ -7,8 +7,7 @@ AIActionTable_RockCrusher:
 	dw .take_prize
 
 .do_turn
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 
 .start_duel
 	call InitAIDuelVars
@@ -16,20 +15,16 @@ AIActionTable_RockCrusher:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
 	db RHYHORN

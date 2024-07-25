@@ -481,8 +481,7 @@ _DrawYourOrOppPlayAreaScreen::
 	call DrawYourOrOppPlayArea_Icons
 
 .done
-	call EnableLCD
-	ret
+	jp EnableLCD
 
 Func_82b6:
 	ld a, [wCheckMenuPlayAreaWhichDuelist]
@@ -492,13 +491,11 @@ Func_82b6:
 	jr nz, .not_equal
 
 	ld hl, PrizeCardsCoordinateData_YourOrOppPlayArea.player
-	call DrawPlayArea_PrizeCards
-	ret
+	jp DrawPlayArea_PrizeCards
 
 .not_equal
 	ld hl, PrizeCardsCoordinateData_YourOrOppPlayArea.opponent
-	call DrawPlayArea_PrizeCards
-	ret
+	jp DrawPlayArea_PrizeCards
 
 ; loads tiles and icons to display the In Play Area screen,
 ; and draws the screen
@@ -558,8 +555,7 @@ DrawInPlayAreaScreen:
 	call DrawInPlayArea_Icons
 
 	call SwapTurn
-	call DrawInPlayArea_ActiveCardGfx
-	ret
+	jp DrawInPlayArea_ActiveCardGfx
 
 ; draws players prize cards and bench cards
 _DrawPlayersPrizeAndBenchCards::
@@ -590,8 +586,7 @@ _DrawPlayersPrizeAndBenchCards::
 	call DrawPlayArea_PrizeCards
 	lb de, 1, 0 ; coordinates
 	ld c, 3 ; spacing
-	call DrawPlayArea_BenchCards
-	ret
+	jp DrawPlayArea_BenchCards
 
 ; draws the active card gfx at coordinates de
 ; of the player (or opponent) depending on wCheckMenuPlayAreaWhichDuelist
@@ -730,8 +725,7 @@ DrawInPlayArea_ActiveCardGfx:
 	lb bc, 8, 6
 	call FillRectangle
 	bank1call ApplyBGP7ToCardImage
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 ; draws prize cards depending on the turn
 ; loaded in wCheckMenuPlayAreaWhichDuelist
@@ -1019,8 +1013,7 @@ DrawYourOrOppPlayArea_Icons:
 	ld a, [de]
 	ld b, a
 	ld a, $d8 ; discard pile icon
-	call DrawPlayArea_IconWithValue
-	ret
+	jp DrawPlayArea_IconWithValue
 
 ; draws the interface icon corresponding to the gfx tile in a
 ; also prints the number in decimal corresponding to the value in b
@@ -1139,8 +1132,7 @@ DrawInPlayArea_Icons:
 	ld a, [de]
 	ld b, a
 	ld a, $d8 ; discard pile tile
-	call DrawPlayArea_IconWithValue
-	ret
+	jp DrawPlayArea_IconWithValue
 
 ; prints text HandText_2 and a cross with decimal value of b
 ; input
@@ -1661,15 +1653,13 @@ _DrawAIPeekScreen::
 	ld a, [wIsSwapTurnPending]
 	or a
 	ret z
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 LoadCursorTile:
 	ld de, v0Tiles0
 	ld hl, .tile_data
 	ld b, 16
-	call SafeCopyDataHLtoDE
-	ret
+	jp SafeCopyDataHLtoDE
 
 .tile_data:
 	db $e0, $c0, $98, $b0, $84, $8c, $83, $82
@@ -2033,8 +2023,7 @@ _DrawPlayAreaToPlacePrizeCards::
 	lb hl, 1, 4
 	lb bc, 4, 3
 	call FillRectangle
-	call SwapTurn
-	ret
+	jp SwapTurn
 
 .player_icon_coordinates
 	db 15, 11

@@ -7,8 +7,7 @@ AIActionTable_LegendaryZapdos:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_LegendaryZapdos
-	ret
+	jp AIDoTurn_LegendaryZapdos
 
 .start_duel
 	call InitAIDuelVars
@@ -16,20 +15,16 @@ AIActionTable_LegendaryZapdos:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
 	db ELECTABUZZ_LV35

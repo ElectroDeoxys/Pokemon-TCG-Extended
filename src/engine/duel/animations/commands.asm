@@ -269,8 +269,7 @@ Func_1910f:
 	pop af
 	ld [wDuelDisplayedScreen], a
 .skip_change_screen
-	call DrawWideTextBox
-	ret
+	jp DrawWideTextBox
 
 ; prints text related to the damage received
 ; by card stored in wTempNonTurnDuelistCardID

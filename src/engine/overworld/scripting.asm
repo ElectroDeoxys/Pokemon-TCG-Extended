@@ -119,8 +119,7 @@ DetermineImakuniAndChallengeHall:
 	xor a
 	ld [wEventVars + EVENT_VAR_BYTES - 1], a
 	call DetermineImakuniRoom
-	call DetermineChallengeHallEvent
-	ret
+	jp DetermineChallengeHallEvent
 
 ; Determines what room Imakuni is in when you reset
 ; Skips current room and does not occur if you haven't talked to Imakuni
@@ -507,8 +506,7 @@ PrintInteractableObjectText:
 	ld h, [hl]
 	ld l, a
 	call Func_cc32
-	call CloseAdvancedDialogueBox
-	ret
+	jp CloseAdvancedDialogueBox
 
 Func_cc32:
 	push hl
@@ -517,8 +515,7 @@ Func_cc32:
 	inc hl
 	ld d, [hl]
 	pop hl
-	call Func_c8ba
-	ret
+	jp Func_c8ba
 
 ; Used for things that are represented as NPCs but don't have a Script
 ; EX: Clerks and legendary cards that interact through Level Objects
@@ -532,8 +529,7 @@ Script_LegendaryCardLeftSpark:
 Script_LegendaryCardBottomLeft:
 Script_LegendaryCardBottomRight:
 Script_LegendaryCardRightSpark:
-	call CloseAdvancedDialogueBox
-	ret
+	jp CloseAdvancedDialogueBox
 
 ; Enters into the script loop, continuing until wBreakScriptLoop > 0
 ; When the loop is broken, it resumes normal code execution where script ended
@@ -1935,8 +1931,7 @@ ScriptCommand_JumpIfEventLessThan:
 GetEventValueBC:
 	ld a, c
 	ld c, b
-	call GetEventValue
-	ret
+	jp GetEventValue
 
 ScriptCommand_MaxOutEventValue:
 	ld a, c
