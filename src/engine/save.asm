@@ -56,7 +56,7 @@ SaveGeneralSaveDataFromDE:
 	push de
 	farcall TryGiveMedalPCPacks
 	ld [wMedalCount], a
-	farcall OverworldMap_GetOWMapID
+	call OverworldMap_GetOWMapID
 	ld [wCurOverworldMap], a
 	pop de
 	push de
