@@ -1013,7 +1013,7 @@ DrawYourOrOppPlayArea_Icons:
 	ld a, [de]
 	ld b, a
 	ld a, $d8 ; discard pile icon
-	jp DrawPlayArea_IconWithValue
+;	fallthrough
 
 ; draws the interface icon corresponding to the gfx tile in a
 ; also prints the number in decimal corresponding to the value in b
@@ -1292,9 +1292,7 @@ HandleCheckMenuInput_YourOrOppPlayArea:
 .sfx
 	ld a, [wMenuInputSFX]
 	or a
-	jr z, .draw_cursor
-	call PlaySFX
-
+	call nz, PlaySFX
 .draw_cursor
 	ld hl, wCheckMenuCursorBlinkCounter
 	ld a, [hl]
@@ -1825,8 +1823,7 @@ YourOrOppPlayAreaScreen_HandleInput:
 .return
 	ld a, [wMenuInputSFX]
 	or a
-	jr z, .skip_sfx
-	call PlaySFX
+	call nz, PlaySFX
 .skip_sfx
 	ld hl, wCheckMenuCursorBlinkCounter
 	ld a, [hl]

@@ -274,8 +274,7 @@ TryOpenPCMailBoosterPack:
 	pop hl
 	ld a, [hl]
 	or a
-	jr z, .done
-	call GiveBoosterPack
+	call nz, GiveBoosterPack
 .done
 	jp DisableLCD
 

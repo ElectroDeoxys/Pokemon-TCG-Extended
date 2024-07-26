@@ -1825,7 +1825,7 @@ Music2_LoadBackup:
 	ld hl, wMusicCh1StackBackup
 	ld de, wMusicCh1Stack
 	ld a, $c * 4
-	jp Music2_CopyData
+;	fallthrough
 
 ; copies a bytes from hl to de
 Music2_CopyData:

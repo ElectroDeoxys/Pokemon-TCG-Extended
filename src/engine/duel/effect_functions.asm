@@ -36,7 +36,8 @@ Sleep50PercentEffect:
 
 SleepEffect:
 	lb bc, PSN_DBLPSN, ASLEEP
-	jr QueueStatusCondition
+;	fallthrough
+
 
 QueueStatusCondition:
 	ldh a, [hWhoseTurn]
@@ -938,8 +939,7 @@ ResetDevolvedCardStatus:
 ; if it's Arena card, clear status conditions
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
-	jr nz, .skip_clear_status
-	call ClearAllStatusConditions
+	call z, ClearAllStatusConditions
 .skip_clear_status
 ; reset changed color status
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -9584,8 +9584,7 @@ ScoopUp_ReturnToHandEffect:
 ; if the Pokemon was in the Arena, clear status
 	ldh a, [hTemp_ffa0]
 	or a
-	jr nz, .skip_clear_status
-	call ClearAllStatusConditions
+	call z, ClearAllStatusConditions
 .skip_clear_status
 
 ; if card was not played by Player, show detail screen

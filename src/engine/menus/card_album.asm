@@ -369,8 +369,7 @@ PrintCardSetListEntries:
 	ld [wUnableToScrollDown], a
 	ld a, SYM_BOX_BTM_R
 .got_down_cursor_tile
-	ld b, 19
-	ld c, 17
+	lb bc, 19, 17
 	call WriteByteToBGMap0
 	pop bc
 	ret
@@ -742,7 +741,7 @@ CardAlbum:
 	call DrawListCursor_Invisible
 	ld a, [wCardListCursorPos]
 	ld [wTempCardListCursorPos], a
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	cp $ff
 	jr nz, .open_card_page
 	ldh a, [hCurMenuItem]
@@ -886,10 +885,10 @@ CardAlbum:
 	xor a
 	ld [wTileMapFill], a
 	call EmptyScreen
-	ld a, [hffb4]
+	ldh a, [hffb4]
 	dec a
 	jr nz, .draw_box
-	ld [hffb4], a
+	ldh [hffb4], a
 	call Set_OBJ_8x8
 	call ZeroObjectPositions
 	ld a, $01
@@ -931,8 +930,7 @@ CardAlbum:
 	; still has no promotional, print empty Card Set name
 	ld a, TRUE
 	ld [wUnavailableAlbumCardSets + CARD_SET_PROMOTIONAL], a
-	ld e, 11
-	ld d, 5
+	lb de, 5, 11
 	call InitTextPrinting
 	ldtx hl, EmptyPromotionalCardText
 	call ProcessTextFromID

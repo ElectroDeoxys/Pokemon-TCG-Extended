@@ -68,9 +68,7 @@ PlayLoadedDuelAnimation::
 	ld a, [hl]
 	pop hl
 	or a
-	jr z, .calc_addr
-	call PlaySFX
-
+	call nz, PlaySFX
 .calc_addr
 ; this data field is always $00,
 ; so this calculation is unnecessary
@@ -416,8 +414,7 @@ _UpdateQueuedAnimations::
 .asm_1cafb
 	; if a is $ff, then play buffered animations
 	cp $ff
-	jr nz, .skip_play_anims
-	call PlayBufferedDuelAnimations
+	call z, PlayBufferedDuelAnimations
 .skip_play_anims
 	ret
 
@@ -535,8 +532,7 @@ DrawDamageAnimationNumbers:
 	push de
 	ld a, [hl]
 	or a
-	jr z, .no_char
-	call CreateDamageCharSprite
+	call nz, CreateDamageCharSprite
 .no_char
 	pop de
 	pop hl

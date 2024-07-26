@@ -115,7 +115,8 @@ SetScriptData:
 	ld [wNextScript + 1], a
 	ld a, OWMODE_SCRIPT
 	ld [wOverworldMode], a
-	jr EnterScript
+;	fallthrough
+
 
 EnterScript:
 	ld hl, wNextScript
@@ -592,7 +593,8 @@ Func_c41c:
 	ld a, [wPlayerYCoordPixels]
 	sub $40
 	ld [wSCYBuffer], a
-	jp Func_c430
+;	fallthrough
+
 
 Func_c430:
 ; update wSCXBuffer

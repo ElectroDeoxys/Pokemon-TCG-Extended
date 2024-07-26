@@ -99,9 +99,7 @@ AIProcessAttacks:
 	ld a, c
 	ld [wSelectedAttack], a
 	or a
-	jr z, .attack_chosen
-	call CheckWhetherToSwitchToFirstAttack
-
+	call nz, CheckWhetherToSwitchToFirstAttack
 .attack_chosen
 ; check whether to execute the attack chosen
 	ld a, [wAIExecuteProcessedAttack]

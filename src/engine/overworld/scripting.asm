@@ -676,7 +676,7 @@ ScriptCommand_AskQuestionJump:
 	ld l, c
 	ld h, b
 	call Func_c8ed
-	ld a, [hCurMenuItem]
+	ldh a, [hCurMenuItem]
 	ld [wScriptControlByte], a
 	jr c, .no_jump
 	call GetScriptArgs3AfterPointer
@@ -752,8 +752,7 @@ SetNPCDuelParams:
 ScriptCommand_PrintVariableNPCText:
 	ld a, [wScriptControlByte]
 	or a
-	jr nz, .print_text
-	call GetScriptArgs3AfterPointer
+	call z, GetScriptArgs3AfterPointer
 .print_text
 	ld l, c
 	ld h, b
@@ -775,8 +774,7 @@ ScriptCommand_PrintTextForChallengeCup:
 ScriptCommand_PrintVariableText:
 	ld a, [wScriptControlByte]
 	or a
-	jr nz, .print_text
-	call GetScriptArgs3AfterPointer
+	call z, GetScriptArgs3AfterPointer
 .print_text
 	ld l, c
 	ld h, b
@@ -1050,8 +1048,7 @@ ScriptCommand_TakeCard:
 	jp IncreaseScriptPointerBy2
 
 ScriptCommand_JumpIfAnyEnergyCardsInCollection:
-	ld c, GRASS_ENERGY
-	ld b, 0
+	lb bc, 0, GRASS_ENERGY
 .loop
 	ld a, c
 	call GetCardCountInCollection
@@ -1611,8 +1608,7 @@ ShowMultichoiceTextbox:
 	ld h, [hl]
 	ld l, a
 	or h
-	jr z, .no_text
-	call Func_c8ba
+	call nz, Func_c8ba
 .no_text
 	ld a, 1 << AUTO_CLOSE_TEXTBOX
 	call SetOverworldNPCFlags
@@ -1634,14 +1630,14 @@ ShowMultichoiceTextbox:
 	call DoFrameIfLCDEnabled
 	call HandleMenuInput
 	jr nc, .wait_input
-	ld a, [hCurMenuItem]
+	ldh a, [hCurMenuItem]
 	cp e
 	jr z, .got_result
 	ld a, [wd417]
 	or a
 	jr z, .wait_input
 	ld e, a
-	ld [hCurMenuItem], a
+	ldh [hCurMenuItem], a
 
 .got_result
 	pop hl

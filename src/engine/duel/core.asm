@@ -1123,8 +1123,7 @@ PrintAndLoadAttacksToDuelTempList:
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff98], a
 	call LoadCardDataToBuffer1_FromDeckIndex
-	ld c, 0
-	ld b, 13
+	lb bc, 13, 0
 	ld hl, wDuelTempList
 	xor a
 	ld [wCardPageNumber], a
@@ -1866,7 +1865,7 @@ ChooseInitialArenaAndBenchPokemon:
 	ldh a, [hTempCardIndex_ff98]
 	ldtx hl, PlacedInTheArenaText
 	call DisplayCardDetailScreen
-	jr .choose_bench
+;	fallthrough
 
 ; after choosing the active Pokemon, let the player place 0 or more basic Pokemon
 ; cards in the bench. loop until the player decides to stop placing Pokemon cards.
@@ -1926,8 +1925,7 @@ ShuffleDeckAndDrawSevenCards:
 	jr nz, .draw_loop
 	ld a, DUELVARS_HAND
 	call GetTurnDuelistVariable
-	ld b, $00
-	ld c, 7
+	lb bc, $00, 7
 .cards_loop
 	ld a, [hli]
 	push hl
@@ -2041,21 +2039,18 @@ DisplayPracticeDuelPlayerHandScreen:
 	jp EnableLCD
 
 PlayShuffleAndDrawCardsAnimation_TurnDuelist:
-	ld b, DUEL_ANIM_PLAYER_SHUFFLE
-	ld c, DUEL_ANIM_PLAYER_DRAW
+	lb bc, DUEL_ANIM_PLAYER_SHUFFLE, DUEL_ANIM_PLAYER_DRAW
 	ldh a, [hWhoseTurn]
 	cp PLAYER_TURN
 	jr z, .play_anim
-	ld b, DUEL_ANIM_OPP_SHUFFLE
-	ld c, DUEL_ANIM_OPP_DRAW
+	lb bc, DUEL_ANIM_OPP_SHUFFLE, DUEL_ANIM_OPP_DRAW
 .play_anim
 	ldtx hl, ShufflesTheDeckText
 	ldtx de, Drew7CardsText
 	jr PlayShuffleAndDrawCardsAnimation
 
 PlayShuffleAndDrawCardsAnimation_BothDuelists:
-	ld b, DUEL_ANIM_BOTH_SHUFFLE
-	ld c, DUEL_ANIM_BOTH_DRAW
+	lb bc, DUEL_ANIM_BOTH_SHUFFLE, DUEL_ANIM_BOTH_DRAW
 	ldtx hl, EachPlayerShuffleOpponentsDeckText
 	ldtx de, EachPlayerDraw7CardsText
 	ld a, [wDuelType]
@@ -3005,7 +3000,8 @@ SetDiscardPileScreenTexts:
 	ldtx de, OpponentsDiscardPileText
 .got_header_text
 	ldtx hl, ChooseTheCardYouWishToExamineText
-	jp SetCardListHeaderText
+;	fallthrough
+
 
 SetCardListHeaderText:
 	ld a, e
@@ -5396,7 +5392,7 @@ DisplayUsePokemonPowerScreen::
 	call InitTextPrinting_ProcessTextFromPointerToID
 	lb de, 1, 6
 	ld hl, wLoadedCard1Atk1Description
-	jp PrintAttackOrCardDescription
+;	fallthrough
 
 ; print the description of an attack, a Pokemon power, or a trainer or energy card
 ; x,y coordinates of where to start printing the text are given at de
@@ -6368,8 +6364,7 @@ HandleBetweenTurnsEvents:
 	or a
 	jr z, .asm_6c3a
 	call HandlePoisonDamage
-	jr c, .asm_6c3a
-	call HandleSleepCheck
+	call nc, HandleSleepCheck
 .asm_6c3a
 	call DiscardAttachedDefenders
 	call SwapTurn
@@ -6932,8 +6927,7 @@ CountKnockedOutPokemon:
 	call GetTurnDuelistVariable
 	ld d, h
 	ld e, DUELVARS_ARENA_CARD
-	ld b, PLAY_AREA_ARENA
-	ld c, MAX_PLAY_AREA_POKEMON
+	lb bc, PLAY_AREA_ARENA, MAX_PLAY_AREA_POKEMON
 .loop
 	ld a, [de]
 	cp -1

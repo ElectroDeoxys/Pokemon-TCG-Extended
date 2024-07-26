@@ -19,7 +19,8 @@ ClubEntranceAfterDuel:
 LoadClubEntrance:
 	call TryFirstRonaldDuel
 	call TrySecondRonaldDuel
-	jp TryFirstRonaldEncounter
+;	fallthrough
+
 
 TryFirstRonaldEncounter:
 	ld a, NPC_RONALD1

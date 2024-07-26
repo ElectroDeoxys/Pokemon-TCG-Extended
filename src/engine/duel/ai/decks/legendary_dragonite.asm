@@ -147,8 +147,7 @@ AIDoTurn_LegendaryDragonite:
 	call AIProcessHandTrainerCards
 	ld a, [wAlreadyPlayedEnergy]
 	or a
-	jr nz, .skip_energy_attach_2
-	call AIProcessAndTryToPlayEnergy
+	call z, AIProcessAndTryToPlayEnergy
 .skip_energy_attach_2
 	call AIDecidePlayPokemonCard
 .try_attack

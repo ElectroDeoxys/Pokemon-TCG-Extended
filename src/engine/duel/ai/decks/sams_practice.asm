@@ -115,8 +115,7 @@ AIPerformScriptedTurn:
 	dw .turn_7
 
 .turn_1
-	ld d, MACHOP
-	ld e, FIGHTING_ENERGY
+	lb de, MACHOP, FIGHTING_ENERGY
 	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_2
@@ -125,8 +124,7 @@ AIPerformScriptedTurn:
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_PLAY_BASIC_PKMN
 	bank1call AIMakeDecision
-	ld d, RATTATA
-	ld e, FIGHTING_ENERGY
+	lb de, RATTATA, FIGHTING_ENERGY
 	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_3
@@ -139,13 +137,11 @@ AIPerformScriptedTurn:
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_EVOLVE_PKMN
 	bank1call AIMakeDecision
-	ld d, RATICATE
-	ld e, LIGHTNING_ENERGY
+	lb de, RATICATE, LIGHTNING_ENERGY
 	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_4
-	ld d, RATICATE
-	ld e, LIGHTNING_ENERGY
+	lb de, RATICATE, LIGHTNING_ENERGY
 	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_5
@@ -154,8 +150,7 @@ AIPerformScriptedTurn:
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_PLAY_BASIC_PKMN
 	bank1call AIMakeDecision
-	ld d, MACHOP
-	ld e, FIGHTING_ENERGY
+	lb de, MACHOP, FIGHTING_ENERGY
 	call AIAttachEnergyInHandToCardInBench
 
 	ld a, DUELVARS_ARENA_CARD
@@ -169,11 +164,9 @@ AIPerformScriptedTurn:
 	jp AITryToRetreat
 
 .turn_6
-	ld d, MACHOP
-	ld e, FIGHTING_ENERGY
+	lb de, MACHOP, FIGHTING_ENERGY
 	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_7
-	ld d, MACHOP
-	ld e, FIGHTING_ENERGY
+	lb de, MACHOP, FIGHTING_ENERGY
 	jp AIAttachEnergyInHandToCardInPlayArea

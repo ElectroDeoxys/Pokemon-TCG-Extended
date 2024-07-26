@@ -156,7 +156,8 @@ UpdateConfigMenuCursor:
 	jr HideConfigMenuCursor
 .show
 	pop af
-	jr ShowConfigMenuCursor ; can be fallthrough
+;	fallthrough
+
 
 ShowConfigMenuCursor:
 	push bc

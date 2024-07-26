@@ -48,7 +48,7 @@ AddDeckToCollection:
 ; deck configurations
 ; a = DECK_* flags to pick which deck names to show
 DrawDecksScreen:
-	ld [hffb5], a
+	ldh [hffb5], a
 	call EmptyScreenAndLoadFontDuelAndHandCardsIcons
 	lb de, 0,  0
 	lb bc, 20, 4
@@ -384,7 +384,7 @@ HandleDeckBuildScreen:
 .no_down_btn
 	call HandleCardSelectionInput
 	jr nc, .wait_input
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	cp $ff ; operation cancelled?
 	jp z, OpenDeckConfigurationMenu
 
@@ -475,7 +475,7 @@ HandleDeckBuildScreen:
 	call DrawListCursor_Invisible
 	ld a, [wCardListCursorPos]
 	ld [wTempCardListCursorPos], a
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	cp $ff
 	jr nz, .open_card_page
 	; cancelled
@@ -1593,7 +1593,7 @@ AddCardIDToVisibleList:
 ; wCardListHandlerFunction
 InitCardSelectionParams:
 	ld [wCardListCursorPos], a
-	ld [hffb3], a
+	ldh [hffb3], a
 	ld de, wCardListCursorXPos
 	ld b, $9
 .loop
@@ -1647,7 +1647,7 @@ HandleCardSelectionInput:
 
 .handle_ab_btns
 	ld a, [wCardListCursorPos]
-	ld [hffb3], a
+	ldh [hffb3], a
 	ldh a, [hKeysPressed]
 	and A_BUTTON | B_BUTTON
 	jr z, HandleCardSelectionCursorBlink
@@ -1655,7 +1655,7 @@ HandleCardSelectionInput:
 	jr nz, ConfirmSelectionAndReturnCarry
 	; b button
 	ld a, $ff
-	ld [hffb3], a
+	ldh [hffb3], a
 	call PlaySFXConfirmOrCancel
 	scf
 	ret
@@ -1667,15 +1667,14 @@ ConfirmSelectionAndReturnCarry:
 	call PlaySFXConfirmOrCancel
 	ld a, [wCardListCursorPos]
 	ld e, a
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	scf
 	ret
 
 HandleCardSelectionCursorBlink:
 	ld a, [wMenuInputSFX]
 	or a
-	jr z, .skip_sfx
-	call PlaySFX
+	call nz, PlaySFX
 .skip_sfx
 	ld hl, wCheckMenuCursorBlinkCounter
 	ld a, [hl]
@@ -1815,7 +1814,7 @@ HandleDeckCardSelectionList:
 
 .asm_9bb9
 	ld a, [wCardListCursorPos]
-	ld [hffb3], a
+	ldh [hffb3], a
 	ld hl, wCardListHandlerFunction
 	ld a, [hli]
 	or [hl]
@@ -1826,7 +1825,7 @@ HandleDeckCardSelectionList:
 	ld a, [hld]
 	ld l, [hl]
 	ld h, a
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	call CallHL
 	jr nc, .handle_blink
 
@@ -1836,7 +1835,7 @@ HandleDeckCardSelectionList:
 	call PlaySFXConfirmOrCancel
 	ld a, [wCardListCursorPos]
 	ld e, a
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	scf
 	ret
 
@@ -1847,7 +1846,7 @@ HandleDeckCardSelectionList:
 	and A_BUTTON
 	jr nz, .select_card
 	ld a, $ff
-	ld [hffb3], a
+	ldh [hffb3], a
 	call PlaySFXConfirmOrCancel
 	scf
 	ret
@@ -1855,8 +1854,7 @@ HandleDeckCardSelectionList:
 .check_sfx
 	ld a, [wMenuInputSFX]
 	or a
-	jr z, .handle_blink
-	call PlaySFX
+	call nz, PlaySFX
 .handle_blink
 	ld hl, wCheckMenuCursorBlinkCounter
 	ld a, [hl]
@@ -2330,7 +2328,7 @@ HandleDeckConfirmationMenu:
 	jr .init_params
 
 .selection_made
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	cp $ff
 	ret z ; operation cancelled
 	jr .selected_card
@@ -2644,8 +2642,7 @@ SortCurDeckCardsByID:
 ; it finds (assuming wCurDeckCards is sorted by ID)
 ; also counts the total number of the different cards
 CreateCurDeckUniqueCardList:
-	ld b, 0
-	ld c, $0
+	lb bc, 0, $0
 	ld hl, wCurDeckCards
 	ld de, wUniqueDeckCardList
 .loop
@@ -3027,7 +3024,7 @@ HandlePlayersCardsScreen:
 .no_d_down
 	call HandleCardSelectionInput
 	jr nc, .wait_input
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	cp $ff ; operation cancelled
 	jr nz, .jump_to_list
 	ret
@@ -3104,7 +3101,7 @@ HandlePlayersCardsScreen:
 	call DrawListCursor_Invisible
 	ld a, [wCardListCursorPos]
 	ld [wTempCardListCursorPos], a
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	cp $ff
 	jr nz, .open_card_page
 	ld hl, FiltersCardSelectionParams
@@ -3159,7 +3156,7 @@ PrintFilteredCardSelectionList:
 ; plus the cards that are being used in built decks
 ; a = DECK_* flags for which decks to include in the collection
 CreateCardCollectionListWithDeckCards:
-	ld [hffb5], a
+	ldh [hffb5], a
 ; copies sCardCollection to wTempCardCollection
 	ld hl, sCardCollection
 	ld de, wTempCardCollection
@@ -3191,7 +3188,7 @@ CreateCardCollectionListWithDeckCards:
 	bit DECK_4_F, a
 	ret z
 	ld de, sDeck4Cards
-	jp IncrementDeckCardsInTempCollection
+;	fallthrough
 
 ; goes through cards in deck in de
 ; and for each card ID, increments its corresponding

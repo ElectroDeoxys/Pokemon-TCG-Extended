@@ -131,8 +131,7 @@ AIDoTurn_LegendaryRonald:
 ; play Energy card if possible
 	ld a, [wAlreadyPlayedEnergy]
 	or a
-	jr nz, .skip_attach_energy_1
-	call AIProcessAndTryToPlayEnergy
+	call z, AIProcessAndTryToPlayEnergy
 .skip_attach_energy_1
 ; try playing Pokemon cards from hand again
 	call AIDecidePlayPokemonCard
@@ -183,8 +182,7 @@ AIDoTurn_LegendaryRonald:
 	call AIProcessHandTrainerCards
 	ld a, [wAlreadyPlayedEnergy]
 	or a
-	jr nz, .skip_attach_energy_2
-	call AIProcessAndTryToPlayEnergy
+	call z, AIProcessAndTryToPlayEnergy
 .skip_attach_energy_2
 	call AIDecidePlayPokemonCard
 	ret c ; return if turn ended

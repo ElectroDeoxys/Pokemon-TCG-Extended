@@ -51,7 +51,8 @@ PlayDuelAnimation::
 
 .play_anim
 	call PlayLoadedDuelAnimation
-	jr .done
+;	fallthrough
+
 
 .done
 	pop de

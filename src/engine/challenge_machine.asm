@@ -543,8 +543,7 @@ ChallengeMachine_PrintOpponentClubStatus:
 	ld h, [hl]
 	ld l, a
 	or h
-	jr z, .no_element
-	call PrintTextNoDelay
+	call nz, PrintTextNoDelay
 .no_element
 	pop bc
 	ret

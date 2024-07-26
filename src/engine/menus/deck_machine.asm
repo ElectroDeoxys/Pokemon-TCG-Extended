@@ -82,7 +82,7 @@ HandleDeckMissingCardsList:
 	jr .loop
 
 .selection_made
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	cp $ff
 	ret z
 	jr .open_card_pge
@@ -542,7 +542,7 @@ HandleDeckMachineSelection:
 	ld [wTempCardListVisibleOffset], a
 	ld a, [wCardListCursorPos]
 	ld [wTempDeckMachineCursorPos], a
-	ld a, [hffb3]
+	ldh a, [hffb3]
 	or a
 	ret
 
@@ -895,8 +895,7 @@ GetSavedDeckCount:
 	call EnableSRAM
 	ld hl, sSavedDecks
 	ld bc, DECK_STRUCT_SIZE
-	ld d, NUM_DECK_SAVE_MACHINE_SLOTS
-	ld e, 0
+	lb de, NUM_DECK_SAVE_MACHINE_SLOTS, 0
 .loop
 	ld a, [hl]
 	or a
@@ -1074,8 +1073,7 @@ SafelySwitchToTempSRAMBank:
 	ld b, a
 	ld a, [wTempBankSRAM]
 	cp b
-	jr z, .skip
-	call BankswitchSRAM
+	call nz, BankswitchSRAM
 .skip
 	pop bc
 	pop af

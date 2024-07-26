@@ -168,7 +168,7 @@ ResetTxRam_WriteToTextHeader::
 	ld [wWhichTxRam2], a
 	ld [wWhichTxRam3], a
 	ld a, TX_KATAKANA
-	ld [hJapaneseSyllabary], a
+	ldh [hJapaneseSyllabary], a
 ;	fallthrough
 
 ; fill the wTextHeader specified in wWhichTextHeader (0-3) with hJapaneseSyllabary,
@@ -177,7 +177,7 @@ WriteToTextHeader::
 	push hl
 	call GetPointerToTextHeader
 	pop bc
-	ld a, [hJapaneseSyllabary]
+	ldh a, [hJapaneseSyllabary]
 	ld [hli], a
 	ld a, [wFontWidth]
 	ld [hli], a
@@ -203,7 +203,7 @@ WriteToTextHeader_MoveToNext::
 ReadTextHeader::
 	call GetPointerToTextHeader
 	ld a, [hli]
-	ld [hJapaneseSyllabary], a
+	ldh [hJapaneseSyllabary], a
 	ld a, [hli]
 	ld [wFontWidth], a
 	ld a, [hli]
@@ -305,7 +305,7 @@ ProcessTextHeader::
 .tx_ram2
 	call WriteToTextHeader_MoveToNext
 	ld a, TX_KATAKANA
-	ld [hJapaneseSyllabary], a
+	ldh [hJapaneseSyllabary], a
 	xor a ; FULL_WIDTH
 	ld [wFontWidth], a
 	ld de, wTxRam2

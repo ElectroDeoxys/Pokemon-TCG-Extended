@@ -50,8 +50,7 @@ LoadMapTilesAndPals:
 	ld [wd4cb], a
 	ld a, [wCurMapPalette]
 	or a
-	jr z, .asm_80076
-	call SetBGPAndLoadedPal
+	call nz, SetBGPAndLoadedPal
 .asm_80076
 	ret
 
@@ -1356,7 +1355,8 @@ Func_80cd7:
 	ld [wLoadedNPCTempIndex], a
 	call ClearSpriteAnimations
 	call .DrawNPCSprite
-	jr .PrintNPCInfo
+;	fallthrough
+
 
 .PrintNPCInfo
 	lb de, 0, 4

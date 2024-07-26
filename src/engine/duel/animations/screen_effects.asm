@@ -88,7 +88,8 @@ ShakeScreenX_Small:
 
 ShakeScreenX_Big:
 	ld hl, BigShakeOffsets
-	jr ShakeScreenX
+;	fallthrough
+
 
 ShakeScreenX:
 	ld a, l
@@ -116,7 +117,8 @@ ShakeScreenY_Small:
 
 ShakeScreenY_Big:
 	ld hl, BigShakeOffsets
-	jr ShakeScreenY
+;	fallthrough
+
 
 ShakeScreenY:
 	ld a, l

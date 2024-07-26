@@ -2042,8 +2042,7 @@ AIDecide_PokemonBreeder:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld c, a
-	ld e, $00
-	ld d, $00
+	lb de, $00, $00
 
 ; find highest score in wce08
 .loop_score_1
@@ -2137,8 +2136,7 @@ AIDecide_PokemonBreeder:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld c, a
-	ld e, $00
-	ld d, $00
+	lb de, $00, $00
 
 ; find highest score in wce08 with at least
 ; 2 energy cards attached
@@ -2260,7 +2258,8 @@ AIDecide_PokemonBreeder:
 	farcall CountNumberOfEnergyCardsAttached
 	cp 3
 	jr c, .set_carry
-	jr .no_carry
+;	fallthrough
+
 
 .no_carry
 	pop hl
@@ -4641,7 +4640,8 @@ AIDecide_Revive:
 	cp TAUROS
 	jr nz, .loop_discard_pile ; bug, these two lines should be swapped
 	cp KANGASKHAN
-	jr z, .set_carry ; bug, these two lines should be swapped
+;	fallthrough
+
 
 .set_carry
 	ld a, b
@@ -5188,7 +5188,8 @@ AIDecide_ComputerSearch_RockCrusher:
 	jp c, .no_carry
 	call CreateHandCardList
 	ld hl, wDuelTempList
-	jr .find_discard_cards_2
+;	fallthrough
+
 
 .find_discard_cards_2
 	ld a, $ff
