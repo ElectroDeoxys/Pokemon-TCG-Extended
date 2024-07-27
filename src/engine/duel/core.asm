@@ -437,7 +437,6 @@ DuelMenu_Retreat:
 	call OpenPlayAreaScreenForSelection
 	jr c, .done
 	ld [wBenchSelectedPokemon], a
-	ld a, [wBenchSelectedPokemon] ; unnecessary
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, OPPACTION_ATTEMPT_RETREAT
 	ldh [hOppActionTableIndex], a
@@ -3538,7 +3537,6 @@ LoadSelectedCardGfx:
 	call LoadCardDataToBuffer1_FromCardID
 	ld de, v0Tiles1 + $20 tiles
 	call LoadLoaded1CardGfx
-	ld de, $c0c ; useless
 	call SetBGP6ToCardPalette
 	jp FlushAllPalettesOrSendPal23Packet
 
@@ -4635,7 +4633,6 @@ DisplayPlayAreaScreen:
 	jp z, .asm_60ac
 	pop af
 	ldh [hTempCardIndex_ff98], a
-	ld a, [wPlayAreaSelectAction] ; useless
 	jr OpenPlayAreaScreenForSelection
 .asm_6061
 	call HandleMenuInput

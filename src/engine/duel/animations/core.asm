@@ -163,7 +163,6 @@ LoadAnimCoordsAndFlags:
 
 	ld bc, SPRITE_ANIM_FLAGS - SPRITE_ANIM_COORD_Y
 	add hl, bc
-	ld c, a ; useless
 	and (1 << SPRITE_ANIM_FLAG_Y_SUBTRACT) | (1 << SPRITE_ANIM_FLAG_X_SUBTRACT)
 	or [hl]
 	ld [hl], a
