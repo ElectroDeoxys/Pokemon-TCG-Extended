@@ -34,7 +34,8 @@ OverworldMap_Update:
 	ld a, [wOverworldMapPlayerAnimationState]
 	or a
 	jr nz, .player_walking
-	jp OverworldMap_HandleKeyPress
+	call OverworldMap_HandleKeyPress
+	ret
 .player_walking
 	cp 2
 	jr z, .player_finished_walking
