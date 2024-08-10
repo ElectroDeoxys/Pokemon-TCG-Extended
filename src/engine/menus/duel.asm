@@ -557,37 +557,6 @@ DrawInPlayAreaScreen:
 	call SwapTurn
 	jp DrawInPlayArea_ActiveCardGfx
 
-; draws players prize cards and bench cards
-_DrawPlayersPrizeAndBenchCards::
-	xor a
-	ld [wTileMapFill], a
-	call ZeroObjectPositions
-	ld a, $01
-	ld [wVBlankOAMCopyToggle], a
-	call DoFrame
-	call EmptyScreen
-	call LoadSymbolsFont
-	call LoadDeckAndDiscardPileIcons
-
-; player cards
-	ld a, PLAYER_TURN
-	ld [wCheckMenuPlayAreaWhichDuelist], a
-	ld [wCheckMenuPlayAreaWhichLayout], a
-	ld hl, PrizeCardsCoordinateData_2.player
-	call DrawPlayArea_PrizeCards
-	lb de, 5, 10 ; coordinates
-	ld c, 3 ; spacing
-	call DrawPlayArea_BenchCards
-
-; opponent cards
-	ld a, OPPONENT_TURN
-	ld [wCheckMenuPlayAreaWhichDuelist], a
-	ld hl, PrizeCardsCoordinateData_2.opponent
-	call DrawPlayArea_PrizeCards
-	lb de, 1, 0 ; coordinates
-	ld c, 3 ; spacing
-	jp DrawPlayArea_BenchCards
-
 ; draws the active card gfx at coordinates de
 ; of the player (or opponent) depending on wCheckMenuPlayAreaWhichDuelist
 ; input:
@@ -800,25 +769,6 @@ PrizeCardsCoordinateData_YourOrOppPlayArea:
 	db 7, 15
 	db 5, 17
 	db 5, 15
-
-; used by Func_833c
-PrizeCardsCoordinateData_2:
-; x and y coordinates for player prize cards
-.player
-	db  6, 0
-	db  6, 2
-	db  8, 0
-	db  8, 2
-	db 10, 0
-	db 10, 2
-; x and y coordinates for opponent prize cards
-.opponent
-	db 4, 18
-	db 4, 16
-	db 2, 18
-	db 2, 16
-	db 0, 18
-	db 0, 16
 
 PrizeCardsCoordinateData_InPlayArea:
 ; x and y coordinates for player prize cards

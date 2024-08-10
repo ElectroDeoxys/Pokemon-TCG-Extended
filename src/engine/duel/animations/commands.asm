@@ -230,9 +230,6 @@ Func_190f4:
 	ld a, [wDuelAnimSetScreen]
 	cp SET_ANIM_SCREEN_PLAY_AREA
 	jr z, Func_1910f
-	; fallthrough
-
-Func_190fb:
 	cp SET_ANIM_SCREEN_MAIN
 	jr nz, .done
 	ld a, DUEL_ANIM_SCREEN_MAIN_SCENE

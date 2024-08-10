@@ -3,12 +3,6 @@ FlushAllPalettes::
 	ld a, FLUSH_ALL_PALS
 	jr FlushPalettes
 
-; Flush non-CGB palettes and a single CGB palette,
-; provided in a as an index between 0-7 (BGP) or 8-15 (OBP)
-FlushPalette::
-	or FLUSH_ONE_PAL
-	jr FlushPalettes
-
 ; Set wBGP to the specified value, flush non-CGB palettes, and the first CGB palette.
 SetBGP::
 	ld [wBGP], a

@@ -68,10 +68,6 @@ WriteByteToBGMap0::
 	ret
 .lcd_on
 	pop af
-;	fallthrough
-
-; writes a to [v*BGMap0 + BG_MAP_WIDTH * c + b] during hblank
-HblankWriteByteToBGMap0::
 	push hl
 	push de
 	push bc

@@ -94,17 +94,8 @@ TossCoin_BankB:
 TossCoinATimes_BankB:
 	jp TossCoinATimes
 
-CommentedOut_2c086:
-	ret
-
-Func_2c087:
-	xor a
-	jr Func_2c08c
-
 Func_2c08a:
 	ld a, $1
-
-Func_2c08c:
 	push de
 	push af
 	ld a, OPPACTION_TOSS_COIN_A_TIMES
@@ -121,20 +112,6 @@ SetNoEffectFromStatus:
 SetWasUnsuccessful:
 	ld a, EFFECT_FAILED_UNSUCCESSFUL
 	ld [wEffectFailed], a
-	ret
-
-Func_2c0a8:
-	ldh a, [hTemp_ffa0]
-	push af
-	ldh a, [hWhoseTurn]
-	ldh [hTemp_ffa0], a
-	ld a, OPPACTION_6B30
-	ldh [hOppActionTableIndex], a
-	bank1call Func_4f2d
-	ld c, a
-	pop af
-	ldh [hTemp_ffa0], a
-	ld a, c
 	ret
 
 Func_2c0bd:

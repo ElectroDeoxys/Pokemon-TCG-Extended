@@ -401,29 +401,6 @@ ReloadCardListItems::
 .done
 	ret
 
-; reload a list of cards, except don't print their names
-Func_2827::
-	ld a, $01
-	ldh [hffb0], a
-	call ReloadCardListItems
-	xor a
-	ldh [hffb0], a
-	ret
-
-; convert the number at a to TX_SYMBOL text format and write it to wDefaultText
-; if the first digit is a 0, delete it and shift the number one tile to the left
-OneByteNumberToTxSymbol_TrimLeadingZerosAndAlign::
-	call OneByteNumberToTxSymbol
-	ld a, [hli]
-	cp SYM_0
-	jr nz, .not_zero
-	; shift number one tile to the left
-	ld a, [hld]
-	ld [hli], a
-	ld [hl], SYM_SPACE
-.not_zero
-	ret
-
 ; this function is always loaded to wMenuUpdateFunc by PrintCardListItems
 ; takes care of things like handling page scrolling and calling the function at wListFunctionPointer
 CardListMenuFunction::
@@ -745,12 +722,6 @@ SetCursorParametersForTextBox::
 	ld [wCursorBlinkCounter], a
 	ret
 
-; draw a 20x6 text box aligned to the bottom of the screen,
-; print the text at hl without letter delay, and wait for A or B pressed
-DrawWideTextBox_PrintTextNoDelay_Wait::
-	call DrawWideTextBox_PrintTextNoDelay
-	jp WaitForWideTextBoxInput
-
 ; draw a 20x6 text box aligned to the bottom of the screen
 ; and print the text at hl without letter delay
 DrawWideTextBox_PrintTextNoDelay::
@@ -797,30 +768,6 @@ DrawNarrowTextBox::
 	lb bc, 12, 6
 	call AdjustCoordinatesForBGScroll
 	jp DrawRegularTextBox
-
-; draw a 12x6 text box aligned to the bottom left of the screen,
-; print the text at hl without letter delay, and wait for A or B pressed
-DrawNarrowTextBox_WaitForInput::
-	call DrawNarrowTextBox_PrintTextNoDelay
-	xor a
-	ld hl, NarrowTextBoxMenuParameters
-	call InitializeMenuParameters
-	call EnableLCD
-.wait_A_or_B_loop
-	call DoFrame
-	call RefreshMenuCursor
-	ldh a, [hKeysPressed]
-	and A_BUTTON | B_BUTTON
-	jr z, .wait_A_or_B_loop
-	ret
-
-NarrowTextBoxMenuParameters::
-	db 10, 17 ; cursor x, cursor y
-	db 1 ; y displacement between items
-	db 1 ; number of items
-	db SYM_CURSOR_D ; cursor tile number
-	db SYM_BOX_BOTTOM ; tile behind cursor
-	dw NULL ; function pointer if non-0
 
 ; draw a 20x6 text box aligned to the bottom of the screen
 DrawWideTextBox::
@@ -958,8 +905,3 @@ PrintYesOrNoItems::
 	call AdjustCoordinatesForBGScroll
 	ldtx hl, YesOrNoText
 	jp InitTextPrinting_ProcessTextFromID
-
-ContinueDuel::
-	ld a, BANK(_ContinueDuel)
-	call BankswitchROM
-	jp _ContinueDuel

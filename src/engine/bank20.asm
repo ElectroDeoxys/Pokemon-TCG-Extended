@@ -414,10 +414,6 @@ LoadGfxDataFromTempPointerToVRAMBank:
 	call GetTileOffsetPointerAndSwitchVRAM
 	jr LoadGfxDataFromTempPointer
 
-LoadGfxDataFromTempPointerToVRAMBank_Tiles0ToTiles2:
-	call GetTileOffsetPointerAndSwitchVRAM_Tiles0ToTiles2
-;	fallthrough
-
 ; loads graphics data pointed by wTempPointer in wTempPointerBank
 ; to wVRAMPointer
 LoadGfxDataFromTempPointer:
@@ -1246,43 +1242,6 @@ Func_80baa:
 	db $12, $12, TILEMAP_DECK_MACHINE_MAP_EVENT
 .ChallengeMachine
 	db $0a, $00, TILEMAP_CHALLENGE_MACHINE_MAP_EVENT
-
-Func_80cd6:
-	ret
-
-; seems to be used to look at each OW NPC sprites
-; with functions to rotate NPC and animate them
-Func_80cd7:
-	call DisableLCD
-	call EmptyScreen
-	call ClearSpriteAnimations
-	xor a
-	ld [wd4ca], a
-	ld [wd4cb], a
-	ld a, PALETTE_0
-	call SetBGPAndLoadedPal
-	xor a
-	ld [wd4ca], a
-	ld [wd4cb], a
-	ld a, PALETTE_29
-	call LoadPaletteData
-	ld a, SOUTH
-	ld [wLoadNPCDirection], a
-	ld a, $01
-	ld [wLoadedNPCTempIndex], a
-	call .DrawNPCSprite
-	call .PrintNPCInfo
-	call EnableLCD
-.loop
-	call DoFrameIfLCDEnabled
-	call .HandleInput
-	call HandleAllSpriteAnimations
-	ldh a, [hKeysPressed]
-	and SELECT ; if select is pressed, exit
-	jr z, .loop
-	ret
-
-	ret ; stray ret
 
 ; A button makes NPC rotate
 ; D-pad scrolls through the NPCs

@@ -596,10 +596,6 @@ SetScriptPointer:
 	ld [hl], b
 	ret
 
-GetScriptArgs5AfterPointer:
-	ld a, 5
-	jr GetScriptArgsAfterPointer
-
 GetScriptArgs1AfterPointer:
 	ld a, 1
 	jr GetScriptArgsAfterPointer
@@ -1776,9 +1772,6 @@ ScriptCommand_GiveStarterDeck:
 	ld a, [wStarterDeckChoice]
 	bank1call AddStarterDeck
 	jp IncreaseScriptPointerBy1
-
-Unknown_d3dd:
-	db $03, $05, $07
 
 ScriptCommand_WalkPlayerToMasonLaboratory:
 	ld a, OWMAP_MASON_LABORATORY

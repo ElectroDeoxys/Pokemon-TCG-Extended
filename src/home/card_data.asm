@@ -202,12 +202,3 @@ LoadCardGfx::
 	jr nz, .copy_card_palette
 	pop af
 	jp BankswitchROM
-
-; identical to CopyFontsOrDuelGraphicsTiles
-CopyFontsOrDuelGraphicsTiles2::
-	ld a, BANK(Fonts) ; BANK(DuelGraphics)
-	call BankpushROM
-	ld c, TILE_SIZE
-	call CopyGfxData
-	call BankpopROM
-	ret

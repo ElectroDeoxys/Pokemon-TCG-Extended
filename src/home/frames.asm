@@ -1,13 +1,3 @@
-; calls DoFrame a times
-DoAFrames::
-.loop
-	push af
-	call DoFrame
-	pop af
-	dec a
-	jr nz, .loop
-	ret
-
 ; updates background, sprites and other game variables, halts until vblank, and reads user input
 ; if wDebugPauseAllowed is not 0, the game can be paused (and resumed) by pressing the SELECT button
 DoFrame::

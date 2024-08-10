@@ -343,22 +343,6 @@ MoveDiscardPileCardToHand::
 	pop hl
 	ret
 
-; return in the z flag whether turn holder's prize a (0-7) has been drawn or not
-; z: drawn, nz: not drawn
-CheckPrizeTaken::
-	ld e, a
-	ld d, 0
-	ld hl, PowersOf2
-	add hl, de
-	ld a, [hl]
-	ld e, a
-	cpl
-	ld d, a
-	ld a, DUELVARS_PRIZES
-	call GetTurnDuelistVariable
-	and e
-	ret
-
 PowersOf2::
 	db $01, $02, $04, $08, $10, $20, $40, $80
 

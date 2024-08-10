@@ -1,16 +1,3 @@
-; similar to ProcessText except it calls InitTextPrinting first
-; with the first two bytes of hl being used to set hTextBGMap0Address.
-; (the caller to ProcessText usually calls InitTextPrinting first)
-InitTextPrinting_ProcessText::
-	push de
-	push bc
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	inc hl
-	call InitTextPrinting
-	jr ProcessText.next_char
-
 ; reads the characters from the text at hl processes them. loops until
 ; TX_END is found. ignores TX_RAM1, TX_RAM2, and TX_RAM3 characters.
 ProcessText::

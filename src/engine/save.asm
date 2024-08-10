@@ -523,34 +523,6 @@ _SaveGame::
 .save
 	jp SaveAndBackupData
 
-_AddCardToCollectionAndUpdateAlbumProgress::
-	ld [wCardToAddToCollection], a
-	push hl
-	push bc
-	push de
-	ldh a, [hBankSRAM]
-	push af
-	ld a, BANK(sAlbumProgress)
-	call BankswitchSRAM
-	ld a, [wCardToAddToCollection]
-	call AddCardToCollection
-	ld de, sAlbumProgress
-	call UpdateAlbumProgress
-	pop af
-	call BankswitchSRAM
-	call DisableSRAM ; unnecessary
-
-; unintentional? runs the same write operation
-; on the same address but on the current SRAM bank
-	ld a, [wCardToAddToCollection]
-	call AddCardToCollection
-	ld de, $b8fe
-	call UpdateAlbumProgress
-	pop de
-	pop bc
-	pop hl
-	ret
-
 WriteBackupCardAndDeckSaveData:
 	ld bc, sCardAndDeckSaveDataEnd - sCardAndDeckSaveData
 	ld hl, sCardCollection

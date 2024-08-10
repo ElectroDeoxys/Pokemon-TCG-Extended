@@ -4,9 +4,6 @@ TryContinueDuel::
 	call LoadAndValidateDuelSaveData
 	ldtx hl, BackUpIsBrokenText
 	jr c, HandleFailedToContinueDuel
-;	fallthrough
-
-_ContinueDuel::
 	call ClearJoypad
 	ld a, [wDuelTheme]
 	call PlaySong
@@ -33,9 +30,6 @@ StartDuel_VSAIOpp::
 	call SwapTurn
 	call LoadOpponentDeck
 	call SwapTurn
-;	fallthrough
-
-StartDuel:
 	xor a
 	ld [wCurrentDuelMenuItem], a
 	call SetupDuel
@@ -2965,13 +2959,6 @@ DisplayPlaceInitialPokemonCardsScreen:
 	pop af
 	ret
 
-Func_5542:
-	call CreateDiscardPileCardList
-	ret c
-	call InitAndDrawCardListScreenLayout
-	call SetDiscardPileScreenTexts
-	jp DisplayCardList
-
 ; draw the turn holder's discard pile screen
 OpenDiscardPileScreen:
 	call CreateDiscardPileCardList
@@ -3830,12 +3817,6 @@ ApplyBGP6ToCardImage:
 ApplyBGP7ToCardImage:
 	ld a, $07 ; CGB BG Palette 7
 	jp ApplyCardCGBAttributes
-
-Func_5a81:
-	lb de, 0, 5
-	call ApplyBGP7ToCardImage
-	lb de, 12, 1
-	jp ApplyBGP6ToCardImage
 
 ; given the 8x6 card image with coordinates at de, fill its BGMap attributes with a
 ApplyCardCGBAttributes:
@@ -5245,17 +5226,6 @@ PrintPlayAreaCardAttachedEnergies:
 	ld b, NUM_TYPES
 	jp SafeCopyDataHLtoDE
 
-Func_6423:
-	ld hl, wDefaultText
-	ld e, $08
-.asm_6428
-	ld a, [hli]
-	call JPWriteByteToBGMap0
-	inc b
-	dec e
-	jr nz, .asm_6428
-	ret
-
 DisplayPlayAreaScreenToUsePkmnPower:
 	xor a
 	ld [wSelectedDuelSubMenuItem], a
@@ -5945,13 +5915,6 @@ HandleSpecialDuelMainSceneHotkeys:
 	call OpenNonTurnHolderDiscardPileScreen
 	jr .return_carry
 
-ResetDoFrameFunction_Bank1:
-	xor a
-	ld hl, wDoFrameFunction
-	ld [hli], a
-	ld [hl], a
-	ret
-
 ; print the AttachedEnergyToPokemonText, given the energy card to attach in hTempCardIndex_ff98,
 ; and the PLAY_AREA_* of the turn holder's Pokemon to attach the energy to in hTempPlayAreaLocation_ff9d
 PrintAttachedEnergyToPokemon:
@@ -6288,10 +6251,6 @@ LoadCardNameToTxRam2_b:
 
 DrawWideTextBox_WaitForInput_Bank1:
 	jp DrawWideTextBox_WaitForInput
-
-Func_6ba2:
-	call DrawWideTextBox_PrintText
-	jp WaitForWideTextBoxInput
 
 ; apply and/or refresh status conditions and other events that trigger between turns
 HandleBetweenTurnsEvents:
@@ -7520,41 +7479,6 @@ Func_7324:
 	jr nz, .asm_732f
 	ldh a, [hff96]
 	ret
-
-BuildVersion:
-	db "VER 12/20 09:36", TX_END
-
-; draws the current opponent to be selected
-; (his/her portrait and name)
-; and prints text box for selection
-DrawOpponentSelectionScreen:
-	ld a, [wOpponentDeckID]
-	ld [wNPCDuelDeckID], a
-	call GetNPCDuelConfigurations
-	jr c, .ok
-	; duel configuration not found for the NPC
-	; so load a default portrait and name
-	xor a
-	ld [wOpponentPortrait], a
-	ld hl, wOpponentName
-	ld [hli], a
-	ld [hl], a
-.ok
-	ld hl, SelectComputerOpponentData
-	call PlaceTextItems
-	call DrawDuelistPortraitsAndNames
-	ld a, [wOpponentDeckID]
-	lb bc, 5, 16
-	call WriteTwoByteNumberInTxSymbolFormat
-	ld a, [wNPCDuelPrizes]
-	lb bc, 15, 10
-	jp WriteTwoByteNumberInTxSymbolFormat
-
-SelectComputerOpponentData:
-	textitem 10,  0, ClearOpponentNameText
-	textitem 10, 10, NumberOfPrizesText
-	textitem  3, 14, SelectComputerOpponentText
-	db $ff
 
 Func_7415::
 	xor a

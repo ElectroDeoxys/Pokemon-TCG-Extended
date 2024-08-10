@@ -56,9 +56,7 @@ INCLUDE "data/multichoice.asm"
 INCLUDE "data/overworld_map/player_movement_paths.asm"
 
 SECTION "Menus 3", ROMX
-INCLUDE "engine/menus/debug_main.asm"
 INCLUDE "engine/menus/main_menu.asm"
-INCLUDE "engine/menus/debug.asm"
 INCLUDE "engine/menus/wait_keys.asm"
 INCLUDE "engine/gfx/default_palettes.asm"
 INCLUDE "engine/menus/naming.asm"
@@ -91,9 +89,6 @@ INCLUDE "engine/duel/effect_commands.asm"
 SECTION "Animation Commands", ROMX
 INCLUDE "engine/duel/animations/commands.asm"
 
-SECTION "Sprite Animations VBlank", ROMX
-INCLUDE "engine/gfx/sprite_vblank.asm"
-
 SECTION "Starter Deck", ROMX
 INCLUDE "engine/starter_deck.asm"
 
@@ -110,7 +105,6 @@ SECTION "Auto Deck Machines", ROMX
 INCLUDE "engine/auto_deck_machines.asm"
 
 SECTION "Bank 7", ROMX
-INCLUDE "engine/overworld/debug_player_coordinates.asm"
 INCLUDE "engine/overworld/warp.asm"
 INCLUDE "engine/overworld/load_map_header.asm"
 INCLUDE "engine/overworld/npc_core.asm"

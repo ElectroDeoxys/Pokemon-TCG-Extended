@@ -138,9 +138,6 @@ DrawRegularTextBox::
 	ld a, [wConsole]
 	cp CONSOLE_CGB
 	jr z, DrawRegularTextBoxCGB
-;	fallthrough
-
-DrawRegularTextBoxDMG::
 	call DECoordToBGMap0Address
 	; top line (border) of the text box
 	ld a, SYM_BOX_TOP

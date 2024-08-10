@@ -9,19 +9,3 @@ AddToDamage::
 	ld [hl], a
 	pop hl
 	ret
-
-; [wDamage] -= a
-SubtractFromDamage::
-	push de
-	push hl
-	ld e, a
-	ld hl, wDamage
-	ld a, [hl]
-	sub e
-	ld [hli], a
-	ld a, [hl]
-	sbc 0
-	ld [hl], a
-	pop hl
-	pop de
-	ret

@@ -115,39 +115,6 @@ SetNPCMatchStartTheme:
 
 INCLUDE "data/npcs.asm"
 
-_GetNPCDuelConfigurations::
-	push hl
-	push bc
-	push de
-	ld a, [wNPCDuelDeckID]
-	ld e, a
-	ld bc, 9 ; size of struct - 1
-	ld hl, DeckIDDuelConfigurations
-.loop_deck_ids
-	ld a, [hli]
-	cp -1 ; end of list?
-	jr z, .done
-	cp e
-	jr nz, .next_deck_id
-	ld a, [hli]
-	ld [wOpponentPortrait], a
-	ld a, [hli]
-	ld [wOpponentName], a
-	ld a, [hli]
-	ld [wOpponentName + 1], a
-	ld a, [hl]
-	ld [wNPCDuelPrizes], a
-	scf
-	jr .done
-.next_deck_id
-	add hl, bc
-	jr .loop_deck_ids
-.done
-	pop de
-	pop bc
-	pop hl
-	ret
-
 _GetChallengeMachineDuelConfigurations:
 	push bc
 	push de

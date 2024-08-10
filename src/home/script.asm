@@ -91,18 +91,6 @@ GetMapScriptPointer::
 	pop bc
 	ret
 
-; loads some configurations for the duel against
-; the NPC whose deck ID is stored in wNPCDuelDeckID
-; this includes NPC portrait, his/her name text ID,
-; and the number of prize cards
-; this was used in testing since these configurations
-; are stored in the script-related NPC data for normal gameplay
-; returns carry if a duel configuration was found
-; for the given NPC deck ID
-GetNPCDuelConfigurations::
-	farcall _GetNPCDuelConfigurations
-	ret
-
 ; finds a Script from the first byte and puts the next two bytes (usually arguments?) into cb
 RunOverworldScript::
 	ld hl, wScriptPointer
@@ -130,15 +118,6 @@ RunOverworldScript::
 	call BankswitchROM
 	pop bc
 	jp hl
-
-Func_3b11::
-	ldh a, [hBankROM]
-	push af
-	ld a, BANK(_GameLoop)
-	call BankswitchROM
-	call _GameLoop
-	pop af
-	jp BankswitchROM
 
 ResetAnimationQueue::
 	ldh a, [hBankROM]

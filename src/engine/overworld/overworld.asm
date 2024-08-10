@@ -290,12 +290,6 @@ Func_c241:
 	pop hl
 	ret
 
-Func_c251:
-	ldh a, [hffb0]
-	push af
-	ld a, $1
-	jr Func_c258.asm_c25d
-
 Func_c258:
 	ldh a, [hffb0]
 	push af
@@ -593,10 +587,6 @@ Func_c41c:
 	ld a, [wPlayerYCoordPixels]
 	sub $40
 	ld [wSCYBuffer], a
-;	fallthrough
-
-
-Func_c430:
 ; update wSCXBuffer
 	push bc
 	ld a, [wd237]

@@ -39,15 +39,6 @@ DrawYourOrOppPlayAreaScreen_Bank0::
 	pop af
 	jp BankswitchROM
 
-DrawPlayersPrizeAndBenchCards::
-	ldh a, [hBankROM]
-	push af
-	ld a, BANK(_DrawPlayersPrizeAndBenchCards)
-	call BankswitchROM
-	call _DrawPlayersPrizeAndBenchCards
-	pop af
-	jp BankswitchROM
-
 HandlePeekSelection::
 	ldh a, [hBankROM]
 	push af

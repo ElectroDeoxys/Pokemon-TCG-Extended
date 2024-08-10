@@ -19,10 +19,7 @@ ClubEntranceAfterDuel:
 LoadClubEntrance:
 	call TryFirstRonaldDuel
 	call TrySecondRonaldDuel
-;	fallthrough
-
-
-TryFirstRonaldEncounter:
+	; try first Ronald encounter
 	ld a, NPC_RONALD1
 	ld [wTempNPC], a
 	call FindLoadedNPC
