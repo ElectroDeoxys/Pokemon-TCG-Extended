@@ -335,9 +335,8 @@ ENDM
 ; Sets some NPC sprite attributes
 MACRO set_sprite_attributes
 	run_command ScriptCommand_SetSpriteAttributes
-	db \1 ; Relates to LOADED_NPC_ANIM
-	db \2 ; Relates to LOADED_NPC_ANIM
-	db \3 ; Relates to LOADED_NPC_FLAGS
+	db \1 ; sprite animation (SPRITE_ANIM_*)
+	db \2 ; NPC animation flags (NPC_FLAG_*)
 ENDM
 
 ; Sets the active NPC's coords

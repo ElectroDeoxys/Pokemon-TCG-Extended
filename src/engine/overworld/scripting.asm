@@ -1250,19 +1250,15 @@ ScriptCommand_SetNextNPCAndScript:
 ScriptCommand_SetSpriteAttributes:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
-	push bc
-	call GetScriptArgs3AfterPointer
-	ld a, [wScriptNPC]
 	ld l, LOADED_NPC_FLAGS
 	call GetItemInLoadedNPCIndex
 	res NPC_FLAG_DIRECTIONLESS_F, [hl]
 	ld a, [hl]
-	or c
+	or b
 	ld [hl], a
-	pop bc
-	ld a, b
+	ld a, c
 	farcall SetNPCAnimation
-	jp IncreaseScriptPointerBy4
+	jp IncreaseScriptPointerBy3
 
 ScriptCommand_SetActiveNPCCoords:
 	ld a, [wScriptNPC]

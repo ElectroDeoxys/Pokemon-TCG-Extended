@@ -46,22 +46,22 @@ SpriteAnimations:
 	anim_data_pointer AnimData43  ; SPRITE_ANIM_INDIGO_NPC_RIGHT
 	anim_data_pointer AnimData44  ; SPRITE_ANIM_INDIGO_NPC_DOWN
 	anim_data_pointer AnimData45  ; SPRITE_ANIM_INDIGO_NPC_LEFT
-	anim_data_pointer AnimData46  ; SPRITE_ANIM_CGB_AMY_LAYING
-	anim_data_pointer AnimData47  ; SPRITE_ANIM_CGB_AMY_STAND
-	anim_data_pointer AnimData48  ; SPRITE_ANIM_CGB_CLERK_NPC_UP
-	anim_data_pointer AnimData49  ; SPRITE_ANIM_CGB_CLERK_NPC_RIGHT
-	anim_data_pointer AnimData50  ; SPRITE_ANIM_CGB_CLERK_NPC_DOWN
-	anim_data_pointer AnimData51  ; SPRITE_ANIM_CGB_CLERK_NPC_LEFT
-	anim_data_pointer AnimData55  ; SPRITE_ANIM_CGB_VOLCANO_SMOKE
-	anim_data_pointer AnimData56  ; SPRITE_ANIM_CGB_OWMAP_CURSOR
-	anim_data_pointer AnimData57  ; SPRITE_ANIM_CGB_OWMAP_CURSOR_FAST
+	anim_data_pointer AnimData46  ; SPRITE_ANIM_AMY_LAYING
+	anim_data_pointer AnimData47  ; SPRITE_ANIM_AMY_STAND
+	anim_data_pointer AnimData48  ; SPRITE_ANIM_CLERK_NPC_UP
+	anim_data_pointer AnimData49  ; SPRITE_ANIM_CLERK_NPC_RIGHT
+	anim_data_pointer AnimData50  ; SPRITE_ANIM_CLERK_NPC_DOWN
+	anim_data_pointer AnimData51  ; SPRITE_ANIM_CLERK_NPC_LEFT
+	anim_data_pointer AnimData55  ; SPRITE_ANIM_VOLCANO_SMOKE
+	anim_data_pointer AnimData56  ; SPRITE_ANIM_OWMAP_CURSOR
+	anim_data_pointer AnimData57  ; SPRITE_ANIM_OWMAP_CURSOR_FAST
 	anim_data_pointer AnimData58  ; SPRITE_ANIM_TORCH
-	anim_data_pointer AnimData65  ; SPRITE_ANIM_CGB_CARD_TOP_LEFT
-	anim_data_pointer AnimData66  ; SPRITE_ANIM_CGB_CARD_TOP_RIGHT
-	anim_data_pointer AnimData67  ; SPRITE_ANIM_CGB_CARD_LEFT_SPARK
-	anim_data_pointer AnimData68  ; SPRITE_ANIM_CGB_CARD_BOTTOM_LEFT
-	anim_data_pointer AnimData69  ; SPRITE_ANIM_CGB_CARD_BOTTOM_RIGHT
-	anim_data_pointer AnimData70  ; SPRITE_ANIM_CGB_CARD_RIGHT_SPARK
+	anim_data_pointer AnimData65  ; SPRITE_ANIM_CARD_TOP_LEFT
+	anim_data_pointer AnimData66  ; SPRITE_ANIM_CARD_TOP_RIGHT
+	anim_data_pointer AnimData67  ; SPRITE_ANIM_CARD_LEFT_SPARK
+	anim_data_pointer AnimData68  ; SPRITE_ANIM_CARD_BOTTOM_LEFT
+	anim_data_pointer AnimData69  ; SPRITE_ANIM_CARD_BOTTOM_RIGHT
+	anim_data_pointer AnimData70  ; SPRITE_ANIM_CARD_RIGHT_SPARK
 	anim_data_pointer AnimData71  ; SPRITE_ANIM_71
 	anim_data_pointer AnimData72  ; SPRITE_ANIM_72
 	anim_data_pointer AnimData73  ; SPRITE_ANIM_73

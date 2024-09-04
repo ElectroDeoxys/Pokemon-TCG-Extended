@@ -210,7 +210,7 @@ OverworldMap_InitVolcanoSprite:
 	ld [hli], a ; x
 	ld a, $10
 	ld [hl], a ; y
-	ld a, SPRITE_ANIM_CGB_VOLCANO_SMOKE
+	ld a, SPRITE_ANIM_VOLCANO_SMOKE
 	jp StartNewSpriteAnimation
 
 OverworldMap_InitCursorSprite:
@@ -222,7 +222,7 @@ OverworldMap_InitCursorSprite:
 	call CreateSpriteAndAnimBufferEntry
 	ld a, [wWhichSprite]
 	ld [wOverworldMapCursorSprite], a
-	ld a, SPRITE_ANIM_CGB_OWMAP_CURSOR
+	ld a, SPRITE_ANIM_OWMAP_CURSOR
 	ld [wOverworldMapCursorAnimation], a
 	call StartNewSpriteAnimation
 	ld a, EVENT_MASON_LAB_STATE
@@ -235,7 +235,7 @@ OverworldMap_InitCursorSprite:
 .visited_lab
 	ret
 
-; play animation SPRITE_ANIM_CGB_OWMAP_CURSOR_FAST
+; play animation SPRITE_ANIM_OWMAP_CURSOR_FAST
 ; to make the cursor blink faster after a selection is made
 OverworldMap_UpdateCursorAnimation:
 	ld a, [wOverworldMapCursorSprite]
