@@ -1811,12 +1811,12 @@ BoyfriendsEffect:
 	call AddToDamage ; adds 2 * 10 * c
 	ret
 
-NidoranFFurySwipes_AIEffect:
+FurySwipes10_AIEffect:
 	ld a, 30 / 2
 	lb de, 0, 30
 	jp SetExpectedAIDamage
 
-NidoranFFurySwipes_MultiplierEffect:
+FurySwipes10_MultiplierEffect:
 	ld hl, 10
 	call LoadTxRam3
 	ldtx de, DamageCheckIfHeadsXDamageText
@@ -2839,20 +2839,6 @@ HeadacheEffect:
 	call GetNonTurnDuelistVariable
 	set SUBSTATUS3_HEADACHE_F, [hl]
 	ret
-
-PsyduckFurySwipes_AIEffect:
-	ld a, 30 / 2
-	lb de, 0, 30
-	jp SetExpectedAIDamage
-
-PsyduckFurySwipes_MultiplierEffect:
-	ld hl, 10
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 3
-	call TossCoinATimes_BankB
-	call ATimes10
-	jp SetDefiniteDamage
 
 GolduckHyperBeam_PlayerSelectEffect:
 	call SwapTurn

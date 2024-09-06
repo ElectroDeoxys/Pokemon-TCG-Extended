@@ -191,8 +191,8 @@ NidoqueenBoyfriendsEffectCommands:
 	db  $00
 
 NidoranFFurySwipesEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NidoranFFurySwipes_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, NidoranFFurySwipes_AIEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FurySwipes10_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, FurySwipes10_AIEffect
 	db  $00
 
 NidoranFCallForFamilyEffectCommands:
@@ -399,8 +399,8 @@ PsyduckHeadacheEffectCommands:
 	db  $00
 
 PsyduckFurySwipesEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PsyduckFurySwipes_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, PsyduckFurySwipes_AIEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FurySwipes10_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, FurySwipes10_AIEffect
 	db  $00
 
 GolduckPsyshockEffectCommands:
