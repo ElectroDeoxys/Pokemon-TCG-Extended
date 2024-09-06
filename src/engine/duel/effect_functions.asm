@@ -1476,7 +1476,7 @@ FoulOdorEffect:
 	jp SwapTurn
 
 ; If heads, prevent all damage done to user next turn
-KakunaStiffenEffect:
+StiffenEffect:
 	ldtx de, IfHeadsNoDamageNextTurnText
 	call TossCoin_BankB
 	jp nc, SetWasUnsuccessful
@@ -1513,7 +1513,7 @@ SwordsDanceEffect:
 	jp ApplySubstatus1ToDefendingCard
 
 ; If heads, defending Pokemon becomes confused
-ZubatSupersonicEffect:
+SupersonicEffect:
 	call Confusion50PercentEffect
 	call nc, SetNoEffectFromStatus
 	ret
@@ -1567,17 +1567,6 @@ FoulGas_PoisonOrConfusionEffect:
 	call TossCoin_BankB
 	jp c, PoisonEffect
 	jp ConfusionEffect
-
-; an exact copy of KakunaStiffenEffect
-; If heads, prevent all damage done to user next turn
-MetapodStiffenEffect:
-	ldtx de, IfHeadsNoDamageNextTurnText
-	call TossCoin_BankB
-	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_NO_DAMAGE_STIFFEN
-	jp ApplySubstatus1ToDefendingCard
 
 ; returns carry if no cards in Deck or if
 ; Play Area is full already.
@@ -1961,11 +1950,6 @@ HornHazard_NoDamage50PercentEffect:
 .heads
 	ld a, ATK_ANIM_HIT
 	ld [wLoadedAttackAnimation], a
-	ret
-
-NidorinaSupersonicEffect:
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
 	ret
 
 NidorinaDoubleKick_AIEffect:
@@ -2937,11 +2921,6 @@ SeadraAgilityEffect:
 	ld a, SUBSTATUS1_AGILITY
 	jp ApplySubstatus1ToDefendingCard
 
-ShellderSupersonicEffect:
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
-	ret
-
 HideInShellEffect:
 	ldtx de, IfHeadsNoDamageNextTurnText
 	call TossCoin_BankB
@@ -3025,11 +3004,6 @@ SquirtleWithdrawEffect:
 HorseaSmokescreenEffect:
 	ld a, SUBSTATUS2_SMOKESCREEN
 	jp ApplySubstatus2ToDefendingCard
-
-TentacruelSupersonicEffect:
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
-	ret
 
 JellyfishSting_AIEffect:
 	ld a, 10
@@ -7844,11 +7818,6 @@ JigglypuffDoubleEdgeEffect:
 PounceEffect:
 	ld a, SUBSTATUS2_POUNCE
 	jp ApplySubstatus2ToDefendingCard
-
-LickitungSupersonicEffect:
-	call Confusion50PercentEffect
-	call nc, SetNoEffectFromStatus
-	ret
 
 PidgeyWhirlwind_SelectEffect:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA

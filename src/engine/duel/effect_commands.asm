@@ -89,7 +89,7 @@ GloomFoulOdorEffectCommands:
 	db  $00
 
 KakunaStiffenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, KakunaStiffenEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StiffenEffect
 	db  $00
 
 KakunaPoisonPowderEffectCommands:
@@ -114,7 +114,7 @@ ScytherSwordsDanceEffectCommands:
 	db  $00
 
 ZubatSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZubatSupersonicEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
 	db  $00
 
 ZubatLeechLifeEffectCommands:
@@ -145,7 +145,7 @@ KoffingFoulGasEffectCommands:
 	db  $00
 
 MetapodStiffenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MetapodStiffenEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StiffenEffect
 	db  $00
 
 MetapodStunSporeEffectCommands:
@@ -208,7 +208,7 @@ NidoranMHornHazardEffectCommands:
 	db  $00
 
 NidorinaSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NidorinaSupersonicEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
 	db  $00
 
 NidorinaDoubleKickEffectCommands:
@@ -423,7 +423,7 @@ SeadraAgilityEffectCommands:
 	db  $00
 
 ShellderSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ShellderSupersonicEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
 	db  $00
 
 ShellderHideInShellEffectCommands:
@@ -469,7 +469,7 @@ HorseaSmokescreenEffectCommands:
 	db  $00
 
 TentacruelSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TentacruelSupersonicEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
 	db  $00
 
 TentacruelJellyfishStingEffectCommands:
@@ -1329,7 +1329,7 @@ LickitungTongueWrapEffectCommands:
 	db  $00
 
 LickitungSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LickitungSupersonicEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
 	db  $00
 
 PidgeyWhirlwindEffectCommands:
