@@ -74,7 +74,7 @@ DrawDecksScreen:
 ; mark is as valid in wDecksValid
 
 ; deck 1
-	ld a, [hffb5] ; should be ldh
+	ldh a, [hffb5]
 	bit 0, a
 	jr z, .skip_name_1
 	ld hl, sDeck1Name
@@ -88,7 +88,7 @@ DrawDecksScreen:
 	ld [wDeck1Valid], a
 
 .deck_2
-	ld a, [hffb5] ; should be ldh
+	ldh a, [hffb5]
 	bit 1, a
 	jr z, .skip_name_2
 	ld hl, sDeck2Name
@@ -102,7 +102,7 @@ DrawDecksScreen:
 	ld [wDeck2Valid], a
 
 .deck_3
-	ld a, [hffb5] ; should be ldh
+	ldh a, [hffb5]
 	bit 2, a
 	jr z, .skip_name_3
 	ld hl, sDeck3Name
@@ -116,7 +116,7 @@ DrawDecksScreen:
 	ld [wDeck3Valid], a
 
 .deck_4
-	ld a, [hffb5] ; should be ldh
+	ldh a, [hffb5]
 	bit 3, a
 	jr z, .skip_name_4
 	ld hl, sDeck4Name
@@ -3068,25 +3068,25 @@ CreateCardCollectionListWithDeckCards:
 	call DisableSRAM
 
 ; deck_1
-	ld a, [hffb5] ; should be ldh
+	ldh a, [hffb5]
 	bit DECK_1_F, a
 	jr z, .deck_2
 	ld de, sDeck1Cards
 	call IncrementDeckCardsInTempCollection
 .deck_2
-	ld a, [hffb5] ; should be ldh
+	ldh a, [hffb5]
 	bit DECK_2_F, a
 	jr z, .deck_3
 	ld de, sDeck2Cards
 	call IncrementDeckCardsInTempCollection
 .deck_3
-	ld a, [hffb5] ; should be ldh
+	ldh a, [hffb5]
 	bit DECK_3_F, a
 	jr z, .deck_4
 	ld de, sDeck3Cards
 	call IncrementDeckCardsInTempCollection
 .deck_4
-	ld a, [hffb5] ; should be ldh
+	ldh a, [hffb5]
 	bit DECK_4_F, a
 	ret z
 	ld de, sDeck4Cards

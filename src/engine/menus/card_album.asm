@@ -624,7 +624,7 @@ GetFirstOwnedCardIndex:
 
 CardAlbum:
 	ld a, $01
-	ld [hffb4], a ; should be ldh
+	ldh [hffb4], a
 
 	xor a
 .booster_pack_menu
