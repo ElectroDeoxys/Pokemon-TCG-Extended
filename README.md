@@ -1,32 +1,14 @@
 # Pokémon TCG Extended
 
-Highly optimized disassembly of Pokémon TCG, meant to be used as a base for hacks. Removes GameBoy compatibility and multiplayer features to allow for more ROM space.
-Compared to the base game, this build saves 83,794 bytes, translating to 9.8% more available space.
+Modified disassembly of [Pokémon TCG](https://github.com/pret/poketcg) that supports double the cards as the vanilla game, meant to be used as a base for hacks. The modified engine supports up to 510 cards, as opposed to 254 from the base game. For everything else this repo stays as faithful as possible to the vanilla game.
 
-## Current ROM map summary
+These changes are built upon the [tinytcg branch](https://github.com/ElectroDeoxys/poketcg/tree/tinytcg). Please read that repo's `README.md` for more details.
 
-```
-SUMMARY:
-	ROM0: 13110 bytes used / 3274 free
-	ROMX: 754523 bytes used / 277669 free in 63 banks
-	SRAM: 20903 bytes used / 11865 free in 4 banks
-	WRAM0: 4068 bytes used / 28 free
-	WRAMX: 3813 bytes used / 283 free in 1 bank
-	HRAM: 56 bytes used / 71 free
-```
 
-## Removed content
+## Technical details
 
-- GameBoy tilemaps and compatibility functionality;
-- Unused content (Japanese title screen, unreferenced routines, unused text, debug menus);
-- Printer functions;
-- Card Pop!;
-- Gift Center;
-- Link duels.
+The engine has gone through an overhaul based on the features in the sequel, which also supports card IDs up to `0x1ff`. This is not a true 16-bit engine since many of the systems in-game rely on card IDs fitting inside a 9-bit integer. This corresponds to how the game stores which cards are in the collection and how it compresses saved decks in SRAM.
 
-## Added content
-
-- A simplistic compatibility screen when GameBoy is detected.
 
 ## Instructions to build
 
