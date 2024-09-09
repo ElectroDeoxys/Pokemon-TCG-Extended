@@ -1,4 +1,4 @@
-# tinytcg
+# Pokémon TCG Extended
 
 Highly optimized disassembly of Pokémon TCG, meant to be used as a base for hacks. Removes GameBoy compatibility and multiplayer features to allow for more ROM space.
 Compared to the base game, this build saves 83,794 bytes, translating to 9.8% more available space.
@@ -33,4 +33,4 @@ SUMMARY:
 To assemble, first download RGBDS (https://github.com/gbdev/rgbds/releases) and extract it to /usr/local/bin.
 Run `make` in your shell.
 
-This will output a file named "tinytcg.gbc".
+This will output a file named "poketcg_ext.gbc".

@@ -1,4 +1,4 @@
-rom := tinytcg.gbc
+rom := poketcg_ext.gbc
 
 rom_obj := \
 	src/main.o \
