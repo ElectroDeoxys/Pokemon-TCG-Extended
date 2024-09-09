@@ -72,6 +72,7 @@ ROMX $07
 ROMX $08
 	"AI Logic 2"
 ROMX $0a
+	"Card Pointers"
 	"Cards"
 ROMX $0b
 	"Effect Functions"

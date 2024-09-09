@@ -32,6 +32,10 @@ MACRO bigdw ; big-endian word
 	dx 2, \1
 ENDM
 
+MACRO dab
+	dwb \1, BANK(\1)
+ENDM
+
 MACRO rgb
 	dw ((\3) << 10 | (\2) << 5 | (\1))
 ENDM

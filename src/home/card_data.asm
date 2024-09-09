@@ -1,18 +1,23 @@
 ; load data of card with text id of name at de to wLoadedCard1
 LoadCardDataToBuffer1_FromName::
-	ld hl, CardPointers + 2 ; skip first NULL pointer
+	ld hl, CardPointers + 3 ; skip first NULL pointer
+	ldh a, [hBankROM]
+	push af
 	ld a, BANK(CardPointers)
-	call BankpushROM2
+	call BankswitchROM
 .find_card_loop
 	ld a, [hli]
 	or [hl]
 	jr z, .done
+	inc hl
 	push hl
+	ld a, [hld]
+	ld b, a
 	ld a, [hld]
 	ld l, [hl]
 	ld h, a
-	ld a, BANK(CardPointers)
-	call BankpushROM2
+	ld a, b
+	call BankswitchROM
 	ld bc, CARD_DATA_NAME
 	add hl, bc
 	ld a, [hli]
@@ -22,15 +27,20 @@ LoadCardDataToBuffer1_FromName::
 	cp d
 .no_match
 	pop hl
-	pop hl
+	push af
+	ld a, BANK(CardPointers)
+	call BankswitchROM
+	pop af
 	inc hl
 	jr nz, .find_card_loop
 	dec hl
 	ld a, [hld]
+	ld b, a
+	ld a, [hld]
 	ld l, [hl]
 	ld h, a
-	ld a, BANK(CardPointers)
-	call BankpushROM2
+	ld a, b
+	call BankswitchROM
 	ld de, wLoadedCard1
 	ld b, PKMN_CARD_DATA_LENGTH
 .copy_card_loop
@@ -39,10 +49,9 @@ LoadCardDataToBuffer1_FromName::
 	inc de
 	dec b
 	jr nz, .copy_card_loop
-	pop hl
 .done
-	call BankpopROM
-	ret
+	pop af
+	jp BankswitchROM
 
 ; load data of card with id at de to wLoadedCard2
 LoadCardDataToBuffer2_FromCardID::
@@ -63,7 +72,6 @@ LoadCardDataToHL_FromCardID::
 	call GetCardPointer
 	pop de
 	jr c, .done
-	ld a, BANK(CardPointers)
 	call BankpushROM2
 	ld b, PKMN_CARD_DATA_LENGTH
 .copy_card_data_loop
@@ -85,7 +93,6 @@ GetCardType::
 	push hl
 	call GetCardPointer
 	jr c, .done
-	ld a, BANK(CardPointers)
 	call BankpushROM2
 	ld l, [hl]
 	call BankpopROM
@@ -100,7 +107,6 @@ GetCardName::
 	push hl
 	call GetCardPointer
 	jr c, .done
-	ld a, BANK(CardPointers)
 	call BankpushROM2
 	ld de, CARD_DATA_NAME
 	add hl, de
@@ -118,7 +124,6 @@ GetCardTypeRarityAndSet::
 	push hl
 	call GetCardPointer
 	jr c, .done
-	ld a, BANK(CardPointers)
 	call BankpushROM2
 	ld e, [hl] ; CARD_DATA_TYPE
 	ld bc, CARD_DATA_RARITY
@@ -133,34 +138,49 @@ GetCardTypeRarityAndSet::
 	pop hl
 	ret
 
-; return at hl the pointer to the data of the card with id at e
-; return carry if e was out of bounds, so no pointer was returned
+; return at a:hl the pointer to the data of the card with id at de
+; return carry if de was out of bounds, so no pointer was returned
 GetCardPointer::
 	push de
 	push bc
+	ldh a, [hBankROM]
+	push af
+	ld a, BANK(CardPointers)
+	call BankswitchROM
 	ld l, e
 	ld h, d
 	add hl, hl
+	add hl, de
 	ld bc, CardPointers
 	add hl, bc
 	ld a, h
-	cp HIGH(CardPointers + 2 + (2 * NUM_CARDS))
+	cp HIGH(CardPointers + 3 * (NUM_CARDS + 1))
 	jr nz, .nz
 	ld a, l
-	cp LOW(CardPointers + 2 + (2 * NUM_CARDS))
+	cp LOW(CardPointers + 3 * (NUM_CARDS + 1))
 .nz
 	ccf
 	jr c, .out_of_bounds
-	ld a, BANK(CardPointers)
-	call BankpushROM2
 	ld a, [hli]
-	ld h, [hl]
+	ld c, [hl]
+	inc hl
+	ld b, [hl]
 	ld l, a
-	call BankpopROM
-	or a
-.out_of_bounds
+	ld h, c
+	pop af
+	call BankswitchROM
+	ld a, b
 	pop bc
 	pop de
+	or a
+	ret
+
+.out_of_bounds
+	pop af
+	call BankswitchROM
+	pop bc
+	pop de
+	scf
 	ret
 
 ; input:

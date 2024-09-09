@@ -141,6 +141,9 @@ INCLUDE "engine/duel/effect_functions.asm"
 SECTION "Decks", ROMX
 INCLUDE "data/decks.asm"
 
+SECTION "Card Pointers", ROMX
+INCLUDE "data/card_pointers.asm"
+
 SECTION "Cards", ROMX
 INCLUDE "data/cards.asm"
 
