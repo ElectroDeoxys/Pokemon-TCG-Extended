@@ -92,23 +92,9 @@ AIDoAction::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-
 	ld a, c
-	or a
-	jr nz, .not_zero
-
-; if input was 0, copy deck data of turn player
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	call CopyDeckData
-	jr .done
-
-; jump to corresponding AI routine related to input
-.not_zero
 	call JumpToFunctionInTable
 
-.done
 	ld c, a
 	pop af
 	call BankswitchROM

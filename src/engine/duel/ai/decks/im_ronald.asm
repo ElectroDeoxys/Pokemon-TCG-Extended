@@ -27,25 +27,25 @@ AIActionTable_ImRonald:
 	jp AIPickPrizeCards
 
 .list_arena
-	db LAPRAS
-	db SEEL
-	db CHARMANDER
-	db CUBONE
-	db SQUIRTLE
-	db GROWLITHE
-	db $00
+	dw LAPRAS
+	dw SEEL
+	dw CHARMANDER
+	dw CUBONE
+	dw SQUIRTLE
+	dw GROWLITHE
+	dw NULL
 
 .list_bench
-	db CHARMANDER
-	db SQUIRTLE
-	db SEEL
-	db CUBONE
-	db GROWLITHE
-	db LAPRAS
-	db $00
+	dw CHARMANDER
+	dw SQUIRTLE
+	dw SEEL
+	dw CUBONE
+	dw GROWLITHE
+	dw LAPRAS
+	dw NULL
 
 .list_retreat
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy CHARMANDER,     3, +0
@@ -59,11 +59,11 @@ AIActionTable_ImRonald:
 	ai_energy LAPRAS,         3, +0
 	ai_energy CUBONE,         3, +0
 	ai_energy MAROWAK_LV26,   3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db LAPRAS
-	db $00
+	dw LAPRAS
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

@@ -32,14 +32,14 @@ s0a00c:: ; a00c
 sPlayerName:: ; a010
 	ds NAME_BUFFER_LENGTH
 
-	ds $e0
+SECTION "Card and Deck SRAM", SRAM
 
 sCardAndDeckSaveData::
 
 ; for each card, how many (0-127) the player owns
 ; CARD_NOT_OWNED ($80) indicates that the player has not yet seen the card
 sCardCollection:: ; a100
-	ds $100
+	ds CARD_COLLECTION_SIZE
 
 sBuiltDecks::
 sDeck1:: deck_struct sDeck1 ; a200
@@ -47,67 +47,11 @@ sDeck2:: deck_struct sDeck2 ; a254
 sDeck3:: deck_struct sDeck3 ; a2a8
 sDeck4:: deck_struct sDeck4 ; a2fc
 
-sSavedDecks::
-sSavedDeck1::  deck_struct sSavedDeck1  ; a350
-sSavedDeck2::  deck_struct sSavedDeck2  ; a3a4
-sSavedDeck3::  deck_struct sSavedDeck3  ; a3f8
-sSavedDeck4::  deck_struct sSavedDeck4  ; a44c
-sSavedDeck5::  deck_struct sSavedDeck5  ; a4a0
-sSavedDeck6::  deck_struct sSavedDeck6  ; a4f4
-sSavedDeck7::  deck_struct sSavedDeck7  ; a548
-sSavedDeck8::  deck_struct sSavedDeck8  ; a59c
-sSavedDeck9::  deck_struct sSavedDeck9  ; a5f0
-sSavedDeck10:: deck_struct sSavedDeck10 ; a644
-sSavedDeck11:: deck_struct sSavedDeck11 ; a698
-sSavedDeck12:: deck_struct sSavedDeck12 ; a6ec
-sSavedDeck13:: deck_struct sSavedDeck13 ; a740
-sSavedDeck14:: deck_struct sSavedDeck14 ; a794
-sSavedDeck15:: deck_struct sSavedDeck15 ; a7e8
-sSavedDeck16:: deck_struct sSavedDeck16 ; a83c
-sSavedDeck17:: deck_struct sSavedDeck17 ; a890
-sSavedDeck18:: deck_struct sSavedDeck18 ; a8e4
-sSavedDeck19:: deck_struct sSavedDeck19 ; a938
-sSavedDeck20:: deck_struct sSavedDeck20 ; a98c
-sSavedDeck21:: deck_struct sSavedDeck21 ; a9e0
-sSavedDeck22:: deck_struct sSavedDeck22 ; aa34
-sSavedDeck23:: deck_struct sSavedDeck23 ; aa88
-sSavedDeck24:: deck_struct sSavedDeck24 ; aadc
-sSavedDeck25:: deck_struct sSavedDeck25 ; ab30
-sSavedDeck26:: deck_struct sSavedDeck26 ; ab84
-sSavedDeck27:: deck_struct sSavedDeck27 ; abd8
-sSavedDeck28:: deck_struct sSavedDeck28 ; ac2c
-sSavedDeck29:: deck_struct sSavedDeck29 ; ac80
-sSavedDeck30:: deck_struct sSavedDeck30 ; acd4
-sSavedDeck31:: deck_struct sSavedDeck31 ; ad28
-sSavedDeck32:: deck_struct sSavedDeck32 ; ad7c
-sSavedDeck33:: deck_struct sSavedDeck33 ; add0
-sSavedDeck34:: deck_struct sSavedDeck34 ; ae24
-sSavedDeck35:: deck_struct sSavedDeck35 ; ae78
-sSavedDeck36:: deck_struct sSavedDeck36 ; aecc
-sSavedDeck37:: deck_struct sSavedDeck37 ; af20
-sSavedDeck38:: deck_struct sSavedDeck38 ; af74
-sSavedDeck39:: deck_struct sSavedDeck39 ; afc8
-sSavedDeck40:: deck_struct sSavedDeck40 ; b01c
-sSavedDeck41:: deck_struct sSavedDeck41 ; b070
-sSavedDeck42:: deck_struct sSavedDeck42 ; b0c4
-sSavedDeck43:: deck_struct sSavedDeck43 ; b118
-sSavedDeck44:: deck_struct sSavedDeck44 ; b16c
-sSavedDeck45:: deck_struct sSavedDeck45 ; b1c0
-sSavedDeck46:: deck_struct sSavedDeck46 ; b214
-sSavedDeck47:: deck_struct sSavedDeck47 ; b268
-sSavedDeck48:: deck_struct sSavedDeck48 ; b2bc
-sSavedDeck49:: deck_struct sSavedDeck49 ; b310
-sSavedDeck50:: deck_struct sSavedDeck50 ; b364
-sSavedDeck51:: deck_struct sSavedDeck51 ; b3b8
-sSavedDeck52:: deck_struct sSavedDeck52 ; b40c
-sSavedDeck53:: deck_struct sSavedDeck53 ; b460
-sSavedDeck54:: deck_struct sSavedDeck54 ; b4b4
-sSavedDeck55:: deck_struct sSavedDeck55 ; b508
-sSavedDeck56:: deck_struct sSavedDeck56 ; b55c
-sSavedDeck57:: deck_struct sSavedDeck57 ; b5b0
-sSavedDeck58:: deck_struct sSavedDeck58 ; b604
-sSavedDeck59:: deck_struct sSavedDeck59 ; b658
-sSavedDeck60:: deck_struct sSavedDeck60 ; b6ac
+sSavedDecks:: ; a350
+; wSavedDeck1 - wSavedDeck10
+FOR n, 1, NUM_DECK_SAVE_MACHINE_SLOTS + 1
+sSavedDeck{d:n}:: deck_struct sSavedDeck{d:n}
+ENDR
 
 sCurrentlySelectedDeck:: ; b700
 	ds $1
@@ -131,7 +75,8 @@ sb704:: ; b704
 	ds $3
 sCardAndDeckSaveDataEnd::
 
-	ds $f9
+
+SECTION "General Data SRAM", SRAM
 
 sGeneralSaveData::
 sb800:: ; b800
@@ -339,16 +284,16 @@ SECTION "SRAM2", SRAM
 sBackupGeneralSaveData:: ; b800
 	ds $bb
 
-	ds $43
+	ds $41
 
-; byte 1 = total number of cards collected
-; byte 2 = total number of cards to collect
+; word 1 = total number of cards collected
+; word 2 = total number of cards to collect
 ;  (doesn't count Phantom cards unless they
 ;   have been collected already)
 sAlbumProgress:: ; b8fe
-	ds $2
+	ds $4
 
-	ds $300
+	ds $2fe
 
 ; saved data of the current duel, including a two-byte checksum
 ; see SaveDuelDataToDE

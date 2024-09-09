@@ -27,25 +27,25 @@ AIActionTable_WondersOfScience:
 	jp AIPickPrizeCards
 
 .list_arena
-	db MEWTWO_LV53
-	db MEWTWO_ALT_LV60
-	db MEWTWO_LV60
-	db GRIMER
-	db KOFFING
-	db PORYGON
-	db $00
+	dw MEWTWO_LV53
+	dw MEWTWO_ALT_LV60
+	dw MEWTWO_LV60
+	dw GRIMER
+	dw KOFFING
+	dw PORYGON
+	dw NULL
 
 .list_bench
-	db GRIMER
-	db KOFFING
-	db MEWTWO_ALT_LV60
-	db MEWTWO_LV60
-	db MEWTWO_LV53
-	db PORYGON
-	db $00
+	dw GRIMER
+	dw KOFFING
+	dw MEWTWO_ALT_LV60
+	dw MEWTWO_LV60
+	dw MEWTWO_LV53
+	dw PORYGON
+	dw NULL
 
 .list_retreat
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy GRIMER,          3, +0
@@ -56,11 +56,11 @@ AIActionTable_WondersOfScience:
 	ai_energy MEWTWO_ALT_LV60, 2, -1
 	ai_energy MEWTWO_LV60,     2, -1
 	ai_energy PORYGON,         2, -1
-	db $00
+	dw NULL
 
 .list_prize
-	db MUK
-	db $00
+	dw MUK
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

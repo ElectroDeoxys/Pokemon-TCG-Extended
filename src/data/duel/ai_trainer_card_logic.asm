@@ -1,6 +1,6 @@
 MACRO ai_trainer_card_logic
 	db \1 ; AI_TRAINER_CARD_PHASE_* constant
-	db \2 ; ID of trainer card
+	dw \2 ; ID of trainer card
 	dw \3 ; function for AI decision to play card
 	dw \4 ; function for AI playing the card
 ENDM

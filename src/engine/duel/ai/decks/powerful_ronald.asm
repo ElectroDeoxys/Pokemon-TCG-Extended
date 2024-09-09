@@ -27,36 +27,36 @@ AIActionTable_PowerfulRonald:
 	jp AIPickPrizeCards
 
 .list_arena
-	db KANGASKHAN
-	db ELECTABUZZ_LV35
-	db HITMONCHAN
-	db MR_MIME
-	db LICKITUNG
-	db HITMONLEE
-	db TAUROS
-	db JYNX
-	db MEWTWO_LV53
-	db DODUO
-	db $00
+	dw KANGASKHAN
+	dw ELECTABUZZ_LV35
+	dw HITMONCHAN
+	dw MR_MIME
+	dw LICKITUNG
+	dw HITMONLEE
+	dw TAUROS
+	dw JYNX
+	dw MEWTWO_LV53
+	dw DODUO
+	dw NULL
 
 .list_bench
-	db KANGASKHAN
-	db HITMONLEE
-	db HITMONCHAN
-	db TAUROS
-	db DODUO
-	db JYNX
-	db MEWTWO_LV53
-	db ELECTABUZZ_LV35
-	db MR_MIME
-	db LICKITUNG
-	db $00
+	dw KANGASKHAN
+	dw HITMONLEE
+	dw HITMONCHAN
+	dw TAUROS
+	dw DODUO
+	dw JYNX
+	dw MEWTWO_LV53
+	dw ELECTABUZZ_LV35
+	dw MR_MIME
+	dw LICKITUNG
+	dw NULL
 
 .list_retreat
 	ai_retreat KANGASKHAN, -1
 	ai_retreat DODUO,      -1
 	ai_retreat DODRIO,     -1
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy ELECTABUZZ_LV35, 2, +1
@@ -70,12 +70,12 @@ AIActionTable_PowerfulRonald:
 	ai_energy LICKITUNG,       2, +0
 	ai_energy KANGASKHAN,      4, -1
 	ai_energy TAUROS,          3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db ENERGY_REMOVAL
-	db $00
+	dw GAMBLER
+	dw ENERGY_REMOVAL
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

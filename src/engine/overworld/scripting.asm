@@ -423,7 +423,8 @@ EventVarMasks:
 	event_def $07, %00000100 ; EVENT_ISAAC_TALKED
 	event_def $07, %00000010 ; EVENT_MAN1_TALKED
 	event_def $07, %00000001 ; EVENT_MAN1_WAITING_FOR_CARD
-	event_def $08, %11111111 ; EVENT_MAN1_REQUESTED_CARD_ID
+	event_def $08, %11111111 ; EVENT_MAN1_REQUESTED_CARD_ID_LO
+	event_def $0d, %00000001 ; EVENT_MAN1_REQUESTED_CARD_ID_HI
 	event_def $09, %11100000 ; EVENT_MAN1_GIFT_SEQUENCE_STATE
 	event_def $09, %00011111 ; EVENT_MAN1_GIFTED_CARD_FLAGS
 	event_def $0a, %11110000 ; EVENT_MEDAL_COUNT
@@ -965,34 +966,45 @@ ScriptCommand_GiveOneOfEachTrainerBooster:
 ScriptCommand_ShowCardReceivedScreen:
 	call Func_c2a3
 	ld a, c
+	and b
 	cp $ff
 	jr z, .legendary_card
-	or a
-	jr nz, .show_card
-	ld a, [wCardReceived]
+	ld a, c
+	or b
+	jr z, .card_received
+	ld e, c
+	ld d, b
+	jr .show_card
+.card_received
+	ld a, [wCardReceived + 0]
+	ld e, a
+	ld a, [wCardReceived + 1]
+	ld d, a
 
 .show_card
-	push af
+	push de
 	farcall InitMenuScreen
 	farcall FlashWhiteScreen
-	pop af
+	pop de
 	bank1call ShowPromotionalCardScreen
 	call WhiteOutDMGPals
 	call DoFrameIfLCDEnabled
 	call ReturnToOverworldNoCallback
-	jp IncreaseScriptPointerBy2
+	jp IncreaseScriptPointerBy3
 
 .legendary_card
-	xor a
+	ld de, NULL
 	jr .show_card
 
 ScriptCommand_JumpIfCardOwned:
-	ld a, c
+	ld e, c
+	ld d, b
 	call GetCardCountInCollectionAndDecks
 	jr ScriptCommand_JumpIfCardInCollection.count_check
 
 ScriptCommand_JumpIfCardInCollection:
-	ld a, c
+	ld d, b
+	ld e, c
 	call GetCardCountInCollection
 
 .count_check
@@ -1001,21 +1013,18 @@ ScriptCommand_JumpIfCardInCollection:
 
 .fail
 	call SetScriptControlByteFail
-	jp IncreaseScriptPointerBy4
+	jp IncreaseScriptPointerBy5
 
 .pass_try_jump
 	call SetScriptControlBytePass
-	call GetScriptArgs2AfterPointer
+	call GetScriptArgs3AfterPointer
 	jr z, .no_jump
 	jp SetScriptPointer
 
 .no_jump
-	jp IncreaseScriptPointerBy4
+	jp IncreaseScriptPointerBy5
 
 ScriptCommand_JumpIfEnoughCardsOwned:
-	push bc
-	call IncreaseScriptPointerBy1
-	pop bc
 	call GetAmountOfCardsOwned
 	ld a, h
 	cp b
@@ -1029,30 +1038,35 @@ ScriptCommand_JumpIfEnoughCardsOwned:
 
 ; Gives the first arg as a card. If that's 0 pulls from wCardReceived
 ScriptCommand_GiveCard:
-	ld a, c
-	or a
+	ld e, c
+	ld d, b
+	ld a, d
+	or e
 	jr nz, .give_card
-	ld a, [wCardReceived]
+	ld a, [wCardReceived + 0]
+	ld e, a
+	ld a, [wCardReceived + 1]
+	ld d, a
 
 .give_card
 	call AddCardToCollection
-	jp IncreaseScriptPointerBy2
+	jp IncreaseScriptPointerBy3
 
 ScriptCommand_TakeCard:
-	ld a, c
+	ld d, b
+	ld e, c
 	call RemoveCardFromCollection
-	jp IncreaseScriptPointerBy2
+	jp IncreaseScriptPointerBy3
 
 ScriptCommand_JumpIfAnyEnergyCardsInCollection:
-	lb bc, 0, GRASS_ENERGY
+	ld de, GRASS_ENERGY
+	ld b, 0
 .loop
-	ld a, c
 	call GetCardCountInCollection
 	add b
 	ld b, a
-	inc c
-	ld a, c
-	cp DOUBLE_COLORLESS_ENERGY + 1
+	inc de
+	cp16 DOUBLE_COLORLESS_ENERGY + 1
 	jr c, .loop
 	ld a, b
 	or a
@@ -1072,24 +1086,19 @@ ScriptCommand_JumpIfAnyEnergyCardsInCollection:
 	jp IncreaseScriptPointerBy3
 
 ScriptCommand_RemoveAllEnergyCardsFromCollection:
-	ld c, GRASS_ENERGY
+	ld de, GRASS_ENERGY
 .next_energy
-	push bc
-	ld a, c
 	call GetCardCountInCollection
 	jr c, .no_energy
 	ld b, a
 .remove_loop
-	ld a, c
 	call RemoveCardFromCollection
 	dec b
 	jr nz, .remove_loop
 
 .no_energy
-	pop bc
-	inc c
-	ld a, c
-	cp DOUBLE_COLORLESS_ENERGY + 1
+	inc de
+	cp16 DOUBLE_COLORLESS_ENERGY + 1
 	jr c, .next_energy
 	jp IncreaseScriptPointerBy1
 
@@ -1133,7 +1142,7 @@ ScriptCommand_PickNextMan1RequestedCard:
 	get_event_value EVENT_MAN1_GIFTED_CARD_FLAGS
 	ld b, a
 .choose_again
-	ld a, Man1RequestedCardsList.end - Man1RequestedCardsList
+	ld a, (Man1RequestedCardsList.end - Man1RequestedCardsList) / 2
 	call Random
 	ld e, 1
 	ld c, a
@@ -1157,17 +1166,21 @@ ScriptCommand_PickNextMan1RequestedCard:
 	pop bc
 	ld b, 0
 	ld hl, Man1RequestedCardsList
+	sla c
 	add hl, bc
 	ld c, [hl]
-	set_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	set_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	inc hl
+	ld c, [hl]
+	set_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
 	jp IncreaseScriptPointerBy1
 
 Man1RequestedCardsList:
-	db GRAVELER
-	db OMASTAR
-	db PARASECT
-	db RAPIDASH
-	db WEEZING
+	dw GRAVELER
+	dw OMASTAR
+	dw PARASECT
+	dw RAPIDASH
+	dw WEEZING
 .end
 
 ScriptCommand_LoadMan1RequestedCardIntoTxRamSlot:
@@ -1176,9 +1189,10 @@ ScriptCommand_LoadMan1RequestedCardIntoTxRamSlot:
 	ld hl, wTxRam2
 	add hl, bc
 	push hl
-	get_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
 	ld e, a
-	ld d, 0
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
+	ld d, a
 	call GetCardName
 	pop hl
 	ld [hl], e
@@ -1187,19 +1201,28 @@ ScriptCommand_LoadMan1RequestedCardIntoTxRamSlot:
 	jp IncreaseScriptPointerBy2
 
 ScriptCommand_JumpIfMan1RequestedCardOwned:
-	get_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	ld e, a
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
+	ld d, a
 	call GetCardCountInCollectionAndDecks
 	jp c, ScriptCommand_JumpIfAnyEnergyCardsInCollection.fail
 	jp ScriptCommand_JumpIfAnyEnergyCardsInCollection.pass_try_jump
 
 ScriptCommand_JumpIfMan1RequestedCardInCollection:
-	get_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	ld e, a
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
+	ld d, a
 	call GetCardCountInCollection
 	jp c, ScriptCommand_JumpIfAnyEnergyCardsInCollection.fail
 	jp ScriptCommand_JumpIfAnyEnergyCardsInCollection.pass_try_jump
 
 ScriptCommand_RemoveMan1RequestedCardFromCollection:
-	get_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	ld e, a
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
+	ld d, a
 	call RemoveCardFromCollection
 	jp IncreaseScriptPointerBy1
 
@@ -1412,20 +1435,21 @@ ScriptCommand_PickChallengeCupPrizeCard:
 	dec a
 	cp 2
 	jr c, .first_or_second_cup
-	ld a, (ChallengeCupPrizeCards.end - ChallengeCupPrizeCards) / 3 - 2
+	ld a, (ChallengeCupPrizeCards.end - ChallengeCupPrizeCards) / 4 - 2
 	call Random
 	add 2
 .first_or_second_cup
 	ld hl, ChallengeCupPrizeCards
 .get_card_from_list
-	ld e, a
 	add a
-	add e
+	add a
 	ld e, a
 	ld d, 0
 	add hl, de
 	ld a, [hli]
-	ld [wCardReceived], a
+	ld [wCardReceived + 0], a
+	ld a, [hli]
+	ld [wCardReceived + 1], a
 	ld a, [hli]
 	ld [wTxRam2], a
 	ld a, [hl]
@@ -1433,49 +1457,49 @@ ScriptCommand_PickChallengeCupPrizeCard:
 	jp IncreaseScriptPointerBy1
 
 ChallengeCupPrizeCards:
-	db MEWTWO_LV60
+	dw MEWTWO_LV60
 	tx MewtwoTradeCardName
 
-	db MEW_LV8
+	dw MEW_LV8
 	tx MewTradeCardName
 
-	db ARCANINE_LV34
+	dw ARCANINE_LV34
 	tx ArcanineTradeCardName
 
-	db PIKACHU_LV16
+	dw PIKACHU_LV16
 	tx PikachuTradeCardName
 
-	db PIKACHU_ALT_LV16
+	dw PIKACHU_ALT_LV16
 	tx PikachuTradeCardName
 
-	db SURFING_PIKACHU_LV13
+	dw SURFING_PIKACHU_LV13
 	tx SurfingPikachuTradeCardName
 
-	db SURFING_PIKACHU_ALT_LV13
+	dw SURFING_PIKACHU_ALT_LV13
 	tx SurfingPikachuTradeCardName
 
-	db ELECTABUZZ_LV20
+	dw ELECTABUZZ_LV20
 	tx ElectabuzzTradeCardName
 
-	db SLOWPOKE_LV9
+	dw SLOWPOKE_LV9
 	tx SlowpokeTradeCardName
 
-	db MEWTWO_ALT_LV60
+	dw MEWTWO_ALT_LV60
 	tx MewtwoTradeCardName
 
-	db MEWTWO_LV60
+	dw MEWTWO_LV60
 	tx MewtwoTradeCardName
 
-	db MEW_LV8
+	dw MEW_LV8
 	tx MewTradeCardName
 
-	db JIGGLYPUFF_LV12
+	dw JIGGLYPUFF_LV12
 	tx JigglypuffTradeCardName
 
-	db SUPER_ENERGY_RETRIEVAL
+	dw SUPER_ENERGY_RETRIEVAL
 	tx SuperEnergyRetrievalTradeCardName
 
-	db FLYING_PIKACHU
+	dw FLYING_PIKACHU
 	tx FlyingPikachuTradeCardName
 .end
 
@@ -1509,16 +1533,16 @@ ScriptCommand_PickLegendaryCard:
 	jr ScriptCommand_PickChallengeCupPrizeCard.get_card_from_list
 
 LegendaryCards:
-	db ZAPDOS_LV68
+	dw ZAPDOS_LV68
 	tx ZapdosLegendaryCardName
 
-	db MOLTRES_LV37
+	dw MOLTRES_LV37
 	tx MoltresLegendaryCardName
 
-	db ARTICUNO_LV37
+	dw ARTICUNO_LV37
 	tx ArticunoLegendaryCardName
 
-	db DRAGONITE_LV41
+	dw DRAGONITE_LV41
 	tx DragoniteLegendaryCardName
 
 LegendaryCardEvents:

@@ -290,10 +290,14 @@ PrintStartMenuDescriptionText:
 	ldtx hl, ContinueFromDiarySummaryText
 	call PrintTextNoDelay
 
-	ld a, [wTotalNumCardsCollected]
-	ld d, a
-	ld a, [wTotalNumCardsToCollect]
+	ld a, [wTotalNumCardsCollected + 0]
 	ld e, a
+	ld a, [wTotalNumCardsCollected + 1]
+	ld d, a
+	ld a, [wTotalNumCardsToCollect + 0]
+	ld l, a
+	ld a, [wTotalNumCardsToCollect + 1]
+	ld h, a
 	lb bc, 9, 14
 	farcall PrintAlbumProgress_SkipGetProgress
 	lb bc, 10, 16

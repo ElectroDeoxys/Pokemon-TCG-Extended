@@ -27,26 +27,26 @@ AIActionTable_LegendaryArticuno:
 	jp AIPickPrizeCards
 
 .list_arena
-	db CHANSEY
-	db LAPRAS
-	db DITTO
-	db SEEL
-	db ARTICUNO_LV35
-	db ARTICUNO_LV37
-	db $00
+	dw CHANSEY
+	dw LAPRAS
+	dw DITTO
+	dw SEEL
+	dw ARTICUNO_LV35
+	dw ARTICUNO_LV37
+	dw NULL
 
 .list_bench
-	db ARTICUNO_LV35
-	db SEEL
-	db LAPRAS
-	db CHANSEY
-	db DITTO
-	db $00
+	dw ARTICUNO_LV35
+	dw SEEL
+	dw LAPRAS
+	dw CHANSEY
+	dw DITTO
+	dw NULL
 
 .list_retreat
 	ai_retreat SEEL,  -3
 	ai_retreat DITTO, -3
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy SEEL,          3, +1
@@ -56,12 +56,12 @@ AIActionTable_LegendaryArticuno:
 	ai_energy ARTICUNO_LV37, 3, +0
 	ai_energy CHANSEY,       0, -8
 	ai_energy DITTO,         3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db ARTICUNO_LV37
-	db $00
+	dw GAMBLER
+	dw ARTICUNO_LV37
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
@@ -90,13 +90,13 @@ ScoreLegendaryArticunoCards:
 ; otherwise, check if Articuno or Dewgong
 ; have more than half HP and can use second attack
 ; and if so, the next Pokémon to check is Lapras
-	ld a, LAPRAS
+	ld de, LAPRAS
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .articuno
-	ld a, ARTICUNO_LV35
+	ld de, ARTICUNO_LV35
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .lapras
-	ld a, DEWGONG
+	ld de, DEWGONG
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .lapras
 	jr .articuno
@@ -107,7 +107,7 @@ ScoreLegendaryArticunoCards:
 ; attached energy count, which skips calling the routine
 ; if this count is >= 3
 .lapras
-	ld a, LAPRAS
+	ld de, LAPRAS
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .articuno
@@ -115,31 +115,31 @@ ScoreLegendaryArticunoCards:
 	call CountNumberOfEnergyCardsAttached
 	cp 3
 	jr nc, .articuno
-	ld a, LAPRAS
+	ld bc, LAPRAS
 	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .articuno
-	ld a, ARTICUNO_LV35
+	ld de, ARTICUNO_LV35
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .dewgong
-	ld a, ARTICUNO_LV35
+	ld bc, ARTICUNO_LV35
 	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .dewgong
-	ld a, DEWGONG
+	ld de, DEWGONG
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .seel
-	ld a, DEWGONG
+	ld bc, DEWGONG
 	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .seel
-	ld a, SEEL
+	ld de, SEEL
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	ret nc
-	ld a, SEEL
+	ld bc, SEEL
 	jp RaiseAIScoreToAllMatchingIDsInBench
 
 AIDoTurn_LegendaryArticuno:

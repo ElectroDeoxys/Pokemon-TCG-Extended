@@ -9,49 +9,48 @@ HandleSpecialAIAttacks:
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
 
-	cp NIDORANF
-	jr z, .NidoranFCallForFamily
-	cp ODDISH
-	jr z, .CallForFamily
-	cp BELLSPROUT
-	jr z, .CallForFamily
-	cp EXEGGUTOR
+	cp16 NIDORANF
+	jp z, .NidoranFCallForFamily
+	cp16 ODDISH
+	jp z, .CallForFamily
+	cp16 BELLSPROUT
+	jp z, .CallForFamily
+	cp16 EXEGGUTOR
 	jp z, .Teleport
-	cp SCYTHER
+	cp16 SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
-	cp KRABBY
-	jr z, .CallForFamily
-	cp VAPOREON_LV29
+	cp16 KRABBY
+	jp z, .CallForFamily
+	cp16 VAPOREON_LV29
 	jp z, .SwordsDanceAndFocusEnergy
-	cp ELECTRODE_LV42
+	cp16 ELECTRODE_LV42
 	jp z, .ChainLightning
-	cp MAROWAK_LV26
-	jr z, .CallForFriend
-	cp MEW_LV23
+	cp16 MAROWAK_LV26
+	jp z, .CallForFriend
+	cp16 MEW_LV23
 	jp z, .DevolutionBeam
-	cp JIGGLYPUFF_LV13
+	cp16 JIGGLYPUFF_LV13
 	jp z, .FriendshipSong
-	cp PORYGON
+	cp16 PORYGON
 	jp z, .Conversion
-	cp MEWTWO_ALT_LV60
+	cp16 MEWTWO_ALT_LV60
 	jp z, .EnergyAbsorption
-	cp MEWTWO_LV60
+	cp16 MEWTWO_LV60
 	jp z, .EnergyAbsorption
-	cp NINETALES_LV35
+	cp16 NINETALES_LV35
 	jp z, .MixUp
-	cp ZAPDOS_LV68
+	cp16 ZAPDOS_LV68
 	jp z, .BigThunder
-	cp KANGASKHAN
+	cp16 KANGASKHAN
 	jp z, .Fetch
-	cp DUGTRIO
+	cp16 DUGTRIO
 	jp z, .Earthquake
-	cp ELECTRODE_LV35
+	cp16 ELECTRODE_LV35
 	jp z, .EnergySpike
-	cp GOLDUCK
+	cp16 GOLDUCK
 	jp z, .HyperBeam
-	cp DRAGONAIR
+	cp16 DRAGONAIR
 	jp z, .HyperBeam
 
 ; return zero score.
@@ -78,11 +77,11 @@ HandleSpecialAIAttacks:
 ; if any of NidoranM or NidoranF is found in deck,
 ; return a score of $80 + slots available in bench.
 .NidoranFCallForFamily:
-	ld e, NIDORANM
+	ld de, NIDORANM
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_nidoran
-	ld e, NIDORANF
+	ld de, NIDORANF
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr nc, .zero_score
@@ -101,19 +100,19 @@ HandleSpecialAIAttacks:
 ; if any of them are found, return a score of
 ; $80 + slots available in bench.
 .CallForFriend:
-	ld e, GEODUDE
+	ld de, GEODUDE
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_fighting_card
-	ld e, ONIX
+	ld de, ONIX
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_fighting_card
-	ld e, CUBONE
+	ld de, CUBONE
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_fighting_card
-	ld e, RHYHORN
+	ld de, RHYHORN
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_fighting_card
@@ -137,7 +136,7 @@ HandleSpecialAIAttacks:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	cp MAX_PLAY_AREA_POKEMON
-	jr nc, .zero_score
+	jp nc, .zero_score
 	ld b, a
 	ld a, MAX_PLAY_AREA_POKEMON
 	sub b
@@ -243,7 +242,7 @@ HandleSpecialAIAttacks:
 ; if any Psychic Energy is found in the Discard Pile,
 ; return a score of $80 + 2.
 .EnergyAbsorption:
-	ld e, PSYCHIC_ENERGY
+	ld de, PSYCHIC_ENERGY
 	ld a, CARD_LOCATION_DISCARD_PILE
 	call CheckIfAnyCardIDinLocation
 	jp nc, .zero_score
@@ -375,7 +374,7 @@ HandleSpecialAIAttacks:
 ; return a score of $80 + 3.
 .EnergySpike:
 	ld a, CARD_LOCATION_DECK
-	ld e, LIGHTNING_ENERGY
+	ld de, LIGHTNING_ENERGY
 	call CheckIfAnyCardIDinLocation
 	jp nc, .zero_score
 	call AIProcessButDontPlayEnergy_SkipEvolution

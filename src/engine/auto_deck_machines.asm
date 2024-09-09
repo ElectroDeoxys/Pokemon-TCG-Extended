@@ -42,7 +42,7 @@ ReadAutoDeckConfiguration:
 .GetPointerToSRAMAutoDeck
 	push hl
 	ld l, b
-	ld h, DECK_STRUCT_SIZE
+	ld h, DECK_COMPRESSED_STRUCT_SIZE
 	call HtimesL
 	ld de, sAutoDecks
 	add hl, de
@@ -61,9 +61,8 @@ ReadAutoDeckConfiguration:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	pop hl
-	ld bc, DECK_NAME_SIZE
-	add hl, bc
+	
+	ld hl, wCurDeckCards
 .loop_create_deck
 	ld a, [de]
 	inc de
@@ -73,13 +72,27 @@ ReadAutoDeckConfiguration:
 	ld a, [de]
 	inc de
 	ld c, a ; card ID
+	ld a, [de]
+	inc de
 .loop_card_count
 	ld [hl], c
 	inc hl
+	ld [hli], a
 	dec b
 	jr nz, .loop_card_count
 	jr .loop_create_deck
+
 .done_create_deck
+	xor a
+	ld [hli], a
+	ld [hl], a
+
+	pop hl
+	ld de, DECK_NAME_SIZE
+	add hl, de
+	; hl = destination
+	ld de, wCurDeckCards
+	call CompressDeckToSRAM
 	pop de
 	pop bc
 	pop hl

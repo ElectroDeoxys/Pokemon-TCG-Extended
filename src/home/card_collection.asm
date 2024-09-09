@@ -3,12 +3,18 @@ GetAmountOfCardsOwned::
 	push de
 	push bc
 	call EnableSRAM
-	ld hl, $0000
+	ld hl, 0
 	ld de, sDeck1Cards
 	ld c, NUM_DECKS
 .next_deck
+	push bc
 	ld a, [de]
-	or a
+	inc de
+	ld c, a
+	ld a, [de]
+	dec de
+	or c
+	pop bc
 	jr z, .skip_deck ; jump if deck empty
 	ld a, c
 	ld bc, DECK_SIZE
@@ -23,60 +29,83 @@ GetAmountOfCardsOwned::
 	ld d, a ; de = sDeck*Cards[x]
 	dec c
 	jr nz, .next_deck
+
 	; hl = DECK_SIZE * (no. of non-empty decks)
 	ld de, sCardCollection
+	ld bc, CARD_COLLECTION_SIZE
 .next_card
 	ld a, [de]
 	bit CARD_NOT_OWNED_F, a
 	jr nz, .skip_card
+	push bc
 	ld c, a ; card count in sCardCollection
 	ld b, $0
 	add hl, bc
+	pop bc
 .skip_card
-	inc e
-	jr nz, .next_card ; assumes sCardCollection is $100 bytes long (CARD_COLLECTION_SIZE)
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .next_card
 	call DisableSRAM
 	pop bc
 	pop de
 	ret
 
 ; return carry if the count in sCardCollection plus the count in each deck (sDeck*)
-; of the card with id given in a is 0 (if card not owned).
+; of the card with id given in de is 0 (if card not owned).
 ; also return the count (total owned amount) in a.
 GetCardCountInCollectionAndDecks::
 	push hl
 	push de
 	push bc
 	call EnableSRAM
-	ld c, a
-	ld b, $0
 	ld hl, sDeck1Cards
-	ld d, NUM_DECKS
-.next_deck
-	ld a, [hl]
-	or a
-	jr z, .deck_done ; jump if deck empty
+	ld b, 0
+.loop_decks
+	ld a, [hli]
+	or [hl]
+	dec hl
+	jr z, .next_deck ; jump if deck empty
+
 	push hl
-	ld e, DECK_SIZE
+	push de
+	ld d, h
+	ld e, l
+	ld hl, wCurDeckCards
+	call DecompressSRAMDeck
+	pop de
+
+	ld c, DECK_SIZE
 .next_card
 	ld a, [hli]
-	cp c
+	cp e
+	ld a, [hli]
 	jr nz, .no_match
-	inc b ; this deck card matches card c
+	cp d
+	jr nz, .no_match
+	inc b
 .no_match
-	dec e
+	dec c
 	jr nz, .next_card
 	pop hl
-.deck_done
-	push de
-	ld de, sDeck2Cards - sDeck1Cards
-	add hl, de
-	pop de
-	dec d
-	jr nz, .next_deck
+
+.next_deck
+	push bc
+	ld bc, sDeck2Cards - sDeck1Cards
+	add hl, bc
+	pop bc
+	ld a, h
+	cp HIGH(sDeck4Cards + (DECK_NAME_SIZE + DECK_COMPRESSED_SIZE))
+	jr nz, .loop_decks
+	ld a, l
+	cp LOW(sDeck4Cards + (DECK_NAME_SIZE + DECK_COMPRESSED_SIZE))
+	jr nz, .loop_decks
+
 	; all decks done
-	ld h, HIGH(sCardCollection)
-	ld l, c
+	ld hl, sCardCollection
+	add hl, de
 	ld a, [hl]
 	bit CARD_NOT_OWNED_F, a
 	jr nz, .done
@@ -92,13 +121,13 @@ GetCardCountInCollectionAndDecks::
 	scf
 	ret
 
-; return carry if the count in sCardCollection of the card with id given in a is 0.
+; return carry if the count in sCardCollection of the card with id given in de is 0.
 ; also return the count (amount owned outside of decks) in a.
 GetCardCountInCollection::
 	push hl
 	call EnableSRAM
-	ld h, HIGH(sCardCollection)
-	ld l, a
+	ld hl, sCardCollection
+	add hl, de
 	ld a, [hl]
 	call DisableSRAM
 	pop hl
@@ -133,34 +162,46 @@ CreateTempCardCollection::
 	add hl, de
 	ld e, l
 	ld d, h
-	ld h, HIGH(wTempCardCollection)
+	ld hl, wCurDeckCards
+	call DecompressSRAMDeck
+
+	ld de, wCurDeckCards
+	ld hl, wTempCardCollection
 	ld c, DECK_SIZE
 .next_card_loop
-	ld a, [de] ; count of current card being added
-	inc de ; move to next card for next iteration
+	push hl
+	ld a, [de]
+	inc de
+	add l
 	ld l, a
+	ld a, [de]
+	inc de
+	adc h
+	ld h, a
 	inc [hl] ; increment count
+	pop hl
 	dec c
 	jr nz, .next_card_loop
 	ret
 
-; add card with id given in a to sCardCollection, provided that
+; add card with id given in de to sCardCollection, provided that
 ; the player has less than MAX_AMOUNT_OF_CARD (99) of them
 AddCardToCollection::
 	push hl
 	push de
 	push bc
-	ld l, a
-	push hl
+	push de
 	call CreateTempCardCollection
-	pop hl
+	pop de
 	call EnableSRAM
-	ld h, HIGH(wTempCardCollection)
+	ld hl, wTempCardCollection
+	add hl, de
 	ld a, [hl]
 	and CARD_COUNT_MASK
 	cp MAX_AMOUNT_OF_CARD
 	jr nc, .already_max
-	ld h, HIGH(sCardCollection)
+	ld hl, sCardCollection
+	add hl, de
 	ld a, [hl]
 	and CARD_COUNT_MASK
 	inc a
@@ -172,12 +213,12 @@ AddCardToCollection::
 	pop hl
 	ret
 
-; remove a card with id given in a from sCardCollection (decrement its count if non-0)
+; remove a card with id given in de from sCardCollection (decrement its count if non-0)
 RemoveCardFromCollection::
 	push hl
 	call EnableSRAM
-	ld h, HIGH(sCardCollection)
-	ld l, a
+	ld hl, sCardCollection
+	add hl, de
 	ld a, [hl]
 	and CARD_COUNT_MASK
 	jr z, .zero
@@ -188,32 +229,37 @@ RemoveCardFromCollection::
 	pop hl
 	ret
 
-; return the amount of different cards that the player has collected in d
-; return NUM_CARDS in e, minus 1 if VENUSAUR_LV64 or MEW_LV15 has not been collected (minus 2 if neither)
+; return the amount of different cards that the player has collected in de
+; return NUM_CARDS in bc, minus 1 if VENUSAUR_LV64 or MEW_LV15 has not been collected (minus 2 if neither)
 GetCardAlbumProgress::
 	push hl
 	call EnableSRAM
-	ld e, NUM_CARDS
-	ld h, HIGH(sCardCollection)
-	ld l, VENUSAUR_LV64
-	bit CARD_NOT_OWNED_F, [hl]
-	jr z, .next1
-	dec e ; if VENUSAUR_LV64 not owned
-.next1
-	ld l, MEW_LV15
-	bit CARD_NOT_OWNED_F, [hl]
-	jr z, .next2
-	dec e ; if MEW_LV15 not owned
-.next2
-	ld d, LOW(sCardCollection)
-	ld l, d
+	ld de, 0
+	ld hl, sCardCollection
 .next_card
 	bit CARD_NOT_OWNED_F, [hl]
 	jr nz, .skip
-	inc d ; if this card owned
+	inc de ; if this card owned
 .skip
-	inc l
-	jr nz, .next_card ; assumes sCardCollection is $100 bytes long (CARD_COLLECTION_SIZE)
+	inc hl
+	ld a, l
+	cp LOW(sCardCollection + CARD_COLLECTION_SIZE)
+	jr nz, .next_card
+	ld a, h
+	cp HIGH(sCardCollection + CARD_COLLECTION_SIZE)
+	jr nz, .next_card
+
+	ld bc, NUM_CARDS
+	ld hl, sCardCollection + VENUSAUR_LV64
+	bit CARD_NOT_OWNED_F, [hl]
+	jr z, .has_venusaur_lv64
+	dec bc
+.has_venusaur_lv64
+	ld hl, sCardCollection + MEW_LV15
+	bit CARD_NOT_OWNED_F, [hl]
+	jr z, .has_mew_lv15
+	dec bc
+.has_mew_lv15
 	call DisableSRAM
 	pop hl
 	ret

@@ -274,9 +274,10 @@ PrintDamageText:
 	cp ATK_ANIM_HEALING_WIND_PLAY_AREA
 	jr z, .skip
 
-	ld a, [wTempNonTurnDuelistCardID]
+	ld a, [wTempNonTurnDuelistCardID + 0]
 	ld e, a
-	ld d, $00
+	ld a, [wTempNonTurnDuelistCardID + 1]
+	ld d, a
 	call LoadCardDataToBuffer1_FromCardID
 	ld a, 18
 	call CopyCardNameAndLevel

@@ -91,10 +91,10 @@ HandleDamageReductionExceptSubstatus2::
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-	ld a, [wTempNonTurnDuelistCardID]
-	cp MR_MIME
+	ld hl, wTempNonTurnDuelistCardID + 1
+	cphl MR_MIME
 	jr z, .prevent_less_than_30_damage ; invisible wall
-	cp KABUTO
+	cphl KABUTO
 	jr z, .halve_damage2 ; kabuto armor
 	ret
 .no_damage
@@ -154,8 +154,10 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects::
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-	ld a, MUK
+	push de
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
+	pop de
 	ret c
 	ld a, [wTempPlayAreaLocation_cceb]
 	or a
@@ -180,10 +182,10 @@ HandleStrikesBack_AgainstDamagingAttack::
 	ld a, [wIsDamageToSelf]
 	or a
 	ret nz
-	ld a, [wTempNonTurnDuelistCardID] ; ID of defending Pokemon
-	cp MACHAMP
+	ld hl, wTempNonTurnDuelistCardID + 1 ; ID of defending Pokemon
+	cphl MACHAMP
 	ret nz
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c
 	ld a, [wLoadedAttackCategory] ; category of attack used
@@ -208,8 +210,10 @@ HandleStrikesBack_AgainstDamagingAttack::
 	push hl
 	ld de, 10
 	call SubtractHP
-	ld a, [wLoadedCard2ID]
-	ld [wTempNonTurnDuelistCardID], a
+	ld a, [wLoadedCard2ID + 0]
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, [wLoadedCard2ID + 1]
+	ld [wTempNonTurnDuelistCardID + 1], a
 	ld hl, 10
 	call LoadTxRam3
 	ld hl, wLoadedCard2Name
@@ -239,10 +243,9 @@ HandleNShieldAndTransparency::
 	add e
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp MEW_LV8
+	cp16 MEW_LV8
 	jr z, .nshield
-	cp HAUNTER_LV17
+	cp16 HAUNTER_LV17
 	jr z, .transparency
 .done
 	pop de
@@ -379,8 +382,8 @@ HandleNoDamageOrEffectSubstatus::
 	ccf
 	ret nc
 .pkmn_power
-	ld a, [wTempNonTurnDuelistCardID]
-	cp MEW_LV8
+	ld hl, wTempNonTurnDuelistCardID + 1
+	cphl MEW_LV8
 	jr z, .neutralizing_shield
 	or a
 	ret
@@ -394,9 +397,10 @@ HandleNoDamageOrEffectSubstatus::
 	or a
 	ret nz
 	; prevent damage if attacked by a non-basic Pokemon
-	ld a, [wTempTurnDuelistCardID]
+	ld a, [wTempTurnDuelistCardID + 0]
 	ld e, a
-	ld d, $0
+	ld a, [wTempTurnDuelistCardID + 1]
+	ld d, a
 	call LoadCardDataToBuffer2_FromCardID
 	ld a, [wLoadedCard2Stage]
 	or a
@@ -409,8 +413,8 @@ HandleNoDamageOrEffectSubstatus::
 ; there is a 50% chance that any damage or effect is prevented
 ; return carry if damage is prevented
 HandleTransparency::
-	ld a, [wTempNonTurnDuelistCardID]
-	cp HAUNTER_LV17
+	ld hl, wTempNonTurnDuelistCardID + 1
+	cphl HAUNTER_LV17
 	jr z, .transparency
 .done
 	or a
@@ -470,11 +474,11 @@ NoDamageOrEffectTextIDTable::
 
 ; return carry if turn holder has Omanyte and its Clairvoyance Pkmn Power is active
 IsClairvoyanceActive::
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret nc
-	ld a, OMANYTE
+	ld de, OMANYTE
 	jp CountPokemonIDInPlayArea
 
 ; returns carry if turn holder's arena card is paralyzed, asleep, confused,
@@ -493,8 +497,10 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0::
 	scf
 	jr nz, .done ; return carry
 .check_toxic_gas
-	ld a, MUK
+	push de
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
+	pop de
 	ldtx hl, UnableDueToToxicGasText
 .done
 	ret
@@ -502,14 +508,15 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0::
 ; return, in a, the amount of times that the Pokemon card with a given ID is found in the
 ; play area of both duelists. Also return carry if the Pokemon card is at least found once.
 ; if the arena Pokemon is asleep, confused, or paralyzed (Pkmn Power-incapable), it doesn't count.
-; input: a = Pokemon card ID to search
+; input:
+; - de = Pokemon card ID to search
 CountPokemonIDInBothPlayAreas::
 	push bc
-	ld [wTempPokemonID_ce7c], a
+	push de
 	call CountPokemonIDInPlayArea
 	ld c, a
+	pop de
 	call SwapTurn
-	ld a, [wTempPokemonID_ce7c]
 	call CountPokemonIDInPlayArea
 	call SwapTurn
 	add c
@@ -524,20 +531,29 @@ CountPokemonIDInBothPlayAreas::
 ; return, in a, the amount of times that the Pokemon card with a given ID is found in the
 ; turn holder's play area. Also return carry if the Pokemon card is at least found once.
 ; if the arena Pokemon is asleep, confused, or paralyzed (Pkmn Power-incapable), it doesn't count.
-; input: a = Pokemon card ID to search
+; input:
+; - de = Pokemon card ID to search
 CountPokemonIDInPlayArea::
 	push hl
 	push de
 	push bc
-	ld [wTempPokemonID_ce7c], a
+	ld a, e
+	ld [wTempPokemonID_ce7c + 0], a
+	ld a, d
+	ld [wTempPokemonID_ce7c + 1], a
 	ld c, $0
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	cp -1
 	jr z, .check_bench
 	call GetCardIDFromDeckIndex
-	ld a, [wTempPokemonID_ce7c]
-	cp e
+	push bc
+	ld a, [wTempPokemonID_ce7c + 0]
+	ld c, a
+	ld a, [wTempPokemonID_ce7c + 1]
+	ld b, a
+	call CompareDEtoBC
+	pop bc
 	jr nz, .check_bench
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
@@ -552,8 +568,13 @@ CountPokemonIDInPlayArea::
 	cp -1
 	jr z, .done
 	call GetCardIDFromDeckIndex
-	ld a, [wTempPokemonID_ce7c]
-	cp e
+	push bc
+	ld a, [wTempPokemonID_ce7c + 0]
+	ld c, a
+	ld a, [wTempPokemonID_ce7c + 1]
+	ld b, a
+	call CompareDEtoBC
+	pop bc
 	jr nz, .skip
 	inc c
 .skip
@@ -582,8 +603,7 @@ GetLoadedCard1RetreatCost::
 	cp -1
 	jr z, .no_more_bench
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp DODRIO
+	cp16 DODRIO
 	jr nz, .not_dodrio
 	inc c
 .not_dodrio
@@ -596,7 +616,7 @@ GetLoadedCard1RetreatCost::
 	ld a, [wLoadedCard1RetreatCost] ; return regular retreat cost
 	ret
 .dodrio_found
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .muk_found
 	ld a, [wLoadedCard1RetreatCost]
@@ -633,10 +653,10 @@ CheckCantUseTrainerDueToHeadache::
 
 ; return carry if any duelist has Aerodactyl and its Prehistoric Power Pkmn Power is active
 IsPrehistoricPowerActive::
-	ld a, AERODACTYL
+	ld de, AERODACTYL
 	call CountPokemonIDInBothPlayAreas
 	ret nc
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
 	ccf
@@ -699,10 +719,10 @@ UpdateSubstatusConditions_EndOfTurn::
 
 ; return carry if turn holder has Blastoise and its Rain Dance Pkmn Power is active
 IsRainDanceActive::
-	ld a, BLASTOISE
+	ld de, BLASTOISE
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Pkmn Power-capable Blastoise found in turn holder's play area
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret
@@ -767,8 +787,8 @@ HandleDestinyBondSubstatus::
 ; attacking Pokemon (turn holder's arena Pokemon) takes 10 damage.
 ; used to bounce back an attack of the RESIDUAL category
 HandleStrikesBack_AgainstResidualAttack::
-	ld a, [wTempNonTurnDuelistCardID]
-	cp MACHAMP
+	ld hl, wTempNonTurnDuelistCardID + 1
+	cphl MACHAMP
 	jr z, .strikes_back
 	ret
 .strikes_back
@@ -790,9 +810,10 @@ HandleStrikesBack_AgainstResidualAttack::
 ApplyStrikesBack_AgainstResidualAttack::
 	push hl
 	call LoadTxRam3
-	ld a, [wTempTurnDuelistCardID]
+	ld a, [wTempTurnDuelistCardID + 0]
 	ld e, a
-	ld d, $0
+	ld a, [wTempTurnDuelistCardID + 1]
+	ld d, a
 	call LoadCardDataToBuffer2_FromCardID
 	ld hl, wLoadedCard2Name
 	ld a, [hli]
@@ -822,8 +843,7 @@ ApplyStrikesBack_AgainstResidualAttack::
 ; clear the changed type of all arena and bench Pokemon
 ClearChangedTypesIfMuk::
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp MUK
+	cp16 MUK
 	ret nz
 	call SwapTurn
 	call .zero_changed_types

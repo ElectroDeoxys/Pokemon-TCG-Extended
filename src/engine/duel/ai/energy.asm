@@ -148,10 +148,10 @@ AIProcessEnergyCards:
 ; and there's VenusaurLv67 in own Play Area,
 ; add to AI score
 .check_venusaur
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_if_active
-	ld a, VENUSAUR_LV67
+	ld de, VENUSAUR_LV67
 	call CountPokemonIDInPlayArea
 	jr nc, .check_if_active
 	ld a, 1
@@ -253,10 +253,15 @@ AIProcessEnergyCards:
 
 .loop_id_list
 	ld a, [hli]
-	or a
+	or [hl]
+	dec hl
 	jr z, .check_boss_deck
+	ld a, [hli]
 	cp e
-	jr nz, .next_id
+	jr nz, .next_id_inc_hl_3
+	ld a, [hli]
+	cp d
+	jr nz, .next_id_inc_hl_2
 
 	; number of attached energy cards
 	ld a, [hli]
@@ -281,7 +286,6 @@ AIProcessEnergyCards:
 	sub $80
 	call AddToAIScore
 	jr .check_boss_deck
-
 .decrease_score_1
 	ld d, a
 	ld a, $80
@@ -289,7 +293,9 @@ AIProcessEnergyCards:
 	call SubFromAIScore
 	jr .check_boss_deck
 
-.next_id
+.next_id_inc_hl_3
+	inc hl
+.next_id_inc_hl_2
 	inc hl
 	inc hl
 	jr .loop_id_list
@@ -451,8 +457,8 @@ DetermineAIScoreOfAttackEnergyRequirement:
 ; if current card is ZapdosLv64, don't add to score.
 ; if there is no surplus energy, encourage playing energy.
 .discard_energy
-	ld a, [wLoadedCard1ID]
-	cp ZAPDOS_LV64
+	ld hl, wLoadedCard1ID + 1
+	cphl ZAPDOS_LV64
 	jr z, .check_evolution
 	call CheckIfNoSurplusEnergyForAttack
 	jr c, .asm_166cd
@@ -471,7 +477,6 @@ DetermineAIScoreOfAttackEnergyRequirement:
 	ld a, b
 	or a
 	jr z, .check_colorless_needed
-	ld a, e
 	call LookForCardIDInHand
 	jr c, .check_colorless_needed
 	ld a, 4
@@ -544,7 +549,6 @@ DetermineAIScoreOfAttackEnergyRequirement:
 	ld a, b
 	or a
 	jr z, .check_colorless_needed_evo
-	ld a, e
 	call LookForCardIDInHand
 	jr c, .check_colorless_needed_evo
 	ld a, 2
@@ -697,7 +701,6 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer2_FromDeckIndex
-	ld b, a
 	ld a, [wSelectedAttack]
 	or a
 	jr z, .first_attack
@@ -706,12 +709,12 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 ; Charizard's Fire Spin or Exeggutor's Big Eggsplosion,
 ; for these to be treated differently.
 ; for both attacks, load its energy cost.
-	ld a, b
-	cp ZAPDOS_LV64
+	ld hl, wLoadedCard2ID + 1
+	cphl ZAPDOS_LV64
 	jr z, .zapdos2
-	cp CHARIZARD
+	cphl CHARIZARD
 	jr z, .charizard_or_exeggutor
-	cp EXEGGUTOR
+	cphl EXEGGUTOR
 	jr z, .charizard_or_exeggutor
 	ld hl, wLoadedCard2Atk2EnergyCost
 	jr .fire
@@ -726,36 +729,36 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 	ld b, a
 	and $f0
 	jr z, .grass
-	ld e, FIRE_ENERGY
+	ld de, FIRE_ENERGY
 	jr .set_carry
 .grass
 	ld a, b
 	and $0f
 	jr z, .lightning
-	ld e, GRASS_ENERGY
+	ld de, GRASS_ENERGY
 	jr .set_carry
 .lightning
 	ld a, [hli]
 	ld b, a
 	and $f0
 	jr z, .water
-	ld e, LIGHTNING_ENERGY
+	ld de, LIGHTNING_ENERGY
 	jr .set_carry
 .water
 	ld a, b
 	and $0f
 	jr z, .fighting
-	ld e, WATER_ENERGY
+	ld de, WATER_ENERGY
 	jr .set_carry
 .fighting
 	ld a, [hli]
 	ld b, a
 	and $f0
 	jr z, .psychic
-	ld e, FIGHTING_ENERGY
+	ld de, FIGHTING_ENERGY
 	jr .set_carry
 .psychic
-	ld e, PSYCHIC_ENERGY
+	ld de, PSYCHIC_ENERGY
 
 .set_carry
 	lb bc, $01, $00
@@ -862,7 +865,6 @@ AITryToPlayEnergyCard:
 
 ; in this case, Pokémon needs a specific basic energy card.
 ; look for basic energy card needed in hand and play it.
-	ld a, e
 	call LookForCardIDInHand
 	ldh [hTemp_ffa0], a
 	jr nc, .play_energy_card
@@ -889,8 +891,7 @@ AITryToPlayEnergyCard:
 	jr z, .look_for_any_energy
 	ldh [hTemp_ffa0], a
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp DOUBLE_COLORLESS_ENERGY
+	cp16 DOUBLE_COLORLESS_ENERGY
 	jr nz, .loop_1
 	jr .play_energy_card
 
@@ -908,8 +909,7 @@ AITryToPlayEnergyCard:
 	jr nc, .load_card
 	push af
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp DOUBLE_COLORLESS_ENERGY
+	cp16 DOUBLE_COLORLESS_ENERGY
 	pop bc
 	jr z, .loop_2
 	ld a, b
@@ -972,26 +972,26 @@ CheckSpecificDecksToAttachDoubleColorless:
 ; if playing Legendary Dragonite deck,
 ; check for Charmander and Dratini.
 .legendary_dragonite_deck
-	call .get_id
-	cp CHARMANDER
+	call .GetArenaCardID
+	cp16 CHARMANDER
 	jr z, .check_colorless_attached
-	cp DRATINI
+	cp16 DRATINI
 	jr z, .check_colorless_attached
 	jr .no_carry
 
 ; if playing Fire Charge deck,
 ; check for Growlithe.
 .fire_charge_deck
-	call .get_id
-	cp GROWLITHE
+	call .GetArenaCardID
+	cp16 GROWLITHE
 	jr z, .check_colorless_attached
 	jr .no_carry
 
 ; if playing Legendary Ronald deck,
 ; check for Dratini.
 .legendary_ronald_deck
-	call .get_id
-	cp DRATINI
+	call .GetArenaCardID
+	cp16 DRATINI
 	jr z, .check_colorless_attached
 	jr .no_carry
 
@@ -1007,7 +1007,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 
 ; card has no colorless energy, so look for double colorless
 ; in hand and if found, return carry and its card index.
-	ld a, DOUBLE_COLORLESS_ENERGY
+	ld de, DOUBLE_COLORLESS_ENERGY
 	call LookForCardIDInHand
 	jr c, .no_carry
 	ldh [hTemp_ffa0], a
@@ -1017,10 +1017,9 @@ CheckSpecificDecksToAttachDoubleColorless:
 	scf
 	ret
 
-.get_id:
+.GetArenaCardID:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
 	ret

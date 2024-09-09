@@ -1,33 +1,18 @@
 INCLUDE "data/glossary_menu_transitions.asm"
 
-; copies DECK_SIZE number of cards from de to hl in SRAM
-CopyDeckFromSRAM:
-	push bc
-	call EnableSRAM
-	ld b, DECK_SIZE
-.loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec b
-	jr nz, .loop
-	xor a
-	ld [hl], a
-	call DisableSRAM
-	pop bc
-	ret
-
 ; clears some WRAM addresses to act as
 ; terminator bytes to wFilteredCardList and wCurDeckCards
 WriteCardListsTerminatorBytes:
 	xor a
 	ld hl, wFilteredCardList
-	ld bc, DECK_SIZE
+	ld bc, DECK_SIZE * 2
 	add hl, bc
+	ld [hli], a ; terminator byte
 	ld [hl], a ; terminator byte
 	ld hl, wCurDeckCards
-	ld bc, DECK_CONFIG_BUFFER_SIZE
+	ld bc, DECK_CONFIG_BUFFER_SIZE * 2
 	add hl, bc
+	ld [hli], a ; terminator byte
 	ld [hl], a ; terminator byte
 	ret
 
@@ -191,7 +176,9 @@ OpenDeckConfirmationMenu:
 
 ; copy deck cards
 	ld hl, wCurDeckCards
-	call CopyDeckFromSRAM
+	call EnableSRAM
+	call DecompressSRAMDeck
+	call DisableSRAM
 
 	ld a, NUM_FILTERS
 	ld hl, wCardFilterCounts
@@ -237,7 +224,9 @@ DeckSelectionSubMenu:
 	ld e, l
 	ld d, h
 	ld hl, wCurDeckCards
-	call CopyDeckFromSRAM
+	call EnableSRAM
+	call DecompressSRAMDeck
+	call DisableSRAM
 	ld a, 20
 	ld hl, wCurDeckName
 	call ClearNBytesFromHL
@@ -252,16 +241,9 @@ DeckSelectionSubMenu:
 	call DecrementDeckCardsInCollection
 	call GetPointerToDeckCards
 	call AddDeckToCollection
-	ld e, l
-	ld d, h
-	ld hl, wCurDeckCards
-	ld b, DECK_SIZE
-.asm_8ea9
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .asm_8ea9
+	ld de, wCurDeckCards
+	call CompressDeckToSRAM
+
 	call GetPointerToDeckName
 	ld d, h
 	ld e, l
@@ -498,7 +480,7 @@ DeckSelectionData:
 GetPointerToDeckName:
 	ld a, [wCurDeck]
 	ld h, a
-	ld l, DECK_STRUCT_SIZE
+	ld l, DECK_COMPRESSED_STRUCT_SIZE
 	call HtimesL
 	push de
 	ld de, sDeck1Name

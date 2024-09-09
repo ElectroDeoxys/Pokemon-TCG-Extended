@@ -94,8 +94,7 @@ HandleEnergyBurn::
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp CHARIZARD
+	cp16 CHARIZARD
 	ret nz
 	xor a
 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0

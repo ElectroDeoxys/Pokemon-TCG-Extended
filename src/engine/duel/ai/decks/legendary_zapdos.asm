@@ -27,27 +27,27 @@ AIActionTable_LegendaryZapdos:
 	jp AIPickPrizeCards
 
 .list_arena
-	db ELECTABUZZ_LV35
-	db VOLTORB
-	db EEVEE
-	db ZAPDOS_LV40
-	db ZAPDOS_LV64
-	db ZAPDOS_LV68
-	db $00
+	dw ELECTABUZZ_LV35
+	dw VOLTORB
+	dw EEVEE
+	dw ZAPDOS_LV40
+	dw ZAPDOS_LV64
+	dw ZAPDOS_LV68
+	dw NULL
 
 .list_bench
-	db ZAPDOS_LV64
-	db ZAPDOS_LV40
-	db EEVEE
-	db VOLTORB
-	db ELECTABUZZ_LV35
-	db $00
+	dw ZAPDOS_LV64
+	dw ZAPDOS_LV40
+	dw EEVEE
+	dw VOLTORB
+	dw ELECTABUZZ_LV35
+	dw NULL
 
 .list_retreat
 	ai_retreat EEVEE,           -5
 	ai_retreat VOLTORB,         -5
 	ai_retreat ELECTABUZZ_LV35, -5
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy VOLTORB,         1, -1
@@ -58,12 +58,12 @@ AIActionTable_LegendaryZapdos:
 	ai_energy ZAPDOS_LV64,     4, +2
 	ai_energy ZAPDOS_LV68,     3, +1
 	ai_energy EEVEE,           3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db ZAPDOS_LV68
-	db $00
+	dw GAMBLER
+	dw ZAPDOS_LV68
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
@@ -105,16 +105,14 @@ AIDoTurn_LegendaryZapdos:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, VOLTORB
-	cp e
+	cp16 VOLTORB
 	jr nz, .check_electabuzz
-	ld a, ELECTRODE_LV35
+	ld de, ELECTRODE_LV35
 	call LookForCardIDInHandList_Bank5
 	jr nc, .attach_normally
 	jr .voltorb_or_electabuzz
 .check_electabuzz
-	ld a, ELECTABUZZ_LV35
-	cp e
+	cp16 ELECTABUZZ_LV35
 	jr nz, .attach_normally
 
 .voltorb_or_electabuzz

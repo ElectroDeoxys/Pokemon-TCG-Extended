@@ -131,9 +131,8 @@ SetUpBossStartingHandAndDeck:
 	jr nz, .draw_loop
 	ret
 
-; expectation: return carry if card ID corresponding
+; return carry if card ID corresponding
 ; to the input deck index is listed in wAICardListAvoidPrize;
-; reality: always returns no carry
 ; input:
 ;	- a = deck index of card to check
 .CheckIfIDIsInList
@@ -150,15 +149,17 @@ SetUpBossStartingHandAndDeck:
 	call GetCardIDFromDeckIndex
 .loop_id_list
 	ld a, [hli]
-	cp a ; bug, should be 'or a'
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	or c
 	jr z, .false
-	cp e
+	call CompareDEtoBC
 	jr nz, .loop_id_list
-
-; true
 	pop hl
 	scf
 	ret
+
 .false
 	pop hl
 	or a

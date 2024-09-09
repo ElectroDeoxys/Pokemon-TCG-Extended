@@ -192,23 +192,24 @@ ConvertWordToNumericalDigits:
 PrintAlbumProgress:
 	push bc
 	call GetCardAlbumProgress
+	ld l, c
+	ld h, b
 	pop bc
 ;	fallthrough
+
 PrintAlbumProgress_SkipGetProgress:
 	push bc
-	push de
+	push hl
 	push bc
-	ld l, d ; number of different cards collected
-	ld h, $00
+	ld l, e ; number of different cards collected
+	ld h, d ;
 	call ConvertWordToNumericalDigits
 	pop bc
 	call BCCoordToBGMap0Address
 	ld hl, wDecimalChars
 	ld b, 3
 	call SafeCopyDataHLtoDE
-	pop de
-	ld l, e ; total number of cards
-	ld h, $00
+	pop hl ; total number of cards
 	call ConvertWordToNumericalDigits
 	pop bc
 	ld a, b

@@ -71,11 +71,12 @@ ROMX $07
 	"Booster Packs"
 ROMX $08
 	"AI Logic 2"
+ROMX $0a
+	"Cards"
 ROMX $0b
 	"Effect Functions"
 ROMX $0c
 	"Decks"
-	"Cards"
 ROMX $0d
 	"Text 1"
 ROMX $0e
@@ -170,13 +171,14 @@ ROMX $3f
 WRAM0
 	"WRAM0"
 	"WRAM0 Duels 1"
+	org $c600
 	"WRAM0 Text Engine"
 	"WRAM0 1"
-	"WRAM0 Serial Transfer"
 	"WRAM0 Duels 2"
 	"WRAM0 2"
 WRAMX 1
 	"WRAM1"
+	org $dd80
 	"WRAM1 Audio"
 VRAM $00
 	"VRAM0"
@@ -184,6 +186,10 @@ VRAM $01
 	"VRAM1"
 SRAM $00
 	"SRAM0"
+	org $a100
+	"Card and Deck SRAM"
+	org $b800
+	"General Data SRAM"
 SRAM $01
 	"SRAM1"
 SRAM $02

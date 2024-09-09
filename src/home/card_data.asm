@@ -44,13 +44,13 @@ LoadCardDataToBuffer1_FromName::
 	call BankpopROM
 	ret
 
-; load data of card with id at e to wLoadedCard2
+; load data of card with id at de to wLoadedCard2
 LoadCardDataToBuffer2_FromCardID::
 	push hl
 	ld hl, wLoadedCard2
 	jr LoadCardDataToHL_FromCardID
 
-; load data of card with id at e to wLoadedCard1
+; load data of card with id at de to wLoadedCard1
 LoadCardDataToBuffer1_FromCardID::
 	push hl
 	ld hl, wLoadedCard1
@@ -80,7 +80,7 @@ LoadCardDataToHL_FromCardID::
 	pop hl
 	ret
 
-; return in a the type (TYPE_* constant) of the card with id at e
+; return in a the type (TYPE_* constant) of the card with id at de
 GetCardType::
 	push hl
 	call GetCardPointer
@@ -95,7 +95,7 @@ GetCardType::
 	pop hl
 	ret
 
-; return in de the 2-byte text id of the name of the card with id at e
+; return in de the 2-byte text id of the name of the card with id at de
 GetCardName::
 	push hl
 	call GetCardPointer
@@ -113,12 +113,9 @@ GetCardName::
 	pop hl
 	ret
 
-; from the card id in a, returns type into a, rarity into b, and set into c
+; from the card id in de, returns type into a, rarity into b, and set into c
 GetCardTypeRarityAndSet::
 	push hl
-	push de
-	ld d, 0
-	ld e, a
 	call GetCardPointer
 	jr c, .done
 	ld a, BANK(CardPointers)
@@ -133,7 +130,6 @@ GetCardTypeRarityAndSet::
 	ld a, e
 	or a
 .done
-	pop de
 	pop hl
 	ret
 
@@ -143,7 +139,7 @@ GetCardPointer::
 	push de
 	push bc
 	ld l, e
-	ld h, $0
+	ld h, d
 	add hl, hl
 	ld bc, CardPointers
 	add hl, bc

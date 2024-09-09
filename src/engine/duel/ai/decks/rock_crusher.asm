@@ -27,22 +27,22 @@ AIActionTable_RockCrusher:
 	jp AIPickPrizeCards
 
 .list_arena
-	db RHYHORN
-	db ONIX
-	db GEODUDE
-	db DIGLETT
-	db $00
+	dw RHYHORN
+	dw ONIX
+	dw GEODUDE
+	dw DIGLETT
+	dw NULL
 
 .list_bench
-	db DIGLETT
-	db GEODUDE
-	db RHYHORN
-	db ONIX
-	db $00
+	dw DIGLETT
+	dw GEODUDE
+	dw RHYHORN
+	dw ONIX
+	dw NULL
 
 .list_retreat
 	ai_retreat DIGLETT, -1
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy DIGLETT,  3, +1
@@ -52,12 +52,12 @@ AIActionTable_RockCrusher:
 	ai_energy GOLEM,    4, +0
 	ai_energy ONIX,     2, -1
 	ai_energy RHYHORN,  3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db ENERGY_REMOVAL
-	db RHYHORN
-	db $00
+	dw ENERGY_REMOVAL
+	dw RHYHORN
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

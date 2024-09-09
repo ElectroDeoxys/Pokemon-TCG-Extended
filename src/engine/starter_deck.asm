@@ -17,7 +17,7 @@ _AddStarterDeck:
 	add 2
 	push hl
 	ld hl, sDeck1
-	call CopyDeckNameAndCards
+	call StoreDeckIDInSRAM
 	pop hl
 	call SwapTurn
 	ld a, [hli] ; extra deck
@@ -28,26 +28,40 @@ _AddStarterDeck:
 ; wPlayerDeck = main starter deck
 ; wOpponentDeck = extra cards
 	call EnableSRAM
-	ld h, HIGH(sCardCollection)
+	ld hl, sCardCollection
 	ld de, wPlayerDeck
 	ld c, DECK_SIZE
 .loop_main_cards
+	push hl
 	ld a, [de]
 	inc de
+	add l
 	ld l, a
+	ld a, [de]
+	inc de
+	adc h
+	ld h, a
 	res CARD_NOT_OWNED_F, [hl]
+	pop hl
 	dec c
 	jr nz, .loop_main_cards
 
-	ld h, HIGH(sCardCollection)
+	ld hl, sCardCollection
 	ld de, wOpponentDeck
 	ld c, 30 ; number of extra cards
 .loop_extra_cards
+	push hl
 	ld a, [de]
 	inc de
+	add l
 	ld l, a
+	ld a, [de]
+	inc de
+	adc h
+	ld h, a
 	res CARD_NOT_OWNED_F, [hl]
 	inc [hl]
+	pop hl
 	dec c
 	jr nz, .loop_extra_cards
 	jp DisableSRAM
@@ -79,21 +93,24 @@ InitSaveData:
 ; add the starter decks
 	ld a, CHARMANDER_AND_FRIENDS_DECK
 	ld hl, sSavedDeck1
-	call CopyDeckNameAndCards
+	call StoreDeckIDInSRAM
 	ld a, SQUIRTLE_AND_FRIENDS_DECK
 	ld hl, sSavedDeck2
-	call CopyDeckNameAndCards
+	call StoreDeckIDInSRAM
 	ld a, BULBASAUR_AND_FRIENDS_DECK
 	ld hl, sSavedDeck3
-	call CopyDeckNameAndCards
+	call StoreDeckIDInSRAM
 
 ; marks all cards in Collection to not owned
 	call EnableSRAM
 	ld hl, sCardCollection
-	ld a, CARD_NOT_OWNED
+	ld bc, CARD_COLLECTION_SIZE
 .loop_collection
-	ld [hl], a
-	inc l
+	ld a, CARD_NOT_OWNED
+	ld [hli], a
+	dec bc
+	ld a, b
+	or c
 	jr nz, .loop_collection
 
 	ld hl, sCurrentDuel
@@ -119,7 +136,7 @@ InitSaveData:
 ; input:
 ;    a = Deck ID
 ;    hl = destination to copy
-CopyDeckNameAndCards:
+StoreDeckIDInSRAM:
 	push de
 	push bc
 	push hl
@@ -142,13 +159,7 @@ CopyDeckNameAndCards:
 	ld de, DECK_NAME_SIZE
 	add hl, de
 	ld de, wPlayerDeck
-	ld c, DECK_SIZE
-.loop_write_cards
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	jr nz, .loop_write_cards
+	call CompressDeckToSRAM
 	call DisableSRAM
 	or a
 .done

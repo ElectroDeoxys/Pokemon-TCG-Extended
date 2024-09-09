@@ -27,22 +27,30 @@ SaveDuelStateToSRAM::
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempTurnDuelistCardID], a
+	ld [wTempTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempTurnDuelistCardID + 1], a
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempNonTurnDuelistCardID], a
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 	call SwapTurn
 	pop hl
 	push hl
 	call EnableSRAM
 	ld a, [wDuelTurns]
 	ld [hli], a
-	ld a, [wTempNonTurnDuelistCardID]
+	ld a, [wTempNonTurnDuelistCardID + 0]
 	ld [hli], a
-	ld a, [wTempTurnDuelistCardID]
+	ld a, [wTempNonTurnDuelistCardID + 1]
+	ld [hli], a
+	ld a, [wTempTurnDuelistCardID + 0]
+	ld [hli], a
+	ld a, [wTempTurnDuelistCardID + 1]
 	ld [hli], a
 	; save duel data to SRAM3:(a000 + $400 * [s0a008] & $3) + $0010
 	pop hl
@@ -65,9 +73,11 @@ CopyDeckData::
 .copy_deck_data
 	; start by putting a terminator at the end of the deck
 	push hl
-	ld bc, DECK_SIZE - 1
+	ld bc, DECK_SIZE_BYTES - 2
 	add hl, bc
-	ld [hl], $0
+	xor a
+	ld [hli], a
+	ld [hl], a
 	pop hl
 	push hl
 .next_card
@@ -76,14 +86,17 @@ CopyDeckData::
 	ld b, a
 	or a
 	jr z, .done
+.card_quantity_loop
 	ld a, [de]
 	inc de
-	ld c, a
-.card_quantity_loop
-	ld [hl], c
-	inc hl
+	ld [hli], a
+	ld a, [de]
+	ld [hli], a
+	dec de
 	dec b
 	jr nz, .card_quantity_loop
+	inc de
+	inc de
 	jr .next_card
 .done
 	ld hl, wDeckName
@@ -93,11 +106,18 @@ CopyDeckData::
 	ld a, [de]
 	ld [hl], a
 	pop hl
-	ld bc, DECK_SIZE - 1
+
+	ld bc, DECK_SIZE_BYTES - 2
 	add hl, bc
-	ld a, [hl]
-	or a
-	ret nz
+	ld a, [hli]
+	or [hl]
+	jr z, .fail
+	inc hl
+	ld a, [hli]
+	or [hl]
+	jr nz, .fail
+	ret
+.fail
 	debug_nop
 	scf
 	ret
@@ -583,7 +603,7 @@ SortCardsInListByID::
 	ld a, c
 	ldh [hTempCardID_ff9b], a
 	ld a, b
-	ldh [hTempCardID_ff9b + 1], a ; 0
+	ldh [hTempCardID_ff9b + 1], a
 	; hl = [hTempListPtr_ff99] + 1
 	inc hl
 	jr .check_list_end
@@ -643,9 +663,11 @@ SortCardsInListByID_CheckForListTerminator::
 ; preserves hl
 GetCardIDFromDeckIndex_bc::
 	push hl
+	push de
 	call _GetCardIDFromDeckIndex
-	ld c, a
-	ld b, $0
+	ld c, e
+	ld b, d
+	pop de
 	pop hl
 	ret
 
@@ -685,8 +707,6 @@ GetCardIDFromDeckIndex::
 	push af
 	push hl
 	call _GetCardIDFromDeckIndex
-	ld e, a
-	ld d, $0
 	pop hl
 	pop af
 	ret
@@ -741,9 +761,8 @@ CountCardsInDuelTempList::
 	pop hl
 	ret
 
-; returns, in register a, the id of the card with the deck index (0-59) specified in register a
+; returns, in register de, the id of the card with the deck index (0-59) specified in register a
 _GetCardIDFromDeckIndex::
-	push de
 	ld e, a
 	ld d, $0
 	ld hl, wPlayerDeck
@@ -753,8 +772,10 @@ _GetCardIDFromDeckIndex::
 	ld hl, wOpponentDeck
 .load_card_from_deck
 	add hl, de
-	ld a, [hl]
-	pop de
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
 	ret
 
 ; load data of card with deck index a (0-59) to wLoadedCard1
@@ -1266,23 +1287,30 @@ GetPlayAreaCardAttachedEnergies::
 	ret
 
 ; returns in a how many times card e can be found in location b
-; e = card id to search
+; de = card id to search
 ; b = location to consider (CARD_LOCATION_*)
 ; h = PLAYER_TURN or OPPONENT_TURN
 CountCardIDInLocation::
 	push bc
 	ld l, DUELVARS_CARD_LOCATIONS
-	ld c, $0
+	ld c, 0
 .next_card
 	ld a, [hl]
 	cp b
 	jr nz, .unmatching_card_location_or_ID
 	ld a, l
-	push hl
-	call _GetCardIDFromDeckIndex
+
+	push bc
+	call GetCardIDFromDeckIndex_bc
+	ld a, c
 	cp e
-	pop hl
+	jr nz, .done_id_comparison
+	ld a, b
+	cp d
+.done_id_comparison
+	pop bc
 	jr nz, .unmatching_card_location_or_ID
+
 	inc c
 .unmatching_card_location_or_ID
 	inc l
@@ -1330,7 +1358,9 @@ ProcessPlayedPokemonCard::
 	ldh [hTempCardIndex_ff9f], a
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempTurnDuelistCardID], a
+	ld [wTempTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempTurnDuelistCardID + 1], a
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret nz
@@ -1344,8 +1374,8 @@ ProcessPlayedPokemonCard::
 	call LoadTxRam2
 	ldtx hl, HavePokemonPowerText
 	call DrawWideTextBox_WaitForInput
-	ld a, [wLoadedCard1ID]
-	cp MUK
+	ld hl, wLoadedCard1ID + 1
+	cphl MUK
 	jr z, .use_pokemon_power
 	ld a, $01 ; check only Muk
 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
@@ -1385,20 +1415,16 @@ ProcessPlayedPokemonCard::
 	jp TryExecuteEffectCommandFunction
 
 ; copies, given a card identified by register a (card ID):
-; - e into wSelectedAttack and d into hTempCardIndex_ff9f
+; - c into wSelectedAttack and b into hTempCardIndex_ff9f
 ; - Attack1 (if e == 0) or Attack2 (if e == 1) data into wLoadedAttack
 ; - Also from that attack, its Damage field into wDamage
 ; finally, clears wNoDamageOrEffect and wDealtDamage
 CopyAttackDataAndDamage_FromCardID::
-	push de
-	push af
-	ld a, e
+	push bc
+	ld a, c
 	ld [wSelectedAttack], a
-	ld a, d
+	ld a, b
 	ldh [hTempCardIndex_ff9f], a
-	pop af
-	ld e, a
-	ld d, $00
 	call LoadCardDataToBuffer1_FromCardID
 	pop de
 	jr CopyAttackDataAndDamage
@@ -1417,8 +1443,10 @@ CopyAttackDataAndDamage_FromDeckIndex::
 ;	fallthrough
 
 CopyAttackDataAndDamage::
-	ld a, [wLoadedCard1ID]
-	ld [wTempCardID_ccc2], a
+	ld a, [wLoadedCard1ID + 0]
+	ld [wTempCardID_ccc2 + 0], a
+	ld a, [wLoadedCard1ID + 1]
+	ld [wTempCardID_ccc2 + 1], a
 	ld hl, wLoadedCard1Atk1
 	dec e
 	jr nz, .got_atk
@@ -1453,13 +1481,17 @@ UpdateArenaCardIDsAndClearTwoTurnDuelVars::
 	ldh [hTempCardIndex_ff9f], a
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempTurnDuelistCardID], a
+	ld [wTempTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempTurnDuelistCardID + 1], a
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempNonTurnDuelistCardID], a
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 	call SwapTurn
 	xor a
 	ld [wccec], a
@@ -1478,8 +1510,10 @@ UseAttackOrPokemonPower::
 	ld [wPlayerAttackingAttackIndex], a
 	ldh a, [hTempCardIndex_ff9f]
 	ld [wPlayerAttackingCardIndex], a
-	ld a, [wTempCardID_ccc2]
-	ld [wPlayerAttackingCardID], a
+	ld a, [wTempCardID_ccc2 + 0]
+	ld [wPlayerAttackingCardID + 0], a
+	ld a, [wTempCardID_ccc2 + 1]
+	ld [wPlayerAttackingCardID + 1], a
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	jp z, UsePokemonPower
@@ -1557,12 +1591,18 @@ PlayAttackAnimation_DealAttackDamage::
 	jr HandleAfterDamageEffects
 
 HandleAfterDamageEffects::
-	ld a, [wTempNonTurnDuelistCardID]
-	push af
+	ld a, [wTempNonTurnDuelistCardID + 0]
+	ld e, a
+	ld a, [wTempNonTurnDuelistCardID + 1]
+	ld d, a
+	push de
 	ld a, EFFECTCMDTYPE_AFTER_DAMAGE
 	call TryExecuteEffectCommandFunction
-	pop af
-	ld [wTempNonTurnDuelistCardID], a
+	pop de
+	ld a, e
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 	call HandleStrikesBack_AgainstResidualAttack
 	bank1call ApplyStatusConditionQueue
 	call Func_1bb4
@@ -1758,10 +1798,15 @@ DealConfusionDamageToSelf::
 	xor a
 	ld [wNoDamageOrEffect], a
 	bank1call Func_7415
-	ld a, [wTempNonTurnDuelistCardID]
-	push af
-	ld a, [wTempTurnDuelistCardID]
-	ld [wTempNonTurnDuelistCardID], a
+	ld a, [wTempNonTurnDuelistCardID + 0]
+	ld e, a
+	ld a, [wTempNonTurnDuelistCardID + 1]
+	ld d, a
+	push de
+	ld a, [wTempTurnDuelistCardID + 0]
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, [wTempTurnDuelistCardID + 1]
+	ld [wTempNonTurnDuelistCardID + 1], a
 	bank1call ApplyDamageModifiers_DamageToSelf ; this is at bank 0
 	ld a, [wDamageEffectiveness]
 	ld c, a
@@ -1770,8 +1815,11 @@ DealConfusionDamageToSelf::
 	call GetTurnDuelistVariable
 	bank1call PlayAttackAnimation_DealAttackDamageSimple
 	call PrintKnockedOutIfHLZero
-	pop af
-	ld [wTempNonTurnDuelistCardID], a
+	pop de
+	ld a, e
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 	pop af
 	ld [wNoDamageOrEffect], a
 	ret
@@ -1967,22 +2015,30 @@ SubtractHP::
 ; given a play area location offset in a, check if the turn holder's Pokemon card in
 ; that location has no HP left, and, if so, print that it was knocked out.
 PrintPlayAreaCardKnockedOutIfNoHP::
-	ld e, a
+	ld b, a
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
 	or a
 	ret nz ; return if arena card has non-0 HP
-	ld a, [wTempNonTurnDuelistCardID]
-	push af
-	ld a, e
+	ld a, [wTempNonTurnDuelistCardID + 0]
+	ld e, a
+	ld a, [wTempNonTurnDuelistCardID + 1]
+	ld d, a
+	push de
+	ld a, b
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, [wLoadedCard1ID]
-	ld [wTempNonTurnDuelistCardID], a
+	ld a, [wLoadedCard1ID + 0]
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, [wLoadedCard1ID + 1]
+	ld [wTempNonTurnDuelistCardID + 1], a
 	call PrintKnockedOut
-	pop af
-	ld [wTempNonTurnDuelistCardID], a
+	pop de
+	ld a, e
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 	scf
 	ret
 
@@ -1995,8 +2051,10 @@ PrintKnockedOutIfHLZero::
 ; print in a text box that the Pokemon card at wTempNonTurnDuelistCardID
 ; was knocked out and wait 40 frames
 PrintKnockedOut::
-	ld a, [wTempNonTurnDuelistCardID]
+	ld a, [wTempNonTurnDuelistCardID + 0]
 	ld e, a
+	ld a, [wTempNonTurnDuelistCardID + 1]
+	ld d, a
 	call LoadCardDataToBuffer1_FromCardID
 	ld hl, wLoadedCard1Name
 	ld a, [hli]
@@ -2047,7 +2105,9 @@ DealDamageToPlayAreaPokemon::
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempNonTurnDuelistCardID], a
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 	pop de
 	ld a, [wTempPlayAreaLocation_cceb]
 	or a ; cp PLAY_AREA_ARENA
@@ -2210,11 +2270,7 @@ MoveCardToDiscardPileIfInArena::
 	jr z, .skip ; jump if card not in arena
 	ld a, l
 	call GetCardIDFromDeckIndex
-	ld a, c
-	cp e
-	jr nz, .skip ; jump if not the card id provided in c
-	ld a, b
-	cp d ; card IDs are 8-bit so d is always 0
+	call CompareDEtoBC
 	jr nz, .skip
 	ld a, l
 	push bc

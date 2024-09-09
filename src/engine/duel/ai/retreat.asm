@@ -181,9 +181,8 @@ AIDecideWhetherToRetreat:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 PORYGON
 	pop de
-	cp PORYGON
 	jr nz, .check_weakness_3
 
 ; handle Porygon
@@ -284,10 +283,9 @@ AIDecideWhetherToRetreat:
 	call SwapTurn
 	call GetCardIDFromDeckIndex
 	call SwapTurn
-	ld a, e
-	cp MR_MIME
+	cp16 MR_MIME
 	jr z, .mr_mime_or_hitmonlee
-	cp HITMONLEE ; ??
+	cp16 HITMONLEE ; ??
 	jr nz, .check_retreat_cost
 
 ; check bench if there's any Pokémon
@@ -367,13 +365,25 @@ AIDecideWhetherToRetreat:
 	push de
 	push hl
 	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2ID]
 	pop hl
 	pop de
-	cp MYSTERIOUS_FOSSIL
+
+	ld a, [wLoadedCard2ID + 0]
+	cp LOW(MYSTERIOUS_FOSSIL)
+	jr nz, .not_mysterious_fossil
+	ld a, [wLoadedCard2ID + 1]
+	cp HIGH(MYSTERIOUS_FOSSIL)
 	jr z, .loop_ko_2
-	cp CLEFAIRY_DOLL
+
+.not_mysterious_fossil
+	ld a, [wLoadedCard2ID + 0]
+	cp LOW(CLEFAIRY_DOLL)
+	jr nz, .not_clefairy_doll
+	ld a, [wLoadedCard2ID + 1]
+	cp HIGH(CLEFAIRY_DOLL)
 	jr z, .loop_ko_2
+
+.not_clefairy_doll
 	ld a, e
 	ldh [hTempPlayAreaLocation_ff9d], a
 	push de
@@ -391,10 +401,9 @@ AIDecideWhetherToRetreat:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp MYSTERIOUS_FOSSIL
+	cp16 MYSTERIOUS_FOSSIL
 	jr z, .mysterious_fossil_or_clefairy_doll
-	cp CLEFAIRY_DOLL
+	cp16 CLEFAIRY_DOLL
 	jr z, .mysterious_fossil_or_clefairy_doll
 
 ; if wAIScore is at least 131, set carry
@@ -564,7 +573,8 @@ AIDecideBenchPokemonToSwitchTo:
 	call SwapTurn
 	call LoadCardDataToBuffer2_FromDeckIndex
 	call SwapTurn
-	cp MR_MIME
+	ld hl, wLoadedCard2ID + 1
+	cphl MR_MIME
 	jr nz, .check_defending_weak
 	xor a
 	call EstimateDamage_VersusDefendingCard
@@ -663,7 +673,7 @@ AIDecideBenchPokemonToSwitchTo:
 	or a
 	jr nz, .add_hp_score
 	ld [wAIScore], a
-	jr .store_score
+	jp .store_score
 
 ; AI score += floor(HP/40)
 .add_hp_score
@@ -680,9 +690,10 @@ AIDecideBenchPokemonToSwitchTo:
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
-	cp MR_MIME
+	ld hl, wLoadedCard1ID + 1
+	cphl MR_MIME
 	jr z, .raise_score
-	cp MEW_LV8
+	cphl MEW_LV8
 	jr nz, .asm_15cf0
 	ld a, DUELVARS_ARENA_CARD
 	call GetNonTurnDuelistVariable
@@ -705,17 +716,19 @@ AIDecideBenchPokemonToSwitchTo:
 ; if card is Mysterious Fossil or Clefairy Doll,
 ; lower AI score
 .mysterious_fossil_or_clefairy_doll
-	ld a, [wLoadedCard1ID]
-	cp MYSTERIOUS_FOSSIL
+	ld hl, wLoadedCard1ID + 1
+	cphl MYSTERIOUS_FOSSIL
 	jr z, .lower_score_2
-	cp CLEFAIRY_DOLL
+	cphl CLEFAIRY_DOLL
 	jr nz, .ai_score_bonus
 .lower_score_2
 	ld a, 10
 	call SubFromAIScore
 
 .ai_score_bonus
-	ld b, a
+	ld c, [hl]
+	inc hl
+	ld b, [hl]
 	ld a, [wAICardListRetreatBonus + 1]
 	or a
 	jr z, .store_score
@@ -725,9 +738,12 @@ AIDecideBenchPokemonToSwitchTo:
 
 .loop_ids
 	ld a, [hli]
-	or a
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	or e
 	jr z, .store_score ; list is over
-	cp b
+	call CompareDEtoBC
 	jr nz, .next_id
 	ld a, [hl]
 	cp $80
@@ -822,10 +838,9 @@ AITryToRetreat:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp MYSTERIOUS_FOSSIL
+	cp16 MYSTERIOUS_FOSSIL
 	jp z, .mysterious_fossil_or_clefairy_doll
-	cp CLEFAIRY_DOLL
+	cp16 CLEFAIRY_DOLL
 	jp z, .mysterious_fossil_or_clefairy_doll
 
 ; if card is Asleep or Paralyzed, set carry and exit
@@ -883,7 +898,9 @@ AITryToRetreat:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempCardID], a
+	ld [wTempCardID + 0], a
+	ld a, d
+	ld [wTempCardID + 1], a
 	call LoadCardDataToBuffer1_FromCardID
 	ld a, [wLoadedCard1Type]
 	or TYPE_ENERGY
@@ -905,9 +922,8 @@ AITryToRetreat:
 	ld [de], a
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 DOUBLE_COLORLESS_ENERGY
 	pop de
-	cp DOUBLE_COLORLESS_ENERGY
 	jr nz, .loop_2
 	ld a, [de]
 	call RemoveCardFromDuelTempList
@@ -956,9 +972,8 @@ AITryToRetreat:
 	inc de
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 DOUBLE_COLORLESS_ENERGY
 	pop de
-	cp DOUBLE_COLORLESS_ENERGY
 	jr nz, .not_double_colorless
 	dec c
 	jr z, .end_retreat_list

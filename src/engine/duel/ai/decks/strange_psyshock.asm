@@ -27,27 +27,27 @@ AIActionTable_StrangePsyshock:
 	jp AIPickPrizeCards
 
 .list_arena
-	db KANGASKHAN
-	db CHANSEY
-	db SNORLAX
-	db MR_MIME
-	db ABRA
-	db $00
+	dw KANGASKHAN
+	dw CHANSEY
+	dw SNORLAX
+	dw MR_MIME
+	dw ABRA
+	dw NULL
 
 .list_bench
-	db ABRA
-	db MR_MIME
-	db KANGASKHAN
-	db SNORLAX
-	db CHANSEY
-	db $00
+	dw ABRA
+	dw MR_MIME
+	dw KANGASKHAN
+	dw SNORLAX
+	dw CHANSEY
+	dw NULL
 
 .list_retreat
 	ai_retreat ABRA,       -3
 	ai_retreat SNORLAX,    -3
 	ai_retreat KANGASKHAN, -1
 	ai_retreat CHANSEY,    -1
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy ABRA,       3, +1
@@ -57,14 +57,14 @@ AIActionTable_StrangePsyshock:
 	ai_energy CHANSEY,    2, -2
 	ai_energy KANGASKHAN, 4, -2
 	ai_energy SNORLAX,    0, -8
-	db $00
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db MR_MIME
-	db ALAKAZAM
-	db SWITCH
-	db $00
+	dw GAMBLER
+	dw MR_MIME
+	dw ALAKAZAM
+	dw SWITCH
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

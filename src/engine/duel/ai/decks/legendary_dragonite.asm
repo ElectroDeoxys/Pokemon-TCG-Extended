@@ -27,25 +27,25 @@ AIActionTable_LegendaryDragonite:
 	jp AIPickPrizeCards
 
 .list_arena
-	db KANGASKHAN
-	db LAPRAS
-	db CHARMANDER
-	db DRATINI
-	db MAGIKARP
-	db $00
+	dw KANGASKHAN
+	dw LAPRAS
+	dw CHARMANDER
+	dw DRATINI
+	dw MAGIKARP
+	dw NULL
 
 .list_bench
-	db CHARMANDER
-	db MAGIKARP
-	db DRATINI
-	db LAPRAS
-	db KANGASKHAN
-	db $00
+	dw CHARMANDER
+	dw MAGIKARP
+	dw DRATINI
+	dw LAPRAS
+	dw KANGASKHAN
+	dw NULL
 
 .list_retreat
 	ai_retreat CHARMANDER, -1
 	ai_retreat MAGIKARP,   -5
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy CHARMANDER,     3, +1
@@ -58,13 +58,13 @@ AIActionTable_LegendaryDragonite:
 	ai_energy DRAGONITE_LV41, 3, -1
 	ai_energy KANGASKHAN,     2, -2
 	ai_energy LAPRAS,         3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db DRAGONITE_LV41
-	db KANGASKHAN
-	db $00
+	dw GAMBLER
+	dw DRAGONITE_LV41
+	dw KANGASKHAN
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
@@ -106,8 +106,7 @@ AIDoTurn_LegendaryDragonite:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, KANGASKHAN
-	cp e
+	cp16 KANGASKHAN
 	jr nz, .attach_normally
 	call CreateEnergyCardListFromHand
 	jr c, .skip_energy_attach_1

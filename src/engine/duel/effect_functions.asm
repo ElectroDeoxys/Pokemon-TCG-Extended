@@ -44,13 +44,13 @@ QueueStatusCondition:
 	ld hl, wWhoseTurn
 	cp [hl]
 	jr nz, .can_induce_status
-	ld a, [wTempNonTurnDuelistCardID]
-	cp CLEFAIRY_DOLL
+	ld hl, wTempNonTurnDuelistCardID + 1
+	cphl CLEFAIRY_DOLL
 	jr z, .cant_induce_status
-	cp MYSTERIOUS_FOSSIL
+	cphl MYSTERIOUS_FOSSIL
 	jr z, .cant_induce_status
 	; Snorlax's Thick Skinned prevents it from being statused...
-	cp SNORLAX
+	cphl SNORLAX
 	jr nz, .can_induce_status
 	call SwapTurn
 	xor a
@@ -630,14 +630,14 @@ CheckIfDeckIsEmpty:
 ; if none were found, asks the Player whether to look
 ; in the Deck anyway, and returns carry if No is selected.
 ; uses SEARCHEFFECT_* as input which determines what to search for:
-;	SEARCHEFFECT_CARD_ID = search for card ID in e
+;	no search effect = search for card ID in e
 ;	SEARCHEFFECT_NIDORAN = search for either NidoranM or NidoranF
 ;	SEARCHEFFECT_BASIC_FIGHTING = search for any Basic Fighting Pokemon
 ;	SEARCHEFFECT_BASIC_ENERGY = search for any Basic Energy
 ;	SEARCHEFFECT_POKEMON = search for any Pokemon card
 ; input:
 ;	d = SEARCHEFFECT_* constant
-;	e = (optional) card ID to search for in deck
+;	de = (optional) card ID to search for in deck
 ;	hl = text to print if Deck has card(s)
 ; output:
 ;	carry set if refused to look at deck
@@ -648,9 +648,19 @@ LookForCardsInDeck:
 	cp $ff
 	jr z, .none_in_deck
 	ld a, d
+	bit 7, a
+	jr nz, .not_card_id
+	call .SearchDeckForCardID
+	jr c, .none_in_deck
+	jr .exists_in_deck
+
+.not_card_id
+	res 7, a
 	ld hl, .search_table
 	call JumpToFunctionInTable
 	jr c, .none_in_deck
+
+.exists_in_deck
 	pop bc
 	pop hl
 	call DrawWideTextBox_WaitForInput
@@ -667,29 +677,27 @@ LookForCardsInDeck:
 	jp YesOrNoMenuWithText_SetCursorToYes
 
 .search_table
-	dw .SearchDeckForCardID
+	dw .SearchDeckForPokemon
 	dw .SearchDeckForNidoran
 	dw .SearchDeckForBasicFighting
 	dw .SearchDeckForBasicEnergy
-	dw .SearchDeckForPokemon
 
 .set_carry
 	scf
 	ret
 
 ; returns carry if no card with
-; same card ID as e is found in Deck
+; same card ID as de is found in Deck
 .SearchDeckForCardID
+	ld b, d
+	ld c, e
 	ld hl, wDuelTempList
 .loop_deck_e
 	ld a, [hli]
 	cp $ff
 	jr z, .set_carry
-	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
-	pop de
-	cp e
+	call CompareDEtoBC
 	jr nz, .loop_deck_e
 	or a
 	ret
@@ -702,10 +710,9 @@ LookForCardsInDeck:
 	cp $ff
 	jr z, .set_carry
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp NIDORANF
+	cp16 NIDORANF
 	jr z, .found_nidoran
-	cp NIDORANM
+	cp16 NIDORANM
 	jr nz, .loop_deck_nidoran
 .found_nidoran
 	or a
@@ -962,10 +969,13 @@ DuelistSelectForcedSwitch:
 	call SwapTurn
 
 	ld a, [wPlayerAttackingAttackIndex]
-	ld e, a
+	ld c, a
 	ld a, [wPlayerAttackingCardIndex]
+	ld b, a
+	ld a, [wPlayerAttackingCardID + 0]
+	ld e, a
+	ld a, [wPlayerAttackingCardID + 1]
 	ld d, a
-	ld a, [wPlayerAttackingCardID]
 	call CopyAttackDataAndDamage_FromCardID
 	jp UpdateArenaCardIDsAndClearTwoTurnDuelVars
 
@@ -1506,8 +1516,8 @@ VenonatLeechLifeEffect:
 
 ; During your next turn, double damage
 SwordsDanceEffect:
-	ld a, [wTempTurnDuelistCardID]
-	cp SCYTHER
+	ld hl, wTempTurnDuelistCardID + 1
+	cphl SCYTHER
 	ret nz
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
 	jp ApplySubstatus1ToDefendingCard
@@ -1587,7 +1597,7 @@ Sprout_PlayerSelectEffect:
 	call CreateDeckCardList
 	ldtx hl, ChooseAnOddishFromDeckText
 	ldtx bc, OddishText
-	lb de, SEARCHEFFECT_CARD_ID, ODDISH
+	ld de, ODDISH
 	call LookForCardsInDeck
 	ret c
 
@@ -1601,8 +1611,7 @@ Sprout_PlayerSelectEffect:
 	bank1call DisplayCardList
 	jr c, .pressed_b
 	call GetCardIDFromDeckIndex
-	ld bc, ODDISH
-	call CompareDEtoBC
+	cp16 ODDISH
 	jr nz, .play_sfx
 
 ; Oddish was selected
@@ -1627,8 +1636,7 @@ Sprout_PlayerSelectEffect:
 	jr nz, .next
 	ld a, l
 	call GetCardIDFromDeckIndex
-	ld bc, ODDISH
-	call CompareDEtoBC
+	cp16 ODDISH
 	jr z, .play_sfx ; found Oddish, go back to top loop
 .next
 	inc l
@@ -1651,8 +1659,7 @@ Sprout_AISelectEffect:
 	cp $ff
 	ret z ; no Oddish
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp ODDISH
+	cp16 ODDISH
 	jr nz, .loop_deck
 	ret ; Oddish found
 
@@ -1787,17 +1794,13 @@ Toxic_DoublePoisonEffect:
 BoyfriendsEffect:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
-	ld c, PLAY_AREA_ARENA
+	ld c, 0
 .loop
 	ld a, [hl]
 	cp $ff
 	jr z, .done
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp NIDOKING
-	jr nz, .next
-	ld a, d
-	cp $00 ; why check d? Card IDs are only 1 byte long
+	cp16 NIDOKING
 	jr nz, .next
 	inc c
 .next
@@ -1842,7 +1845,7 @@ NidoranFCallForFamily_PlayerSelectEffect:
 	call CreateDeckCardList
 	ldtx hl, ChooseNidoranFromDeckText
 	ldtx bc, NidoranMNidoranFText
-	lb de, SEARCHEFFECT_NIDORAN, $00
+	ld d, SEARCHEFFECT_NIDORAN
 	call LookForCardsInDeck
 	ret c
 
@@ -1856,11 +1859,9 @@ NidoranFCallForFamily_PlayerSelectEffect:
 	bank1call DisplayCardList
 	jr c, .pressed_b
 	call GetCardIDFromDeckIndex
-	ld bc, NIDORANF
-	call CompareDEtoBC
+	cp16 NIDORANF
 	jr z, .selected_nidoran
-	ld bc, NIDORANM
-	call CompareDEtoBC
+	cp16 NIDORANM
 	jr nz, .loop ; .play_sfx would be more appropriate here
 
 .selected_nidoran
@@ -1885,10 +1886,9 @@ NidoranFCallForFamily_PlayerSelectEffect:
 	jr nz, .next
 	ld a, l
 	call GetCardIDFromDeckIndex
-	ld bc, NIDORANF
-	call CompareDEtoBC
+	cp16 NIDORANF
 	jr z, .play_sfx ; found, go back to top loop
-	ld bc, NIDORANM
+	cp16 NIDORANM
 	jr z, .play_sfx ; found, go back to top loop
 .next
 	inc l
@@ -1911,10 +1911,9 @@ NidoranFCallForFamily_AISelectEffect:
 	cp $ff
 	ret z ; none found
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp NIDORANF
+	cp16 NIDORANF
 	jr z, .found
-	cp NIDORANM
+	cp16 NIDORANM
 	jr nz, .loop_deck
 .found
 	ret
@@ -2222,7 +2221,7 @@ BellsproutCallForFamily_PlayerSelectEffect:
 	call CreateDeckCardList
 	ldtx hl, ChooseABellsproutFromDeckText
 	ldtx bc, BellsproutText
-	lb de, SEARCHEFFECT_CARD_ID, BELLSPROUT
+	ld de, BELLSPROUT
 	call LookForCardsInDeck
 	ret c
 
@@ -2236,8 +2235,7 @@ BellsproutCallForFamily_PlayerSelectEffect:
 	bank1call DisplayCardList
 	jr c, .pressed_b
 	call GetCardIDFromDeckIndex
-	ld bc, BELLSPROUT
-	call CompareDEtoBC
+	cp16 BELLSPROUT
 	jr nz, .play_sfx
 
 ; Bellsprout was selected
@@ -2262,8 +2260,7 @@ BellsproutCallForFamily_PlayerSelectEffect:
 	jr nz, .next
 	ld a, l
 	call GetCardIDFromDeckIndex
-	ld bc, BELLSPROUT
-	call CompareDEtoBC
+	cp16 BELLSPROUT
 	jr z, .play_sfx ; found Bellsprout, go back to top loop
 .next
 	inc l
@@ -2286,8 +2283,7 @@ BellsproutCallForFamily_AISelectEffect:
 	cp $ff
 	ret z ; no Bellsprout
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp BELLSPROUT
+	cp16 BELLSPROUT
 	jr nz, .loop_deck
 	ret ; Bellsprout found
 
@@ -2724,7 +2720,7 @@ KrabbyCallForFamily_PlayerSelectEffect:
 	call CreateDeckCardList
 	ldtx hl, ChooseAKrabbyFromDeckText
 	ldtx bc, KrabbyText
-	lb de, SEARCHEFFECT_CARD_ID, KRABBY
+	ld de, KRABBY
 	call LookForCardsInDeck
 	ret c
 
@@ -2738,8 +2734,7 @@ KrabbyCallForFamily_PlayerSelectEffect:
 	bank1call DisplayCardList
 	jr c, .pressed_b
 	call GetCardIDFromDeckIndex
-	ld bc, KRABBY
-	call CompareDEtoBC
+	cp16 KRABBY
 	jr nz, .play_sfx
 
 ; Krabby was selected
@@ -2764,8 +2759,7 @@ KrabbyCallForFamily_PlayerSelectEffect:
 	jr nz, .next
 	ld a, l
 	call GetCardIDFromDeckIndex
-	ld bc, KRABBY
-	call CompareDEtoBC
+	cp16 KRABBY
 	jr z, .play_sfx ; found Krabby, go back to top loop
 .next
 	inc l
@@ -2788,8 +2782,7 @@ KrabbyCallForFamily_AISelectEffect:
 	cp $ff
 	ret z ; no Krabby
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp KRABBY
+	cp16 KRABBY
 	jr nz, .loop_deck
 	ret ; Krabby found
 
@@ -3144,8 +3137,8 @@ IceBreath_RandomPokemonDamageEffect:
 	jp SwapTurn
 
 FocusEnergyEffect:
-	ld a, [wTempTurnDuelistCardID]
-	cp VAPOREON_LV29
+	ld hl, wTempTurnDuelistCardID + 1
+	cphl VAPOREON_LV29
 	ret nz ; return if no VaporeonLv29
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
 	jp ApplySubstatus1ToDefendingCard
@@ -4679,8 +4672,10 @@ DevolutionBeam_DevolveEffect:
 	call LoadCardDataToBuffer1_FromDeckIndex
 
 ; check if car is affected
-	ld a, [wLoadedCard1ID]
-	ld [wTempNonTurnDuelistCardID], a
+	ld a, [wLoadedCard1ID + 0]
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, [wLoadedCard1ID + 1]
+	ld [wTempNonTurnDuelistCardID + 1], a
 	ld de, $0
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a
@@ -5335,7 +5330,7 @@ MarowakCallForFamily_PlayerSelectEffect:
 	call CreateDeckCardList
 	ldtx hl, ChooseBasicFightingPokemonFromDeckText
 	ldtx bc, FightingPokemonDeckText
-	lb de, SEARCHEFFECT_BASIC_FIGHTING, $00
+	ld d, SEARCHEFFECT_BASIC_FIGHTING
 	call LookForCardsInDeck
 	ret c
 
@@ -6482,7 +6477,7 @@ EnergySpike_PlayerSelectEffect:
 	call CreateDeckCardList
 	ldtx hl, Choose1BasicEnergyCardFromDeckText
 	ldtx bc, BasicEnergyText
-	lb de, SEARCHEFFECT_BASIC_ENERGY, 0
+	ld d, SEARCHEFFECT_BASIC_ENERGY
 	call LookForCardsInDeck
 	ret c
 
@@ -7211,8 +7206,10 @@ HandlePlayerMetronomeEffect:
 	ld [wPlayerAttackingCardIndex], a
 	ld a, [wSelectedAttack]
 	ld [wPlayerAttackingAttackIndex], a
-	ld a, [wTempCardID_ccc2]
-	ld [wPlayerAttackingCardID], a
+	ld a, [wTempCardID_ccc2 + 0]
+	ld [wPlayerAttackingCardID + 0], a
+	ld a, [wTempCardID_ccc2 + 1]
+	ld [wPlayerAttackingCardID + 1], a
 	or a
 	ret
 
@@ -7618,7 +7615,11 @@ MorphEffect:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff98], a
+	push de
 	call _GetCardIDFromDeckIndex
+	pop de
+	ld [hl], d
+	dec hl
 	ld [hl], e
 
 ; overwrite HP to new card's maximum HP
@@ -7634,9 +7635,10 @@ MorphEffect:
 	call ClearAllStatusConditions
 
 ; load both card's names for printing text
-	ld a, [wTempTurnDuelistCardID]
+	ld a, [wTempTurnDuelistCardID + 0]
 	ld e, a
-	ld d, $00
+	ld a, [wTempTurnDuelistCardID + 1]
+	ld d, a
 	call LoadCardDataToBuffer2_FromCardID
 	ld hl, wLoadedCard2Name
 	ld de, wTxRam2
@@ -7662,8 +7664,7 @@ MorphEffect:
 	ret
 
 ; picks a random Pokemon in the Deck to morph.
-; needs to be a Basic Pokemon that doesn't have
-; the same ID as the Arena card.
+; needs to be a Basic Pokemon that isn't Ditto
 ; returns carry if no Pokemon were found.
 .PickRandomBasicPokemonFromDeck
 	call CreateDeckCardList
@@ -7682,9 +7683,9 @@ MorphEffect:
 	ld a, [wLoadedCard2Stage]
 	or a
 	jr nz, .loop_deck ; skip non-Basic cards
-	ld a, [wLoadedCard2ID]
-	cp DUELVARS_ARENA_CARD
-	jr z, .loop_deck ; skip cards with same ID as Arena card
+	ld hl, wLoadedCard2ID + 1
+	cphl DITTO
+	jr z, .loop_deck ; skip other Ditto cards
 	ldh a, [hTempCardIndex_ff98]
 	or a
 	ret
@@ -7949,16 +7950,16 @@ ImakuniEffect:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, [wLoadedCard1ID]
+	ld hl, wLoadedCard1ID + 1
 
 ; cannot confuse Clefairy Doll and Mysterious Fossil
-	cp CLEFAIRY_DOLL
+	cphl CLEFAIRY_DOLL
 	jr z, .failed
-	cp MYSTERIOUS_FOSSIL
+	cphl MYSTERIOUS_FOSSIL
 	jr z, .failed
 
 ; cannot confuse Snorlax if its Pkmn Power is active
-	cp SNORLAX
+	cphl SNORLAX
 	jr nz, .success
 	xor a
 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
@@ -8110,7 +8111,7 @@ EnergySearch_PlayerSelection:
 	ldh [hTemp_ffa0], a
 	call CreateDeckCardList
 	ldtx hl, Choose1BasicEnergyCardFromDeckText
-	lb de, SEARCHEFFECT_BASIC_ENERGY, 0
+	ld d, SEARCHEFFECT_BASIC_ENERGY
 	ldtx bc, BasicEnergyText
 	call LookForCardsInDeck
 	ret c ; skip showing deck
@@ -9416,7 +9417,7 @@ PokeBall_PlayerSelection:
 	call CreateDeckCardList
 	ldtx hl, ChooseBasicOrEvolutionPokemonCardFromDeckText
 	ldtx bc, EvolutionCardText
-	lb de, SEARCHEFFECT_POKEMON, 0
+	ld d, SEARCHEFFECT_POKEMON
 	call LookForCardsInDeck
 	jr c, .no_pkmn ; return if Player chose not to check deck
 

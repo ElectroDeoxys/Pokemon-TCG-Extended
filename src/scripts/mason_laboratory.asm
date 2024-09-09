@@ -54,10 +54,13 @@ Script_ChallengeMachine:
 	quit_script_fully
 
 Script_Tech1:
-	lb bc, 0, EnergyCardList.end - EnergyCardList
+	lb bc, 0, (EnergyCardList.end - EnergyCardList) / 2
 	ld hl, EnergyCardList
 .count_loop
 	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	inc hl
 	call GetCardCountInCollection
 	add b
 	ld b, a
@@ -73,11 +76,14 @@ Script_Tech1:
 	quit_script_fully
 
 .low_on_energies
-	ld c, EnergyCardList.end - EnergyCardList
+	ld c, (EnergyCardList.end - EnergyCardList) / 2
 	ld hl, EnergyCardList
 .next_energy_card
 	ld b, 10
 	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	inc hl
 .add_loop
 	push af
 	call AddCardToCollection
@@ -97,12 +103,12 @@ Script_Tech1:
 	print_text_quit_fully Tech1GoodbyeText
 
 EnergyCardList:
-	db GRASS_ENERGY
-	db FIRE_ENERGY
-	db WATER_ENERGY
-	db LIGHTNING_ENERGY
-	db FIGHTING_ENERGY
-	db PSYCHIC_ENERGY
+	dw GRASS_ENERGY
+	dw FIRE_ENERGY
+	dw WATER_ENERGY
+	dw LIGHTNING_ENERGY
+	dw FIGHTING_ENERGY
+	dw PSYCHIC_ENERGY
 .end
 
 Script_Tech2:

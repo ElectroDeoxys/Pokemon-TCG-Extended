@@ -27,24 +27,24 @@ AIActionTable_FirstStrike:
 	jp AIPickPrizeCards
 
 .list_arena
-	db HITMONCHAN
-	db MACHOP
-	db HITMONLEE
-	db MANKEY
-	db $00
+	dw HITMONCHAN
+	dw MACHOP
+	dw HITMONLEE
+	dw MANKEY
+	dw NULL
 
 .list_bench
-	db MACHOP
-	db HITMONLEE
-	db HITMONCHAN
-	db MANKEY
-	db $00
+	dw MACHOP
+	dw HITMONLEE
+	dw HITMONCHAN
+	dw MANKEY
+	dw NULL
 
 .list_retreat
 	ai_retreat MACHOP,  -1
 	ai_retreat MACHOKE, -1
 	ai_retreat MANKEY,  -2
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy MACHOP,     3, +0
@@ -54,12 +54,12 @@ AIActionTable_FirstStrike:
 	ai_energy HITMONLEE,  3, +0
 	ai_energy MANKEY,     2, -1
 	ai_energy PRIMEAPE,   3, -1
-	db $00
+	dw NULL
 
 .list_prize
-	db HITMONLEE
-	db HITMONCHAN
-	db $00
+	dw HITMONLEE
+	dw HITMONCHAN
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

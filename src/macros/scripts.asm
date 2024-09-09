@@ -203,14 +203,14 @@ ENDM
 ; Jumps to a given script position if the player owns a card anywhere
 MACRO jump_if_card_owned
 	run_command ScriptCommand_JumpIfCardOwned
-	db \1 ; card ID (ex LAPRAS)
+	dw \1 ; card ID (ex LAPRAS)
 	dw \2 ; script label
 ENDM
 
 ; Jumps to a given script position if the player has a card specifically in their collection
 MACRO jump_if_card_in_collection
 	run_command ScriptCommand_JumpIfCardInCollection
-	db \1 ; card ID (ex LAPRAS)
+	dw \1 ; card ID (ex LAPRAS)
 	dw \2 ; script label
 ENDM
 
@@ -218,13 +218,13 @@ ENDM
 ; Does not show the card received screen. For that see show_card_received_screen
 MACRO give_card
 	run_command ScriptCommand_GiveCard
-	db \1 ; card ID (ex LAPRAS)
+	dw \1 ; card ID (ex LAPRAS)
 ENDM
 
 ; Removes a card from the player's collection, usually to trade
 MACRO take_card
 	run_command ScriptCommand_TakeCard
-	db \1 ; card ID (ex LAPRAS)
+	dw \1 ; card ID (ex LAPRAS)
 ENDM
 
 ; Jumps to a given script position if the player has any energy cards in their collection
@@ -316,7 +316,7 @@ ENDM
 ; Shows a fullscreen image of a card and says the player has received it
 MACRO show_card_received_screen
 	run_command ScriptCommand_ShowCardReceivedScreen
-	db \1 ; Card received (ex LAPRAS)
+	dw \1 ; Card received (ex LAPRAS)
 ENDM
 
 ; Sets the active NPC

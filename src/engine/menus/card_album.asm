@@ -4,7 +4,7 @@
 ; a = CARD_SET_* constant
 CreateCardSetList:
 	push af
-	ld a, DECK_SIZE
+	ld a, DECK_SIZE * 2
 	ld hl, wFilteredCardList
 	call ClearNBytesFromHL
 	ld a, DECK_SIZE
@@ -15,10 +15,10 @@ CreateCardSetList:
 	pop af
 
 	ld hl, 0
-	lb de, 0, 0
+	ld de, 0
 	ld b, a
 .loop_all_cards
-	inc e
+	inc de
 	call LoadCardDataToBuffer1_FromCardID
 	jr c, .done_pkmn_cards
 	ld a, [wLoadedCard1Set]
@@ -28,17 +28,19 @@ CreateCardSetList:
 	jr nz, .loop_all_cards
 
 ; it's same set as input
-	ld a, e
-	cp VENUSAUR_LV64
+	cp16 VENUSAUR_LV64
 	jp z, .SetVenusaurLv64OwnedFlag
-	cp MEW_LV15
+	cp16 MEW_LV15
 	jp z, .SetMewLv15OwnedFlag
 
 	push bc
 	push hl
 	ld bc, wFilteredCardList
+	add hl, hl
 	add hl, bc
 	ld [hl], e ; card ID
+	inc hl     ;
+	ld [hl], d ;
 
 	ld hl, wTempCardCollection
 	add hl, de
@@ -65,17 +67,19 @@ CreateCardSetList:
 
 ; colosseum
 ; places all basic energy cards in wFilteredCardList
-	lb de, 0, 0
+	ld de, 0
 .loop_basic_energy_cards
 	inc e
-	ld a, e
-	cp DOUBLE_COLORLESS_ENERGY
+	cp16 DOUBLE_COLORLESS_ENERGY
 	jr z, .skip_energy_cards
 	push bc
 	push hl
 	ld bc, wFilteredCardList
+	add hl, hl
 	add hl, bc
 	ld [hl], e
+	inc hl
+	ld [hl], d
 	ld hl, wTempCardCollection
 	add hl, de
 	ld a, [hl]
@@ -91,20 +95,22 @@ CreateCardSetList:
 
 .mystery
 ; places double colorless energy card in wFilteredCardList
-	lb de, 0, 0
+	ld de, 0
 .loop_find_double_colorless
 	inc e
-	ld a, e
-	cp BULBASAUR
+	cp16 BULBASAUR
 	jr z, .skip_energy_cards
-	cp DOUBLE_COLORLESS_ENERGY
+	cp16 DOUBLE_COLORLESS_ENERGY
 	jr nz, .loop_find_double_colorless
 	; double colorless energy
 	push bc
 	push hl
 	ld bc, wFilteredCardList
+	add hl, hl
 	add hl, bc
 	ld [hl], e
+	inc hl
+	ld [hl], d
 	ld hl, wTempCardCollection
 	add hl, de
 	ld a, [hl]
@@ -145,13 +151,15 @@ CreateCardSetList:
 	inc c
 	ld a, c
 	ld [wNumEntriesInCurFilter], a
-	xor a
-	ld hl, wFilteredCardList
-	add hl, bc
-	ld [hl], a
-	ld a, $ff ; terminator byte
 	ld hl, wOwnedCardsCountList
 	add hl, bc
+	ld [hl], $ff ; terminator byte
+
+	xor a
+	ld hl, wFilteredCardList
+	sla c
+	add hl, bc
+	ld [hli], a
 	ld [hl], a
 	ret
 
@@ -183,14 +191,17 @@ CreateCardSetList:
 .PlaceVenusaurLv64InList
 	push af
 	push hl
-	ld e, VENUSAUR_LV64
+	ld de, VENUSAUR_LV64
 ;	fallthrough
 
-; places card in register e directly in the list
+; places card in register de directly in the list
 .PlaceCardInList
 	ld bc, wFilteredCardList
+	add hl, hl
 	add hl, bc
 	ld [hl], e
+	inc hl
+	ld [hl], d
 	pop hl
 	push hl
 	ld bc, wOwnedCardsCountList
@@ -204,7 +215,7 @@ CreateCardSetList:
 .PlaceMewLv15InList
 	push af
 	push hl
-	ld e, MEW_LV15
+	ld de, MEW_LV15
 	jr .PlaceCardInList
 
 ; a = CARD_SET_* constant
@@ -212,9 +223,9 @@ CreateCardSetListAndInitListCoords:
 	push af
 	ld hl, sCardCollection
 	ld de, wTempCardCollection
-	ld b, CARD_COLLECTION_SIZE - 1
+	ld bc, CARD_COLLECTION_SIZE - 2
 	call EnableSRAM
-	call CopyNBytesFromHLToDE
+	call CopyNBytesFromHLToDE_Long
 	call DisableSRAM
 	pop af
 
@@ -300,13 +311,15 @@ PrintCardSetListEntries:
 	ld b, a
 	ld de, wFilteredCardList
 	push hl
+	add hl, hl
 	add hl, de
-	ld a, [hl]
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
 	pop hl
 	inc l
-	or a
+	or d
 	jr z, .no_down_cursor
-	ld e, a
 	call AddCardIDToVisibleList
 	call LoadCardDataToBuffer1_FromCardID
 	push bc
@@ -354,9 +367,10 @@ PrintCardSetListEntries:
 
 .handle_down_cursor
 	ld de, wFilteredCardList
+	add hl, hl
 	add hl, de
-	ld a, [hl]
-	or a
+	ld a, [hli]
+	or [hl]
 	jr z, .no_down_cursor
 	pop de
 	xor a ; FALSE
@@ -382,15 +396,19 @@ PrintCardSetListEntries:
 .AppendCardListIndex
 	push bc
 	push de
+	add hl, hl
 	ld de, wFilteredCardList
 	add hl, de
 	dec hl
-	ld a, [hl]
-	cp DOUBLE_COLORLESS_ENERGY + 1
+	dec hl
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	cp16 DOUBLE_COLORLESS_ENERGY + 1
 	jr c, .energy_card
-	cp VENUSAUR_LV64
+	cp16 VENUSAUR_LV64
 	jr z, .phantom_card
-	cp MEW_LV15
+	cp16 MEW_LV15
 	jr z, .phantom_card
 
 	ld a, [wNumVisibleCardListEntries]
@@ -426,7 +444,9 @@ PrintCardSetListEntries:
 	ret
 
 .energy_card
-	call CalculateOnesAndTensDigits
+	ld h, d
+	ld l, e
+	call CalculateOnesAndTensDigits_Long
 	ld hl, wDecimalDigitsSymbols
 	ld a, [hli]
 	ld b, a
@@ -489,9 +509,11 @@ HandleCardAlbumCardPage:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	sla c
 	add hl, bc
 	ld e, [hl]
-	ld d, $00
+	inc hl
+	ld d, [hl]
 	push de
 	call LoadCardDataToBuffer1_FromCardID
 	lb de, $38, $9f
@@ -552,16 +574,18 @@ HandleCardAlbumCardPage:
 	ld h, [hl]
 	ld l, a
 	ld a, [wCardListCursorPos]
+	sla a
 	ld c, a
 	ld b, $00
 	add hl, bc
 	ld a, [wCardListVisibleOffset]
 	inc a
+	sla a
 	ld c, a
 	ld b, $00
 	add hl, bc
-	ld a, [hl]
-	or a
+	ld a, [hli]
+	or [hl]
 	jr z, .open_card_page_pop_af_1
 	ld a, [wCardListVisibleOffset]
 	inc a
@@ -767,10 +791,11 @@ CardAlbum:
 
 .GetNumCardEntries
 	ld hl, wFilteredCardList
-	ld b, $00
+	ld b, 0
 .loop_card_ids
 	ld a, [hli]
-	or a
+	or [hl]
+	inc hl
 	jr z, .asm_aa1f
 	inc b
 	jr .loop_card_ids
@@ -924,8 +949,9 @@ CardAlbum:
 	; this is still the case by checking the collection
 	ld a, CARD_SET_PROMOTIONAL
 	call CreateCardSetListAndInitListCoords
-	ld a, [wFilteredCardList]
-	or a
+	ld hl, wFilteredCardList
+	ld a, [hli]
+	or [hl]
 	jr nz, .set_has_promotional
 	; still has no promotional, print empty Card Set name
 	ld a, TRUE

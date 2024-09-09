@@ -1,43 +1,42 @@
 ; shows screen with the promotional card and received text
-; depending on input a
-; if $0 = Legendary Molters, Articuno, Zapdos and Dragonite cards
+; depending on input de
+; if NULL = Legendary Molters, Articuno, Zapdos and Dragonite cards
 ; otherwise, a card ID
 _ShowPromotionalCardScreen:
-	push af
+	push de
 	lb de, $38, $9f
 	call SetupText
-	pop af
-	or a
+	pop de
+	ld a, d
+	or e
 	jr nz, .else
-	ld a, MOLTRES_LV37
+	ld de, MOLTRES_LV37
 	call .legendary_card_text
-	ld a, ARTICUNO_LV37
+	ld de, ARTICUNO_LV37
 	call .legendary_card_text
-	ld a, ZAPDOS_LV68
+	ld de, ZAPDOS_LV68
 	call .legendary_card_text
-	ld a, DRAGONITE_LV41
+	ld de, DRAGONITE_LV41
 .legendary_card_text
 	ldtx hl, ReceivedLegendaryCardText
 	jr .print_text
 .else
 	ldtx hl, ReceivedCardText
-	cp VILEPLUME
+	cp16 VILEPLUME
 	jr z, .print_text
-	cp BLASTOISE
+	cp16 BLASTOISE
 	jr z, .print_text
 	ldtx hl, ReceivedPromotionalFlyingPikachuText
-	cp FLYING_PIKACHU
+	cp16 FLYING_PIKACHU
 	jr z, .print_text
 	ldtx hl, ReceivedPromotionalSurfingPikachuText
-	cp SURFING_PIKACHU_LV13
+	cp16 SURFING_PIKACHU_LV13
 	jr z, .print_text
-	cp SURFING_PIKACHU_ALT_LV13
+	cp16 SURFING_PIKACHU_ALT_LV13
 	jr z, .print_text
 	ldtx hl, ReceivedPromotionalCardText
 .print_text
 	push hl
-	ld e, a
-	ld d, $0
 	call LoadCardDataToBuffer1_FromCardID
 	call PauseSong
 	ld a, MUSIC_MEDAL

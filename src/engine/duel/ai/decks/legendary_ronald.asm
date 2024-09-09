@@ -27,32 +27,32 @@ AIActionTable_LegendaryRonald:
 	jp AIPickPrizeCards
 
 .list_arena
-	db KANGASKHAN
-	db DRATINI
-	db EEVEE
-	db ZAPDOS_LV68
-	db ARTICUNO_LV37
-	db MOLTRES_LV37
-	db $00
+	dw KANGASKHAN
+	dw DRATINI
+	dw EEVEE
+	dw ZAPDOS_LV68
+	dw ARTICUNO_LV37
+	dw MOLTRES_LV37
+	dw NULL
 
 .list_bench
-	db KANGASKHAN
-	db DRATINI
-	db EEVEE
-	db $00
+	dw KANGASKHAN
+	dw DRATINI
+	dw EEVEE
+	dw NULL
 
 .list_play_hand
-	db MOLTRES_LV37
-	db ZAPDOS_LV68
-	db KANGASKHAN
-	db DRATINI
-	db EEVEE
-	db ARTICUNO_LV37
-	db $00
+	dw MOLTRES_LV37
+	dw ZAPDOS_LV68
+	dw KANGASKHAN
+	dw DRATINI
+	dw EEVEE
+	dw ARTICUNO_LV37
+	dw NULL
 
 .list_retreat
 	ai_retreat EEVEE, -2
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy FLAREON_LV22,   3, +0
@@ -66,15 +66,15 @@ AIActionTable_LegendaryRonald:
 	ai_energy DRATINI,        3, +0
 	ai_energy DRAGONAIR,      4, +0
 	ai_energy DRAGONITE_LV41, 3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db MOLTRES_LV37
-	db ARTICUNO_LV37
-	db ZAPDOS_LV68
-	db DRAGONITE_LV41
-	db GAMBLER
-	db $00
+	dw MOLTRES_LV37
+	dw ARTICUNO_LV37
+	dw ZAPDOS_LV68
+	dw DRAGONITE_LV41
+	dw GAMBLER
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
@@ -106,10 +106,10 @@ AIDoTurn_LegendaryRonald:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_1 ; skip if cards in deck <= 9
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .skip_moltres_1 ; skip if Muk in play
-	ld a, MOLTRES_LV37
+	ld de, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres_1 ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a
@@ -160,10 +160,10 @@ AIDoTurn_LegendaryRonald:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_2 ; skip if cards in deck <= 9
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	jr c, .skip_moltres_2 ; skip if Muk in play
-	ld a, MOLTRES_LV37
+	ld de, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres_2 ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a

@@ -39,8 +39,7 @@ InitAITurnVars:
 	call SwapTurn
 	call GetCardIDFromDeckIndex
 	call SwapTurn
-	ld a, e
-	cp MEWTWO_LV53
+	cp16 MEWTWO_LV53
 	jr nz, .check_flag
 	; Player used Barrier last turn
 
@@ -65,8 +64,7 @@ InitAITurnVars:
 	call SwapTurn
 	call GetCardIDFromDeckIndex
 	call SwapTurn
-	ld a, e
-	cp MEWTWO_LV53
+	cp16 MEWTWO_LV53
 	jr nz, .reset_1
 	farcall CheckIfPlayerHasPokemonOtherThanMewtwoLv53
 	jr nc, .set_flag

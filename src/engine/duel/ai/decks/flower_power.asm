@@ -27,23 +27,23 @@ AIActionTable_FlowerPower:
 	jp AIPickPrizeCards
 
 .list_arena
-	db ODDISH
-	db EXEGGCUTE
-	db BULBASAUR
-	db $00
+	dw ODDISH
+	dw EXEGGCUTE
+	dw BULBASAUR
+	dw NULL
 
 .list_bench
-	db BULBASAUR
-	db EXEGGCUTE
-	db ODDISH
-	db $00
+	dw BULBASAUR
+	dw EXEGGCUTE
+	dw ODDISH
+	dw NULL
 
 .list_retreat
 	ai_retreat GLOOM,     -2
 	ai_retreat VILEPLUME, -2
 	ai_retreat BULBASAUR, -2
 	ai_retreat IVYSAUR,   -2
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy BULBASAUR,      3, +0
@@ -54,11 +54,11 @@ AIActionTable_FlowerPower:
 	ai_energy VILEPLUME,      3, -1
 	ai_energy EXEGGCUTE,      3, +0
 	ai_energy EXEGGUTOR,     22, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db VENUSAUR_LV67
-	db $00
+	dw VENUSAUR_LV67
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

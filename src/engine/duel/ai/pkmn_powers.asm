@@ -18,11 +18,11 @@ HandleAIEnergyTrans:
 	dec a
 	ret z ; return if no Bench cards
 
-	ld a, VENUSAUR_LV67
+	ld de, VENUSAUR_LV67
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no VenusaurLv67 found in own Play Area
 
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if Muk found in any Play Area
 
@@ -59,8 +59,7 @@ HandleAIEnergyTrans:
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff9f], a
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp VENUSAUR_LV67
+	cp16 VENUSAUR_LV67
 	jr z, .use_pkmn_power
 
 	ld a, b
@@ -101,9 +100,8 @@ HandleAIEnergyTrans:
 	ld a, e
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 GRASS_ENERGY
 	pop de
-	cp GRASS_ENERGY
 	jr nz, .next_card
 
 	; store the deck index of energy card
@@ -148,8 +146,7 @@ HandleAIEnergyTrans:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp EXEGGUTOR
+	cp16 EXEGGUTOR
 	jr z, .is_exeggutor
 
 	xor a ; PLAY_AREA_ARENA
@@ -169,8 +166,7 @@ HandleAIEnergyTrans:
 	ld a, b
 	or a
 	jr z, .attack_false
-	ld a, e
-	cp GRASS_ENERGY
+	cp16 GRASS_ENERGY
 	jr nz, .attack_false
 	ld c, b
 	jr .count_if_enough
@@ -217,9 +213,8 @@ HandleAIEnergyTrans:
 	ld a, e
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 GRASS_ENERGY
 	pop de
-	cp GRASS_ENERGY
 	jr nz, .count_next
 	inc d
 .count_next
@@ -302,8 +297,7 @@ AIEnergyTransTransferEnergyToBench:
 	ldh [hTempCardIndex_ff9f], a
 	ld [wAIVenusaurLv67DeckIndex], a
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp VENUSAUR_LV67
+	cp16 VENUSAUR_LV67
 	jr z, .use_pkmn_power
 
 	ld a, b
@@ -350,9 +344,8 @@ AIEnergyTransTransferEnergyToBench:
 	ld a, e
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 GRASS_ENERGY
 	pop de
-	cp GRASS_ENERGY
 	jr nz, .next_card
 
 	; store the deck index of energy card
@@ -410,7 +403,7 @@ AIEnergyTransTransferEnergyToBench:
 ;	- Curse.
 ; returns carry if turn ended.
 HandleAIPkmnPowers:
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret nc ; return no carry if Muk is in play
@@ -457,31 +450,30 @@ HandleAIPkmnPowers:
 ; so check what Pkmn Power this is through card's ID.
 	pop af
 	call GetCardIDFromDeckIndex
-	ld a, e
 	push bc
 
 ; check heal
-	cp VILEPLUME
+	cp16 VILEPLUME
 	jr nz, .check_shift
 	call HandleAIHeal
 	jr .next_1
 .check_shift
-	cp VENOMOTH
+	cp16 VENOMOTH
 	jr nz, .check_peek
 	call HandleAIShift
 	jr .next_1
 .check_peek
-	cp MANKEY
+	cp16 MANKEY
 	jr nz, .check_strange_behavior
 	call HandleAIPeek
 	jr .next_1
 .check_strange_behavior
-	cp SLOWBRO
+	cp16 SLOWBRO
 	jr nz, .check_curse
 	call HandleAIStrangeBehavior
 	jr .next_1
 .check_curse
-	cp GENGAR
+	cp16 GENGAR
 	jr nz, .next_1
 	call z, HandleAICurse
 	jr c, .done
@@ -943,7 +935,7 @@ HandleAICurse:
 
 ; handles AI logic for Cowardice
 HandleAICowardice:
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
 
@@ -967,9 +959,8 @@ HandleAICowardice:
 	call GetTurnDuelistVariable
 	ld [wce08], a
 	call GetCardIDFromDeckIndex
-	ld a, e
 	push bc
-	cp TENTACOOL
+	cp16 TENTACOOL
 	call z, .CheckWhetherToUseCowardice
 	pop bc
 	jr nc, .next
@@ -1040,10 +1031,10 @@ HandleAIDamageSwap:
 	farcall AIChooseRandomlyNotToDoAction
 	ret c
 
-	ld a, ALAKAZAM
+	ld de, ALAKAZAM
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Alakazam
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
 
@@ -1051,14 +1042,13 @@ HandleAIDamageSwap:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp ALAKAZAM
+	cp16 ALAKAZAM
 	jr z, .ok
-	cp KADABRA
+	cp16 KADABRA
 	jr z, .ok
-	cp ABRA
+	cp16 ABRA
 	jr z, .ok
-	cp MR_MIME
+	cp16 MR_MIME
 	ret nz
 
 .ok
@@ -1069,7 +1059,7 @@ HandleAIDamageSwap:
 
 	call ConvertHPToCounters
 	ld [wce06], a
-	ld a, ALAKAZAM
+	ld de, ALAKAZAM
 	ld b, PLAY_AREA_BENCH_1
 	farcall LookForCardIDInPlayArea_Bank5
 	jr c, .is_in_bench
@@ -1147,17 +1137,15 @@ HandleAIDamageSwap:
 	call GetTurnDuelistVariable
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 CHANSEY
+	jr z, .found_candidate
+	cp16 KANGASKHAN
+	jr z, .found_candidate
+	cp16 SNORLAX
+	jr z, .found_candidate
+	cp16 MR_MIME
+	jr z, .found_candidate
 	pop de
-	cp CHANSEY
-	jr z, .found_candidate
-	cp KANGASKHAN
-	jr z, .found_candidate
-	cp SNORLAX
-	jr z, .found_candidate
-	cp MR_MIME
-	jr z, .found_candidate
-
 .next_play_area
 	inc c
 	ld a, c
@@ -1177,6 +1165,7 @@ HandleAIDamageSwap:
 
 .found_candidate
 ; found a potential candidate to receive damage counters
+	pop de
 	ld a, DUELVARS_ARENA_CARD_HP
 	add c
 	call GetTurnDuelistVariable
@@ -1206,10 +1195,10 @@ HandleAIGoGoRainDanceEnergy:
 	cp GO_GO_RAIN_DANCE_DECK_ID
 	ret nz ; return if not Go Go Rain Dance deck
 
-	ld a, BLASTOISE
+	ld de, BLASTOISE
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Blastoise
-	ld a, MUK
+	ld de, MUK
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
 

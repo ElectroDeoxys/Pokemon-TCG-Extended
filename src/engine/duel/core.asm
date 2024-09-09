@@ -1941,10 +1941,10 @@ ShuffleDeckAndDrawSevenCards:
 ; return nc if the card at wLoadedCard1 is a basic Pokemon card
 ; MYSTERIOUS_FOSSIL and CLEFAIRY_DOLL do count as basic Pokemon cards
 IsLoadedCard1BasicPokemon:
-	ld a, [wLoadedCard1ID]
-	cp MYSTERIOUS_FOSSIL
+	ld hl, wLoadedCard1ID + 1
+	cphl MYSTERIOUS_FOSSIL
 	jr z, .basic
-	cp CLEFAIRY_DOLL
+	cphl CLEFAIRY_DOLL
 	jr z, .basic
 ;	fallthrough
 
@@ -2531,8 +2531,8 @@ PracticeDuel_DrawSevenCards:
 	jp PrintPracticeDuelDrMasonInstructions
 
 PracticeDuel_PlayGoldeen:
-	ld a, [wLoadedCard1ID]
-	cp GOLDEEN
+	ld hl, wLoadedCard1ID + 1
+	cphl GOLDEEN
 	ret z
 	ldtx hl, ChooseGoldeenPracticeDuelText
 	ldtx de, DrMasonText ; unnecessary
@@ -2803,14 +2803,14 @@ PracticeDuelTurnVerificationPointerTable:
 	dw PracticeDuelVerify_Turn7Or8
 
 PracticeDuelVerify_Turn1:
-	ld a, [wTempCardID_ccc2]
-	cp GOLDEEN
+	ld hl, wTempCardID_ccc2 + 1
+	cphl GOLDEEN
 	jp nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn2:
-	ld a, [wTempCardID_ccc2]
-	cp SEAKING
+	ld hl, wTempCardID_ccc2 + 1
+	cphl SEAKING
 	jp nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp 1
@@ -2819,13 +2819,13 @@ PracticeDuelVerify_Turn2:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + PSYCHIC]
 	or a
-	jr z, ReturnWrongAction
+	jp z, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn3:
-	ld a, [wTempCardID_ccc2]
-	cp SEAKING
-	jr nz, ReturnWrongAction
+	ld hl, wTempCardID_ccc2 + 1
+	cphl SEAKING
+	jp nz, ReturnWrongAction
 	ld e, PLAY_AREA_BENCH_1
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
@@ -2842,8 +2842,8 @@ PracticeDuelVerify_Turn4:
 	ld a, [wAttachedEnergies + WATER]
 	or a
 	jr z, ReturnWrongAction
-	ld a, [wTempCardID_ccc2]
-	cp SEAKING
+	ld hl, wTempCardID_ccc2 + 1
+	cphl SEAKING
 	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp 1
@@ -2856,8 +2856,8 @@ PracticeDuelVerify_Turn5:
 	ld a, [wAttachedEnergies + WATER]
 	cp 2
 	jr nz, ReturnWrongAction
-	ld a, [wTempCardID_ccc2]
-	cp STARYU
+	ld hl, wTempCardID_ccc2 + 1
+	cphl STARYU
 	jr nz, ReturnWrongAction
 	ret
 
@@ -2870,14 +2870,14 @@ PracticeDuelVerify_Turn6:
 	ld a, [wPlayerArenaCardHP]
 	cp 40
 	jr nz, ReturnWrongAction
-	ld a, [wTempCardID_ccc2]
-	cp STARYU
+	ld hl, wTempCardID_ccc2 + 1
+	cphl STARYU
 	jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn7Or8:
-	ld a, [wTempCardID_ccc2]
-	cp STARMIE
+	ld hl, wTempCardID_ccc2 + 1
+	cphl STARMIE
 	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp 1
@@ -4046,7 +4046,6 @@ PrintAttackOrPkmnPowerInformation:
 	ld c, e
 	inc c
 	call WriteByteToBGMap0
-	jr .print_energy_cost
 .print_energy_cost
 	ld bc, CARD_DATA_ATTACK1_ENERGY_COST - CARD_DATA_ATTACK1_CATEGORY
 	add hl, bc
@@ -5548,9 +5547,10 @@ DisplayOpponentUsedAttackScreen:
 	call EmptyScreen
 	call LoadDuelCardSymbolTiles
 	call LoadDuelFaceDownCardTiles
-	ld a, [wTempCardID_ccc2]
+	ld a, [wTempCardID_ccc2 + 0]
 	ld e, a
-	ld d, $00
+	ld a, [wTempCardID_ccc2 + 1]
+	ld d, a
 	call LoadCardDataToBuffer1_FromCardID
 	ld a, CARDPAGE_POKEMON_OVERVIEW
 	ld [wCardPageNumber], a
@@ -5785,14 +5785,10 @@ LoadPlayerDeck:
 	call HtimesL
 	ld de, sDeck1Cards
 	add hl, de
-	ld de, wPlayerDeck
-	ld c, DECK_SIZE
-.copy_cards_loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .copy_cards_loop
+	ld d, h
+	ld e, l
+	ld hl, wPlayerDeck
+	call DecompressSRAMDeck
 	jp DisableSRAM
 
 ; returns carry if wSkipDelayAllowed is non-0 and B is being held in order to branch
@@ -6218,8 +6214,10 @@ OppAction_UseMetronomeAttack:
 	ld [wPlayerAttackingCardIndex], a
 	ld a, [wSelectedAttack]
 	ld [wPlayerAttackingAttackIndex], a
-	ld a, [wTempCardID_ccc2]
-	ld [wPlayerAttackingCardID], a
+	ld a, [wTempCardID_ccc2 + 0]
+	ld [wPlayerAttackingCardID + 0], a
+	ld a, [wTempCardID_ccc2 + 1]
+	ld [wPlayerAttackingCardID + 1], a
 	call UpdateArenaCardIDsAndClearTwoTurnDuelVars
 	pop bc
 	ld a, c
@@ -6283,7 +6281,9 @@ HandleBetweenTurnsEvents:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempNonTurnDuelistCardID], a
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 	ld l, DUELVARS_ARENA_CARD_STATUS
 	ld a, [hl]
 	or a
@@ -6314,7 +6314,9 @@ HandleBetweenTurnsEvents:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempNonTurnDuelistCardID], a
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 	ld l, DUELVARS_ARENA_CARD_STATUS
 	ld a, [hl]
 	or a
@@ -6432,8 +6434,10 @@ PlayBetweenTurnsAnimation:
 ; prints the name of the card at wTempNonTurnDuelistCardID in a text box
 PrintCardNameFromCardIDInTextBox:
 	push hl
-	ld a, [wTempNonTurnDuelistCardID]
+	ld a, [wTempNonTurnDuelistCardID + 0]
 	ld e, a
+	ld a, [wTempNonTurnDuelistCardID + 1]
+	ld d, a
 	call LoadCardDataToBuffer1_FromCardID
 	ld hl, wLoadedCard1Name
 	ld a, [hli]
@@ -6453,8 +6457,10 @@ HandleSleepCheck:
 	ret nz ; quit if not asleep
 
 	push hl
-	ld a, [wTempNonTurnDuelistCardID]
+	ld a, [wTempNonTurnDuelistCardID + 0]
 	ld e, a
+	ld a, [wTempNonTurnDuelistCardID + 1]
+	ld d, a
 	call LoadCardDataToBuffer1_FromCardID
 	ld a, 18
 	call CopyCardNameAndLevel
@@ -6554,18 +6560,9 @@ ConvertSpecialTrainerCardToPokemon::
 	and CARD_LOCATION_PLAY_AREA
 	pop hl
 	ret z ; return if the card is not in the arena or bench
-	ld a, e
-	cp MYSTERIOUS_FOSSIL
-	jr nz, .check_for_clefairy_doll
-	ld a, d
-	cp $00 ; MYSTERIOUS_FOSSIL >> 8
+	cp16 MYSTERIOUS_FOSSIL
 	jr z, .start_ram_data_overwrite
-	ret
-.check_for_clefairy_doll
-	cp CLEFAIRY_DOLL
-	ret nz
-	ld a, d
-	cp $00 ; CLEFAIRY_DOLL >> 8
+	cp16 CLEFAIRY_DOLL
 	ret nz
 .start_ram_data_overwrite
 	push de

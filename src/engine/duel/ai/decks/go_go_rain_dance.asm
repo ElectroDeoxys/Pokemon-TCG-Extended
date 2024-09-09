@@ -27,24 +27,24 @@ AIActionTable_GoGoRainDance:
 	jp AIPickPrizeCards
 
 .list_arena
-	db LAPRAS
-	db HORSEA
-	db GOLDEEN
-	db SQUIRTLE
-	db $00
+	dw LAPRAS
+	dw HORSEA
+	dw GOLDEEN
+	dw SQUIRTLE
+	dw NULL
 
 .list_bench
-	db SQUIRTLE
-	db HORSEA
-	db GOLDEEN
-	db LAPRAS
-	db $00
+	dw SQUIRTLE
+	dw HORSEA
+	dw GOLDEEN
+	dw LAPRAS
+	dw NULL
 
 .list_retreat
 	ai_retreat SQUIRTLE,  -3
 	ai_retreat WARTORTLE, -2
 	ai_retreat HORSEA,    -1
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy SQUIRTLE,  2, +0
@@ -55,14 +55,14 @@ AIActionTable_GoGoRainDance:
 	ai_energy HORSEA,    2, +0
 	ai_energy SEADRA,    3, +0
 	ai_energy LAPRAS,    3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db ENERGY_RETRIEVAL
-	db SUPER_ENERGY_RETRIEVAL
-	db BLASTOISE
-	db $00
+	dw GAMBLER
+	dw ENERGY_RETRIEVAL
+	dw SUPER_ENERGY_RETRIEVAL
+	dw BLASTOISE
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

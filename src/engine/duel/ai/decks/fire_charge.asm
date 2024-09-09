@@ -27,28 +27,28 @@ AIActionTable_FireCharge:
 	jp AIPickPrizeCards
 
 .list_arena
-	db JIGGLYPUFF_LV14
-	db CHANSEY
-	db TAUROS
-	db MAGMAR_LV24
-	db JIGGLYPUFF_LV12
-	db GROWLITHE
-	db $00
+	dw JIGGLYPUFF_LV14
+	dw CHANSEY
+	dw TAUROS
+	dw MAGMAR_LV24
+	dw JIGGLYPUFF_LV12
+	dw GROWLITHE
+	dw NULL
 
 .list_bench
-	db JIGGLYPUFF_LV14
-	db CHANSEY
-	db GROWLITHE
-	db MAGMAR_LV24
-	db JIGGLYPUFF_LV12
-	db TAUROS
-	db $00
+	dw JIGGLYPUFF_LV14
+	dw CHANSEY
+	dw GROWLITHE
+	dw MAGMAR_LV24
+	dw JIGGLYPUFF_LV12
+	dw TAUROS
+	dw NULL
 
 .list_retreat
 	ai_retreat JIGGLYPUFF_LV12, -1
 	ai_retreat CHANSEY,         -1
 	ai_retreat GROWLITHE,       -1
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy GROWLITHE,       3, +0
@@ -59,11 +59,11 @@ AIActionTable_FireCharge:
 	ai_energy WIGGLYTUFF,      3, +0
 	ai_energy CHANSEY,         4, +0
 	ai_energy TAUROS,          3, +0
-	db $00
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db $00
+	dw GAMBLER
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize

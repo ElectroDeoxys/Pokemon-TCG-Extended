@@ -27,26 +27,26 @@ AIActionTable_InvincibleRonald:
 	jp AIPickPrizeCards
 
 .list_arena
-	db KANGASKHAN
-	db MAGMAR_LV31
-	db CHANSEY
-	db GEODUDE
-	db SCYTHER
-	db GRIMER
-	db $00
+	dw KANGASKHAN
+	dw MAGMAR_LV31
+	dw CHANSEY
+	dw GEODUDE
+	dw SCYTHER
+	dw GRIMER
+	dw NULL
 
 .list_bench
-	db GRIMER
-	db SCYTHER
-	db GEODUDE
-	db CHANSEY
-	db MAGMAR_LV31
-	db KANGASKHAN
-	db $00
+	dw GRIMER
+	dw SCYTHER
+	dw GEODUDE
+	dw CHANSEY
+	dw MAGMAR_LV31
+	dw KANGASKHAN
+	dw NULL
 
 .list_retreat
 	ai_retreat GRIMER, -1
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy GRIMER,         1, -1
@@ -57,11 +57,11 @@ AIActionTable_InvincibleRonald:
 	ai_energy GRAVELER,       3, +0
 	ai_energy CHANSEY,        4, +0
 	ai_energy KANGASKHAN,     4, -1
-	db $00
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db $00
+	dw GAMBLER
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
