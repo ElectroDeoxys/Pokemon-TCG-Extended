@@ -1428,13 +1428,7 @@ wPrizeCardCursorTemporaryPosition:: ; ce61
 wGlossaryPageNo:: ; ce62
 	ds $1
 
-wSerialTransferData:: ; ce6e
-	ds $1
-
-; pointer to packet data that is
-; being transmitted through serial
-wSerialDataPtr:: ; ce70
-	ds $2
+	ds $3
 
 ; keeps track of which Bench Pokemon is pointed
 ; by the cursor during Gigashock selection screen
@@ -1450,8 +1444,7 @@ wMetronomeSelectedAttack:: ; ce73
 wNumberOfCardsToOrder:: ; ce75
 	ds $1
 
-wBackupPlayerAreaHP:: ; ce76
-	ds MAX_PLAY_AREA_POKEMON
+	ds $6
 
 ; used in CountPokemonIDInPlayArea
 wTempPokemonID_ce7c:: ; ce7c
@@ -1478,21 +1471,7 @@ wDamageAnimPlayAreaSide:: ; ce83
 wDamageAnimCardID:: ; ce84
 	ds $1
 
-; buffer to store data that will be sent/received through IR
-wIRDataBuffer:: ; ce85
-	ds $8
-
-wVBlankFunctionTrampolineBackup:: ; ce8d
-	ds $2
-
-wPrizeCardSelectionFrameCounter:: ; ce9a
-	ds $1
-
-wPrintOnlyStarRarity:: ; ce9c
-	ds $1
-
-wce9f:: ; ce9f
-	ds $1
+	ds $d
 
 ; first index in the current card list that is visible
 ; used to calculate which element to get based
@@ -2349,27 +2328,7 @@ wd416:: ; d416
 wd417:: ; d417
 	ds $1
 
-wDebugMenuSelection:: ; d418
-	ds $1
-
-	ds $1
-
-wDebugBoosterSelection:: ; d41a
-	ds $1
-
-	ds $2
-
-wd41d:: ; d41d
-	ds $1
-
-wd41e:: ; d41e
-	ds $1
-
-wd41f:: ; d41f
-	ds $1
-
-wd420:: ; d420
-	ds $1
+	ds $9
 
 ; store settings for animation enabled/disabled
 ; 0 means enabled, 1 means disabled
