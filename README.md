@@ -1,46 +1,36 @@
-# Pokémon TCG [![Build Status][ci-badge]][ci]
+# tinytcg
 
-This is a disassembly of Pokémon TCG.
+Highly optimized disassembly of Pokémon TCG, meant to be used as a base for hacks. Removes GameBoy compatibility and multiplayer features to allow for more ROM space.
+Compared to the base game, this build saves 83,794 bytes, translating to 9.8% more available space.
 
-It builds the following ROM:
+## Current ROM map summary
 
-- Pokémon Trading Card Game (U) [C][!].gbc `sha1: 0f8670a583255cff3e5b7ca71b5d7454d928fc48`
+```
+SUMMARY:
+	ROM0: 13110 bytes used / 3274 free
+	ROMX: 754523 bytes used / 277669 free in 63 banks
+	SRAM: 20903 bytes used / 11865 free in 4 banks
+	WRAM0: 4068 bytes used / 28 free
+	WRAMX: 3813 bytes used / 283 free in 1 bank
+	HRAM: 56 bytes used / 71 free
+```
+
+## Removed content
+
+- GameBoy tilemaps and compatibility functionality;
+- Unused content (Japanese title screen, unreferenced routines, unused text, debug menus);
+- Printer functions;
+- Card Pop!;
+- Gift Center;
+- Link duels.
+
+## Added content
+
+- A simplistic compatibility screen when GameBoy is detected.
+
+## Instructions to build
 
 To assemble, first download RGBDS (https://github.com/gbdev/rgbds/releases) and extract it to /usr/local/bin.
 Run `make` in your shell.
 
-This will output a file named "poketcg.gbc".
-
-
-## See also
-
-- [**Symbols**][symbols]
-- **Discord:** [pret][discord]
-- **IRC:** [libera#pret][irc]
-
-Other disassembly projects:
-
-- [**Pokémon TCG 2**][poketcg2]
-- [**Pokémon Red/Blue**][pokered]
-- [**Pokémon Yellow**][pokeyellow]
-- [**Pokémon Gold/Silver**][pokegold]
-- [**Pokémon Crystal**][pokecrystal]
-- [**Pokémon Pinball**][pokepinball]
-- [**Pokémon Ruby**][pokeruby]
-- [**Pokémon FireRed**][pokefirered]
-- [**Pokémon Emerald**][pokeemerald]
-
-[poketcg2]: https://github.com/pret/poketcg2
-[pokered]: https://github.com/pret/pokered
-[pokeyellow]: https://github.com/pret/pokeyellow
-[pokegold]: https://github.com/pret/pokegold
-[pokecrystal]: https://github.com/pret/pokecrystal
-[pokepinball]: https://github.com/pret/pokepinball
-[pokeruby]: https://github.com/pret/pokeruby
-[pokefirered]: https://github.com/pret/pokefirered
-[pokeemerald]: https://github.com/pret/pokeemerald
-[symbols]: https://github.com/pret/poketcg/tree/symbols
-[discord]: https://discord.gg/d5dubZ3
-[irc]: https://web.libera.chat/?#pret
-[ci]: https://github.com/pret/poketcg/actions
-[ci-badge]: https://github.com/pret/poketcg/actions/workflows/main.yml/badge.svg
+This will output a file named "tinytcg.gbc".
