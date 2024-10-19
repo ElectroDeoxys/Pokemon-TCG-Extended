@@ -91,7 +91,7 @@ HandleDamageReductionExceptSubstatus2::
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-	ld hl, wTempNonTurnDuelistCardID + 1
+	ld hl, wTempNonTurnDuelistCardID
 	cphl MR_MIME
 	jr z, .prevent_less_than_30_damage ; invisible wall
 	cphl KABUTO
@@ -182,7 +182,7 @@ HandleStrikesBack_AgainstDamagingAttack::
 	ld a, [wIsDamageToSelf]
 	or a
 	ret nz
-	ld hl, wTempNonTurnDuelistCardID + 1 ; ID of defending Pokemon
+	ld hl, wTempNonTurnDuelistCardID ; ID of defending Pokemon
 	cphl MACHAMP
 	ret nz
 	ld de, MUK
@@ -382,7 +382,7 @@ HandleNoDamageOrEffectSubstatus::
 	ccf
 	ret nc
 .pkmn_power
-	ld hl, wTempNonTurnDuelistCardID + 1
+	ld hl, wTempNonTurnDuelistCardID
 	cphl MEW_LV8
 	jr z, .neutralizing_shield
 	or a
@@ -413,7 +413,7 @@ HandleNoDamageOrEffectSubstatus::
 ; there is a 50% chance that any damage or effect is prevented
 ; return carry if damage is prevented
 HandleTransparency::
-	ld hl, wTempNonTurnDuelistCardID + 1
+	ld hl, wTempNonTurnDuelistCardID
 	cphl HAUNTER_LV17
 	jr z, .transparency
 .done
@@ -787,7 +787,7 @@ HandleDestinyBondSubstatus::
 ; attacking Pokemon (turn holder's arena Pokemon) takes 10 damage.
 ; used to bounce back an attack of the RESIDUAL category
 HandleStrikesBack_AgainstResidualAttack::
-	ld hl, wTempNonTurnDuelistCardID + 1
+	ld hl, wTempNonTurnDuelistCardID
 	cphl MACHAMP
 	jr z, .strikes_back
 	ret

@@ -1374,7 +1374,7 @@ ProcessPlayedPokemonCard::
 	call LoadTxRam2
 	ldtx hl, HavePokemonPowerText
 	call DrawWideTextBox_WaitForInput
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 	cphl MUK
 	jr z, .use_pokemon_power
 	ld a, $01 ; check only Muk

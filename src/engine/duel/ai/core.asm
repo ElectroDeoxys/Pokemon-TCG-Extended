@@ -189,8 +189,8 @@ CheckIfEnergyIsUseful:
 	jp z, .set_carry
 	ld a, [wTempCardType]
 	cp TYPE_ENERGY_DOUBLE_COLORLESS
-	jr z, .set_carry
-	ld hl, wTempCardID + 1
+	jp z, .set_carry
+	ld hl, wTempCardID
 
 	ld bc, PSYCHIC_ENERGY
 	cphl EXEGGCUTE
@@ -839,7 +839,7 @@ CheckEnergyNeededForAttackAfterDiscard:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	farcall AIPickEnergyCardToDiscard
 	call LoadCardDataToBuffer1_FromDeckIndex
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 	cphl DOUBLE_COLORLESS_ENERGY
 	jr z, .colorless
 

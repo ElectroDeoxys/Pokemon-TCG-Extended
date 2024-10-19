@@ -44,7 +44,7 @@ QueueStatusCondition:
 	ld hl, wWhoseTurn
 	cp [hl]
 	jr nz, .can_induce_status
-	ld hl, wTempNonTurnDuelistCardID + 1
+	ld hl, wTempNonTurnDuelistCardID
 	cphl CLEFAIRY_DOLL
 	jr z, .cant_induce_status
 	cphl MYSTERIOUS_FOSSIL
@@ -1516,7 +1516,7 @@ VenonatLeechLifeEffect:
 
 ; During your next turn, double damage
 SwordsDanceEffect:
-	ld hl, wTempTurnDuelistCardID + 1
+	ld hl, wTempTurnDuelistCardID
 	cphl SCYTHER
 	ret nz
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
@@ -3137,7 +3137,7 @@ IceBreath_RandomPokemonDamageEffect:
 	jp SwapTurn
 
 FocusEnergyEffect:
-	ld hl, wTempTurnDuelistCardID + 1
+	ld hl, wTempTurnDuelistCardID
 	cphl VAPOREON_LV29
 	ret nz ; return if no VaporeonLv29
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
@@ -7683,7 +7683,7 @@ MorphEffect:
 	ld a, [wLoadedCard2Stage]
 	or a
 	jr nz, .loop_deck ; skip non-Basic cards
-	ld hl, wLoadedCard2ID + 1
+	ld hl, wLoadedCard2ID
 	cphl DITTO
 	jr z, .loop_deck ; skip other Ditto cards
 	ldh a, [hTempCardIndex_ff98]
@@ -7950,7 +7950,7 @@ ImakuniEffect:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 
 ; cannot confuse Clefairy Doll and Mysterious Fossil
 	cphl CLEFAIRY_DOLL

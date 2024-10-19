@@ -457,7 +457,7 @@ DetermineAIScoreOfAttackEnergyRequirement:
 ; if current card is ZapdosLv64, don't add to score.
 ; if there is no surplus energy, encourage playing energy.
 .discard_energy
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 	cphl ZAPDOS_LV64
 	jr z, .check_evolution
 	call CheckIfNoSurplusEnergyForAttack
@@ -709,7 +709,7 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 ; Charizard's Fire Spin or Exeggutor's Big Eggsplosion,
 ; for these to be treated differently.
 ; for both attacks, load its energy cost.
-	ld hl, wLoadedCard2ID + 1
+	ld hl, wLoadedCard2ID
 	cphl ZAPDOS_LV64
 	jr z, .zapdos2
 	cphl CHARIZARD

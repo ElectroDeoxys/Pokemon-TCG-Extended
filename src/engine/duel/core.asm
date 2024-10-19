@@ -1941,7 +1941,7 @@ ShuffleDeckAndDrawSevenCards:
 ; return nc if the card at wLoadedCard1 is a basic Pokemon card
 ; MYSTERIOUS_FOSSIL and CLEFAIRY_DOLL do count as basic Pokemon cards
 IsLoadedCard1BasicPokemon:
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 	cphl MYSTERIOUS_FOSSIL
 	jr z, .basic
 	cphl CLEFAIRY_DOLL
@@ -2531,7 +2531,7 @@ PracticeDuel_DrawSevenCards:
 	jp PrintPracticeDuelDrMasonInstructions
 
 PracticeDuel_PlayGoldeen:
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 	cphl GOLDEEN
 	ret z
 	ldtx hl, ChooseGoldeenPracticeDuelText
@@ -2803,13 +2803,13 @@ PracticeDuelTurnVerificationPointerTable:
 	dw PracticeDuelVerify_Turn7Or8
 
 PracticeDuelVerify_Turn1:
-	ld hl, wTempCardID_ccc2 + 1
+	ld hl, wTempCardID_ccc2
 	cphl GOLDEEN
 	jp nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn2:
-	ld hl, wTempCardID_ccc2 + 1
+	ld hl, wTempCardID_ccc2
 	cphl SEAKING
 	jp nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
@@ -2823,7 +2823,7 @@ PracticeDuelVerify_Turn2:
 	ret
 
 PracticeDuelVerify_Turn3:
-	ld hl, wTempCardID_ccc2 + 1
+	ld hl, wTempCardID_ccc2
 	cphl SEAKING
 	jp nz, ReturnWrongAction
 	ld e, PLAY_AREA_BENCH_1
@@ -2842,7 +2842,7 @@ PracticeDuelVerify_Turn4:
 	ld a, [wAttachedEnergies + WATER]
 	or a
 	jr z, ReturnWrongAction
-	ld hl, wTempCardID_ccc2 + 1
+	ld hl, wTempCardID_ccc2
 	cphl SEAKING
 	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
@@ -2856,7 +2856,7 @@ PracticeDuelVerify_Turn5:
 	ld a, [wAttachedEnergies + WATER]
 	cp 2
 	jr nz, ReturnWrongAction
-	ld hl, wTempCardID_ccc2 + 1
+	ld hl, wTempCardID_ccc2
 	cphl STARYU
 	jr nz, ReturnWrongAction
 	ret
@@ -2870,13 +2870,13 @@ PracticeDuelVerify_Turn6:
 	ld a, [wPlayerArenaCardHP]
 	cp 40
 	jr nz, ReturnWrongAction
-	ld hl, wTempCardID_ccc2 + 1
+	ld hl, wTempCardID_ccc2
 	cphl STARYU
 	jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn7Or8:
-	ld hl, wTempCardID_ccc2 + 1
+	ld hl, wTempCardID_ccc2
 	cphl STARMIE
 	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]

@@ -38,7 +38,7 @@ _AIProcessHandTrainerCards:
 	ld a, [wAITrainerCardToPlay]
 	call LoadCardDataToBuffer1_FromDeckIndex
 	push hl
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 	cphl SWITCH
 	pop hl
 	jr nz, .skip_switch_check
@@ -1695,7 +1695,7 @@ AIDecide_SuperEnergyRemoval:
 	cp $ff
 	ret z
 	call LoadCardDataToBuffer1_FromDeckIndex
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 	cphl DOUBLE_COLORLESS_ENERGY
 	; any basic energy card
 	; will set carry flag here
@@ -4436,7 +4436,7 @@ AIDecide_Lass:
 	ld b, a
 	call LoadCardDataToBuffer1_FromDeckIndex
 	push hl
-	ld hl, wLoadedCard1ID + 1
+	ld hl, wLoadedCard1ID
 	cphl LASS
 	pop hl
 	jr z, .loop
