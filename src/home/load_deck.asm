@@ -84,7 +84,7 @@ CompressDeckToSRAM::
 	pop de
 
 	ld a, b
-	swap b ; *$10
+	swap a ; *$10
 	ld [hli], a ; command byte
 	ld c, 4
 .loop_lower_ids_last
