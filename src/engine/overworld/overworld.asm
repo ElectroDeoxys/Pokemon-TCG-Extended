@@ -16,7 +16,7 @@ LoadMap::
 	ld [wTileMapFill], a
 	call LoadSymbolsFont
 	call Set_OBJ_8x8
-	xor a
+	xor a ; DOUBLE_SPACED
 	ld [wLineSeparation], a
 	xor a
 	ld [wd291], a
@@ -1119,7 +1119,7 @@ PauseMenu:
 
 DisplayPauseMenu:
 	ld a, [wSelectedPauseMenuItem]
-	ld hl, Unknown_10d98
+	ld hl, PauseMenuParams
 	farcall InitAndPrintMenu
 	ret
 
@@ -1212,7 +1212,7 @@ PointerTable_c846:
 
 DisplayPCMenu:
 	ld a, [wSelectedPCMenuItem]
-	ld hl, Unknown_10da9
+	ld hl, PCMenuParams
 	farcall InitAndPrintMenu
 	ret
 

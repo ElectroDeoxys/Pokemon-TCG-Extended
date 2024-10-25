@@ -14,7 +14,7 @@ HandleDeckMissingCardsList:
 
 	ld a, NUM_FILTERS
 	ld hl, wCardFilterCounts
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	ld a, DECK_SIZE
 	ld [wTotalCardCount], a
 	ld hl, wCardFilterCounts
@@ -483,7 +483,7 @@ GetSavedDeckPointers:
 	ld a, NUM_DECK_SAVE_MACHINE_SLOTS
 	add NUM_DECK_SAVE_MACHINE_SLOTS ; add a is better
 	ld hl, wMachineDeckPtrs
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	ld de, wMachineDeckPtrs
 	ld hl, sSavedDecks
 	ld bc, DECK_STRUCT_SIZE
@@ -1001,7 +1001,7 @@ TryDeleteSavedDeck:
 	call CopyDeckName
 	pop hl
 	ld a, DECK_STRUCT_SIZE
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	call DisableSRAM
 	xor a
 	ld [wTxRam2 + 0], a
@@ -1105,7 +1105,7 @@ HandleDismantleDeckToMakeSpace:
 	call AddDeckToCollection
 	pop hl
 	ld a, DECK_STRUCT_SIZE
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	call DisableSRAM
 
 	; redraw deck screen
@@ -1298,7 +1298,7 @@ TryBuildDeckMachineDeck:
 	call AddDeckToCollection
 	pop hl
 	ld a, DECK_STRUCT_SIZE
-	jp ClearNBytesFromHL
+	jp ClearMemory_Bank2
 
 ; collects cards missing from player's collection
 ; and shows its confirmation list
@@ -1701,7 +1701,7 @@ HandleAutoDeckMenu:
 .CreateAutoDeckPointerList
 	ld a, 2 * NUM_DECK_MACHINE_SLOTS
 	ld hl, wMachineDeckPtrs
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	ld de, wMachineDeckPtrs
 	ld hl, sAutoDecks
 	ld bc, DECK_STRUCT_SIZE

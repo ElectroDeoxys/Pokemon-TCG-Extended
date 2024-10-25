@@ -688,10 +688,10 @@ DuelMenu_Check:
 ; triggered by pressing SELECT in the duel menu
 DuelMenuShortcut_BothActivePokemon:
 	call FinishQueuedAnimations
-	call Func_4597
+	call OpenVariousPlayAreaScreens_FromSelectPresses
 	jp DuelMainInterface
 
-Func_4597:
+OpenVariousPlayAreaScreens_FromSelectPresses:
 	call OpenInPlayAreaScreen_FromSelectButton
 	ret c
 	call .Func_45a9
@@ -715,7 +715,7 @@ Func_4597:
 ; some status condition or due the bench containing no alive Pokemon.
 ; return carry if unable, nc if able.
 CheckAbleToRetreat:
-	call CheckCantRetreatDueToAcid
+	call CheckUnableToRetreatDueToEffect
 	ret c
 	call CheckIfActiveCardParalyzedOrAsleep
 	ret c
@@ -751,7 +751,7 @@ CheckAbleToRetreat:
 CheckIfEnoughEnergiesToRetreat:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call GetPlayAreaCardRetreatCost
 	ld [wEnergyCardsRequiredToRetreat], a
@@ -781,7 +781,7 @@ DisplayRetreatScreen:
 	call SortCardsInDuelTempListByID
 	ld a, LOW(hTempRetreatCostCards)
 	ld [wTempRetreatCostCardsPos], a
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	call DisplayEnergyDiscardScreen
 	ld a, [wEnergyCardsRequiredToRetreat]
 	ld [wEnergyDiscardMenuDenominator], a
@@ -1604,7 +1604,7 @@ DisplayCardDetailScreen:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	jp _DisplayCardDetailScreen
 
-Func_4b38:
+DisplayCardListDetails:
 	ld a, [wDuelTempList]
 	cp $ff
 	ret z
@@ -2148,7 +2148,7 @@ PlayShuffleAndDrawCardsAnimation:
 	pop bc
 	ret
 
-Func_4f2d:
+PlayDeckShuffleAnimation:
 	ld a, [wDuelDisplayedScreen]
 	cp SHUFFLE_DECK
 	jr z, .skip_draw_scene
@@ -2813,7 +2813,7 @@ PracticeDuelVerify_Turn2:
 	cp SEAKING
 	jp nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
-	cp 1
+	cp SECOND_ATTACK
 	jp nz, ReturnWrongAction
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
@@ -2846,7 +2846,7 @@ PracticeDuelVerify_Turn4:
 	cp SEAKING
 	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
-	cp 1
+	cp SECOND_ATTACK
 	jr nz, ReturnWrongAction
 	ret
 
@@ -2880,7 +2880,7 @@ PracticeDuelVerify_Turn7Or8:
 	cp STARMIE
 	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
-	cp 1
+	cp SECOND_ATTACK
 	jr nz, ReturnWrongAction
 	ret
 
@@ -3003,7 +3003,7 @@ SetCardListInfoBoxText:
 	ld [wCardListInfoBoxText + 1], a
 	ret
 
-Func_5591:
+InitAndDrawCardListScreenLayout_WithSelectCheckMenu:
 	call InitAndDrawCardListScreenLayout
 	ld a, SELECT_CHECK
 	ld [wCardListItemSelectionMenuType], a
@@ -3055,7 +3055,7 @@ DrawCardListScreenLayout:
 	lb bc, 8, 6
 	call FillRectangle
 	call ApplyBGP6ToCardImage
-	call Func_5744
+	call PrintSortNumberInCardList_CallFromPointer
 	ld a, [wDuelTempList]
 	cp $ff
 	scf
@@ -3287,7 +3287,7 @@ CardListFunction:
 	or a
 	ret
 
-Func_5735:
+PrintSortNumberInCardList_SetPointer:
 	ld hl, wPrintSortNumberInCardListPtr
 	ld de, PrintSortNumberInCardList
 	ld [hl], e
@@ -3297,7 +3297,7 @@ Func_5735:
 	ld [wSortCardListByID], a
 	ret
 
-Func_5744:
+PrintSortNumberInCardList_CallFromPointer:
 	ld hl, wPrintSortNumberInCardListPtr
 	jp CallIndirect
 
@@ -4413,7 +4413,7 @@ LargeCardTileData:
 
 ; print lines of text with no separation between them
 SetNoLineSeparation:
-	ld a, $01
+	ld a, SINGLE_SPACED
 ;	fallthrough
 
 SetLineSeparation:
@@ -4422,7 +4422,7 @@ SetLineSeparation:
 
 ; separate lines of text by an empty line
 SetOneLineSeparation:
-	xor a
+	xor a ; DOUBLE_SPACED
 	jr SetLineSeparation
 
 ; given a number in hl, print it divided by 10 at b,c, with decimal part
@@ -4785,7 +4785,7 @@ SelectingBenchPokemonMenu:
 	lb bc, SYM_CURSOR_R, SYM_SPACE
 	jp SetCursorParametersForTextBox
 
-Func_6186:
+InitAndPrintPlayAreaCardInformationAndLocation:
 	ld hl, wCurPlayAreaSlot
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld [hli], a
@@ -4795,14 +4795,14 @@ Func_6186:
 	ld [hl], a
 	jp PrintPlayAreaCardInformationAndLocation
 
-Func_6194:
-	call Func_6186
+InitAndPrintPlayAreaCardInformationAndLocation_WithTextBox:
+	call InitAndPrintPlayAreaCardInformationAndLocation
 	ld a, [wCurPlayAreaY]
 	ld e, a
 	ld d, 0
 	jp SetCursorParametersForTextBox_Default
 
-Func_61a1:
+SetupPlayAreaScreen:
 	xor a
 	ld [wExcludeArenaPokemon], a
 	ld a, [wDuelDisplayedScreen]
@@ -5900,7 +5900,7 @@ HandleSpecialDuelMainSceneHotkeys:
 	call OpenInPlayAreaScreen_FromSelectButton
 	jr .return_carry
 .both_duelist_play_areas
-	call Func_4597
+	call OpenVariousPlayAreaScreens_FromSelectPresses
 	jr .return_carry
 .down_pressed
 	call OpenTurnHolderPlayAreaScreen
@@ -6194,7 +6194,7 @@ OppAction_6b30:
 	push af
 	ldh a, [hTemp_ffa0]
 	ldh [hWhoseTurn], a
-	call Func_4f2d
+	call PlayDeckShuffleAnimation
 	pop af
 	ldh [hWhoseTurn], a
 	ret
@@ -6672,7 +6672,7 @@ ApplyStatusConditionToArenaPokemon:
 	ld [de], a
 	ret
 
-Func_6e49::
+HandleDestinyBondAndBetweenTurnKnockOuts::
 	call HandleDestinyBondSubstatus
 	; fallthrough
 
