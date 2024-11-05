@@ -149,10 +149,10 @@ AIProcessEnergyCards:
 ; add to AI score
 .check_venusaur
 	ld de, MUK
-	call CountPokemonIDInBothPlayAreas
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .check_if_active
 	ld de, VENUSAUR_LV67
-	call CountPokemonIDInPlayArea
+	call CountTurnDuelistPokemonWithActivePkmnPower
 	jr nc, .check_if_active
 	ld a, 1
 	call AddToAIScore
@@ -182,7 +182,7 @@ AIProcessEnergyCards:
 ; or if the defending Pokémon can KO
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
-	call CalculateByteTensDigit
+	call ConvertHPToDamageCounters_Bank5
 	cp 3
 	jr nc, .check_defending_can_ko
 	; hp < 30
@@ -226,7 +226,7 @@ AIProcessEnergyCards:
 .bench
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
-	call CalculateByteTensDigit
+	call ConvertHPToDamageCounters_Bank5
 	cp 3
 	jr nc, .ai_score_bonus
 ; hp < 30
@@ -332,7 +332,7 @@ AIProcessEnergyCards:
 
 ; add AI score for both attacks,
 ; according to their energy requirements.
-	xor a ; first attack
+	xor a ; FIRST_ATTACK_OR_PKMN_POWER
 	call DetermineAIScoreOfAttackEnergyRequirement
 	ld a, SECOND_ATTACK
 	call DetermineAIScoreOfAttackEnergyRequirement
@@ -787,7 +787,7 @@ AITryToPlayEnergyCard:
 ; if first attack doesn't need, test for the second attack.
 	xor a
 	ld [wTempAI], a
-	ld [wSelectedAttack], a
+	ld [wSelectedAttack], a ; FIRST_ATTACK_OR_PKMN_POWER
 	call CheckEnergyNeededForAttack
 	jr nc, .second_attack
 	ld a, b

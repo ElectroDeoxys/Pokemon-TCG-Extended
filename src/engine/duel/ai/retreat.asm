@@ -36,7 +36,7 @@ AIDecideWhetherToRetreat:
 	call AddToAIScore
 
 .check_ko_1
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call CheckIfAnyAttackKnocksOutDefendingCard
 	jr nc, .active_cant_ko_1
@@ -265,7 +265,7 @@ AIDecideWhetherToRetreat:
 	call CheckIfNotABossDeckID
 	jr c, .check_defending_id
 
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call CheckIfAnyAttackKnocksOutDefendingCard
 	jr nc, .active_cant_ko_2
@@ -293,7 +293,7 @@ AIDecideWhetherToRetreat:
 ; this is done because of Mr. Mime's PKMN PWR
 ; but why Hitmonlee ($87) as well?
 .mr_mime_or_hitmonlee
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	call CheckIfCanDamageDefendingPokemon
 	jr c, .check_retreat_cost
 	ld a, DUELVARS_BENCH
@@ -326,7 +326,7 @@ AIDecideWhetherToRetreat:
 ; and adds to wAIScore if the active Pokémon doesn't meet
 ; these conditions
 .check_retreat_cost
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call GetPlayAreaCardRetreatCost
 	cp 2
@@ -474,7 +474,7 @@ Func_15b54:
 ; Play Area location of best card to switch to.
 ; returns carry if no Bench Pokemon.
 AIDecideBenchPokemonToSwitchTo:
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -521,11 +521,11 @@ AIDecideBenchPokemonToSwitchTo:
 ; calculates damage of both attacks
 ; to raise AI score accordingly
 .check_can_use_atks
-	xor a
+	xor a ; FIRST_ATTACK_OR_PKMN_POWER
 	ld [wSelectedAttack], a
 	call CheckIfSelectedAttackIsUnusable
 	call nc, .HandleAttackDamageScore
-	ld a, $01
+	ld a, SECOND_ATTACK
 	ld [wSelectedAttack], a
 	call CheckIfSelectedAttackIsUnusable
 	call nc, .HandleAttackDamageScore
@@ -538,7 +538,7 @@ AIDecideBenchPokemonToSwitchTo:
 	ld a, [wSelectedAttack]
 	call EstimateDamage_VersusDefendingCard
 	ld a, [wDamage]
-	call CalculateByteTensDigit
+	call ConvertHPToDamageCounters_Bank5
 	inc a
 	jp AddToAIScore
 
@@ -551,7 +551,7 @@ AIDecideBenchPokemonToSwitchTo:
 	ld a, [wSelectedAttack]
 	call EstimateDamage_VersusDefendingCard
 	ld a, [wDamage]
-	call CalculateByteTensDigit
+	call ConvertHPToDamageCounters_Bank5
 	srl a
 	call AddToAIScore
 
@@ -576,12 +576,12 @@ AIDecideBenchPokemonToSwitchTo:
 	ld hl, wLoadedCard2ID
 	cphl MR_MIME
 	jr nz, .check_defending_weak
-	xor a
+	xor a ; FIRST_ATTACK_OR_PKMN_POWER
 	call EstimateDamage_VersusDefendingCard
 	ld a, [wDamage]
 	or a
 	jr nz, .can_damage
-	ld a, $01
+	ld a, SECOND_ATTACK
 	call EstimateDamage_VersusDefendingCard
 	ld a, [wDamage]
 	or a
@@ -680,7 +680,7 @@ AIDecideBenchPokemonToSwitchTo:
 	ld b, a
 	ld a, 4
 	call CalculateBDividedByA_Bank5
-	call CalculateByteTensDigit
+	call ConvertHPToDamageCounters_Bank5
 	call AddToAIScore
 
 ; raise AI score if
@@ -814,7 +814,7 @@ AITryToRetreat:
 	ld e, PLAY_AREA_ARENA
 	call CountNumberOfEnergyCardsAttached
 	push af
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call GetPlayAreaCardRetreatCost
 	pop bc
@@ -829,7 +829,7 @@ AITryToRetreat:
 	jr c, .check_id
 	ld a, [wDuelTempList]
 	ldh [hTemp_ffa0], a
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, OPPACTION_PLAY_ENERGY
 	bank1call AIMakeDecision
@@ -862,7 +862,7 @@ AITryToRetreat:
 
 ; check energy required to retreat
 ; if the cost is 0, retreat right away
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call GetPlayAreaCardRetreatCost
 	ld [wTempCardRetreatCost], a
@@ -871,7 +871,7 @@ AITryToRetreat:
 
 ; if cost > 0 and number of energy cards attached == cost
 ; discard them all
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	call CreateArenaOrBenchEnergyCardList
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
@@ -1010,7 +1010,7 @@ AITryToRetreat:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff9f], a
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision

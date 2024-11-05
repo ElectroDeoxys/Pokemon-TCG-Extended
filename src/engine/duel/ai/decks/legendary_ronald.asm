@@ -107,7 +107,7 @@ AIDoTurn_LegendaryRonald:
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_1 ; skip if cards in deck <= 9
 	ld de, MUK
-	call CountPokemonIDInBothPlayAreas
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .skip_moltres_1 ; skip if Muk in play
 	ld de, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
@@ -161,7 +161,7 @@ AIDoTurn_LegendaryRonald:
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_2 ; skip if cards in deck <= 9
 	ld de, MUK
-	call CountPokemonIDInBothPlayAreas
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .skip_moltres_2 ; skip if Muk in play
 	ld de, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5

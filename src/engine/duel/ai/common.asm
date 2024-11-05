@@ -394,16 +394,26 @@ PickTwoAttachedEnergyCards:
 	ld a, $ff
 	ret
 
-; copies $ff terminated buffer from hl to de
-CopyBuffer:
+; copies an $ff-terminated list from hl to de
+; preserves bc
+; input:
+;	hl = address from which to start copying the data
+;	de = where to copy the data
+CopyListWithFFTerminatorFromHLToDE_Bank8:
 	ld a, [hli]
 	ld [de], a
 	cp $ff
 	ret z
 	inc de
-	jr CopyBuffer
+	jr CopyListWithFFTerminatorFromHLToDE_Bank8
 
-; zeroes a bytes starting at hl
+; zeroes a bytes starting from hl.
+; this function is identical to 'ClearMemory_Bank2',
+; 'ClearMemory_Bank5' and 'ClearMemory_Bank6'.
+; preserves all registers
+; input:
+;	a = number of bytes to clear
+;	hl = where to begin erasing
 ClearMemory_Bank8:
 	push af
 	push bc
@@ -438,12 +448,13 @@ CountOppEnergyCardsInHand:
 	or a
 	ret
 
-; converts HP in a to number of equivalent damage counters
+; converts an HP value or amount of damage to the number of equivalent damage counters
+; preserves all registers except af
 ; input:
-;	a = HP
+;	a = HP value to convert
 ; output:
 ;	a = number of damage counters
-ConvertHPToCounters:
+ConvertHPToDamageCounters_Bank8:
 	push bc
 	ld c, 0
 .loop
@@ -496,7 +507,7 @@ CalculateBDividedByA_Bank8:
 ; input:
 ;   a = CARD_LOCATION_*
 ;   de = card ID to look for
-LookForCardIDInLocation:
+LookForCardIDInLocation_Bank8:
 	ld b, d
 	ld c, e
 	ld d, a
@@ -582,7 +593,7 @@ LookForCardIDInDeck_GivenCardIDInHandAndPlayArea:
 
 ; look for the card ID 1 in deck
 	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
+	call LookForCardIDInLocation_Bank8
 	ret nc
 
 ; was found, store its deck index in memory
@@ -652,7 +663,7 @@ LookForCardIDInDeck_GivenCardIDInHand:
 
 ; look for the card ID 1 in deck
 	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
+	call LookForCardIDInLocation_Bank8
 	ret nc
 
 ; was found, store its deck index in memory
@@ -704,25 +715,26 @@ LookForCardIDInPlayArea_Bank8:
 	call GetTurnDuelistVariable
 	cp $ff
 	ret z
-
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld a, [wTempCardIDToLook + 0]
 	cp e
 	jr nz, .next
 	ld a, [wTempCardIDToLook + 1]
 	cp d
-	jr z, .is_same
+	jr z, .found
 
 .next
 	inc b
 	ld a, MAX_PLAY_AREA_POKEMON
 	cp b
 	jr nz, .loop
+
+; not found
 	ld b, $ff
 	or a
 	ret
 
-.is_same
+.found
 	ld a, b
 	scf
 	ret
@@ -837,7 +849,7 @@ LookForCardIDToTradeWithDifferentHandCard:
 	ld a, [wTempAI + 1]
 	ld d, a
 	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation
+	call LookForCardIDInLocation_Bank8
 	jr nc, .no_carry
 
 ; store its deck index

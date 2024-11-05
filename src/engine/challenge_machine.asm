@@ -14,7 +14,7 @@ ChallengeMachine_Reset:
 ; if a challenge is already in progress, then resume
 ; otherwise, start a new 5 round challenge
 ChallengeMachine_Start::
-	xor a
+	xor a ; DOUBLE_SPACED
 	ld [wLineSeparation], a
 	ld [wd317], a
 	call ChallengeMachine_Initialize

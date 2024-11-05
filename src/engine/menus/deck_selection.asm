@@ -182,7 +182,7 @@ OpenDeckConfirmationMenu:
 
 	ld a, NUM_FILTERS
 	ld hl, wCardFilterCounts
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	ld a, DECK_SIZE
 	ld [wTotalCardCount], a
 	ld hl, wCardFilterCounts
@@ -229,7 +229,7 @@ DeckSelectionSubMenu:
 	call DisableSRAM
 	ld a, 20
 	ld hl, wCurDeckName
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	ld de, wCurDeckName
 	call GetPointerToDeckName
 	call CopyListFromHLToDEInSRAM
@@ -268,7 +268,7 @@ DeckSelectionSubMenu:
 .get_input_deck_name
 	ld a, 20
 	ld hl, wCurDeckName
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	ld de, wCurDeckName
 	call GetPointerToDeckName
 	call CopyListFromHLToDEInSRAM

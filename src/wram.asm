@@ -380,7 +380,7 @@ wPlayAreaScreenLoaded:: ; cbd3
 ; while viewing the Play Area:
 ; - if $0 or $2: no action
 ; - if $1: menu is accessible where player can examine Hand or other screens
-; $2 is reserved for Func_4597
+; $2 is reserved for OpenVariousPlayAreaScreens_FromSelectPresses
 wPlayAreaSelectAction:: ; cbd4
 	ds $1
 
@@ -749,7 +749,8 @@ wTilePatternSelector:: ; cd06
 wTilePatternSelectorCorrection:: ; cd07
 	ds $1
 
-; if 0, text lines are separated by a blank line
+; if 0 (DOUBLE_SPACED), text lines are separated by a blank line
+; uses constants DOUBLE_SPACED and SINGLE_SPACED
 wLineSeparation:: ; cd08
 	ds $1
 
