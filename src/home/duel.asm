@@ -1809,18 +1809,18 @@ PlaySupporterCard::
 	or a
 	ret
 
-PlaySupporterCard:
-	ld a, c
-	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
-	or a
-	jr nz, .already_played_supporter
-	jr c, .play_supporter
-	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
-	or a
-	jr z, .play_supporter_set_played
-	ldtx hl, MayOnlyPlayOneSupporterCardText
-	call DrawWideTextBox_WaitForInput
-	jp OpenPlayerHandScreen
+;PlaySupporterCard:
+;	ld a, c
+;	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
+;	or a
+;	jr nz, .already_played_supporter
+;	jr c, .play_supporter
+;	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
+;	or a
+;	jr z, .play_supporter_set_played
+;	ldtx hl, MayOnlyPlayOneSupporterCardText
+;	call DrawWideTextBox_WaitForInput
+;	jp OpenPlayerHandScreen
 
 .already_played_supporter
 	ldtx hl, MayOnlyPlayOneSupporterCardText
