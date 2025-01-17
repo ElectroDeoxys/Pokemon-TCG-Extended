@@ -513,16 +513,16 @@ OpenPlayerHandScreen:
 	bit TYPE_ENERGY_F, c
 	jr nz, PlayEnergyCard
 	call PlayPokemonCard
-	jr c, ReloadCardListScreen ; jump if card not played
+	jp c, ReloadCardListScreen ; jump if card not played
 	jp DuelMainInterface
 .trainer_card
 	call PlayTrainerCard
-	jr c, ReloadCardListScreen ; jump if card not played
+	jp c, ReloadCardListScreen ; jump if card not played
 	jp DuelMainInterface
 
 .supporter_card
 	call PlaySupporterCard
-	jr c, ReloadCardListScreen ; jump if card not played
+	jp c, ReloadCardListScreen ; jump if card not played
 	jp DuelMainInterface
 
 ; play the energy card with deck index at hTempCardIndex_ff98
