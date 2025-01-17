@@ -1775,7 +1775,6 @@ PlaySupporterCard::
 	jr z, .play_supporter_set_played
 	ldtx hl, MayOnlyPlayOneSupporterCardText
 	call DrawWideTextBox_WaitForInput
-	jp OpenPlayerHandScreen
 	ldh a, [hWhoseTurn]
 	ld h, a
 	ldh a, [hTempCardIndex_ff98]
