@@ -6035,7 +6035,6 @@ OppActionTable:
 	dw OppAction_FinishTurnWithoutAttacking
 	dw OppAction_PlayTrainerCard
 	dw OppAction_ExecuteTrainerCardEffectCommands
-	dw OppAction_PlaySupporterCard
 	dw OppAction_ExecuteSupporterCardEffectCommands
 	dw OppAction_BeginUseAttack
 	dw OppAction_UseAttack
@@ -6052,6 +6051,7 @@ OppActionTable:
 	dw OppAction_UseMetronomeAttack
 	dw OppAction_6b15
 	dw OppAction_DrawDuelMainScene
+	dw OppAction_PlaySupporterCard
 	assert_table_length NUM_OPP_ACTIONS
 
 OppAction_DrawCard:
