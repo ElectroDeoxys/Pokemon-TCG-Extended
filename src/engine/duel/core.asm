@@ -3663,7 +3663,7 @@ CardPageSwitchPointerTable:
 	dw CardPageSwitch_TrainerEnd
 	dw CardPageSwitch_EnergyOrTrainerPage1 ; CARDPAGE_SUPPORTER_1
 	dw CardPageSwitch_SupporterPage2 ; CARDPAGE_SUPPORTER_2
-	de CardPageSwitch_SupporterEnd
+	dw CardPageSwitch_SupporterEnd
 
 ; return with CARDPAGE_POKEMON_DESCRIPTION
 CardPageSwitch_00:
