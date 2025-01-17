@@ -2899,3 +2899,5 @@ TextOffsets::
 	textpointer GamblerDescription
 	textpointer RecycleName
 	textpointer RecycleDescription
+	textpointer MayOnlyPlayOneSupporterCardText
+	textpointer UnableToUseSupporterDueToHeadacheText

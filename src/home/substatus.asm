@@ -654,6 +654,17 @@ CheckCantUseTrainerDueToEffect::
 	scf
 	ret
 
+; return carry if the turn holder is affected by HeadacheP and Supporter cards can't be used
+CheckCantUseSupporterDueToEffect::
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	or a
+	bit SUBSTATUS3_HEADACHE_P_F, [hl]
+	ret z
+	ldtx hl, UnableToUseSupporterDueToHeadacheText
+	scf
+	ret
+
 ; return carry if any duelist has Aerodactyl and its Prehistoric Power Pkmn Power is active
 IsPrehistoricPowerActive::
 	ld de, AERODACTYL

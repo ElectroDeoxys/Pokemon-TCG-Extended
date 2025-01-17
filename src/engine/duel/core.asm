@@ -508,6 +508,8 @@ OpenPlayerHandScreen:
 	ld c, a
 	bit TYPE_TRAINER_F, c
 	jr nz, .trainer_card
+	bit TYPE_SUPPORTER_F, c
+	jr nz, .supporter_card
 	bit TYPE_ENERGY_F, c
 	jr nz, PlayEnergyCard
 	call PlayPokemonCard
@@ -515,6 +517,11 @@ OpenPlayerHandScreen:
 	jp DuelMainInterface
 .trainer_card
 	call PlayTrainerCard
+	jr c, ReloadCardListScreen ; jump if card not played
+	jp DuelMainInterface
+
+.supporter_card
+	call PlaySupporterCard
 	jr c, ReloadCardListScreen ; jump if card not played
 	jp DuelMainInterface
 
@@ -567,6 +574,62 @@ PlayEnergyCard:
 	ldtx hl, MayOnlyAttachOneEnergyCardText
 	call DrawWideTextBox_WaitForInput
 ;	fallthrough
+
+PlaySupporterCard:
+	ld a, c
+	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
+	or a
+	jr nz, .already_played_supporter
+	jr c, .play_supporter
+	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
+	or a
+	jr z, .play_supporter_set_played
+	ldtx hl, MayOnlyPlayOneSupporterCardText
+	call DrawWideTextBox_WaitForInput
+	jp OpenPlayerHandScreen
+
+.already_played_supporter
+	ldtx hl, MayOnlyPlayOneSupporterCardText
+	call DrawWideTextBox_WaitForInput
+;	fallthrough
+
+.play_supporter
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld e, a
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	call PutHandCardInPlayArea
+	call PrintPlayAreaCardList_EnableLCD
+	ld a, OPPACTION_PLAY_SUPPORTER
+	ldh [hOppActionTableIndex], a
+	call PrintPlayedSupporter
+	jp DuelMainInterface	
+
+.play_supporter_set_played
+	ld a, TRUE
+	ld [wAlreadyPlayedSupporter], a
+
+; play supporter card from hand
+OppAction_PlaySupporterCard:
+	call LoadNonPokemonCardEffectCommands
+	call DisplayUsedSupporterCardDetailScreen
+	call PrintUsedSupporterCardDescription
+	ld a, $01
+	ld [wSkipDuelistIsThinkingDelay], a
+	ret
+
+; execute the effect commands of the Supporter card that is being played
+; used only for Supporter cards, as a continuation of OppAction_PlaySupporterCard
+OppAction_ExecuteSupporterCardEffectCommands:
+	ld a, EFFECTCMDTYPE_DISCARD_ENERGY
+	call TryExecuteEffectCommandFunction
+	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
+	call TryExecuteEffectCommandFunction
+	call DrawDuelMainScene
+	ldh a, [hTempCardIndex_ff9f]
+	call MoveHandCardToDiscardPile
+	jp DrawDuelMainScene
 
 ; reload the card list screen after the card trying to play couldn't be played
 ReloadCardListScreen:
@@ -5573,10 +5636,36 @@ DisplayUsedTrainerCardDetailScreen::
 	ldtx hl, UsedText
 	jp DisplayCardDetailScreen
 
+; display card detail when a Supporter card is used, and print "Used xxx"
+; hTempCardIndex_ff9f contains the card's deck index
+DisplayUsedSupporterCardDetailScreen::
+	ldh a, [hTempCardIndex_ff9f]
+	ldtx hl, UsedText
+	jp DisplayCardDetailScreen	
+
 ; prints the name and description of a trainer card, along with the
 ; "Used xxx" text in a text box. this function is used to show the player
 ; the information of a trainer card being used by the opponent.
 PrintUsedTrainerCardDescription:
+	call EmptyScreen
+	call SetNoLineSeparation
+	lb de, 1, 1
+	call InitTextPrinting
+	ld hl, wLoadedCard1Name
+	call ProcessTextFromPointerToID
+	ld a, 19
+	lb de, 1, 3
+	call InitTextPrintingInTextbox
+	ld hl, wLoadedCard1NonPokemonDescription
+	call ProcessTextFromPointerToID
+	call SetOneLineSeparation
+	ldtx hl, UsedText
+	jp DrawWideTextBox_WaitForInput
+
+; prints the name and description of a supporter card, along with the
+; "Used xxx" text in a text box. this function is used to show the player
+; the information of a supporter card being used by the opponent.
+PrintUsedSupporterCardDescription:
 	call EmptyScreen
 	call SetNoLineSeparation
 	lb de, 1, 1
@@ -5946,6 +6035,8 @@ OppActionTable:
 	dw OppAction_FinishTurnWithoutAttacking
 	dw OppAction_PlayTrainerCard
 	dw OppAction_ExecuteTrainerCardEffectCommands
+	dw OppAction_PlaySupporterCard
+	dw OppAction_ExecuteSupporterCardEffectCommands
 	dw OppAction_BeginUseAttack
 	dw OppAction_UseAttack
 	dw OppAction_PlayAttackAnimationDealAttackDamage

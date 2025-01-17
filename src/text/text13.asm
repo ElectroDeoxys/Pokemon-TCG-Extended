@@ -183,3 +183,13 @@ RecycleDescription:
 	line "in your discard pile on top of your"
 	line "deck."
 	done
+
+MayOnlyPlayOneSupporterCardText:
+	text "You may only play 1 Supporter"
+	line "card per turn."
+	done
+
+UnableToUseSupporterDueToHeadacheText:
+	text "Unable to use a Supporter card"
+	line "due to the effects of Headache."
+	done

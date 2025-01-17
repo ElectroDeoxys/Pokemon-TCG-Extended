@@ -1762,9 +1762,46 @@ PlayTrainerCard::
 	or a
 	ret
 
+; play the supporter card with deck index at hTempCardIndex_ff98.
+; a supporter card is like an attack effect, with its own effect commands.
+; return nc if the card was played, carry if it wasn't.
+PlaySupporterCard::
+	call CheckCantUseSupporterDueToEffect 
+	jr c, .cant_use
+	ldh a, [hWhoseTurn]
+	ld h, a
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTempCardIndex_ff9f], a
+	call LoadNonPokemonCardEffectCommands
+	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
+	call TryExecuteEffectCommandFunction
+	jr nc, .can_use
+.cant_use
+	call DrawWideTextBox_WaitForInput
+	scf
+	ret
+.can_use
+	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
+	call TryExecuteEffectCommandFunction
+	jr c, .done
+	ld a, OPPACTION_PLAY_SUPPORTER
+	ldh [hOppActionTableIndex], a
+	call DisplayUsedSupporterCardDetailScreen
+	ld a, EFFECTCMDTYPE_DISCARD_ENERGY
+	call TryExecuteEffectCommandFunction
+	ld a, EFFECTCMDTYPE_REQUIRE_SELECTION
+	call TryExecuteEffectCommandFunction
+	ld a, OPPACTION_EXECUTE_SUPPORTER_EFFECTS
+	ldh [hOppActionTableIndex], a
+	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
+	call TryExecuteEffectCommandFunction
+	ldh a, [hTempCardIndex_ff9f]
+	call MoveHandCardToDiscardPile
+.done
+	or a
+	ret
 
-
-; loads the effect commands of a (trainer or energy) card with deck index (0-59) at hTempCardIndex_ff9f
+; loads the effect commands of a (trainer or supporter or energy) card with deck index (0-59) at hTempCardIndex_ff9f
 ; into wLoadedAttackEffectCommands. in practice, only used for trainer cards
 LoadNonPokemonCardEffectCommands::
 	ldh a, [hTempCardIndex_ff9f]

@@ -2809,6 +2809,12 @@ HeadacheEffect:
 	set SUBSTATUS3_HEADACHE_F, [hl]
 	ret
 
+HeadachePEffect:
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetNonTurnDuelistVariable
+	set SUBSTATUS3_HEADACHE_P_F, [hl]
+	ret	
+
 SeadraWaterGunEffect:
 	lb bc, 1, 1
 	jp ApplyExtraWaterEnergyDamageBonus
