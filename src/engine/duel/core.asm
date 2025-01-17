@@ -575,40 +575,6 @@ PlayEnergyCard:
 	call DrawWideTextBox_WaitForInput
 ;	fallthrough
 
-PlaySupporterCard:
-	ld a, c
-	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
-	or a
-	jr nz, .already_played_supporter
-	jr c, .play_supporter
-	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
-	or a
-	jr z, .play_supporter_set_played
-	ldtx hl, MayOnlyPlayOneSupporterCardText
-	call DrawWideTextBox_WaitForInput
-	jp OpenPlayerHandScreen
-
-.already_played_supporter
-	ldtx hl, MayOnlyPlayOneSupporterCardText
-	call DrawWideTextBox_WaitForInput
-;	fallthrough
-
-.play_supporter
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ld e, a
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	call PutHandCardInPlayArea
-	call PrintPlayAreaCardList_EnableLCD
-	ld a, OPPACTION_PLAY_SUPPORTER
-	ldh [hOppActionTableIndex], a
-	call PrintPlayedSupporter
-	jp DuelMainInterface	
-
-.play_supporter_set_played
-	ld a, TRUE
-	ld [wAlreadyPlayedSupporter], a
 
 ; play supporter card from hand
 OppAction_PlaySupporterCard:
@@ -3695,6 +3661,9 @@ CardPageSwitchPointerTable:
 	dw CardPageSwitch_EnergyOrTrainerPage1 ; CARDPAGE_TRAINER_1
 	dw CardPageSwitch_TrainerPage2 ; CARDPAGE_TRAINER_2
 	dw CardPageSwitch_TrainerEnd
+	dw CardPageSwitch_EnergyOrTrainerPage1 ; CARDPAGE_SUPPORTER_1
+	dw CardPageSwitch_SupporterPage2 ; CARDPAGE_SUPPORTER_2
+	de CardPageSwitch_SupporterEnd
 
 ; return with CARDPAGE_POKEMON_DESCRIPTION
 CardPageSwitch_00:
@@ -3761,6 +3730,12 @@ CardPageSwitch_TrainerPage2:
 	ld hl, wLoadedCard1NonPokemonDescription + 2
 	jr CheckCardPageExists
 
+; return with current page if [wLoadedCard1NonPokemonDescription + 2] non-0
+; (if this supporter card has a two-page description)
+CardPageSwitch_SupporterPage2:
+	ld hl, wLoadedCard1NonPokemonDescription + 2
+	jr CheckCardPageExists
+
 ; return with CARDPAGE_ENERGY
 CardPageSwitch_EnergyEnd:
 	ld a, CARDPAGE_ENERGY
@@ -3778,6 +3753,12 @@ CardPageSwitch_TrainerEnd:
 	ld a, CARDPAGE_TRAINER_1
 	scf
 	ret
+
+; return with CARDPAGE_SUPPORTER_1
+CardPageSwitch_SupporterEnd:
+	ld a, CARDPAGE_SUPPORTER_1
+	scf
+	ret	
 
 ZeroObjectPositionsAndToggleOAMCopy:
 	call ZeroObjectPositions
@@ -4379,6 +4360,16 @@ DisplayCardPage_TrainerPage2:
 	xor a ; HEADER_TRAINER
 	ld hl, wLoadedCard1NonPokemonDescription + 2
 	jr DisplayEnergyOrTrainerCardPage
+
+DisplayCardPage_SupporterPage1:
+	xor a ; HEADER_SUPPORTER
+	ld hl, wLoadedCard1NonPokemonDescription
+	jr DisplayEnergyOrTrainerCardPage
+
+DisplayCardPage_SupporterPage2:
+	xor a ; HEADER_SUPPORTER
+	ld hl, wLoadedCard1NonPokemonDescription + 2
+	jr DisplayEnergyOrTrainerCardPage	
 
 DisplayCardPage_Energy:
 	ld a, HEADER_ENERGY

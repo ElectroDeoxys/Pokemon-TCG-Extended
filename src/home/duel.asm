@@ -1767,7 +1767,15 @@ PlayTrainerCard::
 ; return nc if the card was played, carry if it wasn't.
 PlaySupporterCard::
 	call CheckCantUseSupporterDueToEffect 
-	jr c, .cant_use
+	jr c, .cant_use_s
+	ld a, c
+	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
+	or a
+	jr nz, .already_played_supporter
+	jr z, .play_supporter_set_played
+	ldtx hl, MayOnlyPlayOneSupporterCardText
+	call DrawWideTextBox_WaitForInput
+	jp OpenPlayerHandScreen
 	ldh a, [hWhoseTurn]
 	ld h, a
 	ldh a, [hTempCardIndex_ff98]
@@ -1776,7 +1784,7 @@ PlaySupporterCard::
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_1
 	call TryExecuteEffectCommandFunction
 	jr nc, .can_use
-.cant_use
+.cant_use_s
 	call DrawWideTextBox_WaitForInput
 	scf
 	ret
@@ -1800,6 +1808,30 @@ PlaySupporterCard::
 .done
 	or a
 	ret
+
+PlaySupporterCard:
+	ld a, c
+	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
+	or a
+	jr nz, .already_played_supporter
+	jr c, .play_supporter
+	ld a, [wAlreadyPlayedSupporter]		; not sure which of these to keep
+	or a
+	jr z, .play_supporter_set_played
+	ldtx hl, MayOnlyPlayOneSupporterCardText
+	call DrawWideTextBox_WaitForInput
+	jp OpenPlayerHandScreen
+
+.already_played_supporter
+	ldtx hl, MayOnlyPlayOneSupporterCardText
+	call DrawWideTextBox_WaitForInput
+;	fallthrough
+
+.play_supporter_set_played
+	ld a, TRUE
+	ld [wAlreadyPlayedSupporter], a
+
+
 
 ; loads the effect commands of a (trainer or supporter or energy) card with deck index (0-59) at hTempCardIndex_ff9f
 ; into wLoadedAttackEffectCommands. in practice, only used for trainer cards
