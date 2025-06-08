@@ -1,7 +1,5 @@
 # Pokémon TCG Extended
 
-![duel_scene](https://github.com/user-attachments/assets/82321fe2-81ab-4d1e-8b4f-6ca97852f623)
-
 Modified disassembly of [Pokémon TCG](https://github.com/pret/poketcg) that supports double the cards as the vanilla game, meant to be used as a base for hacks. The modified engine supports up to 511 cards, as opposed to 254 from the base game. To leverage the GameBoy Color's ability to show 8 BG colours at once, the engine also supports card graphics with up to 3 palettes, just like the sequel. For everything else this repo stays as faithful as possible to the vanilla game.
 
 These changes are built upon the [tinytcg branch](https://github.com/ElectroDeoxys/poketcg/tree/tinytcg). Please read that repo's `README.md` for more details.
@@ -21,3 +19,5 @@ Run `make` in your shell.
 
 
 This will output a file named "poketcg_ext.gbc".
+
+![duel_scene](https://github.com/user-attachments/assets/82321fe2-81ab-4d1e-8b4f-6ca97852f623)
