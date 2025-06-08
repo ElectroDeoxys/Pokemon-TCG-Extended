@@ -7548,9 +7548,9 @@ MewtwoLv60Card:
 	tx MewtwoLv60Description ; description
 	db 0 ; AI info
 
-MewtwoAltLV60Card:
+MewtwoAltLv60Card:
 	db TYPE_PKMN_PSYCHIC ; type
-	gfx MewtwoAltLV60CardGfx ; gfx
+	gfx MewtwoAltLv60CardGfx ; gfx
 	tx MewtwoName ; name
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
@@ -7566,7 +7566,7 @@ MewtwoAltLV60Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MewtwoAltLV60EnergyAbsorptionEffectCommands ; effect commands
+	dw MewtwoAltLv60EnergyAbsorptionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3

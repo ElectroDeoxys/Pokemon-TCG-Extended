@@ -24,6 +24,7 @@
 
 # intermediate BG map files
 *.bgmap
+*.attrmap
 
 # compressed data
 *.lz

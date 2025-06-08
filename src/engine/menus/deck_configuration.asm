@@ -2987,18 +2987,18 @@ GetCardTypeIconPalette:
 
 .CardTypeIconPalettes
 ; icon tile, BG pal
-	db ICON_TILE_FIRE,            1
-	db ICON_TILE_GRASS,           2
-	db ICON_TILE_LIGHTNING,       1
-	db ICON_TILE_WATER,           2
-	db ICON_TILE_FIGHTING,        3
-	db ICON_TILE_PSYCHIC,         3
-	db ICON_TILE_COLORLESS,       0
-	db ICON_TILE_ENERGY,          2
-	db ICON_TILE_BASIC_POKEMON,   2
-	db ICON_TILE_STAGE_1_POKEMON, 2
-	db ICON_TILE_STAGE_2_POKEMON, 1
-	db ICON_TILE_TRAINER,         2
+	db ICON_TILE_FIRE,            $2
+	db ICON_TILE_GRASS,           $3
+	db ICON_TILE_LIGHTNING,       $2
+	db ICON_TILE_WATER,           $3
+	db ICON_TILE_FIGHTING,        $4
+	db ICON_TILE_PSYCHIC,         $4
+	db ICON_TILE_COLORLESS,       $0
+	db ICON_TILE_ENERGY,          $3
+	db ICON_TILE_BASIC_POKEMON,   $3
+	db ICON_TILE_STAGE_1_POKEMON, $3
+	db ICON_TILE_STAGE_2_POKEMON, $2
+	db ICON_TILE_TRAINER,         $3
 	db $00, $ff
 
 ; copies b bytes from hl to de

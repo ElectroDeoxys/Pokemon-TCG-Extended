@@ -2,5 +2,7 @@ scan_includes
 gfx
 compressor
 bgmap
+pal_fix
+attr_fix
 
 *.exe

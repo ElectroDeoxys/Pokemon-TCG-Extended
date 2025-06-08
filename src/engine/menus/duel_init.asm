@@ -3,7 +3,7 @@ Duel_Init:
 	push af
 	call DisableLCD
 	call InitMenuScreen
-	ld a, $4
+	ld a, $1
 	ld [wTextBoxFrameType], a
 	lb de,  0, 12
 	lb bc, 20,  6

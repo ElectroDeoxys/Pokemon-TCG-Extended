@@ -818,7 +818,7 @@ MewtwoBarrierEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Barrier_AISelectEffect
 	db  $00
 
-MewtwoAltLV60EnergyAbsorptionEffectCommands:
+MewtwoAltLv60EnergyAbsorptionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyAbsorption_CheckDiscardPile
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyAbsorption_PlayerSelectEffect

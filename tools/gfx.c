@@ -1,11 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <getopt.h>
-#include <string.h>
-#include <stdint.h>
-
 #include "common.h"
+
+#include <stdbool.h>
+#include <string.h>
 
 static void usage(void) {
 	fprintf(stderr, "Usage: gfx [--trim-whitespace] [--remove-whitespace] [--interleave] [--remove-duplicates [--keep-whitespace]] [--remove-xflip] [--remove-yflip] [--preserve indexes] [--png filename] [-d depth] [-h] [-o outfile] infile\n");

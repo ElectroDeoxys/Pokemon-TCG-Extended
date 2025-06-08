@@ -159,7 +159,7 @@ CardPointers::
 	dab JynxCard
 	dab MewtwoLv53Card
 	dab MewtwoLv60Card
-	dab MewtwoAltLV60Card
+	dab MewtwoAltLv60Card
 	dab MewLv8Card
 	dab MewLv15Card
 	dab MewLv23Card

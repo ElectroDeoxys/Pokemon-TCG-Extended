@@ -22,7 +22,7 @@ SetDefaultPalettes:
 	ld [wBGP], a
 	ld [wOBP0], a
 	ld [wOBP1], a
-	ld a, 4
+	ld a, $1
 	ld [wTextBoxFrameType], a
 	bank1call SetDefaultConsolePalettes
 	call FlushAllPalettes

@@ -55,7 +55,7 @@ GiveBoosterPack:
 	call ZeroObjectPositions
 	ld a, $1
 	ld [wVBlankOAMCopyToggle], a
-	ld a, $4
+	ld a, $1
 	ld [wTextBoxFrameType], a
 	farcall OpenBoosterPack
 	farcall WhiteOutDMGPals

@@ -831,7 +831,7 @@ wListItemNameMaxLength:: ; cd1c
 wListFunctionPointer:: ; cd1d
 	ds $2
 
-	ds $78
+	ds $50
 
 ; in a card list, the Y position where the <sel_item>/<num_items> indicator is placed
 ; if wCardListIndicatorYPosition == $ff, no indicator is displayed
@@ -1198,9 +1198,11 @@ wCurrentAIFlags:: ; ce21
 wEffectFunctionsBank:: ; ce22
 	ds $1
 
-; LoadCardGfx loads the card's palette here
+; LoadLoaded1CardGfx loads the card's palette here
 wCardPalette:: ; ce23
-	ds CGB_PAL_SIZE
+	ds 3 palettes
+wCardAttrMap::
+	ds $30
 
 ; information about the text being currently processed, including font width,
 ; the rom bank, and the memory address of the next character to be printed.
