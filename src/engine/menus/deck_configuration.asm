@@ -883,13 +883,13 @@ DrawCardTypeIconsAndPrintCardCounts:
 
 ; fills one line at coordinate bc in BG Map
 ; with the byte in register a
-; fills the same line with $04 in VRAM1 if in CGB
+; fills the same line with $1 in VRAM1 if in CGB
 ; bc = coordinates
 FillBGMapLineWithA:
 	call BCCoordToBGMap0Address
 	ld b, SCREEN_WIDTH
 	call FillDEWithA
-	ld a, $04
+	ld a, $1
 	ld b, SCREEN_WIDTH
 	call BankswitchVRAM1
 	call FillDEWithA
