@@ -6006,6 +6006,7 @@ Gigashock_PlayerSelectEffect:
 	xor a
 	ldh [hCurSelectionItem], a
 	ld [wCurGigashockItem], a
+	bank1call SetDefaultConsolePalettes
 	bank1call SetupPlayAreaScreen
 .start
 	bank1call PrintPlayAreaCardList_EnableLCD

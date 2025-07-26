@@ -1587,7 +1587,7 @@ PrintDeckBuildingCardList:
 
 .exit_loop
 	ld a, [hli]
-	or a
+	or [hl]
 	jr z, .cannot_scroll
 	pop de
 ; draw down cursor because
@@ -3341,7 +3341,7 @@ PrintCardSelectionList:
 
 .exit_loop
 	ld a, [hli]
-	or a
+	or [hl]
 	jr z, .cannot_scroll
 	pop de
 ; draw down cursor because
