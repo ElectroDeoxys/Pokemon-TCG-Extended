@@ -1,13 +1,13 @@
 ; enable timer interrupt
 EnableInt_Timer::
 	ldh a, [rIE]
-	or 1 << INT_TIMER
+	or IE_TIMER
 	ldh [rIE], a
 	ret
 
 ; enable vblank interrupt
 EnableInt_VBlank::
 	ldh a, [rIE]
-	or 1 << INT_VBLANK
+	or IE_VBLANK
 	ldh [rIE], a
 	ret

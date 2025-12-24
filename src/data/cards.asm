@@ -20,7 +20,7 @@ BulbasaurCard:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 1
+	db HEALING_EQUALS_10_HP ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	; attack 2
@@ -134,7 +134,7 @@ VenusaurLv64Card:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 2
+	db HEALING_EQUALS_HALF_DAMAGE_DEALT ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	db 2 ; retreat cost
@@ -334,7 +334,7 @@ ButterfreeCard:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 2
+	db HEALING_EQUALS_HALF_DAMAGE_DEALT ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	db 0 ; retreat cost
@@ -870,7 +870,7 @@ NidokingCard:
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_MULTIPLE_SLASH ; animation
 
 	; attack 2
@@ -882,9 +882,9 @@ NidokingCard:
 	db DAMAGE_NORMAL ; category
 	dw NidokingToxicEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 2
+	db 2 ; attack score bonus for ENCOURAGE_THIS_ATTACK (negated if Defending Pokémon is already Double Poisoned)
 	db ATK_ANIM_TOXIC ; animation
 
 	db 3 ; retreat cost
@@ -934,7 +934,7 @@ ZubatCard:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 3
+	db HEALING_EQUALS_DAMAGE_DEALT ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	db 0 ; retreat cost
@@ -984,7 +984,7 @@ GolbatCard:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 3
+	db HEALING_EQUALS_DAMAGE_DEALT ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	db 0 ; retreat cost
@@ -1068,9 +1068,9 @@ GloomCard:
 	db DAMAGE_NORMAL ; category
 	dw GloomPoisonPowderEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score bonus for ENCOURAGE_THIS_ATTACK (-2 if Defending Pokémon is already Double Poisoned)
 	db ATK_ANIM_POISON_POWDER ; animation
 
 	; attack 2
@@ -1118,9 +1118,9 @@ VileplumeCard:
 	db POKEMON_POWER ; category
 	dw VileplumeHealEffectCommands ; effect commands
 	db NONE ; flags 1
-	db HEAL_USER ; flags 2
+	db HEAL_USER ; flags 2 (not an attack, so this isn't used)
 	db NONE ; flags 3
-	db 1
+	db HEALING_EQUALS_10_HP ; used to calculate the HEAL_USER attack score bonus (if this were an attack)
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
@@ -1284,7 +1284,7 @@ VenonatCard:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 3
+	db HEALING_EQUALS_DAMAGE_DEALT ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	db 1 ; retreat cost
@@ -1482,9 +1482,9 @@ VictreebelCard:
 	db DAMAGE_NORMAL ; category
 	dw VictreebelAcidEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 1
+	db 1 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_GOO ; animation
 
 	db 2 ; retreat cost
@@ -1634,7 +1634,7 @@ ExeggcuteCard:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 1
+	db HEALING_EQUALS_10_HP ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	db 1 ; retreat cost
@@ -1784,7 +1784,7 @@ WeezingCard:
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 60
+	db 60 ; amount of recoil damage (used to determine the HIGH_RECOIL attack score penalty)
 	db ATK_ANIM_SELFDESTRUCT ; animation
 
 	db 1 ; retreat cost
@@ -2034,7 +2034,7 @@ CharmanderCard:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_SMALL_FLAME ; animation
 
 	db 1 ; retreat cost
@@ -2084,7 +2084,7 @@ CharmeleonCard:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost
@@ -2134,7 +2134,7 @@ CharizardCard:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 6
+	db 6 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_FIRE_SPIN ; animation
 
 	db 3 ; retreat cost
@@ -2234,7 +2234,7 @@ NinetalesLv32Card:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_FIRE_SPIN ; animation
 
 	db 1 ; retreat cost
@@ -2384,7 +2384,7 @@ ArcanineLv34Card:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3
-	db 6
+	db 6 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_FIRE_SPIN ; animation
 
 	db 1 ; retreat cost
@@ -2420,7 +2420,7 @@ ArcanineLv45Card:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_BIG_FLAME ; animation
 
 	; attack 2
@@ -2434,7 +2434,7 @@ ArcanineLv45Card:
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 30
+	db 30 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 3 ; retreat cost
@@ -2532,7 +2532,7 @@ RapidashCard:
 	db DAMAGE_NORMAL ; category
 	dw RapidashAgilityEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK | FLAG_2_BIT_6 ; flags 2
+	db NULLIFY_OR_WEAKEN_ATTACK | ENCOURAGE_THIS_ATTACK ; flags 2 (this shouldn't have ENCOURAGE_THIS_ATTACK)
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_QUICK_ATTACK ; animation
@@ -2584,7 +2584,7 @@ MagmarLv24Card:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 2 ; retreat cost
@@ -2734,7 +2734,7 @@ FlareonLv28Card:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_BIG_FLAME ; animation
 
 	db 1 ; retreat cost
@@ -2768,7 +2768,7 @@ MoltresLv35Card:
 	db RESIDUAL ; category
 	dw MoltresWildfireEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_5 ; flags 2
+	db IGNORE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
@@ -3018,9 +3018,9 @@ PsyduckCard:
 	db RESIDUAL ; category
 	dw PsyduckHeadacheEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 2
+	db 2 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
@@ -3232,9 +3232,9 @@ PoliwrathCard:
 	db DAMAGE_NORMAL ; category
 	dw PoliwrathWhirlpoolEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_WHIRLPOOL ; animation
 
 	db 3 ; retreat cost
@@ -3268,7 +3268,7 @@ TentacoolCard:
 	db POKEMON_POWER ; category
 	dw TentacoolCowardiceEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2 (not an attack, so this isn't used)
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PKMN_POWER_1 ; animation
@@ -3920,7 +3920,7 @@ StarmieCard:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
@@ -4334,7 +4334,7 @@ ArticunoLv35Card:
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; damage done to opponent's Bench (not used for anything)
 	db ATK_ANIM_BLIZZARD ; animation
 
 	db 2 ; retreat cost
@@ -4382,9 +4382,9 @@ ArticunoLv37Card:
 	db RESIDUAL ; category
 	dw ArticunoIceBreathEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_WHIRLWIND_ZIGZAG ; animation
 
 	db 2 ; retreat cost
@@ -4434,7 +4434,7 @@ PikachuLv12Card:
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_THUNDERSHOCK ; animation
 
 	db 1 ; retreat cost
@@ -4470,7 +4470,7 @@ PikachuLv14Card:
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; damage done to opponent's Bench (not used for anything)
 	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
 
 	; attack 2
@@ -4520,7 +4520,7 @@ PikachuLv16Card:
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; not used for anything
 	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
@@ -4570,7 +4570,7 @@ PikachuAltLv16Card:
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; not used for anything
 	db ATK_ANIM_SUPERSONIC ; animation
 
 	; attack 2
@@ -4781,7 +4781,7 @@ RaichuLv40Card:
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
 	dw RaichuThunderEffectCommands ; effect commands
-	db NONE ; flags 1
+	db NONE ; flags 1 (this should probably have LOW_RECOIL)
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -4820,7 +4820,7 @@ RaichuLv45Card:
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; damage done to opponent's Bench (not used for anything)
 	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
 
 	; attack 2
@@ -4884,7 +4884,7 @@ MagnemiteLv13Card:
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 40
+	db 40 ; amount of recoil damage (used to determine the HIGH_RECOIL attack score penalty)
 	db ATK_ANIM_SELFDESTRUCT ; animation
 
 	db 1 ; retreat cost
@@ -4932,7 +4932,7 @@ MagnemiteLv15Card:
 	db RESIDUAL ; category
 	dw MagnemiteMagneticStormEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_5 ; flags 2
+	db IGNORE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_MAGNETIC_STORM ; animation
@@ -4984,7 +4984,7 @@ MagnetonLv28Card:
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 80
+	db 80 ; amount of recoil damage (used to determine the HIGH_RECOIL attack score penalty)
 	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
 	db 1 ; retreat cost
@@ -5034,7 +5034,7 @@ MagnetonLv35Card:
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 100
+	db 100 ; amount of recoil damage (used to determine the HIGH_RECOIL attack score penalty)
 	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
 	db 2 ; retreat cost
@@ -5284,7 +5284,7 @@ ElectabuzzLv35Card:
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_THUNDERPUNCH ; animation
 
 	db 2 ; retreat cost
@@ -5420,7 +5420,7 @@ ZapdosLv40Card:
 	db LOW_RECOIL | DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_THUNDERSTORM ; animation
 
 	; attack 2
@@ -5470,7 +5470,7 @@ ZapdosLv64Card:
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_THUNDER ; animation
 
 	; attack 2
@@ -5484,7 +5484,7 @@ ZapdosLv64Card:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 9
+	db 9 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_THUNDERBOLT ; animation
 
 	db 3 ; retreat cost
@@ -5517,7 +5517,7 @@ ZapdosLv68Card:
 	db 0 ; damage
 	db POKEMON_POWER ; category
 	dw ZapdosPealOfThunderEffectCommands ; effect commands
-	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1 (not an attack, so this isn't used)
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
@@ -5768,7 +5768,7 @@ MankeyCard:
 	db POKEMON_POWER ; category
 	dw MankeyPeekEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_5 ; flags 2
+	db IGNORE_THIS_ATTACK ; flags 2 (not an attack, so this isn't used)
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PKMN_POWER_1 ; animation
@@ -5934,7 +5934,7 @@ MachokeCard:
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 20
+	db 20 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 3 ; retreat cost
@@ -6134,7 +6134,7 @@ GolemCard:
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 100
+	db 100 ; amount of recoil damage (used to determine the HIGH_RECOIL attack score penalty)
 	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
 
 	db 4 ; retreat cost
@@ -6220,7 +6220,7 @@ CuboneCard:
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; not used for anything
 	db ATK_ANIM_CRY ; animation
 
 	; attack 2
@@ -6368,9 +6368,9 @@ HitmonleeCard:
 	db RESIDUAL ; category
 	dw HitmonleeStretchKickEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_STRETCH_KICK ; animation
 
 	; attack 2
@@ -6534,7 +6534,7 @@ RhydonCard:
 	db LOW_RECOIL ; flags 1
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
-	db 20
+	db 20 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 3 ; retreat cost
@@ -6634,7 +6634,7 @@ KabutopsCard:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 2
+	db HEALING_EQUALS_HALF_DAMAGE_DEALT ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	db 1 ; retreat cost
@@ -6770,7 +6770,7 @@ KadabraCard:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
@@ -6882,9 +6882,9 @@ SlowpokeLv9Card:
 	db DAMAGE_NORMAL ; category
 	dw SlowpokeAmnesiaEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 2
+	db 2 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_AMNESIA ; animation
 
 	db 1 ; retreat cost
@@ -6920,7 +6920,7 @@ SlowpokeLv18Card:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 1
+	db HEALING_EQUALS_10_HP ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_NONE ; animation
 
 	; attack 2
@@ -6934,7 +6934,7 @@ SlowpokeLv18Card:
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 2
+	db 2 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 1 ; retreat cost
@@ -6968,7 +6968,7 @@ SlowbroCard:
 	db POKEMON_POWER ; category
 	dw SlowbroStrangeBehaviorEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2 (not an attack, so this isn't used)
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PKMN_POWER_1 ; animation
@@ -7032,9 +7032,9 @@ GastlyLv8Card:
 	db RESIDUAL ; category
 	dw GastlyDestinyBondEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db NONE ; flags 2 (this should probably have ENCOURAGE_THIS_ATTACK)
 	db SPECIAL_AI_HANDLING ; flags 3
-	db 3
+	db 3 ; not used for anything
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 0 ; retreat cost
@@ -7081,10 +7081,10 @@ GastlyLv17Card:
 	db 0 ; damage
 	db RESIDUAL ; category
 	dw GastlyEnergyConversionEffectCommands ; effect commands
-	db NONE ; flags 1
+	db NONE ; flags 1 (this should probably have LOW_RECOIL)
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
-	db 10
+	db 10 ; amount of recoil damage
 	db ATK_ANIM_ENERGY_CONVERSION ; animation
 
 	db 0 ; retreat cost
@@ -7234,7 +7234,7 @@ GengarCard:
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; damage done to opponent's Bench (not used for anything)
 	db ATK_ANIM_DARK_MIND ; animation
 
 	db 1 ; retreat cost
@@ -7318,7 +7318,7 @@ HypnoCard:
 	db RESIDUAL ; category
 	dw HypnoProphecyEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_5 ; flags 2
+	db IGNORE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
@@ -7334,7 +7334,7 @@ HypnoCard:
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; damage done to opponent's Bench (not used for anything)
 	db ATK_ANIM_DARK_MIND ; animation
 
 	db 2 ; retreat cost
@@ -7484,7 +7484,7 @@ MewtwoLv53Card:
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK | DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db 2
+	db 2 ; attack score penalty for DISCARD_ENERGY
 	db ATK_ANIM_BARRIER ; animation
 
 	db 3 ; retreat cost
@@ -7516,7 +7516,7 @@ MewtwoLv60Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MewtwoLv60EnergyAbsorptionEffectCommands ; effect commands
+	dw MewtwoEnergyAbsorptionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -7566,7 +7566,7 @@ MewtwoAltLv60Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MewtwoAltLv60EnergyAbsorptionEffectCommands ; effect commands
+	dw MewtwoEnergyAbsorptionEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -7832,9 +7832,9 @@ PidgeottoCard:
 	db DAMAGE_NORMAL ; category
 	dw PidgeottoMirrorMoveEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_MIRROR_MOVE ; animation
 
 	db 1 ; retreat cost
@@ -7868,9 +7868,9 @@ PidgeotLv38Card:
 	db RESIDUAL ; category
 	dw PidgeotSlicingWindEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 2
+	db 2 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_WHIRLWIND_ZIGZAG ; animation
 
 	; attack 2
@@ -8082,9 +8082,9 @@ SpearowCard:
 	db DAMAGE_NORMAL ; category
 	dw SpearowMirrorMoveEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_MIRROR_MOVE ; animation
 
 	db 0 ; retreat cost
@@ -8182,9 +8182,9 @@ ClefairyCard:
 	db RESIDUAL ; category
 	dw ClefairyMetronomeEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_NONE ; animation
 
 	db 1 ; retreat cost
@@ -8218,9 +8218,9 @@ ClefableCard:
 	db RESIDUAL ; category
 	dw ClefableMetronomeEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 0
+	db 0 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_NONE ; animation
 
 	; attack 2
@@ -8234,7 +8234,7 @@ ClefableCard:
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 20
+	db 20 ; not used for anything
 	db ATK_ANIM_PROTECT ; animation
 
 	db 2 ; retreat cost
@@ -8270,7 +8270,7 @@ JigglypuffLv12Card:
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 1
+	db HEALING_EQUALS_10_HP ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_RECOVER ; animation
 
 	; attack 2
@@ -8284,7 +8284,7 @@ JigglypuffLv12Card:
 	db LOW_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 20
+	db 20 ; amount of recoil damage (used to determine the LOW_RECOIL attack score penalty)
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 1 ; retreat cost
@@ -8334,7 +8334,7 @@ JigglypuffLv13Card:
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; not used for anything
 	db ATK_ANIM_EXPAND ; animation
 
 	db 1 ; retreat cost
@@ -8468,9 +8468,9 @@ MeowthLv14Card:
 	db RESIDUAL ; category
 	dw MeowthCatPunchEffectCommands ; effect commands
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 2
+	db 2 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_CAT_PUNCH ; animation
 
 	; attack 2
@@ -8584,7 +8584,7 @@ PersianCard:
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 10 ; not used for anything
 	db ATK_ANIM_HIT ; animation
 
 	db 0 ; retreat cost
@@ -8834,7 +8834,7 @@ ChanseyCard:
 	db HIGH_RECOIL ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 80
+	db 80 ; amount of recoil damage (used to determine the HIGH_RECOIL attack score penalty)
 	db ATK_ANIM_HIT_RECOIL ; animation
 
 	db 1 ; retreat cost
@@ -8918,9 +8918,9 @@ TaurosCard:
 	db DAMAGE_PLUS ; category
 	dw TaurosStompEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 1
+	db 1 ; attack score bonus for ENCOURAGE_THIS_ATTACK (maybe to discourage Rampage?)
 	db ATK_ANIM_HIT ; animation
 
 	; attack 2
@@ -8982,9 +8982,9 @@ DittoCard:
 	db RESIDUAL ; category
 	dw DittoMorphEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db ENCOURAGE_THIS_ATTACK ; flags 2
 	db NONE ; flags 3
-	db 3
+	db 3 ; attack score bonus for ENCOURAGE_THIS_ATTACK
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	db 1 ; retreat cost

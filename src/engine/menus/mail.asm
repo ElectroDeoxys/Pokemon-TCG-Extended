@@ -1,4 +1,4 @@
-; clears all PC packs in WRAM 
+; clears all PC packs in WRAM
 ; and then gives the 1st pack
 ; this doesn't clear in SRAM so
 ; it's not done to clear PC pack data
@@ -47,7 +47,7 @@ _PCMenu_ReadMail:
 	call PCMailHandleDPadInput
 	call PCMailHandleAInput
 	ldh a, [hKeysPressed]
-	and B_BUTTON
+	and PAD_B
 	jr z, .asm_1079c
 	ld a, SFX_CANCEL
 	call PlaySFX
@@ -69,7 +69,7 @@ MailScreenLabels:
 
 PCMailHandleDPadInput:
 	ldh a, [hDPadHeld]
-	and D_PAD
+	and PAD_CTRL_PAD
 	ret z
 	farcall GetDirectionFromDPad
 	ld [wPCLastDirectionPressed], a
@@ -110,7 +110,7 @@ PCMailHandleDPadInput:
 
 PCMailTransitionTable:
 ; up, right, down, left
-	table_width 4, PCMailTransitionTable
+	table_width 4
 	db $0c, $01, $03, $02 ; mail 1
 	db $0d, $02, $04, $00 ; mail 2
 	db $0e, $00, $05, $01 ; mail 3
@@ -130,7 +130,7 @@ PCMailTransitionTable:
 
 PCMailHandleAInput:
 	ldh a, [hKeysPressed]
-	and A_BUTTON
+	and PAD_A
 	ret z
 	ld a, SFX_CONFIRM
 	call PlaySFX
@@ -287,7 +287,7 @@ TryOpenPCMailBoosterPack:
 	jr .done
 
 PCMailBoosterPacks:
-	table_width 2, PCMailBoosterPacks
+	table_width 2
 	db $00, $00 ; unused
 	db BOOSTER_COLOSSEUM_NEUTRAL, $00 ; mail 1
 	db BOOSTER_LABORATORY_PSYCHIC, $00 ; mail 2
@@ -359,7 +359,7 @@ GetPCPackNameTextID:
 	ret
 
 .PCPackNameTextIDs:
-	table_width 2, GetPCPackNameTextID.PCPackNameTextIDs
+	table_width 2
 	tx Mail1Text
 	tx Mail2Text
 	tx Mail3Text
@@ -478,7 +478,7 @@ GePCPackSelectionCoordinates:
 	ret
 
 PCMailCoordinates:
-	table_width 2, PCMailCoordinates
+	table_width 2
 	db  1,  2 ; mail 1
 	db  7,  2 ; mail 2
 	db 13,  2 ; mail 3

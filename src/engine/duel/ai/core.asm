@@ -366,7 +366,7 @@ CheckIfSelectedAttackIsUnusable:
 .bench
 	call CheckEnergyNeededForAttack
 	ret c ; can't be used
-	ld a, ATTACK_FLAG2_ADDRESS | FLAG_2_BIT_5_F
+	ld a, ATTACK_FLAG2_ADDRESS | IGNORE_THIS_ATTACK_F
 	jp CheckLoadedAttackFlag
 
 ; load selected attack from Pokémon in hTempPlayAreaLocation_ff9d
@@ -532,11 +532,10 @@ ConvertColorToEnergyCardID:
 	dw DOUBLE_COLORLESS_ENERGY
 
 ; return carry depending on card index in a:
-;	- if energy card, return carry if no energy card has been played yet
-;	- if basic Pokémon card, return carry if there's space in bench
-;	- if evolution card, return carry if there's a Pokémon
-;	  in Play Area it can evolve
-;	- if trainer card, return carry if it can be used
+;	- if energy card, return carry if an energy card has been played already
+;	- if basic Pokémon card, return carry if there's no space in bench
+;	- if evolution card, return carry if there's no Pokémon in Play to evolve
+;	- if trainer card, return carry if it cannot be used
 ; input:
 ;	a = card index to check
 CheckIfCardCanBePlayed:

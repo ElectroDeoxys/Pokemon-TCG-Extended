@@ -42,7 +42,7 @@ ProcessSpecialTextCharacter::
 	jr z, .set_syllabary
 	cp TX_KATAKANA
 	jr z, .set_syllabary
-	cp "\n"
+	cp '\n'
 	jr z, .end_of_line
 	cp TX_SYMBOL
 	jr z, .tx_symbol
@@ -103,7 +103,7 @@ ProcessSpecialTextCharacter::
 	xor a
 	ldh [hTextLineCurPos], a
 	ldh a, [hTextHorizontalAlign]
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld b, a
 	; get current line's starting BGMap0 address
 	ldh a, [hTextBGMap0Address]
@@ -257,7 +257,7 @@ TerminateHalfWidthText::
 	push hl
 	push de
 	push bc
-	ld e, " "
+	ld e, ' '
 	call Func_22ca
 	pop bc
 	pop de
@@ -387,7 +387,7 @@ CaseHalfWidthLetter::
 	ret c
 	cp $7b
 	ret nc
-	sub "a" - "A"
+	sub 'a' - 'A'
 	ld e, a
 	ret
 
@@ -469,7 +469,7 @@ CopyTextData::
 	jr c, .fw_text_done
 	push hl
 .fill_fw_loop
-	ld a, FW_SPACE
+	ldfw a, " "
 	ld [hli], a
 	dec d
 	jr nz, .fill_fw_loop
@@ -485,7 +485,7 @@ CopyTextData::
 	jr c, .hw_text_done
 	push hl
 .fill_hw_loop
-	ld a, " "
+	ld a, ' '
 	ld [hli], a
 	dec d
 	jr nz, .fill_hw_loop

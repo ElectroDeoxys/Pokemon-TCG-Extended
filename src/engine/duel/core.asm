@@ -264,26 +264,26 @@ PrintDuelMenuAndHandleInput:
 .handle_input
 	call DoFrame
 	ldh a, [hKeysHeld]
-	and B_BUTTON
+	and PAD_B
 	jr z, .b_not_held
 	ldh a, [hKeysPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, DuelMenuShortcut_OpponentPlayArea
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, DuelMenuShortcut_PlayerPlayArea
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, DuelMenuShortcut_PlayerDiscardPile
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, DuelMenuShortcut_OpponentDiscardPile
-	bit START_F, a
+	bit B_PAD_START, a
 	jp nz, DuelMenuShortcut_OpponentActivePokemon
 
 .b_not_held
 	ldh a, [hKeysPressed]
-	and START
+	and PAD_START
 	jp nz, DuelMenuShortcut_PlayerActivePokemon
 	ldh a, [hKeysPressed]
-	bit SELECT_F, a
+	bit B_PAD_SELECT, a
 	jp nz, DuelMenuShortcut_BothActivePokemon
 	ld a, [wDebugSkipDuelMenuInput]
 	or a
@@ -361,21 +361,21 @@ OpenTurnHolderHandScreen_Simple:
 	call CreateHandCardList
 	jr c, .no_cards_in_hand
 	call InitAndDrawCardListScreenLayout
-	ld a, START + A_BUTTON
+	ld a, PAD_START + PAD_A
 	ld [wNoItemSelectionMenuKeys], a
 	jp DisplayCardList
 .no_cards_in_hand
 	ldtx hl, NoCardsInHandText
 	jp DrawWideTextBox_WaitForInput
 
-; triggered by pressing B + START in the duel menu
+; triggered by pressing PAD_B + PAD_START in the duel menu
 DuelMenuShortcut_OpponentActivePokemon:
 	call SwapTurn
 	call OpenActivePokemonScreen
 	call SwapTurn
 	jp DuelMainInterface
 
-; triggered by pressing START in the duel menu
+; triggered by pressing PAD_START in the duel menu
 DuelMenuShortcut_PlayerActivePokemon:
 	call OpenActivePokemonScreen
 	jp DuelMainInterface
@@ -685,7 +685,7 @@ DuelMenu_Check:
 	call OpenDuelCheckMenu
 	jp DuelMainInterface
 
-; triggered by pressing SELECT in the duel menu
+; triggered by pressing PAD_SELECT in the duel menu
 DuelMenuShortcut_BothActivePokemon:
 	call FinishQueuedAnimations
 	call OpenVariousPlayAreaScreens_FromSelectPresses
@@ -706,7 +706,7 @@ OpenVariousPlayAreaScreens_FromSelectPresses:
 	ld [wPlayAreaSelectAction], a
 	call OpenPlayAreaScreenForViewing
 	ldh a, [hKeysPressed]
-	and B_BUTTON
+	and PAD_B
 	ret z
 	scf
 	ret
@@ -950,7 +950,7 @@ DuelMenu_Attack:
 .wait_for_input
 	call DoFrame
 	ldh a, [hKeysPressed]
-	and START
+	and PAD_START
 	jr nz, .display_selected_attack_info
 	call HandleMenuInput
 	jr nc, .wait_for_input
@@ -1034,11 +1034,11 @@ OpenAttackPage:
 	call DoFrame
 	; switch page (see SwitchAttackPage) if Right or Left pressed
 	ldh a, [hDPadHeld]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr nz, .open_page
 	; return to Attack menu if A or B pressed
 	ldh a, [hKeysPressed]
-	and A_BUTTON | B_BUTTON
+	and PAD_A | PAD_B
 	jr z, .loop
 	ret
 
@@ -1202,7 +1202,7 @@ CheckIfEnoughEnergiesToAttack:
 	ld d, [hl] ; card's deck index (0 to 59)
 	inc hl
 	ld e, [hl] ; attack index (0 or 1)
-	call _CheckIfEnoughEnergiesToAttack
+	call CheckIfEnoughEnergiesForGivenAttack
 	pop bc
 	pop hl
 	ret
@@ -1210,10 +1210,10 @@ CheckIfEnoughEnergiesToAttack:
 ; check if a pokemon card has enough energy attached to it in order to use an attack
 ; input:
 ;   d = deck index of card (0 to 59)
-;   e = attack index (0 or 1)
+;   e = attack index (SECOND_ATTACK or FIRST_ATTACK_OR_PKMN_POWER)
 ;   wAttachedEnergies and wTotalAttachedEnergies
 ; returns: carry if not enough energy, nc if enough energy.
-_CheckIfEnoughEnergiesToAttack:
+CheckIfEnoughEnergiesForGivenAttack:
 	push de
 	ld a, d
 	call LoadCardDataToBuffer1_FromDeckIndex
@@ -2179,12 +2179,10 @@ PlayDeckShuffleAnimation:
 	ld e, DUEL_ANIM_OPP_SHUFFLE
 .load_anim
 ; play animation 3 times
+REPT 3
 	ld a, e
 	call PlayDuelAnimation
-	ld a, e
-	call PlayDuelAnimation
-	ld a, e
-	call PlayDuelAnimation
+ENDR
 
 .loop_anim
 	call DoFrame
@@ -2422,7 +2420,7 @@ DrawDuelHUD:
 	ld b, HP_BAR_LENGTH / 2 ; first row of the HP bar
 	call SafeCopyDataHLtoDE
 	pop de
-	ld hl, BG_MAP_WIDTH
+	ld hl, TILEMAP_WIDTH
 	add hl, de
 	ld e, l
 	ld d, h
@@ -2430,7 +2428,7 @@ DrawDuelHUD:
 	ld b, HP_BAR_LENGTH / 2 ; second row of the HP bar
 	call SafeCopyDataHLtoDE
 
-	; print number of attached Pluspower and Defender with respective icon, if any
+	; print number of attached PlusPower and Defender with respective icon, if any
 	ld hl, wHUDEnergyAndHPBarsX
 	ld a, [hli]
 	add 6
@@ -2444,7 +2442,7 @@ DrawDuelHUD:
 	ld a, SYM_PLUSPOWER
 	call WriteByteToBGMap0
 	inc b
-	ld a, [hl] ; number of attached Pluspower
+	ld a, [hl] ; number of attached PlusPower
 	add SYM_0
 	call WriteByteToBGMap0
 	dec b
@@ -2963,7 +2961,7 @@ OpenDiscardPileScreen:
 	jr c, .discard_pile_empty
 	call InitAndDrawCardListScreenLayout
 	call SetDiscardPileScreenTexts
-	ld a, START + A_BUTTON
+	ld a, PAD_START + PAD_A
 	ld [wNoItemSelectionMenuKeys], a
 	call DisplayCardList
 	or a
@@ -3023,7 +3021,7 @@ InitAndDrawCardListScreenLayout:
 	ld [hli], a
 	ld [hl], a
 	ld [wCardListItemSelectionMenuType], a
-	ld a, START
+	ld a, PAD_START
 	ld [wNoItemSelectionMenuKeys], a
 	ld hl, wCardListInfoBoxText
 	ldtx [hl], PleaseSelectHandText, & $ff
@@ -3100,9 +3098,9 @@ DisplayCardList:
 	ld [hl], d
 	ldh a, [hKeysPressed]
 	ld b, a
-	bit SELECT_F, b
+	bit B_PAD_SELECT, b
 	jr nz, .select_pressed
-	bit B_BUTTON_F, b
+	bit B_PAD_B, b
 	jr nz, .b_pressed
 	ld a, [wNoItemSelectionMenuKeys]
 	and b
@@ -3118,7 +3116,7 @@ DisplayCardList:
 	or a
 	ret
 .select_pressed
-	; sort cards by ID if SELECT is pressed and return to the first item
+	; sort cards by ID if PAD_SELECT is pressed and return to the first item
 	ld a, [wSortCardListByID]
 	or a
 	jr nz, .wait_button
@@ -3127,22 +3125,22 @@ DisplayCardList:
 	ld hl, wSelectedDuelSubMenuItem
 	ld [hli], a
 	ld [hl], a
-	ld a, 1
+	ld a, TRUE
 	ld [wSortCardListByID], a
 	call EraseCursor
 	jr .reload_list
 .open_card_page
 	; open the card page directly, without an item selection menu
-	; in this mode, D_UP and D_DOWN can be used to open the card page
+	; in this mode, PAD_UP and PAD_DOWN can be used to open the card page
 	; of the card above and below the current card
 	ldh a, [hCurMenuItem]
 	call GetCardInDuelTempList
 	call LoadCardDataToBuffer1_FromDeckIndex
 	call OpenCardPage_FromCheckHandOrDiscardPile
 	ldh a, [hDPadHeld]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .up_pressed
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .down_pressed
 	; if B pressed, exit card page and reload the card list
 	call DrawCardListScreenLayout
@@ -3177,7 +3175,7 @@ DisplayCardList:
 
 .UpdateListOnDPadInput:
 	ldh a, [hDPadHeld]
-	and D_PAD
+	and PAD_CTRL_PAD
 	ret z
 	ld a, $01
 	ldh [hffb0], a
@@ -3268,13 +3266,13 @@ CardListParameters:
 ; also return $ff unto hCurMenuItem if B is pressed.
 CardListFunction:
 	ldh a, [hKeysPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .exit
-	and A_BUTTON | SELECT | START
+	and PAD_A | PAD_SELECT | PAD_START
 	jr nz, .action_button
 	ldh a, [hKeysReleased]
-	and D_PAD
-	jr nz, .reload_card_image ; jump if the D_PAD key was released this frame
+	and PAD_CTRL_PAD
+	jr nz, .reload_card_image ; jump if the PAD_CTRL_PAD key was released this frame
 	ret
 .exit
 	ld a, $ff
@@ -3295,7 +3293,7 @@ PrintSortNumberInCardList_SetPointer:
 	ld [hl], e
 	inc hl
 	ld [hl], d
-	ld a, 1
+	ld a, TRUE
 	ld [wSortCardListByID], a
 	ret
 
@@ -3329,10 +3327,10 @@ PrintSortNumberInCardList:
 ; draw the card page of the card at wLoadedCard1 and listen for input
 ; in order to switch the page or to exit.
 ; triggered by checking a hand card or a discard pile card in the Check menu.
-; D_UP and D_DOWN exit the card page allowing the caller to load the card page
+; PAD_UP and PAD_DOWN exit the card page allowing the caller to load the card page
 ; of the card above or below in the list.
 OpenCardPage_FromCheckHandOrDiscardPile:
-	ld a, B_BUTTON | D_UP | D_DOWN
+	ld a, PAD_B | PAD_UP | PAD_DOWN
 	ld [wCardPageExitKeys], a
 	xor a ; CARDPAGETYPE_NOT_PLAY_AREA
 	jr OpenCardPage
@@ -3341,7 +3339,7 @@ OpenCardPage_FromCheckHandOrDiscardPile:
 ; in order to switch the page or to exit.
 ; triggered by checking an arena card or a bench card in the Check menu.
 OpenCardPage_FromCheckPlayArea:
-	ld a, B_BUTTON
+	ld a, PAD_B
 	ld [wCardPageExitKeys], a
 	ld a, CARDPAGETYPE_PLAY_AREA
 	jr OpenCardPage
@@ -3350,7 +3348,7 @@ OpenCardPage_FromCheckPlayArea:
 ; in order to switch the page or to exit.
 ; triggered by checking a card in the Hand menu.
 OpenCardPage_FromHand:
-	ld a, B_BUTTON
+	ld a, PAD_B
 	ld [wCardPageExitKeys], a
 	xor a ; CARDPAGETYPE_NOT_PLAY_AREA
 ;	fallthrough
@@ -3375,7 +3373,7 @@ OpenCardPage:
 	ld [wCardPageNumber], a
 .load_next
 	call DisplayFirstOrNextCardPage
-	jr c, .done ; done if trying to advance past the last page with START or A_BUTTON
+	jr c, .done ; done if trying to advance past the last page with PAD_START or PAD_A
 	call EnableLCD
 .input_loop
 	call DoFrame
@@ -3384,29 +3382,29 @@ OpenCardPage:
 	ld a, [wCardPageExitKeys]
 	and b
 	jr nz, .done
-	; START and A_BUTTON advance to the next valid card page, but close it
+	; PAD_START and PAD_A advance to the next valid card page, but close it
 	; after trying to advance from the last page
 	ldh a, [hKeysPressed]
-	and START | A_BUTTON
+	and PAD_START | PAD_A
 	jr nz, .load_next
-	; D_RIGHT and D_LEFT advance to the next and previous valid card page respectively.
-	; however, unlike START and A_BUTTON, D_RIGHT past the last page goes back to the start.
+	; PAD_RIGHT and PAD_LEFT advance to the next and previous valid card page respectively.
+	; however, unlike PAD_START and PAD_A, PAD_RIGHT past the last page goes back to the start.
 	ldh a, [hKeysPressed]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr z, .input_loop
 	call DisplayCardPageOnLeftOrRightPressed
 	jr .input_loop
 .done
 	ret
 
-; display the previous valid card page of the card at wLoadedCard1 if bit D_LEFT_F
+; display the previous valid card page of the card at wLoadedCard1 if bit B_PAD_LEFT
 ; of a is set, and the first or next valid card page otherwise.
 ; DisplayFirstOrNextCardPage and DisplayPreviousCardPage only call DisplayCardPage
 ; when GoToFirstOrNextCardPage and GoToPreviousCardPage respectively return nc
 ; so the "call c, DisplayCardPage" instructions makes sure the card page switched
 ; to is always displayed.
 DisplayCardPageOnLeftOrRightPressed:
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .left
 ;.right
 	call DisplayFirstOrNextCardPage
@@ -3608,7 +3606,7 @@ GoToPreviousCardPage:
 ; check if the card page trying to switch to is valid for the card at wLoadedCard1
 ; return with the equivalent to one of these three actions:
    ; stay in card page trying to switch to (nc, nz)
-   ; change to card page returned in a if D_LEFT/D_RIGHT pressed, or exit if A_BUTTON/START pressed (c)
+   ; change to card page returned in a if PAD_LEFT/PAD_RIGHT pressed, or exit if PAD_A/PAD_START pressed (c)
    ; non-existent page, so skip to next/previous (nc, z)
 SwitchCardPage:
 	ld hl, CardPageSwitchPointerTable
@@ -3744,7 +3742,7 @@ SetCardPalette:
 	ld c, a
 	add a
 	add a
-	add a ; a *= CGB_PAL_SIZE
+	add a ; a *= PAL_SIZE
 	ld e, a
 	ld d, $00
 	ld hl, wBackgroundPalettesCGB
@@ -3782,7 +3780,7 @@ ApplyCardCGBAttributes:
 	ld b, 8
 	call SafeCopyDataHLtoDE
 	ld a, e
-	add BG_MAP_WIDTH - 8
+	add TILEMAP_WIDTH - 8
 	ld e, a
 	ld a, d
 	adc 0
@@ -3803,7 +3801,7 @@ SetDefaultConsolePalettes:
 	call .copy_de_to_hl
 	ld de, CGBDefaultPalettes
 	ld hl, wObjectPalettesCGB
-	ld c, CGB_PAL_SIZE
+	ld c, PAL_SIZE
 	call .copy_de_to_hl
 	jp FlushAllPalettes
 
@@ -4539,11 +4537,11 @@ _HasAlivePokemonInPlayArea:
 	ret
 
 OpenPlayAreaScreenForViewing:
-	ld a, START + A_BUTTON
+	ld a, PAD_START + PAD_A
 	jr DisplayPlayAreaScreen
 
 OpenPlayAreaScreenForSelection:
-	ld a, START
+	ld a, PAD_START
 ;	fallthrough
 
 DisplayPlayAreaScreen:
@@ -4655,9 +4653,9 @@ PlayAreaScreenMenuParameters_ActivePokemonExcluded:
 
 PlayAreaScreenMenuFunction:
 	ldh a, [hKeysPressed]
-	and A_BUTTON | B_BUTTON | START
+	and PAD_A | PAD_B | PAD_START
 	ret z
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr z, .start_or_a
 	ld a, $ff
 	ldh [hCurMenuItem], a
@@ -4670,7 +4668,7 @@ SelectingBenchPokemonMenu:
 	or a
 	ret z ; menu not allowed
 	ldh a, [hKeysPressed]
-	and SELECT
+	and PAD_SELECT
 	ret z ; Select not pressed
 	ld a, [wPlayAreaSelectAction]
 	cp $02
@@ -4685,7 +4683,7 @@ SelectingBenchPokemonMenu:
 .loop_input
 	call DoFrame
 	ldh a, [hKeysPressed]
-	and A_BUTTON
+	and PAD_A
 	jr nz, .a_pressed
 	call .HandleInput
 	call RefreshMenuCursor
@@ -4693,7 +4691,7 @@ SelectingBenchPokemonMenu:
 	call HandleSpecialDuelMainSceneHotkeys
 	jr nc, .loop_input
 	ldh a, [hKeysPressed]
-	and SELECT
+	and PAD_SELECT
 	jr z, .duel_main_scene
 .back
 	call HasAlivePokemonInBench
@@ -4718,15 +4716,15 @@ SelectingBenchPokemonMenu:
 
 .HandleInput:
 	ldh a, [hDPadHeld]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	ret nz
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	ret z
 
 	; right or left pressed
 	ld b, a
 	ld a, [wCurrentDuelMenuItem]
-	bit D_LEFT_F, b
+	bit B_PAD_LEFT, b
 	jr z, .right_pressed
 	dec a
 	bit 7, a
@@ -5068,7 +5066,7 @@ PrintPlayAreaCardHeader:
 	call CheckPrintDoublePoisoned
 
 .skip_status
-	; finally check whether to print the Pluspower and/or Defender symbols
+	; finally check whether to print the PlusPower and/or Defender symbols
 	ld a, [wCurPlayAreaSlot]
 	add DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
 	call GetTurnDuelistVariable
@@ -5161,8 +5159,8 @@ PrintPlayAreaCardAttachedEnergies:
 	call GetPlayAreaCardAttachedEnergies
 	ld hl, wDefaultText
 	push hl
-	ld c, NUM_TYPES
-	xor a
+	ld c, 8 ; maximum number of symbols that will be printed
+	xor a ; SYM_SPACE
 .empty_loop
 	ld [hli], a
 	dec c
@@ -5193,7 +5191,7 @@ PrintPlayAreaCardAttachedEnergies:
 	pop bc
 	call BCCoordToBGMap0Address
 	ld hl, wDefaultText
-	ld b, NUM_TYPES
+	ld b, 8
 	jp SafeCopyDataHLtoDE
 
 DisplayPlayAreaScreenToUsePkmnPower:
@@ -5217,7 +5215,7 @@ DisplayPlayAreaScreenToUsePkmnPower:
 	jr z, .asm_649b
 	ld [wSelectedDuelSubMenuItem], a
 	ldh a, [hKeysPressed]
-	and START
+	and PAD_START
 	jr nz, .asm_649d
 	ldh a, [hCurMenuItem]
 	add a
@@ -5770,7 +5768,7 @@ CheckSkipDelayAllowed:
 	or a
 	ret z
 	ldh a, [hKeysHeld]
-	and B_BUTTON
+	and PAD_B
 	ret z
 	scf
 	ret
@@ -5828,21 +5826,21 @@ AIMakeDecision:
 HandleSpecialDuelMainSceneHotkeys:
 	ld [wDuelMainSceneSelectHotkeyAction], a
 	ldh a, [hKeysPressed]
-	bit START_F, a
+	bit B_PAD_START, a
 	jr nz, .start_pressed
-	bit SELECT_F, a
+	bit B_PAD_SELECT, a
 	jr nz, .select_pressed
 	ldh a, [hKeysHeld]
-	and B_BUTTON
+	and PAD_B
 	ret z ; exit if no B btn
 	ldh a, [hKeysPressed]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .down_pressed
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .left_pressed
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .up_pressed
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .right_pressed
 	or a
 	ret
@@ -5910,7 +5908,7 @@ PrintPokemonEvolvedIntoPokemon:
 ; actions for the opponent's turn
 ; this is referenced by AIMakeDecision
 OppActionTable:
-	table_width 2, OppActionTable
+	table_width 2
 	dw OppAction_PlayBasicPokemonCard
 	dw OppAction_EvolvePokemonCard
 	dw OppAction_PlayEnergyCard
@@ -6133,7 +6131,7 @@ OppAction_UsePokemonPower:
 
 ; execute the EFFECTCMDTYPE_BEFORE_DAMAGE command of the used Pokemon Power
 OppAction_ExecutePokemonPowerEffect:
-	call Func_7415
+	call ResetAttackAnimationIsPlaying
 	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
 	call TryExecuteEffectCommandFunction
 	ld a, $01
@@ -6232,7 +6230,7 @@ HandleBetweenTurnsEvents:
 	call IsArenaPokemonAsleepOrPoisoned
 	call SwapTurn
 	jr c, .something_to_handle
-	call DiscardAttachedPluspowers
+	call DiscardAttachedPlusPowers
 	call SwapTurn
 	call DiscardAttachedDefenders
 	jp SwapTurn
@@ -6280,7 +6278,7 @@ HandleBetweenTurnsEvents:
 	call WaitForWideTextBoxInput
 
 .discard_pluspower
-	call DiscardAttachedPluspowers
+	call DiscardAttachedPlusPowers
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
@@ -6301,7 +6299,7 @@ HandleBetweenTurnsEvents:
 	jp HandleBetweenTurnKnockOuts
 
 ; discard any PLUSPOWER attached to the turn holder's arena and/or bench Pokemon
-DiscardAttachedPluspowers:
+DiscardAttachedPlusPowers:
 	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
 	call GetTurnDuelistVariable
 	ld e, MAX_PLAY_AREA_POKEMON
@@ -6504,7 +6502,7 @@ HandlePoisonDamage:
 	call GetTurnDuelistVariable
 	call SubtractHP
 	push hl
-	ld a, $8c
+	ld a, DUEL_ANIM_DAMAGE_HUD
 	call PlayBetweenTurnsAnimation
 	pop hl
 
@@ -7216,6 +7214,7 @@ _TossCoin::
 	ld a, [wDuelDisplayedScreen]
 	cp COIN_TOSS
 	jr z, .print_text
+
 	xor a
 	ld [wCoinTossNumTossed], a
 	call EmptyScreen
@@ -7230,7 +7229,7 @@ _TossCoin::
 	ld [wDuelDisplayedScreen], a
 	lb de, 0, 12
 	lb bc, 20, 6
-	ld hl, $0000
+	ld hl, NULL
 	call DrawLabeledTextBox
 	call EnableLCD
 	lb de, 1, 14
@@ -7256,11 +7255,11 @@ _TossCoin::
 	xor a
 	ld [wCoinTossNumHeads], a
 
-.print_coin_tally
+.toss_next_coin
 ; skip printing text if it's only one coin toss
 	ld a, [wCoinTossTotalNum]
 	cp 2
-	jr c, .asm_7223
+	jr c, .skip_print_coin_tally
 
 ; write "#coin/#total coins"
 	lb bc, 15, 11
@@ -7274,30 +7273,31 @@ _TossCoin::
 	ld a, [wCoinTossTotalNum]
 	call WriteTwoDigitNumberInTxSymbolFormat
 
-.asm_7223
+.skip_print_coin_tally
 	call ResetAnimationQueue
 	ld a, DUEL_ANIM_COIN_SPIN
 	call PlayDuelAnimation
 
 	ld a, [wCoinTossDuelistType]
 	or a
-	jr z, .asm_7236
-	call Func_7324
-	jr .asm_723c
-
-.asm_7236
+	jr z, .player_tossing ; DUELIST_TYPE_PLAYER
+; opponent tossing
+	call .WaitForOpponent
+	jr .generate_coin_result
+.player_tossing
+	; wait for input, and send byte when player is ready to toss
 	call WaitForWideTextBoxInput
-	call Func_72ff
+	call .SendSerialByte
 
-.asm_723c
+.generate_coin_result
 	call ResetAnimationQueue
-	ld d, DUEL_ANIM_COIN_TOSS2
-	ld e, $0 ; tails
+	ld d, DUEL_ANIM_COIN_TOSS_GOING_TAILS
+	ld e, TAILS
 	call UpdateRNGSources
 	rra
 	jr c, .got_result
-	ld d, DUEL_ANIM_COIN_TOSS1
-	ld e, $1 ; heads
+	ld d, DUEL_ANIM_COIN_TOSS_GOING_HEADS
+	ld e, HEADS
 
 .got_result
 ; already decided on coin toss result,
@@ -7307,11 +7307,13 @@ _TossCoin::
 	call PlayDuelAnimation
 	ld a, [wCoinTossDuelistType]
 	or a
-	jr z, .wait_anim
+	jr z, .wait_anim ; player tossing
+; opponent tossing
 	ld a, e
-	call Func_7310
-	ld e, a
+	call .GetOpponentCoinResult
+	ld e, a ; coin result from opponent
 	jr .done_toss_anim
+
 .wait_anim
 	push de
 	call DoFrame
@@ -7319,7 +7321,7 @@ _TossCoin::
 	pop de
 	jr c, .wait_anim
 	ld a, e
-	call Func_72ff
+	call .SendSerialByte
 
 .done_toss_anim
 	ld b, DUEL_ANIM_COIN_HEADS
@@ -7367,7 +7369,7 @@ _TossCoin::
 	ld e, 0
 	ld a, [wCoinTossNumTossed]
 ; calculate the offset to draw the circle/cross
-.asm_72a3
+.loop_get_offset
 	; if < 10, then the offset is simply calculated
 	; from wCoinTossNumTossed * 2...
 	cp 10
@@ -7376,7 +7378,7 @@ _TossCoin::
 	inc e
 	inc e
 	sub 10
-	jr .asm_72a3
+	jr .loop_get_offset
 
 .got_offset
 	add a
@@ -7392,29 +7394,39 @@ _TossCoin::
 
 	ld a, [wCoinTossDuelistType]
 	or a
-	jr z, .asm_72dc
+	jr z, .player_tossing_next_coin
+	; wait for input if we are finished, that is
+	; if wCoinTossNumTossed == wCoinTossTotalNum
 	ld a, [hl]
 	ld hl, wCoinTossTotalNum
 	cp [hl]
 	call z, WaitForWideTextBoxInput
-	call Func_7324
+
+	; delay/wait for link opp input
+	call .WaitForOpponent
+
+	; if we are "tossing until tails",
+	; (i.e. wCoinTossTotalNum == 0)
+	; and we got no heads, wait for input
 	ld a, [wCoinTossTotalNum]
 	ld hl, wCoinTossNumHeads
 	or [hl]
-	jr nz, .asm_72e2
+	jr nz, .check_if_finished
 	call z, WaitForWideTextBoxInput
-	jr .asm_72e2
+	jr .check_if_finished
 
-.asm_72dc
+.player_tossing_next_coin
 	call WaitForWideTextBoxInput
-	call Func_72ff
+	call .SendSerialByte
 
-.asm_72e2
+.check_if_finished
 	call FinishQueuedAnimations
+
+	; we're finished if wCoinTossNumTossed == wCoinTossTotalNum
 	ld a, [wCoinTossNumTossed]
 	ld hl, wCoinTossTotalNum
 	cp [hl]
-	jp c, .print_coin_tally
+	jp c, .toss_next_coin
 	call FinishQueuedAnimations
 	call ResetAnimationQueue
 
@@ -7425,33 +7437,46 @@ _TossCoin::
 	scf
 	ret
 
-Func_72ff:
+; input:
+; - a = byte to send through serial
+.SendSerialByte:
 	ldh [hff96], a
 	ret
 
-Func_7310:
+; if opponent is AI, then wait for animation and
+; use the result generated beforehand (input register a)
+; if link opponent, then wait for serial byte which
+; gives the coin result
+; input:
+; - a = coin result to use for AI (HEADS or TAILS)
+; output:
+; - a = coin result (HEADS or TAILS)
+.GetOpponentCoinResult:
 	ldh [hff96], a
-.loop_anim
+.wait_anim_ai
 	call DoFrame
 	call CheckAnyAnimationPlaying
-	jr c, .loop_anim
+	jr c, .wait_anim_ai
 	ldh a, [hff96]
 	ret
 
-Func_7324:
+; waits for opponent
+; AI delays for 30 frames
+; link opponent sends byte through serial when ready
+.WaitForOpponent:
 	ldh [hff96], a
 ; delay coin flip for AI opponent
 	ld a, 30
-.asm_732f
+.ai_coin_toss_delay
 	call DoFrame
 	dec a
-	jr nz, .asm_732f
+	jr nz, .ai_coin_toss_delay
 	ldh a, [hff96]
 	ret
 
-Func_7415::
-	xor a
-	ld [wce7e], a
+ResetAttackAnimationIsPlaying::
+	xor a ; FALSE
+	ld [wAttackAnimationIsPlaying], a
 	ret
 
 ; plays all animations that are queued in wStatusConditionQueue
@@ -7546,6 +7571,7 @@ WaitAttackAnimation::
 ; - de: damage dealt by the attack (to display the animation with the number)
 ; - b: PLAY_AREA_* location, if applicable
 ; - c: a wDamageEffectiveness constant (to print WEAK or RESIST if necessary)
+; - h: which duelist side to play animation
 PlayAttackAnimation::
 	ldh a, [hWhoseTurn]
 	push af
@@ -7559,6 +7585,7 @@ PlayAttackAnimation::
 	ldh a, [hWhoseTurn]
 	cp h
 	jr z, .got_location
+	; on the non-turn duelist's side
 	set 7, b
 .got_location
 	ld a, b

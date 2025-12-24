@@ -52,11 +52,11 @@ AIProcessAndTryToUseAttack:
 ; AI will use it if wAIExecuteProcessedAttack is 0.
 ; in either case, return carry if an attack is chosen to be used.
 AIProcessAttacks:
-; if AI used Pluspower, load its attack index
+; if AI used PlusPower, load its attack index
 	ld a, [wPreviousAIFlags]
 	and AI_FLAG_USED_PLUSPOWER
 	jr z, .no_pluspower
-	ld a, [wAIPluspowerAttack]
+	ld a, [wAIPlusPowerAttack]
 	ld [wSelectedAttack], a
 	jr .attack_chosen
 
@@ -540,7 +540,7 @@ GetAIScoreOfAttack:
 	call AIDiscourage
 
 .asm_16ca6
-	ld a, ATTACK_FLAG2_ADDRESS | FLAG_2_BIT_6_F
+	ld a, ATTACK_FLAG2_ADDRESS | ENCOURAGE_THIS_ATTACK_F
 	call CheckLoadedAttackFlag
 	jr nc, .check_nullify_flag
 	ld a, [wLoadedAttackEffectParam]
@@ -567,14 +567,15 @@ GetAIScoreOfAttack:
 	call CheckLoadedAttackFlag
 	jr nc, .check_status_effect
 	ld a, [wLoadedAttackEffectParam]
-	cp 1
+	cp HEALING_EQUALS_10_HP
 	jr z, .tally_heal_score
 	ld a, [wTempAI]
 	call ConvertHPToDamageCounters_Bank5
 	ld b, a
 	ld a, [wLoadedAttackEffectParam]
-	cp 3
+	cp HEALING_EQUALS_DAMAGE_DEALT
 	jr z, .asm_16cec
+	; must be HEALING_EQUALS_HALF_DAMAGE_DEALT
 	srl b
 	jr nc, .asm_16cec
 	inc b
@@ -614,7 +615,7 @@ GetAIScoreOfAttack:
 ; encourage a poison inflicting attack if opposing Pokémon
 ; isn't (doubly) poisoned already.
 ; if opposing Pokémon is only poisoned and not double poisoned,
-; and this attack has FLAG_2_BIT_6 set, discourage it
+; and this attack has ENCOURAGE_THIS_ATTACK set, discourage it
 ; (possibly to make Nidoking's Toxic attack less likely to be chosen
 ; if the other Pokémon is poisoned.)
 	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_POISON_F
@@ -625,7 +626,7 @@ GetAIScoreOfAttack:
 	jr z, .add_poison_score
 	and $40 ; only double poisoned?
 	jr z, .check_sleep
-	ld a, ATTACK_FLAG2_ADDRESS | FLAG_2_BIT_6_F
+	ld a, ATTACK_FLAG2_ADDRESS | ENCOURAGE_THIS_ATTACK_F
 	call CheckLoadedAttackFlag
 	jr nc, .check_sleep
 	ld a, 2

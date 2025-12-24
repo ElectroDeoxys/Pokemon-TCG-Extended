@@ -195,7 +195,7 @@ LoadTilemap:
 	call BankswitchVRAM0
 
 	pop de
-	ld hl, BG_MAP_WIDTH
+	ld hl, TILEMAP_WIDTH
 	add hl, de
 	ld e, l
 	ld d, h
@@ -1205,7 +1205,7 @@ Func_80baa:
 	ret
 
 .TilemapPointers
-	table_width 2, Func_80baa.TilemapPointers
+	table_width 2
 	dw .PokemonDomeDoor      ; MAP_EVENT_POKEMON_DOME_DOOR
 	dw .HallOfHonorDoor      ; MAP_EVENT_HALL_OF_HONOR_DOOR
 	dw .FightingDeckMachine  ; MAP_EVENT_FIGHTING_DECK_MACHINE

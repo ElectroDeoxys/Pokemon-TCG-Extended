@@ -1,11 +1,11 @@
 ; for the sprite at wOAM + [wOAMOffset] / 4, set its attributes from registers e, d, c, b
-; return carry if [wOAMOffset] > 40 * 4 (beyond the end of wOAM)
+; return carry if [wOAMOffset] > OAM_SIZE (beyond the end of wOAM)
 SetOneObjectAttributes::
 	push hl
 	ld a, [wOAMOffset]
 	ld l, a
 	ld h, HIGH(wOAM)
-	cp 40 * 4
+	cp OAM_SIZE
 	jr nc, .beyond_oam
 	ld [hl], e ; Y Position
 	inc hl
@@ -30,7 +30,7 @@ ZeroObjectPositions::
 	xor a
 	ld [wOAMOffset], a
 	ld hl, wOAM
-	ld c, 40
+	ld c, OAM_COUNT
 	xor a
 .loop
 	ld [hli], a

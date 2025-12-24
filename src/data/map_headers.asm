@@ -1,6 +1,6 @@
 MapHeaders:
 ; cgb tilemap, initial cgb palette (always 0), final cgb palette, song
-	table_width 4, MapHeaders
+	table_width 4
 	db TILEMAP_OVERWORLD_MAP,           PALETTE_0, PALETTE_1,  MUSIC_OVERWORLD     ; OVERWORLD_MAP
 	db TILEMAP_MASON_LABORATORY,        PALETTE_0, PALETTE_2,  MUSIC_OVERWORLD     ; MASON_LABORATORY
 	db TILEMAP_DECK_MACHINE_ROOM,       PALETTE_0, PALETTE_2,  MUSIC_OVERWORLD     ; DECK_MACHINE_ROOM

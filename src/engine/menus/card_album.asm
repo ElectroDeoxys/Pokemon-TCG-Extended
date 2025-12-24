@@ -248,25 +248,25 @@ CreateCardSetListAndInitListCoords:
 	push af
 	cp CARD_SET_PROMOTIONAL
 	jr nz, .laboratory
-	lb de, 3, "FW3_P"
+	ldfw de, "P"
 	jr .got_prefix
 .laboratory
 	cp CARD_SET_LABORATORY
 	jr nz, .mystery
-	lb de, 3, "FW3_D"
+	ldfw de, "D"
 	jr .got_prefix
 .mystery
 	cp CARD_SET_MYSTERY
 	jr nz, .evolution
-	lb de, 3, "FW3_C"
+	ldfw de, "C"
 	jr .got_prefix
 .evolution
 	cp CARD_SET_EVOLUTION
 	jr nz, .colosseum
-	lb de, 3, "FW3_B"
+	ldfw de, "B"
 	jr .got_prefix
 .colosseum
-	lb de, 3, "FW3_A"
+	ldfw de, "A"
 
 .got_prefix
 	ld hl, wCurDeckName
@@ -451,7 +451,7 @@ PrintCardSetListEntries:
 	ld a, [hli]
 	ld b, a
 	ld hl, wCurDeckName + 2
-	lb de, 3, "FW3_E"
+	ldfw de, "E"
 	ld [hl], d
 	inc hl
 	ld [hl], e
@@ -477,9 +477,9 @@ PrintCardSetListEntries:
 .phantom_card
 ; phantom cards get only "××" in their index number
 	ld hl, wCurDeckName + 2
-	ld [hl], "FW0_×"
+	ldfw [hl], "×"
 	inc hl
-	ld [hl], "FW0_×"
+	ldfw [hl], "×"
 	inc hl
 	ld [hl], TX_SYMBOL
 	inc hl
@@ -524,14 +524,14 @@ HandleCardAlbumCardPage:
 .handle_input
 	ldh a, [hDPadHeld]
 	ld b, a
-	and BUTTONS
+	and PAD_BUTTONS
 	jp nz, .exit
 	xor a ; FALSE
 	ld [wMenuInputSFX], a
 	ld a, [wCardListNumCursorPositions]
 	ld c, a
 	ld a, [wCardListCursorPos]
-	bit D_UP_F, b
+	bit B_PAD_UP, b
 	jr z, .check_d_down
 
 	push af
@@ -557,7 +557,7 @@ HandleCardAlbumCardPage:
 	jr .got_new_pos
 
 .check_d_down
-	bit D_DOWN_F, b
+	bit B_PAD_DOWN, b
 	jr z, .asm_a8d6
 
 	push af
@@ -608,12 +608,12 @@ HandleCardAlbumCardPage:
 	ld a, [wced2]
 	or a
 	jr z, .open_card_page
-	bit D_LEFT_F, b
+	bit B_PAD_LEFT, b
 	jr z, .check_d_right
 	call RemoveCardFromDeck
 	jr .open_card_page
 .check_d_right
-	bit D_RIGHT_F, b
+	bit B_PAD_RIGHT, b
 	jr z, .open_card_page
 	call TryAddCardToDeck
 
@@ -687,7 +687,7 @@ CardAlbum:
 .loop_input_2
 	call DoFrame
 	ldh a, [hKeysPressed]
-	and B_BUTTON
+	and PAD_B
 	jr z, .loop_input_2
 	ld a, $ff
 	call PlaySFXConfirmOrCancel
@@ -721,7 +721,7 @@ CardAlbum:
 	call HandleLeftRightInCardList
 	jr c, .loop_input_3
 	ldh a, [hDPadHeld]
-	and START
+	and PAD_START
 	jr z, .loop_input_3
 .open_card_page
 	ld a, $01

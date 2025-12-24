@@ -341,7 +341,7 @@ AnimateRandomTitleScreenOrb:
 
 	ld c, SPRITE_ANIM_ATTRIBUTES
 	call GetSpriteAnimBufferProperty
-	set SPRITE_ANIM_FLAG_UNSKIPPABLE, [hl]
+	set SPRITE_ANIM_FLAG_UNSKIPPABLE_F, [hl]
 
 	inc hl
 	ld a, 248
@@ -364,7 +364,7 @@ AnimateRandomTitleScreenOrb:
 	ld a, [hld]
 	cp 152
 	jr nz, .skip
-	res SPRITE_ANIM_FLAG_UNSKIPPABLE, [hl]
+	res SPRITE_ANIM_FLAG_UNSKIPPABLE_F, [hl]
 .skip
 	pop bc
 	inc de

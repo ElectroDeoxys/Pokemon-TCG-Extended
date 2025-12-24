@@ -67,17 +67,17 @@ FlushPalettesIfRequested::
 	ld a, [wFlushPaletteFlags]
 	bit FLUSH_ALL_PALS_F, a
 	jr nz, FlushAllCGBPalettes
-	ld b, CGB_PAL_SIZE
+	ld b, PAL_SIZE
 	call CopyCGBPalettes
 	jr .done
 
 FlushAllCGBPalettes::
 	; flush 8 BGP palettes
-	xor a
+	xor a ; start with BGP0 (wBackgroundPalettesCGB)
 	ld b, 8 palettes
 	call CopyCGBPalettes
 	; flush 8 OBP palettes
-	ld a, CGB_PAL_SIZE
+	ld a, NUM_BACKGROUND_PALETTES ; skip all background palettes and start with OBP0 (wObjectPalettesCGB)
 	ld b, 8 palettes
 	call CopyCGBPalettes
 	jr FlushPalettesIfRequested.done
@@ -85,9 +85,9 @@ FlushAllCGBPalettes::
 ; copy b bytes of CGB palette data starting at
 ; (wBackgroundPalettesCGB + a palettes) into rBGPD or rOBPD.
 CopyCGBPalettes::
-	add a
-	add a
-	add a
+	add a ; *2
+	add a ; *4
+	add a ; *8 (PAL_SIZE)
 	ld e, a
 	ld d, $0
 	ld hl, wBackgroundPalettesCGB
@@ -105,7 +105,7 @@ CopyCGBPalettes::
 	inc c
 .wait
 	ldh a, [rSTAT]
-	and 1 << STAT_BUSY ; wait until hblank or vblank
+	and STAT_BUSY ; wait until hblank or vblank
 	jr nz, .wait
 	ld a, [hl]
 	ld [$ff00+c], a

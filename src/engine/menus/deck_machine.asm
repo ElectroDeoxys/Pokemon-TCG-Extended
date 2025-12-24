@@ -58,7 +58,7 @@ HandleDeckMissingCardsList:
 	call HandleLeftRightInCardList
 	jr c, .loop_input
 	ldh a, [hDPadHeld]
-	and START
+	and PAD_START
 	jr z, .loop_input
 
 .open_card_pge
@@ -134,7 +134,7 @@ HandleDeckMissingCardsList:
 	inc a
 	ld hl, wDefaultText
 	call ConvertToNumericalDigits
-	ld [hl], "FW0_・"
+	ldfw [hl], "・"
 	inc hl
 	ld [hl], TX_END
 	ld hl, wDefaultText
@@ -311,7 +311,7 @@ HandleDeckMachineSelection:
 	call .HandleListJumps
 	jr c, .start
 	ldh a, [hDPadHeld]
-	and START
+	and PAD_START
 	jr z, .start
 
 ; start btn
@@ -378,9 +378,9 @@ HandleDeckMachineSelection:
 	ld a, [wCardListVisibleOffset]
 	ld c, a
 	ldh a, [hDPadHeld]
-	cp D_RIGHT
+	cp PAD_RIGHT
 	jr z, .d_right
-	cp D_LEFT
+	cp PAD_LEFT
 	jr z, .d_left
 	or a
 	ret
@@ -551,7 +551,7 @@ PrintDeckMachineEntry:
 	ld hl, wDefaultText
 	inc a
 	call ConvertToNumericalDigits
-	ld [hl], "FW0_・"
+	ldfw [hl], "・"
 	inc hl
 	ld [hl], TX_END
 	call InitTextPrinting
@@ -605,7 +605,7 @@ PrintDeckMachineEntry:
 	pop bc
 	ld hl, wDefaultText
 	jr c, .cannot_build
-	lb de, TX_FULLWIDTH3, "FW3_○" ; can build
+	ldfw de, "○" ; can build
 	jr .asm_b4c2
 .cannot_build
 	push bc
@@ -613,11 +613,11 @@ PrintDeckMachineEntry:
 	call CheckIfCanBuildSavedDeck
 	jr c, .cannot_build_at_all
 	pop bc
-	lb de, TX_FULLWIDTH3, "FW3_※" ; can build by dismantling
+	ldfw de, "※" ; can build by dismantling
 	jr .asm_b4c2
 
 .cannot_build_at_all
-	lb de, TX_FULLWIDTH0, "FW0_×" ; cannot build even by dismantling
+	ldfw de, "×" ; cannot build even by dismantling
 	call Func_22ca
 	pop bc
 	pop de
@@ -1510,7 +1510,7 @@ HandleAutoDeckMenu:
 
 ; check whether to show deck confirmation list
 	ldh a, [hDPadHeld]
-	and START
+	and PAD_START
 	jr z, .wait_input
 
 	ld a, [wCardListVisibleOffset]

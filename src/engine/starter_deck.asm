@@ -120,7 +120,7 @@ InitSaveData:
 	ld [hl], a
 
 ; saved configuration options
-	ld a, $2
+	ld a, TEXT_SPEED_3
 	ld [sTextSpeed], a
 	ld [wTextSpeed], a
 

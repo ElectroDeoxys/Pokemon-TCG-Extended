@@ -524,8 +524,8 @@ ArticunoBlizzardEffectCommands:
 	db  $00
 
 TentacoolCowardiceEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Cowardice_Check
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Cowardice_RemoveFromPlayAreaEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Cowardice_CheckUseAndBench
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Cowardice_ReturnToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Cowardice_PlayerSelectEffect
 	db  $00
 
@@ -818,14 +818,7 @@ MewtwoBarrierEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Barrier_AISelectEffect
 	db  $00
 
-MewtwoAltLv60EnergyAbsorptionEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyAbsorption_CheckDiscardPile
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AddToHandEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyAbsorption_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, EnergyAbsorption_AISelectEffect
-	db  $00
-
-MewtwoLv60EnergyAbsorptionEffectCommands:
+MewtwoEnergyAbsorptionEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyAbsorption_CheckDiscardPile
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyAbsorption_AddToHandEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyAbsorption_PlayerSelectEffect

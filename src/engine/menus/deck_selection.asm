@@ -131,13 +131,13 @@ DeckSelectionMenu:
 	db SYM_SPACE ; tile behind cursor
 	dw NULL ; function pointer if non-0
 
-; handles START button press when in deck selection menu
-; does nothing if START button isn't pressed
+; handles PAD_START button press when in deck selection menu
+; does nothing if PAD_START button isn't pressed
 ; if a press was handled, returns carry
 ; prints "There is no deck here!" if the selected deck is empty
 HandleStartButtonInDeckSelectionMenu:
 	ldh a, [hDPadHeld]
-	and START
+	and PAD_START
 	ret z ; skip
 
 ; set menu item as current deck
@@ -339,15 +339,15 @@ InputCurDeckName:
 	ld hl, wCurDeckName
 	ld [hl], $6
 	inc hl
-	ld [hl], "D"
+	ld [hl], 'D'
 	inc hl
-	ld [hl], "e"
+	ld [hl], 'e'
 	inc hl
-	ld [hl], "c"
+	ld [hl], 'c'
 	inc hl
-	ld [hl], "k"
+	ld [hl], 'k'
 	inc hl
-	ld [hl], " "
+	ld [hl], ' '
 	inc hl
 	ld de, wDefaultText + 2
 	ld a, [de]

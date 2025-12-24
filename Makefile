@@ -18,6 +18,11 @@ RGBFIX  ?= $(RGBDS)rgbfix
 RGBGFX  ?= $(RGBDS)rgbgfx
 RGBLINK ?= $(RGBDS)rgblink
 
+RGBASMFLAGS  ?= -Weverything -Wtruncation=1
+RGBLINKFLAGS ?= -Weverything -Wtruncation=1
+RGBFIXFLAGS  ?= -Weverything
+RGBGFXFLAGS  ?= -Weverything
+
 
 ### Build targets
 
@@ -55,7 +60,7 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS = -I src/ -Weverything
+RGBASMFLAGS += -I src/
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
@@ -87,47 +92,47 @@ endif
 %.asm: ;
 
 
-opts = -Cjv -k 01 -l 0x33 -m 0x1b -p 0xff -r 03 -t POKECARD -i AXQE
+RGBFIXFLAGS += -Cjv -k 01 -l 0x33 -m MBC5+RAM+BATTERY -p 0xff -r 03 -t POKECARD -i AXQE
 
 $(rom): $(rom_obj) src/layout.link
-	$(RGBLINK) -p 0xff -m $(rom:.gbc=.map) -n $(rom:.gbc=.sym) -l src/layout.link -o $@ $(filter %.o,$^)
-	$(RGBFIX) $(opts) $@
+	$(RGBLINK) $(RGBLINKFLAGS) -p 0xff -m $(rom:.gbc=.map) -n $(rom:.gbc=.sym) -l src/layout.link -o $@ $(filter %.o,$^)
+	$(RGBFIX) $(RGBFIXFLAGS) $@
 
 
 ### Misc file-specific graphics rules
 
-src/gfx/booster_packs/colosseum.2bpp: rgbgfx += -x 10
-src/gfx/booster_packs/evolution.2bpp: rgbgfx += -x 10
-src/gfx/booster_packs/laboratory.2bpp: rgbgfx += -x 10
-src/gfx/booster_packs/mystery.2bpp: rgbgfx += -x 10
+src/gfx/booster_packs/colosseum.2bpp: RGBGFXFLAGS += -x 10
+src/gfx/booster_packs/evolution.2bpp: RGBGFXFLAGS += -x 10
+src/gfx/booster_packs/laboratory.2bpp: RGBGFXFLAGS += -x 10
+src/gfx/booster_packs/mystery.2bpp: RGBGFXFLAGS += -x 10
 
-src/gfx/cards/%.2bpp: rgbgfx += -Z
+src/gfx/cards/%.2bpp: RGBGFXFLAGS += -Z
 
-src/gfx/duel/anims/result.2bpp: rgbgfx += -x 10
-src/gfx/duel/other.2bpp: rgbgfx += -x 7
+src/gfx/duel/anims/result.2bpp: RGBGFXFLAGS += -x 10
+src/gfx/duel/other.2bpp: RGBGFXFLAGS += -x 7
 
-src/gfx/fonts/full_width/4.1bpp: rgbgfx += -x 3
+src/gfx/fonts/full_width/4.1bpp: RGBGFXFLAGS += -x 3
 
-src/gfx/overworld_map.2bpp: rgbgfx += -x 15
+src/gfx/overworld_map.2bpp: RGBGFXFLAGS += -x 15
 
-src/gfx/tilesets/challengehall.2bpp: rgbgfx += -x 3
-src/gfx/tilesets/clubentrance.2bpp: rgbgfx += -x 15
-src/gfx/tilesets/clublobby.2bpp: rgbgfx += -x 8
-src/gfx/tilesets/fightingclub.2bpp: rgbgfx += -x 13
-src/gfx/tilesets/fireclub.2bpp: rgbgfx += -x 9
-src/gfx/tilesets/grassclub.2bpp: rgbgfx += -x 9
-src/gfx/tilesets/hallofhonor.2bpp: rgbgfx += -x 7
-src/gfx/tilesets/ishihara.2bpp: rgbgfx += -x 3
-src/gfx/tilesets/lightningclub.2bpp: rgbgfx += -x 13
-src/gfx/tilesets/masonlaboratory.2bpp: rgbgfx += -x 9
-src/gfx/tilesets/pokemondome.2bpp: rgbgfx += -x 1
-src/gfx/tilesets/pokemondomeentrance.2bpp: rgbgfx += -x 2
-src/gfx/tilesets/psychicclub.2bpp: rgbgfx += -x 6
-src/gfx/tilesets/rockclub.2bpp: rgbgfx += -x 4
-src/gfx/tilesets/scienceclub.2bpp: rgbgfx += -x 14
-src/gfx/tilesets/waterclub.2bpp: rgbgfx += -x 15
+src/gfx/tilesets/challengehall.2bpp: RGBGFXFLAGS += -x 3
+src/gfx/tilesets/clubentrance.2bpp: RGBGFXFLAGS += -x 15
+src/gfx/tilesets/clublobby.2bpp: RGBGFXFLAGS += -x 8
+src/gfx/tilesets/fightingclub.2bpp: RGBGFXFLAGS += -x 13
+src/gfx/tilesets/fireclub.2bpp: RGBGFXFLAGS += -x 9
+src/gfx/tilesets/grassclub.2bpp: RGBGFXFLAGS += -x 9
+src/gfx/tilesets/hallofhonor.2bpp: RGBGFXFLAGS += -x 7
+src/gfx/tilesets/ishihara.2bpp: RGBGFXFLAGS += -x 3
+src/gfx/tilesets/lightningclub.2bpp: RGBGFXFLAGS += -x 13
+src/gfx/tilesets/masonlaboratory.2bpp: RGBGFXFLAGS += -x 9
+src/gfx/tilesets/pokemondome.2bpp: RGBGFXFLAGS += -x 1
+src/gfx/tilesets/pokemondomeentrance.2bpp: RGBGFXFLAGS += -x 2
+src/gfx/tilesets/psychicclub.2bpp: RGBGFXFLAGS += -x 6
+src/gfx/tilesets/rockclub.2bpp: RGBGFXFLAGS += -x 4
+src/gfx/tilesets/scienceclub.2bpp: RGBGFXFLAGS += -x 14
+src/gfx/tilesets/waterclub.2bpp: RGBGFXFLAGS += -x 15
 
-src/gfx/titlescreen/title_screen.2bpp: rgbgfx += -x 12
+src/gfx/titlescreen/title_screen.2bpp: RGBGFXFLAGS += -x 12
 
 
 ### Catch-all graphics rules
@@ -142,12 +147,12 @@ src/gfx/titlescreen/title_screen.2bpp: rgbgfx += -x 12
 %.pal: ;
 
 %.2bpp: %.png
-	$(RGBGFX) $(rgbgfx) -o $@ $<
+	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
 
 %.1bpp: %.png
-	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
+	$(RGBGFX) $(RGBGFXFLAGS) --depth 1 -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
 

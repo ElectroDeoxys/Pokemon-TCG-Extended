@@ -1,5 +1,5 @@
 PortraitGfxData:
-	table_width 2, PortraitGfxData
+	table_width 2
 	db TILESET_PLAYER,    PALETTE_119 ; INVALID_PIC
 	db TILESET_PLAYER,    PALETTE_119 ; PLAYER_PIC
 	db TILESET_RONALD,    PALETTE_121 ; RONALD_PIC

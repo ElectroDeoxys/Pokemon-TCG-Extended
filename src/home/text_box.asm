@@ -3,7 +3,7 @@
 ; if LCD on, copy during h-blank only
 SafeCopyDataDEtoHL::
 	ld a, [wLCDC]        ;
-	bit LCDC_ENABLE_F, a ;
+	bit B_LCDC_ENABLE, a ;
 	jr nz, .lcd_on       ; assert that LCD is on
 .lcd_off_loop
 	ld a, [de]
@@ -15,7 +15,7 @@ SafeCopyDataDEtoHL::
 .lcd_on
 	jp HblankCopyDataDEtoHL
 
-; returns v*BGMap0 + BG_MAP_WIDTH * e + d in hl.
+; returns v*BGMap0 + TILEMAP_WIDTH * e + d in hl.
 ; used to map coordinates at de to a BGMap0 address.
 DECoordToBGMap0Address::
 	ld l, e
@@ -67,7 +67,7 @@ DrawLabeledTextBox::
 	ld a, SYM_BOX_TOP_L
 	ld [hli], a
 	; white tile before the text
-	ld a, FW_SPACE
+	ldfw a, " "
 	ld [hli], a
 	; text label
 	ld e, l
@@ -81,7 +81,7 @@ DrawLabeledTextBox::
 	; white tile after the text
 	ld a, TX_HALF2FULL
 	ld [hli], a
-	ld a, FW_SPACE
+	ldfw a, " "
 	ld [hli], a
 	pop de
 	push de
@@ -161,13 +161,13 @@ ContinueDrawingTextBoxDMG::
 	lb de, SYM_BOX_BTM_L, SYM_BOX_BTM_R
 ;	fallthrough
 
-; copies b bytes of data to sp-$1f and to hl, and returns hl += BG_MAP_WIDTH
+; copies b bytes of data to sp-$1f and to hl, and returns hl += TILEMAP_WIDTH
 ; d = value of byte 0
 ; e = value of byte b
 ; a = value of bytes [1, b-1]
-; b is supposed to be BG_MAP_WIDTH or smaller, else the stack would get corrupted
+; b is supposed to be TILEMAP_WIDTH or smaller, else the stack would get corrupted
 CopyLine::
-	add sp, -BG_MAP_WIDTH
+	add sp, -TILEMAP_WIDTH
 	push hl
 	push bc
 	ld hl, sp+$4
@@ -191,10 +191,10 @@ CopyLine::
 	call SafeCopyDataDEtoHL
 	pop bc
 	pop de
-	; advance pointer BG_MAP_WIDTH positions and restore stack pointer
-	ld hl, BG_MAP_WIDTH
+	; advance pointer TILEMAP_WIDTH positions and restore stack pointer
+	ld hl, TILEMAP_WIDTH
 	add hl, de
-	add sp, BG_MAP_WIDTH
+	add sp, TILEMAP_WIDTH
 	ret
 
 ; DrawRegularTextBox branches here on CGB console

@@ -1,6 +1,6 @@
-IF !DEF(__RGBDS_MAJOR__) || !DEF(__RGBDS_MINOR__) || !DEF(__RGBDS_PATCH__)
-	fail "poketcgext requires rgbds v0.9.0 or newer."
+IF !DEF(__RGBDS_MAJOR__)
+	fail "poketcgext requires rgbds v1.0.0 or newer."
 ENDC
-IF __RGBDS_MAJOR__ == 0 && __RGBDS_MINOR__ < 9
-	fail "poketcgext requires rgbds v0.9.0 or newer."
+IF __RGBDS_MAJOR__ < 1
+	fail "poketcgext requires rgbds v1.0.0 or newer."
 ENDC

@@ -16,7 +16,7 @@ TwoByteNumberToText::
 	pop bc
 	ret
 .get_digit
-	ld a, "0" - 1
+	ld a, '0' - 1
 .subtract_loop
 	inc a
 	add hl, bc

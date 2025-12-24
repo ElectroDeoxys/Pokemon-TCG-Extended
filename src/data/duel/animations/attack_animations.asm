@@ -1,27 +1,5 @@
-MACRO anim_end
-	db $00
-ENDM
-MACRO anim_normal
-	db $01, \1
-ENDM
-MACRO anim_player
-	db $02, \1
-ENDM
-MACRO anim_opponent
-	db $03, \1
-ENDM
-MACRO anim_screen
-	db $04, \1
-ENDM
-MACRO anim_play_area
-	db $05, \1
-ENDM
-MACRO anim_end2
-	db $06
-ENDM
-
 PointerTable_AttackAnimation:
-	table_width 2, PointerTable_AttackAnimation
+	table_width 2
 	dw NULL                                ; ATK_ANIM_NONE
 	dw AttackAnimation_Hit                 ; ATK_ANIM_HIT
 	dw AttackAnimation_BigHit              ; ATK_ANIM_BIG_HIT

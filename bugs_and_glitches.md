@@ -27,6 +27,9 @@ Fixes are written in the `diff` format.
   - [Sam's practice deck does wrong card ID check](#sams-practice-deck-does-wrong-card-id-check)
   - [AI does not use Shift properly](#ai-does-not-use-shift-properly)
   - [AI does not use Cowardice properly](#ai-does-not-use-cowardice-properly)
+  - [AI does not pay attention to Acid effect when retreating](#ai-does-not-pay-attention-to-acid-effect-when-retreating)
+  - [AI has flawed logic when considering MewLv8 as a target for switching](#ai-has-flawed-logic-when-considering-mewlv8-as-a-target-for-switching)
+  - [AI has flawed logic when considering the Earthquake attack](#ai-has-flawed-logic-when-considering-the-earthquake-attack)
   - [Phantom Venusaur will never be obtained through Card Pop!](#phantom-venusaur-will-never-be-obtained-through-card-pop)
 - [Graphics](#graphics)
   - [Water Club master room uses the wrong void color](#water-club-master-room-uses-the-wrong-void-color)
@@ -35,8 +38,22 @@ Fixes are written in the `diff` format.
   - [Big Lightning animation has incorrect frame data](#big-lightning-animation-has-incorrect-frame-data)
   - [Dive Bomb animation has incorrect frame data](#dive-bomb-animation-has-incorrect-frame-data)
 - [Text](#text)
-  - [Both Ninetales cards misspell its name](#both-ninetales-cards-misspell-its-name)
+  - [Typos in unused strings](#typos-in-unused-strings)
+  - [Misspelled "chosen" system text string](#misspelled-chosen-system-text-string)
+  - [Missing space](#missing-space)
+  - [Misspelled status effect message](#misspelled-status-effect-message)
+  - [Promotional Flying Pikachu typo](#promotional-flying-pikachu-typo)
+  - [Legendary Zapdos card has a typo](#legendary-zapdos-card-has-a-typo)
+  - [Doctor Mason misspells Exeggcute's name](#doctor-mason-misspells-exeggcutes-name)
+  - [Clerk's Challenge Cup dialogue has an extra 'the'](#clerks-challenge-cup-dialogue-has-an-extra-the)
+  - [Ronald's Challenge Cup dialogue has a typo](#ronalds-challenge-cup-dialogue-has-a-typo)
   - [Challenge host uses wrong name for the first rival](#challenge-host-uses-wrong-name-for-the-first-rival)
+  - [Courtney's defeat dialogue has a typo](#courtneys-defeat-dialogue-has-a-typo)
+  - [Lightning Club dialogue has a typo](#lightning-club-dialogue-has-a-typo)
+  - [Brittany's defeat dialogue has a typo](#brittanys-defeat-dialogue-has-a-typo)
+  - [Ronald's Legendary Card dialogue has a typo](#ronalds-legendary-card-dialogue-has-a-typo)
+  - [Both Ninetales cards misspell its name](#both-ninetales-cards-misspell-its-name)
+  - [Missing acute accents](#missing-acute-accents)
 
 ## Game engine
 
@@ -80,7 +97,7 @@ DetermineAIScoreOfAttackEnergyRequirement:
 
 Each deck AI lists some card IDs that are not supposed to be placed as Prize cards in the beginning of the duel. If the deck configuration after the initial shuffling results in any of these cards being placed as Prize cards, the game is supposed to reshuffle the deck. An example of such a list, for the Go GO Rain Dance deck, is:
 ```
-.list_prize 
+.list_prize
 	db GAMBLER
 	db ENERGY_RETRIEVAL
 	db SUPER_ENERGY_RETRIEVAL
@@ -88,7 +105,7 @@ Each deck AI lists some card IDs that are not supposed to be placed as Prize car
 	db $00
 ```
 
-However, the routine to iterate these lists and look for these cards is buggy, as it will always return no carry because when checking terminating byte in wAICardListAvoidPrize ($00), it wrongfully uses 'cp a' instead of 'or a'. This results in the game ignoring it completely. 
+However, the routine to iterate these lists and look for these cards is buggy, as it will always return no carry because when checking terminating byte in wAICardListAvoidPrize ($00), it wrongfully uses 'cp a' instead of 'or a'. This results in the game ignoring it completely.
 
 **Fix:** Edit `SetUpBossStartingHandAndDeck` in [src/engine/duel/ai/boss_deck_set_up.asm](https://github.com/pret/poketcg/blob/master/src/engine/duel/ai/boss_deck_set_up.asm):
 ```diff
@@ -395,7 +412,7 @@ AIDecide_FullHeal:
 
 ### AI might use a Pkmn Power as an attack
 
-Under very specific conditions, the AI might attempt to use its Arena card's Pkmn Power as an attack. This is because when the AI plays Pluspower, it is hardcoding which attack to use when it finally decides to attack. This does not account for the case where afterwards, for example, the AI plays a Professor Oak and obtains an evolution of that card, and then evolves that card. If the new evolved Pokémon has Pkmn Power on the first "attack slot", and the AI hardcoded to use that attack, then it will be used. This specific combination can be seen when playing with John, since his deck contains Professor Oak, Pluspower, and Doduo and its evolution Dodrio (which has the Pkmn Power Retreat Aid).
+Under very specific conditions, the AI might attempt to use its Arena card's Pkmn Power as an attack. This is because when the AI plays PlusPower, it is hardcoding which attack to use when it finally decides to attack. This does not account for the case where afterwards, for example, the AI plays a Professor Oak and obtains an evolution of that card, and then evolves that card. If the new evolved Pokémon has Pkmn Power on the first "attack slot", and the AI hardcoded to use that attack, then it will be used. This specific combination can be seen when playing with John, since his deck contains Professor Oak, PlusPower, and Doduo and its evolution Dodrio (which has the Pkmn Power Retreat Aid).
 
 **Fix:** Edit `AIDecideEvolution` in [src/engine/duel/ai/hand_pokemon.asm](https://github.com/pret/poketcg/blob/master/src/engine/duel/ai/hand_pokemon.asm):
 ```diff
@@ -527,7 +544,7 @@ The AI does not respect the rule in Cowardice which states it cannot be used on 
 ; handles AI logic for Cowardice
 HandleAICowardice:
 	...
-.CheckWhetherToUseCowardice
+.CheckWhetherToUseCowardice:
 	ld a, c
 	ldh [hTemp_ffa0], a
 	ld e, a
@@ -536,6 +553,132 @@ HandleAICowardice:
 +	and CAN_EVOLVE_THIS_TURN
 +	ret z ; return if was played this turn
 	...
+```
+
+### AI does not pay attention to Acid effect when retreating
+
+When retreating, the AI completely ignores whether or not its Active Pokémon was attacked with Victreebel's Acid attack during the previous turn. While addressing this oversight, you can also remove some of the extra Asleep/Paralyzed checks within the same function.
+
+**Fix:** Edit `AITryToRetreat` in [src/engine/duel/ai/retreat.asm](https://github.com/pret/poketcg/blob/master/src/engine/duel/ai/retreat.asm):
+```diff
+; input:
+;	- a = Play Area location (PLAY_AREA_*) of card to retreat to.
+AITryToRetreat:
+-	push af
++	ld b, a
++	call CheckUnableToRetreatDueToEffect
++	ret c
++	bank1call CheckIfActiveCardParalyzedOrAsleep
++	ret c
++	push bc
+	ld a, [wAIPlayEnergyCardForRetreat]
+	or a
+	jr z, .check_id
+
+; AI is allowed to play an energy card
+; from the hand in order to provide
+; the necessary energy for retreat cost
+-
+-; check status
+-	ld a, DUELVARS_ARENA_CARD_STATUS
+-	call GetTurnDuelistVariable
+-	and CNF_SLP_PRZ
+-	cp ASLEEP
+-	jp z, .check_id
+-	cp PARALYZED
+-	jp z, .check_id
+-
+; if an energy card hasn't been played yet,
+; checks if the Pokémon needs just one more energy to retreat
+; if it does, check if there are any energy cards in hand
+	...
+	pop af
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+-	ld b, a
+-	and CNF_SLP_PRZ
+-	cp ASLEEP
+-	jp z, .set_carry
+-	cp PARALYZED
+-	jp z, .set_carry
+-	ld a, b
+	ldh [hTemp_ffa0], a
+	ld a, $ff
+	ldh [hTempRetreatCostCards], a
+	...
+```
+
+### AI has flawed logic when considering MewLv8 as a target for switching
+
+There is a mistake in the AI logic that affects whether or not Stephanie will choose a Benched MewLv8 to be her new Active Pokémon after retreating. It's supposed to increase MewLv8's score if the player's Active Pokémon isn't a Basic Pokémon, but it mistakenly looks up that Pokémon's deck index in the AI's deck.
+
+**Fix:** Edit `AIDecideBenchPokemonToSwitchTo` in [src/engine/duel/ai/retreat.asm](https://github.com/pret/poketcg/blob/master/src/engine/duel/ai/retreat.asm):
+```diff
+AIDecideBenchPokemonToSwitchTo:
+	...
+	jr z, .raise_score
+	cp MEW_LV8
+	jr nz, .check_if_has_bench_utility
++	call Swap Turn
+	ld a, DUELVARS_ARENA_CARD
+-	call GetNonTurnDuelistVariable
++	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer2_FromDeckIndex
++	call SwapTurn
+	ld a, [wLoadedCard2Stage]
+	or a
+	jr z, .check_if_has_bench_utility
+	...
+```
+
+### AI has flawed logic when considering the Earthquake attack
+
+There are some mistakes in the AI logic that affects whether or not Gene will decide to use Dugtrio's Earthquake attack.
+
+**Fix:** Edit `HandleSpecialAIAttacks` in [src/engine/duel/ai/special_attacks.asm](https://github.com/pret/poketcg/blob/master/src/engine/duel/ai/special_attacks.asm):
+```diff
+HandleSpecialAIAttacks:
+	...
+.Earthquake:
+	ld a, DUELVARS_BENCH
+	call GetTurnDuelistVariable
+
+	lb de, 0, PLAY_AREA_BENCH_1 - 1
+.loop_earthquake
+	inc e
+	ld a, [hli]
+	cp $ff
+	jr z, .count_prizes
+	ld a, e
+	add DUELVARS_ARENA_CARD_HP
+-	; bug, GetTurnDuelistVariable clobbers hl
+-	; uncomment the following lines to preserve hl
+-	; push hl
++	push hl
+	call GetTurnDuelistVariable
+-	; pop hl
++	pop hl
+	cp 20
+	jr nc, .loop_earthquake
+	inc d
+	jr .loop_earthquake
+
+.count_prizes
+-	; bug, this is supposed to count the player's prize cards
+-	; not the opponent's, missing calls to SwapTurn
+	push de
+-	; call SwapTurn
++	call SwapTurn
+	call CountPrizes
+-	; call SwapTurn
++	call SwapTurn
+	pop de
+	cp d
+	jp c, .zero_score
+	jp z, .zero_score
+	ld a, $80
+	ret
 ```
 
 ### Phantom Venusaur will never be obtained through Card Pop!
@@ -624,50 +767,50 @@ Characters that are assigned the green NPC palette have incorrect profile frame 
 ```diff
 .data_a9459
 	db 4 ; size
--	db 0, 0, 6, %011 | (1 << OAM_OBP_NUM)
-+	db 0, 0, 12, %011 | (1 << OAM_OBP_NUM)
-	db 0, 8, 13, %011 | (1 << OAM_OBP_NUM)
-	db 8, 0, 14, %011 | (1 << OAM_OBP_NUM)
-	db 8, 8, 15, %011 | (1 << OAM_OBP_NUM)
+-	db 0, 0, 6, %011 | OAM_PAL1
++	db 0, 0, 12, %011 | OAM_PAL1
+	db 0, 8, 13, %011 | OAM_PAL1
+	db 8, 0, 14, %011 | OAM_PAL1
+	db 8, 8, 15, %011 | OAM_PAL1
 
 .data_a946a
 	db 4 ; size
--	db 0, 0, 8, %011 | (1 << OAM_OBP_NUM)
-+	db 0, 0, 16, %011 | (1 << OAM_OBP_NUM)
-	db 0, 8, 17, %011 | (1 << OAM_OBP_NUM)
-	db 8, 0, 18, %011 | (1 << OAM_OBP_NUM)
-	db 8, 8, 19, %011 | (1 << OAM_OBP_NUM)
+-	db 0, 0, 8, %011 | OAM_PAL1
++	db 0, 0, 16, %011 | OAM_PAL1
+	db 0, 8, 17, %011 | OAM_PAL1
+	db 8, 0, 18, %011 | OAM_PAL1
+	db 8, 8, 19, %011 | OAM_PAL1
 
 ...
 
 
 .data_a94ae
 	db 4 ; size
-	db 0, 0, 13, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
-	db 8, 0, 15, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
--	db 0, 8, 6, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
-+	db 0, 8, 12, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
-	db 8, 8, 14, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
+	db 0, 0, 13, %011 | OAM_PAL1 | OAM_XFLIP
+	db 8, 0, 15, %011 | OAM_PAL1 | OAM_XFLIP
+-	db 0, 8, 6, %011 | OAM_PAL1 | OAM_XFLIP
++	db 0, 8, 12, %011 | OAM_PAL1 | OAM_XFLIP
+	db 8, 8, 14, %011 | OAM_PAL1 | OAM_XFLIP
 
 .data_a94bf
 	db 4 ; size
-	db 0, 0, 17, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
-	db 8, 0, 19, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
--	db 0, 8, 8, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
-+	db 0, 8, 16, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
-	db 8, 8, 18, %011 | (1 << OAM_OBP_NUM) | (1 << OAM_X_FLIP)
+	db 0, 0, 17, %011 | OAM_PAL1 | OAM_XFLIP
+	db 8, 0, 19, %011 | OAM_PAL1 | OAM_XFLIP
+-	db 0, 8, 8, %011 | OAM_PAL1 | OAM_XFLIP
++	db 0, 8, 16, %011 | OAM_PAL1 | OAM_XFLIP
+	db 8, 8, 18, %011 | OAM_PAL1 | OAM_XFLIP
 ```
 
 ### Big Lightning animation has incorrect frame data
 
 One of the bolts from the "big lightning" duel animation has its topmost row of tiles accidentally shifted one tile to the left.
 
-**Fix:** Edit `AnimFrameTable29` in [data/duel/animations/anims1.asm](https://github.com/pret/poketcg/blob/master/src/data/duel/animations/anims1.asm):
+**Fix:** Edit `AnimFrameTable29` in [src/data/duel/animations/anims1.asm](https://github.com/pret/poketcg/blob/master/src/data/duel/animations/anims1.asm):
 ```diff
 .data_ab5fd
 	db 28 ; size
--	db -72, -8, 0, (1 << OAM_X_FLIP)
-+	db -72, 0, 0, (1 << OAM_X_FLIP)
+-	db -72, -8, 0, OAM_XFLIP
++	db -72, 0, 0, OAM_XFLIP
 	db -16, 32, 27, $0
 	...
 	db -56, 10, 42, $0
@@ -678,10 +821,10 @@ The base of the lightning being cut-off is addressed below, though that specific
 ```diff
 .data_ab5fd
 -	db 28 ; size
--	db -72, -8, 0, (1 << OAM_X_FLIP)
+-	db -72, -8, 0, OAM_XFLIP
 +	db 29 ; size
-+	db -72, 0, 0, (1 << OAM_X_FLIP)
-+	db -72, -8, 1, (1 << OAM_X_FLIP)
++	db -72, 0, 0, OAM_XFLIP
++	db -72, -8, 1, OAM_XFLIP
 	db -16, 32, 27, $0
 	...
 	db -56, 10, 42, $0
@@ -691,21 +834,21 @@ The base of the lightning being cut-off is addressed below, though that specific
 
 The fire blasts from Dive Bomb's duel animation mistakenly reuse the same tile twice, causing one tile to go unused, and the animation itself to look less refined.
 
-**Fix:** Edit `AnimFrameTable32` in [data/duel/animations/anims2.asm](https://github.com/pret/poketcg/blob/master/src/data/duel/animations/anims2.asm):
+**Fix:** Edit `AnimFrameTable32` in [src/data/duel/animations/anims2.asm](https://github.com/pret/poketcg/blob/master/src/data/duel/animations/anims2.asm):
 ```diff
 .data_ac685
 	db 19 ; size
 	...
-	db -8, 8, 11, (1 << OAM_X_FLIP)
-	db -8, 16, 10, (1 << OAM_X_FLIP)
--	db 0, 24, 10, (1 << OAM_X_FLIP)
-+	db 0, 24, 12, (1 << OAM_X_FLIP)
-	db 0, 16, 13, (1 << OAM_X_FLIP)
-	db 0, 8, 14, (1 << OAM_X_FLIP)
-	db 8, 8, 17, (1 << OAM_X_FLIP)
-	db 8, 16, 16, (1 << OAM_X_FLIP)
-	db 8, 24, 15, (1 << OAM_X_FLIP)
-	db 16, 24, 18, (1 << OAM_X_FLIP)
+	db -8, 8, 11, OAM_XFLIP
+	db -8, 16, 10, OAM_XFLIP
+-	db 0, 24, 10, OAM_XFLIP
++	db 0, 24, 12, OAM_XFLIP
+	db 0, 16, 13, OAM_XFLIP
+	db 0, 8, 14, OAM_XFLIP
+	db 8, 8, 17, OAM_XFLIP
+	db 8, 16, 16, OAM_XFLIP
+	db 8, 24, 15, OAM_XFLIP
+	db 16, 24, 18, OAM_XFLIP
 
 .data_ac6d2
 	db 19 ; size
@@ -724,16 +867,16 @@ The fire blasts from Dive Bomb's duel animation mistakenly reuse the same tile t
 .data_ac71f
 	db 29 ; size
 	...
-	db -8, 8, 11, (1 << OAM_X_FLIP)
-	db -8, 16, 10, (1 << OAM_X_FLIP)
--	db 0, 24, 10, (1 << OAM_X_FLIP)
-+	db 0, 24, 12, (1 << OAM_X_FLIP)
-	db 0, 16, 13, (1 << OAM_X_FLIP)
-	db 0, 8, 14, (1 << OAM_X_FLIP)
-	db 8, 8, 17, (1 << OAM_X_FLIP)
-	db 8, 16, 16, (1 << OAM_X_FLIP)
-	db 8, 24, 15, (1 << OAM_X_FLIP)
-	db 16, 24, 18, (1 << OAM_X_FLIP)
+	db -8, 8, 11, OAM_XFLIP
+	db -8, 16, 10, OAM_XFLIP
+-	db 0, 24, 10, OAM_XFLIP
++	db 0, 24, 12, OAM_XFLIP
+	db 0, 16, 13, OAM_XFLIP
+	db 0, 8, 14, OAM_XFLIP
+	db 8, 8, 17, OAM_XFLIP
+	db 8, 16, 16, OAM_XFLIP
+	db 8, 24, 15, OAM_XFLIP
+	db 16, 24, 18, OAM_XFLIP
 ```
 
 The flames of one of the blasts being cut-off is addressed below, though that specific fix will cause a byte overflow, forcing one to rearrange `anim2.asm`.
@@ -743,17 +886,17 @@ The flames of one of the blasts being cut-off is addressed below, though that sp
 -	db 19 ; size
 +	db 20 ; size
 	...
-	db -8, 8, 11, (1 << OAM_X_FLIP)
-	db -8, 16, 10, (1 << OAM_X_FLIP)
--	db 0, 24, 10, (1 << OAM_X_FLIP)
-+	db 0, 24, 12, (1 << OAM_X_FLIP)
-	db 0, 16, 13, (1 << OAM_X_FLIP)
-	db 0, 8, 14, (1 << OAM_X_FLIP)
-	db 8, 8, 17, (1 << OAM_X_FLIP)
-	db 8, 16, 16, (1 << OAM_X_FLIP)
-	db 8, 24, 15, (1 << OAM_X_FLIP)
-+	db 16, 16, 19, (1 << OAM_X_FLIP)
-	db 16, 24, 18, (1 << OAM_X_FLIP)
+	db -8, 8, 11, OAM_XFLIP
+	db -8, 16, 10, OAM_XFLIP
+-	db 0, 24, 10, OAM_XFLIP
++	db 0, 24, 12, OAM_XFLIP
+	db 0, 16, 13, OAM_XFLIP
+	db 0, 8, 14, OAM_XFLIP
+	db 8, 8, 17, OAM_XFLIP
+	db 8, 16, 16, OAM_XFLIP
+	db 8, 24, 15, OAM_XFLIP
++	db 16, 16, 19, OAM_XFLIP
+	db 16, 24, 18, OAM_XFLIP
 
 .data_ac6d2
 -	db 19 ; size
@@ -774,19 +917,139 @@ The flames of one of the blasts being cut-off is addressed below, though that sp
 .data_ac71f
 	db 29 ; size
 	...
-	db -8, 8, 11, (1 << OAM_X_FLIP)
-	db -8, 16, 10, (1 << OAM_X_FLIP)
--	db 0, 24, 10, (1 << OAM_X_FLIP)
-+	db 0, 24, 12, (1 << OAM_X_FLIP)
-	db 0, 16, 13, (1 << OAM_X_FLIP)
-	db 0, 8, 14, (1 << OAM_X_FLIP)
-	db 8, 8, 17, (1 << OAM_X_FLIP)
-	db 8, 16, 16, (1 << OAM_X_FLIP)
-	db 8, 24, 15, (1 << OAM_X_FLIP)
-	db 16, 24, 18, (1 << OAM_X_FLIP)
+	db -8, 8, 11, OAM_XFLIP
+	db -8, 16, 10, OAM_XFLIP
+-	db 0, 24, 10, OAM_XFLIP
++	db 0, 24, 12, OAM_XFLIP
+	db 0, 16, 13, OAM_XFLIP
+	db 0, 8, 14, OAM_XFLIP
+	db 8, 8, 17, OAM_XFLIP
+	db 8, 16, 16, OAM_XFLIP
+	db 8, 24, 15, OAM_XFLIP
+	db 16, 24, 18, OAM_XFLIP
 ```
 
 ## Text
+
+### Typos in unused strings
+
+Two pieces of unused text contain typos.
+
+**Fix:** Edit `UnusedText0096` in [src/text/text1.asm](https://github.com/pret/poketcg/blob/master/src/text/text1.asm):
+```diff
+-   line "Payalysis"
++	line "Paralysis"
+```
+
+Edit `UnusedText00d5`, still in `text1.asm`:
+```diff
+-	text "A Transmission Error occured."
++	text "A Transmission Error occurred."
+	done
+```
+
+### Misspelled "chosen" system text string
+
+The word "chosen" is misspelled as "choosen" in one piece of system text. Fixing it is a tad more involved than the rest.
+
+**Fix:** Edit `NoAttackMayBeChoosenText` in [src/text/text1.asm](https://github.com/pret/poketcg/blob/master/src/text/text1.asm):
+```diff
+-NoAttackMayBeChoosenText:
+-	text "No Attacks may be choosen."
++NoAttackMayBeChosenText:
++	text "No Attacks may be chosen."
+    done
+```
+
+Next, correct the corresponding label name in [src/text/text_offsets.asm](https://github.com/pret/poketcg/blob/master/src/text/text_offsets.asm):
+```diff
+	textpointer ThereAreNoTrainerCardsInDiscardPileText            ; 0x00c4
+-	textpointer NoAttackMayBeChoosenText                           ; 0x00c5
++	textpointer NoAttackMayBeChosenText                            ; 0x00c5
+	textpointer YouDidNotReceiveAnAttackToMirrorMoveText           ; 0x00c6
+```
+
+Lastly, you will want to update every instance of "NoAttackMayBeChoosenText" in [src/engine/duel/effect_functions.asm](https://github.com/pret/poketcg/blob/master/src/engine/duel/effect_functions.asm) (there are four of them):
+```diff
+-	ldtx hl, NoAttackMayBeChoosenText
++	ldtx hl, NoAttackMayBeChosenText
+```
+
+### Missing space
+
+The description for Mewtwo's Energy Absorption move is missing a space between "Pile" and "to".
+
+**Fix:** Edit `Choose2EnergyCardsFromDiscardPileToAttachText` in [src/text/text2.asm](https://github.com/pret/poketcg/blob/master/src/text/text2.asm):
+```diff
+	text "Choose 2 Energy cards from the"
+-	line "Discard Pileto attach to a Pokémon."
++	line "Discard Pile to attach to a Pokémon."
+```
+
+### Misspelled status effect message
+
+The message reporting that Poison and Confusion had no effect misspells "effect".
+
+**Fix:** Edit `ThereWasNoEffectFromPoisonConfusionText` in [src/text/text2.asm](https://github.com/pret/poketcg/blob/master/src/text/text2.asm):
+```diff
+-	text "There was no effet"
++	text "There was no effect"
+	line "from Poison, Confusion."
+```
+
+### Promotional Flying Pikachu typo
+
+The message for receiving the promotional Flying Pikachu card ironically misspells "Promotional".
+
+**Fix:** Edit `ReceivedPromotionalFlyingPikachuText` in [src/text/text2.asm](https://github.com/pret/poketcg/blob/master/src/text/text2.asm):
+```diff
+-	text "<RAMNAME> received a Promotinal"
++	text "<RAMNAME> received a Promotional"
+	line "card Flyin' Pikachu!"
+```
+
+### Legendary Zapdos card has a typo
+
+The Legendary Zapdos card misspells "Legendary" in its description.
+
+**Fix:** Edit `LegendaryZapdosDescriptionText` in [src/text/text3.asm](https://github.com/pret/poketcg/blob/master/src/text/text3.asm):
+```diff
+-	line "Legandary Zapdos!"
++	line "Legendary Zapdos!"
+```
+
+### Doctor Mason misspells Exeggcute's name
+
+One of Doctor Mason's emails misspells Exeggcute's name as "Exeggute".
+
+**Fix:** Edit `Mail6Part1Text` in [src/text/text4.asm](https://github.com/pret/poketcg/blob/master/src/text/text4.asm):
+```diff
+-	line "Exeggute and Exeggutor at an"
++	line "Exeggcute and Exeggutor at an"
+```
+
+### Clerk's Challenge Cup dialogue has an extra 'the'
+
+The Clerk mistakenly repeats "the" twice when describing the Challenge Hall.
+
+**Fix:** Edit `Clerk9ChallengeCupOverText` in [src/text/text5.asm](https://github.com/pret/poketcg/blob/master/src/text/text5.asm):
+```diff
+-	line "Challenge Hall! This is where the"
++	line "Challenge Hall! This is where"
+    line "the Challenge Cup is held. The"
+	done
+```
+
+### Ronald's Challenge Cup dialogue has a typo
+
+Ronald was so angry that he atomized the "l" out of "pulverize".
+
+**Fix:** Edit `RonaldChallengeCup1LostActive2Text` in [src/text/text5.asm](https://github.com/pret/poketcg/blob/master/src/text/text5.asm):
+```diff
+-	line "Cup! Of course I'll puverize you!"
++	line "Cup! Of course I'll pulverize you!"
+	done
+```
 
 ### Challenge host uses wrong name for the first rival
 
@@ -800,7 +1063,52 @@ When playing the challenge cup, player name is used instead of rival name before
 +	text "Presently, <RAMTEXT> is still"
 ```
 
+### Courtney's defeat dialogue has a typo
+
+After defeating Courtney at the Pokémon Dome Club, her dialogue is grammatically incorrect.
+
+**Fix:** Edit `Text0579` in [src/text/text6.asm](https://github.com/pret/poketcg/blob/master/src/text/text6.asm):
+```diff
+-	line "But that's no suprise, seeing "
++	line "But that's no surprise, seeing "
+	done
+```
+
+### Lightning Club dialogue has a typo
+
+Brandon's dialogue in the Lightning club is grammatically incorrect.
+
+**Fix:** Edit `Text0629` in [src/text/text7.asm](https://github.com/pret/poketcg/blob/master/src/text/text7.asm):
+```diff
+-	line "to keep it 'em lit!"
++	line "to keep 'em lit!"
+	done
+```
+
+### Brittany's defeat dialogue has a typo
+
+After defeating Brittany in the Grass Club, her dialogue is grammatically incorrect.
+
+**Fix:** Edit `Text06e7` in [src/text/text8.asm](https://github.com/pret/poketcg/blob/master/src/text/text8.asm):
+```diff
+	text "Humph! Whenever I lose, I "
+-	line "get irritated me!"
++	line "get irritated!"
+	done
+```
+
+### Ronald's Legendary Card dialogue has a typo
+
+Ronald's spiel on the Legendary Pokémon Cards is missing a contraction.
+
+**Fix:** Edit `Text073f` in [src/text/text9.asm](https://github.com/pret/poketcg/blob/master/src/text/text9.asm):
+```diff
+-	line "And this time, I not gonna lose!"
++	line "And this time, I'm not gonna lose!"
+```
+
 ### Both Ninetales cards misspell its name
+
 The name string used for both NinetalesLv32 and NinetalesLv35 misspells the Pokémon's name as "Ninetails".
 
 **Fix:** Edit `NinetalesName` in [src/text/text10.asm](https://github.com/pret/poketcg/blob/master/src/text/text10.asm):
@@ -809,4 +1117,20 @@ NinetalesName:
 -	text "Ninetails"
 +	text "Ninetales"
 	done
+```
+
+### Missing acute accents
+
+The following instances of "Poké" are missing the acute accent (thus being incorrectly rendered as "Poke").
+
+**Fix:** Edit `VoltorbDescription` in [src/text/text11.asm](https://github.com/pret/poketcg/blob/master/src/text/text11.asm):
+```diff
+-	line "Easily mistaken for a Poke Ball, it"
++	line "Easily mistaken for a Poké Ball, it"
+```
+
+**Fix:** Edit `ClefairysMetronomeDescription` in [src/text/text12.asm](https://github.com/pret/poketcg/blob/master/src/text/text12.asm):
+```diff
+-	line "Pokemon is, Clefairy's type is"
++	line "Pokémon is, Clefairy's type is"
 ```

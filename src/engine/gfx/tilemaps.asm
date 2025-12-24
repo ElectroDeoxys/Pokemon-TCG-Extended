@@ -6,7 +6,7 @@ MACRO tilemap
 ENDM
 
 Tilemaps:
-	table_width 4, Tilemaps
+	table_width 4
 	tilemap OverworldMapTilemap,               TILESET_OVERWORLD_MAP               ; TILEMAP_OVERWORLD_MAP
 	tilemap MasonLaboratoryTilemap,            TILESET_MASON_LABORATORY            ; TILEMAP_MASON_LABORATORY
 	tilemap ChallengeMachineMapEventTilemap,   TILESET_MASON_LABORATORY            ; TILEMAP_CHALLENGE_MACHINE_MAP_EVENT

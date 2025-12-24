@@ -1410,7 +1410,7 @@ ProcessPlayedPokemonCard::
 	ld [hl], a
 	ldtx hl, WillUseThePokemonPowerText
 	call DrawWideTextBox_WaitForInput
-	call Func_7415
+	call ResetAttackAnimationIsPlaying
 	ld a, EFFECTCMDTYPE_PKMN_POWER_TRIGGER
 	jp TryExecuteEffectCommandFunction
 
@@ -1549,7 +1549,7 @@ UseAttackOrPokemonPower::
 ;	fallthrough
 
 PlayAttackAnimation_DealAttackDamage::
-	call Func_7415
+	call ResetAttackAnimationIsPlaying
 	ld a, [wLoadedAttackCategory]
 	and RESIDUAL
 	jr nz, .deal_damage
@@ -1650,7 +1650,7 @@ HandleConfusionDamageToSelf::
 
 ; use Pokemon Power
 UsePokemonPower::
-	call Func_7415
+	call ResetAttackAnimationIsPlaying
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
 	call TryExecuteEffectCommandFunction
 	jr c, DisplayUsePokemonPowerScreen_WaitForInput
@@ -1797,7 +1797,7 @@ DealConfusionDamageToSelf::
 	push af
 	xor a
 	ld [wNoDamageOrEffect], a
-	bank1call Func_7415
+	bank1call ResetAttackAnimationIsPlaying
 	ld a, [wTempNonTurnDuelistCardID + 0]
 	ld e, a
 	ld a, [wTempNonTurnDuelistCardID + 1]
@@ -1827,7 +1827,7 @@ DealConfusionDamageToSelf::
 ; given a damage value at wDamage:
 ; - if the non-turn holder's arena card is weak to the turn holder's arena card color: double damage
 ; - if the non-turn holder's arena card resists the turn holder's arena card color: reduce damage by 30
-; - also apply Pluspower, Defender, and other kinds of damage reduction accordingly
+; - also apply PlusPower, Defender, and other kinds of damage reduction accordingly
 ; return resulting damage in de
 ApplyDamageModifiers_DamageToTarget::
 	xor a
@@ -1883,7 +1883,7 @@ ApplyDamageModifiers_DamageToTarget::
 	set RESISTANCE, [hl]
 .check_pluspower_and_defender
 	ld b, CARD_LOCATION_ARENA
-	call ApplyAttachedPluspower
+	call ApplyAttachedPlusPower
 	call SwapTurn
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
@@ -1946,7 +1946,7 @@ ApplyDamageModifiers_DamageToSelf::
 	set RESISTANCE, [hl]
 .not_resistant
 	ld b, CARD_LOCATION_ARENA
-	call ApplyAttachedPluspower
+	call ApplyAttachedPlusPower
 	ld b, CARD_LOCATION_ARENA
 	call ApplyAttachedDefender
 	bit 7, d ; test for underflow
@@ -1955,8 +1955,8 @@ ApplyDamageModifiers_DamageToSelf::
 	ld de, 0
 	ret
 
-; increases de by 10 points for each Pluspower found in location b
-ApplyAttachedPluspower::
+; increases de by 10 points for each PlusPower found in location b
+ApplyAttachedPlusPower::
 	push de
 	call GetTurnDuelistVariable
 	ld de, PLUSPOWER
@@ -2116,12 +2116,12 @@ DealDamageToPlayAreaPokemon::
 	or a
 	jr z, .turn_swapped
 	ld b, CARD_LOCATION_ARENA
-	call ApplyAttachedPluspower
+	call ApplyAttachedPlusPower
 	jr .next
 .turn_swapped
 	call SwapTurn
 	ld b, CARD_LOCATION_ARENA
-	call ApplyAttachedPluspower
+	call ApplyAttachedPlusPower
 	call SwapTurn
 .next
 	ld a, [wLoadedAttackCategory]
@@ -2260,7 +2260,7 @@ GetPlayAreaCardRetreatCost::
 
 ; move all turn holder's card with ID at de to the discard pile
 ; that are currently in the Play Area
-; this is used to discard all attached Pluspowers and Defenders
+; this is used to discard all attached PlusPowers and Defenders
 MoveCardToDiscardPileIfInPlayArea::
 	ld c, e
 	ld b, d

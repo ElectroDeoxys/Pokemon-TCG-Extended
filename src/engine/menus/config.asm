@@ -32,13 +32,13 @@ _PauseMenu_Config:
 	inc [hl]
 	call ConfigScreenHandleDPadInput
 	ldh a, [hKeysPressed]
-	and B_BUTTON | START
+	and PAD_B | PAD_START
 	jr nz, .asm_105ab
 	ld a, [wConfigCursorYPos]
 	cp $02
 	jr nz, .asm_10588
 	ldh a, [hKeysPressed]
-	and A_BUTTON
+	and PAD_A
 	jr z, .asm_10588
 .asm_105ab
 	ld a, SFX_CONFIRM
@@ -145,7 +145,7 @@ DuelAnimationSettings:
 ; text printing delay
 TextDelaySettings:
 	; slow to fast
-	db 6, 4, 2, 1, 0
+	db TEXT_SPEED_1, TEXT_SPEED_2, TEXT_SPEED_3, TEXT_SPEED_4, TEXT_SPEED_5
 
 UpdateConfigMenuCursor:
 	push af
@@ -228,7 +228,7 @@ ExitSettingsCursorPosition:
 
 ConfigScreenHandleDPadInput:
 	ldh a, [hDPadHeld]
-	and D_PAD
+	and PAD_CTRL_PAD
 	ret z
 	farcall GetDirectionFromDPad
 	ld hl, ConfigScreenDPadHandlers
