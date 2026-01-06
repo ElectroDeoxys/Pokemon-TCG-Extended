@@ -1243,6 +1243,210 @@ Func_80baa:
 .ChallengeMachine
 	db $0a, $00, TILEMAP_CHALLENGE_MACHINE_MAP_EVENT
 
+; draws [wCurPortrait] at coordinates bc, corresponding
+; to portrait slot given in [wPortraitSlot] and
+; emotion given in [wPortraitEmotion]
+_DrawPortrait::
+	push hl
+	ld l, $0a ; Portraits
+	ld a, [wCurPortrait]
+	call GetMapDataPointer
+	call LoadGraphicsPointerFromHL
+	call .Draw
+	call .LoadPalette
+	pop hl
+	ret
+
+.Draw:
+	push de
+	push bc
+	; adjusts wTempPointer according to emotion
+	; each emotion portrait is 0x240 bytes long
+	ld a, [wPortraitEmotion]
+	ld e, a
+	add a
+	add a
+	add a
+	add e  ; *$9
+	swap a
+	ld e, a
+	and $f0
+	ld l, a
+	ld a, e
+	and $0f
+	ld h, a ; *$90
+	add hl, hl ; *$120
+	add hl, hl ; *$240
+	ld a, [wTempPointer]
+	ld e, a
+	ld a, [wTempPointer + 1]
+	ld d, a
+	add hl, de
+
+	; copy graphics to VRAM
+	ld a, [wPortraitSlot]
+	swap a
+	set 7, a
+	ld d, a
+	ld e, 0
+	ld b, 36
+	ld c, TILE_SIZE
+	call CopyGfxDataFromTempBank
+	pop bc
+
+	; tilemap
+	call BCCoordToBGMap0Address
+	push de
+
+	ld l, e
+	ld h, d
+	ld de, TILEMAP_WIDTH - 6
+	ld a, [wPortraitSlot]
+	ld b, 6
+.loop_tilemap
+	ld c, 6
+.loop_tilemap_inner
+	ld [hli], a
+	inc a
+	dec c
+	jr nz, .loop_tilemap_inner
+	add hl, de ; next row
+	dec b
+	jr nz, .loop_tilemap
+
+	; attribute map
+	ld a, [wCurPortrait]
+	or a ; cp PORTRAIT_PLAYER
+	ld de, 36 tiles
+	jr z, .got_attr_offset
+	ld de, (36 * 3) tiles
+.got_attr_offset
+	ld a, [wTempPointer]
+	ld l, a
+	ld a, [wTempPointer + 1]
+	ld h, a
+	add hl, de
+	ld e, l
+	ld d, h
+	ld b, HIGH(wDecompressionSecondaryBuffer)
+	call InitDataDecompression
+
+	; decompress correct attribute portrait
+	ld a, [wPortraitEmotion]
+	inc a
+	ld e, a
+.loop_decompress
+	push de
+	ld bc, 36
+	ld de, wDecompressionBuffer
+	call DecompressDataFromBank
+	pop de
+	dec e
+	jr nz, .loop_decompress
+
+	ld a, TRUE
+	ld [wBGMapCGBMode], a
+	ld a, [wPortraitSlot]
+	cp PORTRAIT_SLOT_1
+	ld a, $2
+	jr z, .got_pal_idx
+	ld a, $5
+.got_pal_idx
+	ld [wd291], a
+	ld hl, wDecompressionBuffer
+	ld b, 36
+	call Func_80148
+
+	pop hl
+	call BankswitchVRAM1
+	ld de, wDecompressionBuffer
+	ld b, 6
+.loop_attrmap
+	ld c, 6
+.loop_attrmap_inner
+	ld a, [de]
+	inc de
+	ld [hli], a
+	inc a
+	dec c
+	jr nz, .loop_attrmap_inner
+	ld a, TILEMAP_WIDTH - 6 ; next row
+	add l
+	ld l, a
+	ld a, h
+	adc 0
+	ld h, a
+	dec b
+	jr nz, .loop_attrmap
+	call BankswitchVRAM0
+
+	pop de
+	ret
+
+.LoadPalette:
+	ld hl, .PortraitPals
+	ld a, [wCurPortrait]
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [hl]
+	call LoadPaletteDataToBuffer
+
+	ld hl, wLoadedPalData
+	ld a, [wPortraitSlot]
+	cp PORTRAIT_SLOT_1
+	ld b, $2
+	jr z, .got_idx
+	ld b, $5
+.got_idx
+	ld c, 3
+	jp LoadPaletteDataFromHL
+
+.PortraitPals:
+	table_width 1
+	db PALETTE_PLAYER_PORTRAIT    ; PORTRAIT_PLAYER
+	db PALETTE_RONALD_PORTRAIT    ; PORTRAIT_RONALD
+	db PALETTE_SAM_PORTRAIT       ; PORTRAIT_SAM
+	db PALETTE_IMAKUNI_PORTRAIT   ; PORTRAIT_IMAKUNI
+	db PALETTE_NIKKI_PORTRAIT     ; PORTRAIT_NIKKI
+	db PALETTE_RICK_PORTRAIT      ; PORTRAIT_RICK
+	db PALETTE_KEN_PORTRAIT       ; PORTRAIT_KEN
+	db PALETTE_AMY_PORTRAIT       ; PORTRAIT_AMY
+	db PALETTE_ISAAC_PORTRAIT     ; PORTRAIT_ISAAC
+	db PALETTE_MITCH_PORTRAIT     ; PORTRAIT_MITCH
+	db PALETTE_GENE_PORTRAIT      ; PORTRAIT_GENE
+	db PALETTE_MURRAY_PORTRAIT    ; PORTRAIT_MURRAY
+	db PALETTE_COURTNEY_PORTRAIT  ; PORTRAIT_COURTNEY
+	db PALETTE_STEVE_PORTRAIT     ; PORTRAIT_STEVE
+	db PALETTE_JACK_PORTRAIT      ; PORTRAIT_JACK
+	db PALETTE_ROD_PORTRAIT       ; PORTRAIT_ROD
+	db PALETTE_JOSEPH_PORTRAIT    ; PORTRAIT_JOSEPH
+	db PALETTE_DAVID_PORTRAIT     ; PORTRAIT_DAVID
+	db PALETTE_ERIK_PORTRAIT      ; PORTRAIT_ERIK
+	db PALETTE_JOHN_PORTRAIT      ; PORTRAIT_JOHN
+	db PALETTE_ADAM_PORTRAIT      ; PORTRAIT_ADAM
+	db PALETTE_JONATHAN_PORTRAIT  ; PORTRAIT_JONATHAN
+	db PALETTE_JOSHUA_PORTRAIT    ; PORTRAIT_JOSHUA
+	db PALETTE_NICHOLAS_PORTRAIT  ; PORTRAIT_NICHOLAS
+	db PALETTE_BRANDON_PORTRAIT   ; PORTRAIT_BRANDON
+	db PALETTE_MATTHEW_PORTRAIT   ; PORTRAIT_MATTHEW
+	db PALETTE_RYAN_PORTRAIT      ; PORTRAIT_RYAN
+	db PALETTE_ANDREW_PORTRAIT    ; PORTRAIT_ANDREW
+	db PALETTE_CHRIS_PORTRAIT     ; PORTRAIT_CHRIS
+	db PALETTE_MICHAEL_PORTRAIT   ; PORTRAIT_MICHAEL
+	db PALETTE_DANIEL_PORTRAIT    ; PORTRAIT_DANIEL
+	db PALETTE_ROBERT_PORTRAIT    ; PORTRAIT_ROBERT
+	db PALETTE_BRITTANY_PORTRAIT  ; PORTRAIT_BRITTANY
+	db PALETTE_KRISTIN_PORTRAIT   ; PORTRAIT_KRISTIN
+	db PALETTE_HEATHER_PORTRAIT   ; PORTRAIT_HEATHER
+	db PALETTE_SARA_PORTRAIT      ; PORTRAIT_SARA
+	db PALETTE_AMANDA_PORTRAIT    ; PORTRAIT_AMANDA
+	db PALETTE_JENNIFER_PORTRAIT  ; PORTRAIT_JENNIFER
+	db PALETTE_JESSICA_PORTRAIT   ; PORTRAIT_JESSICA
+	db PALETTE_STEPHANIE_PORTRAIT ; PORTRAIT_STEPHANIE
+	db PALETTE_AARON_PORTRAIT     ; PORTRAIT_AARON
+	assert_table_length NUM_PORTRAITS
+
 SpriteNullAnimationPointer::
 	dw SpriteNullAnimationFrame
 

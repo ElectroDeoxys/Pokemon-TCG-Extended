@@ -56,8 +56,6 @@ Tilemaps:
 	tilemap SolidTiles2Tilemap,                TILESET_SOLID_TILES_1               ; TILEMAP_SOLID_TILES_2
 	tilemap SolidTiles3Tilemap,                TILESET_SOLID_TILES_1               ; TILEMAP_SOLID_TILES_3
 	tilemap SolidTiles4Tilemap,                TILESET_SOLID_TILES_2               ; TILEMAP_SOLID_TILES_4
-	tilemap PlayerTilemap,                     TILESET_PLAYER                      ; TILEMAP_PLAYER
-	tilemap OpponentTilemap,                   TILESET_RONALD                      ; TILEMAP_OPPONENT
 	tilemap TitleScreenTilemap,                TILESET_TITLE_SCREEN                ; TILEMAP_TITLE_SCREEN
 	tilemap CopyrightTilemap,                  TILESET_COPYRIGHT                   ; TILEMAP_COPYRIGHT
 	tilemap NintendoTilemap,                   TILESET_NINTENDO                    ; TILEMAP_NINTENDO

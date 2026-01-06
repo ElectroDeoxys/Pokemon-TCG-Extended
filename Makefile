@@ -40,7 +40,8 @@ clean: tidy
 	     \( -iname '*.1bpp' \
 	        -o -iname '*.2bpp' \
 	        -o -iname '*.pal' \
-	        -o -iname '*.attrmap' \) \
+	        -o -iname '*.attrmap' \
+	        -o -iname '*.lz' \) \
 	     -delete
 
 	find src/data \
@@ -106,8 +107,6 @@ src/gfx/booster_packs/evolution.2bpp: RGBGFXFLAGS += -x 10
 src/gfx/booster_packs/laboratory.2bpp: RGBGFXFLAGS += -x 10
 src/gfx/booster_packs/mystery.2bpp: RGBGFXFLAGS += -x 10
 
-src/gfx/cards/%.2bpp: RGBGFXFLAGS += -Z
-
 src/gfx/duel/anims/result.2bpp: RGBGFXFLAGS += -x 10
 src/gfx/duel/other.2bpp: RGBGFXFLAGS += -x 7
 
@@ -139,10 +138,13 @@ src/gfx/titlescreen/title_screen.2bpp: RGBGFXFLAGS += -x 12
 
 %.png: ;
 
-%.attrmap: %.png
-	$(RGBGFX) $(rgbgfx) -Z -P -A $<
-	tools/pal_fix $(tools/pal_fix) $*.pal
+src/gfx/cards/%.attrmap: src/gfx/cards/%.png
+	$(RGBGFX) $(RGBGFXFLAGS) -Z -P -A $<
+	tools/pal_fix $(tools/pal_fix) src/gfx/cards/$*.pal
 	tools/attr_fix $(tools/attr_fix) $@
+
+src/gfx/duelists/%.attrmap: src/gfx/duelists/%.png
+	$(RGBGFX) $(RGBGFXFLAGS) -Z -P -A $<
 
 %.pal: ;
 

@@ -140,7 +140,7 @@ Ronald1NPCHeader:
 	db $00
 	dw Script_Ronald
 	tx RonaldNPCName
-	db RONALD_PIC
+	db PORTRAIT_RONALD
 	db INVINCIBLE_RONALD_DECK_ID
 	db MUSIC_RONALD
 	db MUSIC_MATCH_START_2
@@ -152,7 +152,7 @@ Ronald2NPCHeader:
 	db $00
 	dw Script_Ronald
 	tx RonaldNPCName
-	db RONALD_PIC
+	db PORTRAIT_RONALD
 	db INVINCIBLE_RONALD_DECK_ID
 	db MUSIC_RONALD
 	db MUSIC_MATCH_START_2
@@ -164,7 +164,7 @@ Ronald3NPCHeader:
 	db $00
 	dw Script_Ronald
 	tx RonaldNPCName
-	db RONALD_PIC
+	db PORTRAIT_RONALD
 	db INVINCIBLE_RONALD_DECK_ID
 	db MUSIC_RONALD
 	db MUSIC_MATCH_START_2
@@ -188,7 +188,7 @@ ImakuniNPCHeader:
 	db $00
 	dw Script_Imakuni
 	tx ImakuniNPCName
-	db IMAKUNI_PIC
+	db PORTRAIT_IMAKUNI
 	db IMAKUNI_DECK_ID
 	db MUSIC_IMAKUNI
 	db MUSIC_MATCH_START_1
@@ -200,7 +200,7 @@ SamNPCHeader:
 	db $00
 	dw Script_Sam
 	tx SamNPCName
-	db SAM_PIC
+	db PORTRAIT_SAM
 	db SAMS_NORMAL_DECK_ID
 	db MUSIC_DUEL_THEME_1
 	db MUSIC_MATCH_START_1
@@ -392,7 +392,7 @@ ChrisNPCHeader:
 	db $00
 	dw Script_Chris
 	tx ChrisNPCName
-	db CHRIS_PIC
+	db PORTRAIT_CHRIS
 	db MUSCLES_FOR_BRAINS_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -404,7 +404,7 @@ MichaelNPCHeader:
 	db $00
 	dw Script_Michael
 	tx MichaelNPCName
-	db MICHAEL_PIC
+	db PORTRAIT_MICHAEL
 	db HEATED_BATTLE_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -416,7 +416,7 @@ JessicaNPCHeader:
 	db $00
 	dw Script_Jessica
 	tx JessicaNPCName
-	db JESSICA_PIC
+	db PORTRAIT_JESSICA
 	db LOVE_TO_BATTLE_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -428,7 +428,7 @@ MitchNPCHeader:
 	db $00
 	dw Script_Mitch
 	tx MitchNPCName
-	db MITCH_PIC
+	db PORTRAIT_MITCH
 	db FIRST_STRIKE_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -440,7 +440,7 @@ MatthewNPCHeader:
 	db $00
 	dw Script_Matthew
 	tx MatthewNPCName
-	db MATTHEW_PIC
+	db PORTRAIT_MATTHEW
 	db HARD_POKEMON_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -452,7 +452,7 @@ RyanNPCHeader:
 	db $00
 	dw Script_Ryan
 	tx RyanNPCName
-	db RYAN_PIC
+	db PORTRAIT_RYAN
 	db EXCAVATION_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -464,7 +464,7 @@ AndrewNPCHeader:
 	db $00
 	dw Script_Andrew
 	tx AndrewNPCName
-	db ANDREW_PIC
+	db PORTRAIT_ANDREW
 	db BLISTERING_POKEMON_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -476,7 +476,7 @@ GeneNPCHeader:
 	db $00
 	dw Script_Gene
 	tx GeneNPCName
-	db GENE_PIC
+	db PORTRAIT_GENE
 	db ROCK_CRUSHER_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -488,7 +488,7 @@ SaraNPCHeader:
 	db $00
 	dw Script_Sara
 	tx SaraNPCName
-	db SARA_PIC
+	db PORTRAIT_SARA
 	db WATERFRONT_POKEMON_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -500,7 +500,7 @@ AmandaNPCHeader:
 	db $00
 	dw Script_Amanda
 	tx AmandaNPCName
-	db AMANDA_PIC
+	db PORTRAIT_AMANDA
 	db LONELY_FRIENDS_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -512,7 +512,7 @@ JoshuaNPCHeader:
 	db $00
 	dw Script_Joshua
 	tx JoshuaNPCName
-	db JOSHUA_PIC
+	db PORTRAIT_JOSHUA
 	db SOUND_OF_THE_WAVES_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -524,7 +524,7 @@ AmyNPCHeader:
 	db NPC_FLAG_DIRECTIONLESS
 	dw Script_Amy
 	tx AmyNPCName
-	db AMY_PIC
+	db PORTRAIT_AMY
 	db GO_GO_RAIN_DANCE_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -536,7 +536,7 @@ JenniferNPCHeader:
 	db $00
 	dw Script_Jennifer
 	tx JenniferNPCName
-	db JENNIFER_PIC
+	db PORTRAIT_JENNIFER
 	db PIKACHU_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -548,7 +548,7 @@ NicholasNPCHeader:
 	db $00
 	dw Script_Nicholas
 	tx NicholasNPCName
-	db NICHOLAS_PIC
+	db PORTRAIT_NICHOLAS
 	db BOOM_BOOM_SELFDESTRUCT_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -560,7 +560,7 @@ BrandonNPCHeader:
 	db $00
 	dw Script_Brandon
 	tx BrandonNPCName
-	db BRANDON_PIC
+	db PORTRAIT_BRANDON
 	db POWER_GENERATOR_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -572,7 +572,7 @@ IsaacNPCHeader:
 	db $00
 	dw Script_Isaac
 	tx IsaacNPCName
-	db ISAAC_PIC
+	db PORTRAIT_ISAAC
 	db ZAPPING_SELFDESTRUCT_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -584,7 +584,7 @@ BrittanyNPCHeader:
 	db $00
 	dw Script_Brittany
 	tx BrittanyNPCName
-	db BRITTANY_PIC
+	db PORTRAIT_BRITTANY
 	db ETCETERA_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -596,7 +596,7 @@ KristinNPCHeader:
 	db $00
 	dw Script_Kristin
 	tx KristinNPCName
-	db KRISTIN_PIC
+	db PORTRAIT_KRISTIN
 	db FLOWER_GARDEN_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -608,7 +608,7 @@ HeatherNPCHeader:
 	db $00
 	dw Script_Heather
 	tx HeatherNPCName
-	db HEATHER_PIC
+	db PORTRAIT_HEATHER
 	db KALEIDOSCOPE_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -620,7 +620,7 @@ NikkiNPCHeader:
 	db $00
 	dw Script_Nikki
 	tx NikkiNPCName
-	db NIKKI_PIC
+	db PORTRAIT_NIKKI
 	db FLOWER_POWER_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -632,7 +632,7 @@ RobertNPCHeader:
 	db $00
 	dw Script_Robert
 	tx RobertNPCName
-	db ROBERT_PIC
+	db PORTRAIT_ROBERT
 	db GHOST_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -644,7 +644,7 @@ DanielNPCHeader:
 	db $00
 	dw Script_Daniel
 	tx DanielNPCName
-	db DANIEL_PIC
+	db PORTRAIT_DANIEL
 	db NAP_TIME_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -656,7 +656,7 @@ StephanieNPCHeader:
 	db $00
 	dw Script_Stephanie
 	tx StephanieNPCName
-	db STEPHANIE_PIC
+	db PORTRAIT_STEPHANIE
 	db STRANGE_POWER_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -668,7 +668,7 @@ Murray1NPCHeader:
 	db $00
 	dw Script_Murray
 	tx MurrayNPCName
-	db MURRAY_PIC
+	db PORTRAIT_MURRAY
 	db STRANGE_PSYSHOCK_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -680,7 +680,7 @@ Murray2NPCHeader:
 	db NPC_FLAG_DIRECTIONLESS
 	dw Script_Murray
 	tx MurrayNPCName
-	db MURRAY_PIC
+	db PORTRAIT_MURRAY
 	db STRANGE_PSYSHOCK_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -692,7 +692,7 @@ JosephNPCHeader:
 	db $00
 	dw Script_Joseph
 	tx JosephNPCName
-	db JOSEPH_PIC
+	db PORTRAIT_JOSEPH
 	db FLYIN_POKEMON_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -704,7 +704,7 @@ DavidNPCHeader:
 	db $00
 	dw Script_David
 	tx DavidNPCName
-	db DAVID_PIC
+	db PORTRAIT_DAVID
 	db LOVELY_NIDORAN_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -716,7 +716,7 @@ ErikNPCHeader:
 	db $00
 	dw Script_Erik
 	tx ErikNPCName
-	db ERIK_PIC
+	db PORTRAIT_ERIK
 	db POISON_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -728,7 +728,7 @@ RickNPCHeader:
 	db $00
 	dw Script_Rick
 	tx RickNPCName
-	db RICK_PIC
+	db PORTRAIT_RICK
 	db WONDERS_OF_SCIENCE_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -740,7 +740,7 @@ JohnNPCHeader:
 	db $00
 	dw Script_John
 	tx JohnNPCName
-	db JOHN_PIC
+	db PORTRAIT_JOHN
 	db ANGER_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -752,7 +752,7 @@ AdamNPCHeader:
 	db $00
 	dw Script_Adam
 	tx AdamNPCName
-	db ADAM_PIC
+	db PORTRAIT_ADAM
 	db FLAMETHROWER_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -764,7 +764,7 @@ JonathanNPCHeader:
 	db $00
 	dw Script_Jonathan
 	tx JonathanNPCName
-	db JONATHAN_PIC
+	db PORTRAIT_JONATHAN
 	db RESHUFFLE_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_1
@@ -776,7 +776,7 @@ KenNPCHeader:
 	db $00
 	dw Script_Ken
 	tx KenNPCName
-	db KEN_PIC
+	db PORTRAIT_KEN
 	db FIRE_CHARGE_DECK_ID
 	db MUSIC_DUEL_THEME_2
 	db MUSIC_MATCH_START_2
@@ -788,7 +788,7 @@ CourtneyNPCHeader:
 	db $00
 	dw Script_Courtney
 	tx CourtneyNPCName
-	db COURTNEY_PIC
+	db PORTRAIT_COURTNEY
 	db LEGENDARY_MOLTRES_DECK_ID
 	db MUSIC_DUEL_THEME_3
 	db MUSIC_MATCH_START_3
@@ -800,7 +800,7 @@ SteveNPCHeader:
 	db $00
 	dw Script_Steve
 	tx SteveNPCName
-	db STEVE_PIC
+	db PORTRAIT_STEVE
 	db LEGENDARY_ZAPDOS_DECK_ID
 	db MUSIC_DUEL_THEME_3
 	db MUSIC_MATCH_START_3
@@ -812,7 +812,7 @@ JackNPCHeader:
 	db $00
 	dw Script_Jack
 	tx JackNPCName
-	db JACK_PIC
+	db PORTRAIT_JACK
 	db LEGENDARY_ARTICUNO_DECK_ID
 	db MUSIC_DUEL_THEME_3
 	db MUSIC_MATCH_START_3
@@ -824,7 +824,7 @@ RodNPCHeader:
 	db $00
 	dw Script_Rod
 	tx RodNPCName
-	db ROD_PIC
+	db PORTRAIT_ROD
 	db LEGENDARY_DRAGONITE_DECK_ID
 	db MUSIC_DUEL_THEME_3
 	db MUSIC_MATCH_START_3
@@ -1316,7 +1316,7 @@ AaronNPCHeader:
 	db $00
 	dw Script_Aaron
 	tx AaronNPCName
-	db AARON_PIC
+	db PORTRAIT_AARON
 	db LIGHTNING_AND_FIRE_DECK_ID
 	db MUSIC_DUEL_THEME_1
 	db MUSIC_MATCH_START_1

@@ -108,6 +108,7 @@ MainDuelLoop:
 	jr z, .active_duelist_lost_duel
 	ld a, DUEL_ANIM_DUEL_DRAW
 	ld c, MUSIC_MATCH_DRAW
+	ld e, EMOTION_NEUTRAL
 	ldtx hl, DuelWasADrawText
 	jr .handle_duel_finished
 .active_duelist_won_duel
@@ -119,6 +120,7 @@ MainDuelLoop:
 	ld [wDuelResult], a
 	ld a, DUEL_ANIM_DUEL_WIN
 	ld c, MUSIC_MATCH_VICTORY
+	ld e, EMOTION_SAD
 	ldtx hl, WonDuelText
 	jr .handle_duel_finished
 .active_duelist_lost_duel
@@ -130,12 +132,18 @@ MainDuelLoop:
 	ld [wDuelResult], a
 	ld a, DUEL_ANIM_DUEL_LOSS
 	ld c, MUSIC_MATCH_LOSS
+	ld e, EMOTION_HAPPY
 	ldtx hl, LostDuelText
 
 .handle_duel_finished
 	call PlayDuelAnimation
 	ld a, c
 	call PlaySong
+	; draw opponent's portrait corresponding to duel result
+	ld a, [wOpponentPortrait]
+	lb bc, 13, 1
+	call DrawOpponentPortrait
+
 	ld a, OPPONENT_TURN
 	ldh [hWhoseTurn], a
 	call DrawWideTextBox_PrintText
@@ -1422,10 +1430,6 @@ PrintDeckAndHandIconsAndNumberOfCards:
 	call LoadDuelDrawCardsScreenTiles
 	ld hl, DeckAndHandIconsTileData
 	call WriteDataBlocksToBGMap0
-	call BankswitchVRAM1
-	ld hl, DeckAndHandIconsCGBPalData
-	call WriteDataBlocksToBGMap0
-	call BankswitchVRAM0
 .skip_load_cards
 	call PrintPlayerNumberOfHandAndDeckCards
 	jp PrintOpponentNumberOfHandAndDeckCards
@@ -1492,18 +1496,6 @@ DeckAndHandIconsTileData:
 	db 13, 10, $fa, $fb,  0 ; player's hand icon
 	db $ff
 
-DeckAndHandIconsCGBPalData:
-; x, y, pals[], 0
-	db  8,  2, $3, $3, 0
-	db  8,  3, $3, $3, 0
-	db  2,  2, $3, $3, 0
-	db  2,  3, $3, $3, 0
-	db  7,  9, $3, $3, 0
-	db  7, 10, $3, $3, 0
-	db 13,  9, $3, $3, 0
-	db 13, 10, $3, $3, 0
-	db $ff
-
 ; draw the portraits of the two duelists and print their names.
 ; also draw an horizontal line separating the two sides.
 DrawDuelistPortraitsAndNames:
@@ -1535,6 +1527,7 @@ DrawDuelistPortraitsAndNames:
 	; opponent's portrait
 	ld a, [wOpponentPortrait]
 	lb bc, 13, 1
+	ld e, EMOTION_NEUTRAL
 	call DrawOpponentPortrait
 	; middle line
 	jp DrawDuelHorizontalSeparator
@@ -1985,6 +1978,7 @@ PrintReturnCardsToDeckDrawAgain:
 ; used to let the player know that there are no basic Pokemon in the hand and need to redraw
 DisplayNoBasicPokemonInHandScreen:
 	call EmptyScreen
+	call SetDefaultConsolePalettes
 	call LoadDuelCardSymbolTiles
 	lb de, 0, 0
 	lb bc, 20, 18
@@ -2015,6 +2009,7 @@ NoBasicPokemonCardListParameters:
 DisplayPracticeDuelPlayerHandScreen:
 	call CreateHandCardList
 	call EmptyScreen
+	call SetDefaultConsolePalettes
 	call LoadDuelCardSymbolTiles
 	lb de, 0, 0
 	lb bc, 20, 13

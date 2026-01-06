@@ -276,20 +276,6 @@ SolidTiles2::
 	dw 4
 	INCBIN "gfx/solid_tiles.2bpp"
 
-PlayerGfx::
-	dw 36
-	INCBIN "gfx/duelists/player.2bpp"
-
-DuelStarGfx::
-	dw $2
-	INCBIN "gfx/duel/anims/star.2bpp"
-
-DuelPowderGfx::
-	dw $1
-	INCBIN "gfx/duel/anims/powder.2bpp"
-
-SECTION "Gfx 4", ROMX
-
 OverworldMapTiles::
 	dw 193
 	INCBIN "gfx/overworld_map.2bpp"
@@ -297,6 +283,8 @@ OverworldMapTiles::
 MasonLaboratoryTilesetGfx::
 	dw 151
 	INCBIN "gfx/tilesets/masonlaboratory.2bpp"
+
+SECTION "Gfx 4", ROMX
 
 ClubEntranceTilesetGfx::
 	dw 129
@@ -322,13 +310,21 @@ GrassClubTilesetGfx::
 	dw 87
 	INCBIN "gfx/tilesets/grassclub.2bpp"
 
+LightningClubTilesetGfx::
+	dw 131
+	INCBIN "gfx/tilesets/lightningclub.2bpp"
+
+PsychicClubTilesetGfx::
+	dw 58
+	INCBIN "gfx/tilesets/psychicclub.2bpp"
+
+ScienceClubTilesetGfx::
+	dw 82
+	INCBIN "gfx/tilesets/scienceclub.2bpp"
+
 OWPlayerGfx::
 	dw $14
 	INCBIN "gfx/overworld_sprites/player.2bpp"
-
-DuelPetalGfx::
-	dw $1
-	INCBIN "gfx/duel/anims/petal.2bpp"
 
 AnimData2::
 	frame_table AnimFrameTable0
@@ -343,18 +339,6 @@ Palette109::
 	db 0
 
 SECTION "Gfx 5", ROMX
-
-LightningClubTilesetGfx::
-	dw 131
-	INCBIN "gfx/tilesets/lightningclub.2bpp"
-
-PsychicClubTilesetGfx::
-	dw 58
-	INCBIN "gfx/tilesets/psychicclub.2bpp"
-
-ScienceClubTilesetGfx::
-	dw 82
-	INCBIN "gfx/tilesets/scienceclub.2bpp"
 
 FireClubTilesetGfx::
 	dw 87
@@ -401,18 +385,6 @@ NintendoGfx::
 	dw 24
 	INCBIN "gfx/nintendo.2bpp"
 
-DuelPoisonGfx::
-	dw $4
-	INCBIN "gfx/duel/anims/poison.2bpp"
-
-AnimData3::
-	frame_table AnimFrameTable0
-	frame_data 8, 16, 0, 0
-	frame_data 9, 16, 0, 0
-	frame_data 0, 0, 0, 0
-
-SECTION "Gfx 6", ROMX
-
 ColosseumGfx::
 	dw 86
 	INCBIN "gfx/booster_packs/colosseum.2bpp"
@@ -425,9 +397,13 @@ MysteryGfx::
 	dw 86
 	INCBIN "gfx/booster_packs/mystery.2bpp"
 
-RonaldGfx::
-	dw 36
-	INCBIN "gfx/duelists/ronald.2bpp"
+AnimData3::
+	frame_table AnimFrameTable0
+	frame_data 8, 16, 0, 0
+	frame_data 9, 16, 0, 0
+	frame_data 0, 0, 0, 0
+
+SECTION "Gfx 6", ROMX
 
 CopyrightGfx::
 	dw 36
@@ -437,15 +413,9 @@ OWClerkGfx::
 	dw $8
 	INCBIN "gfx/overworld_sprites/clerk.2bpp"
 
-DuelSparkGfx::
-	dw $3
-	INCBIN "gfx/duel/anims/spark.2bpp"
-
-DuelHealGfx::
-	dw $2
-	INCBIN "gfx/duel/anims/heal.2bpp"
-
-SECTION "Gfx 7", ROMX
+OWLegendaryCardGfx::
+	dw $a
+	INCBIN "gfx/overworld_sprites/legendary_card.2bpp"
 
 LaboratoryGfx::
 	dw 86
@@ -477,8 +447,6 @@ AnimData5::
 	frame_data 4, 16, 0, 0
 	frame_data 0, 0, 0, 0
 
-SECTION "Gfx 8", ROMX
-
 TitleScreenGfx::
 	dw 212
 	INCBIN "gfx/titlescreen/title_screen.2bpp"
@@ -490,182 +458,6 @@ OWDrMasonGfx::
 OverworldMapOAMGfx::
 	dw $8
 	INCBIN "gfx/overworld_map_oam.2bpp"
-
-DuelWaterDropGfx::
-	dw $3
-	INCBIN "gfx/duel/anims/water_drop.2bpp"
-
-DuelSnowGfx::
-	dw $1
-	INCBIN "gfx/duel/anims/snow.2bpp"
-
-SECTION "Gfx 9", ROMX
-
-SamGfx::
-	dw 36
-	INCBIN "gfx/duelists/sam.2bpp"
-
-ImakuniGfx::
-	dw 36
-	INCBIN "gfx/duelists/imakuni.2bpp"
-
-NikkiGfx::
-	dw 36
-	INCBIN "gfx/duelists/nikki.2bpp"
-
-RickGfx::
-	dw 36
-	INCBIN "gfx/duelists/rick.2bpp"
-
-KenGfx::
-	dw 36
-	INCBIN "gfx/duelists/ken.2bpp"
-
-AmyGfx::
-	dw 36
-	INCBIN "gfx/duelists/amy.2bpp"
-
-IsaacGfx::
-	dw 36
-	INCBIN "gfx/duelists/isaac.2bpp"
-
-MitchGfx::
-	dw 36
-	INCBIN "gfx/duelists/mitch.2bpp"
-
-GeneGfx::
-	dw 36
-	INCBIN "gfx/duelists/gene.2bpp"
-
-MurrayGfx::
-	dw 36
-	INCBIN "gfx/duelists/murray.2bpp"
-
-CourtneyGfx::
-	dw 36
-	INCBIN "gfx/duelists/courtney.2bpp"
-
-SteveGfx::
-	dw 36
-	INCBIN "gfx/duelists/steve.2bpp"
-
-JackGfx::
-	dw 36
-	INCBIN "gfx/duelists/jack.2bpp"
-
-RodGfx::
-	dw 36
-	INCBIN "gfx/duelists/rod.2bpp"
-
-JosephGfx::
-	dw 36
-	INCBIN "gfx/duelists/joseph.2bpp"
-
-DavidGfx::
-	dw 36
-	INCBIN "gfx/duelists/david.2bpp"
-
-ErikGfx::
-	dw 36
-	INCBIN "gfx/duelists/erik.2bpp"
-
-JohnGfx::
-	dw 36
-	INCBIN "gfx/duelists/john.2bpp"
-
-AdamGfx::
-	dw 36
-	INCBIN "gfx/duelists/adam.2bpp"
-
-JonathanGfx::
-	dw 36
-	INCBIN "gfx/duelists/jonathan.2bpp"
-
-JoshuaGfx::
-	dw 36
-	INCBIN "gfx/duelists/joshua.2bpp"
-
-NicholasGfx::
-	dw 36
-	INCBIN "gfx/duelists/nicholas.2bpp"
-
-BrandonGfx::
-	dw 36
-	INCBIN "gfx/duelists/brandon.2bpp"
-
-MatthewGfx::
-	dw 36
-	INCBIN "gfx/duelists/matthew.2bpp"
-
-RyanGfx::
-	dw 36
-	INCBIN "gfx/duelists/ryan.2bpp"
-
-AndrewGfx::
-	dw 36
-	INCBIN "gfx/duelists/andrew.2bpp"
-
-ChrisGfx::
-	dw 36
-	INCBIN "gfx/duelists/chris.2bpp"
-
-MichaelGfx::
-	dw 36
-	INCBIN "gfx/duelists/michael.2bpp"
-
-OWLegendaryCardGfx::
-	dw $a
-	INCBIN "gfx/overworld_sprites/legendary_card.2bpp"
-
-DuelDrainGfx::
-	dw $2
-	INCBIN "gfx/duel/anims/drain.2bpp"
-
-SECTION "Gfx 10", ROMX
-
-DanielGfx::
-	dw 36
-	INCBIN "gfx/duelists/daniel.2bpp"
-
-RobertGfx::
-	dw 36
-	INCBIN "gfx/duelists/robert.2bpp"
-
-BrittanyGfx::
-	dw 36
-	INCBIN "gfx/duelists/brittany.2bpp"
-
-KristinGfx::
-	dw 36
-	INCBIN "gfx/duelists/kristin.2bpp"
-
-HeatherGfx::
-	dw 36
-	INCBIN "gfx/duelists/heather.2bpp"
-
-SaraGfx::
-	dw 36
-	INCBIN "gfx/duelists/sara.2bpp"
-
-AmandaGfx::
-	dw 36
-	INCBIN "gfx/duelists/amanda.2bpp"
-
-JenniferGfx::
-	dw 36
-	INCBIN "gfx/duelists/jennifer.2bpp"
-
-JessicaGfx::
-	dw 36
-	INCBIN "gfx/duelists/jessica.2bpp"
-
-StephanieGfx::
-	dw 36
-	INCBIN "gfx/duelists/stephanie.2bpp"
-
-AaronGfx::
-	dw 36
-	INCBIN "gfx/duelists/aaron.2bpp"
 
 OWIshiharaGfx::
 	dw $14
@@ -718,6 +510,8 @@ OWSteveGfx::
 OWJackGfx::
 	dw $14
 	INCBIN "gfx/overworld_sprites/jack.2bpp"
+
+SECTION "Gfx 7", ROMX
 
 OWRodGfx::
 	dw $14
@@ -787,25 +581,6 @@ OWSwimmerGfx::
 	dw $14
 	INCBIN "gfx/overworld_sprites/swimmer.2bpp"
 
-DuelGlowGfx::
-	dw $b
-	INCBIN "gfx/duel/anims/glow.2bpp"
-
-DuelSmallStarGfx::
-	dw $4
-	INCBIN "gfx/duel/anims/small_star.2bpp"
-
-Palette117::
-	db 0
-	db 1
-
-	rgb 27, 27, 24
-	rgb 31, 31,  0
-	rgb 31,  0,  0
-	rgb  0,  8, 19
-
-SECTION "Gfx 11", ROMX
-
 OWGalGfx::
 	dw $14
 	INCBIN "gfx/overworld_sprites/gal.2bpp"
@@ -822,6 +597,61 @@ OWTorchGfx::
 	dw $16
 	INCBIN "gfx/overworld_sprites/torch.2bpp"
 
+Palette117::
+	db 0
+	db 1
+
+	rgb 27, 27, 24
+	rgb 31, 31,  0
+	rgb 31,  0,  0
+	rgb  0,  8, 19
+
+SECTION "Gfx 8", ROMX
+
+DuelWaterDropGfx::
+	dw $3
+	INCBIN "gfx/duel/anims/water_drop.2bpp"
+
+DuelSnowGfx::
+	dw $1
+	INCBIN "gfx/duel/anims/snow.2bpp"
+	
+DuelPetalGfx::
+	dw $1
+	INCBIN "gfx/duel/anims/petal.2bpp"
+
+DuelPoisonGfx::
+	dw $4
+	INCBIN "gfx/duel/anims/poison.2bpp"
+
+DuelSparkGfx::
+	dw $3
+	INCBIN "gfx/duel/anims/spark.2bpp"
+
+DuelHealGfx::
+	dw $2
+	INCBIN "gfx/duel/anims/heal.2bpp"
+
+DuelDrainGfx::
+	dw $2
+	INCBIN "gfx/duel/anims/drain.2bpp"
+
+DuelStarGfx::
+	dw $2
+	INCBIN "gfx/duel/anims/star.2bpp"
+
+DuelPowderGfx::
+	dw $1
+	INCBIN "gfx/duel/anims/powder.2bpp"
+
+DuelGlowGfx::
+	dw $b
+	INCBIN "gfx/duel/anims/glow.2bpp"
+
+DuelSmallStarGfx::
+	dw $4
+	INCBIN "gfx/duel/anims/small_star.2bpp"
+	
 DuelParalysisGfx::
 	dw $06
 	INCBIN "gfx/duel/anims/paralysis.2bpp"
@@ -1010,7 +840,7 @@ AnimData6::
 	frame_data 6, 16, 0, 0
 	frame_data 0, 0, 0, 0
 
-SECTION "Gfx 12", ROMX
+SECTION "Gfx 9", ROMX
 
 DuelBallGfx::
 	dw $08
@@ -1090,15 +920,6 @@ Palette31::
 	rgb 31, 24,  6
 	rgb 11,  3,  0
 
-Palette119::
-	db 0
-	db 1
-
-	rgb 28, 28, 24
-	rgb 28, 16, 12
-	rgb 28,  4,  8
-	rgb  0,  0,  8
-
 SECTION "Anims 4", ROMX
 	INCLUDE "data/duel/animations/anims4.asm"
 
@@ -1107,6 +928,262 @@ SECTION "Palettes1", ROMX
 
 SECTION "Palettes2", ROMX
 	INCLUDE "data/palettes2.asm"
+
+SECTION "Portraits 1", ROMX
+
+PlayerPortrait::
+	INCBIN "gfx/duelists/player.2bpp"
+	INCBIN "gfx/duelists/player.attrmap.lz"
+PalettePlayerPortrait::
+	INCBIN "gfx/duelists/player.pal"
+
+RonaldPortrait::
+	INCBIN "gfx/duelists/ronald.2bpp"
+	INCBIN "gfx/duelists/ronald.attrmap.lz"
+PaletteRonaldPortrait::
+	INCBIN "gfx/duelists/ronald.pal"
+
+SamPortrait::
+	INCBIN "gfx/duelists/sam.2bpp"
+	INCBIN "gfx/duelists/sam.attrmap.lz"
+PaletteSamPortrait::
+	INCBIN "gfx/duelists/sam.pal"
+
+ImakuniPortrait::
+	INCBIN "gfx/duelists/imakuni.2bpp"
+	INCBIN "gfx/duelists/imakuni.attrmap.lz"
+PaletteImakuniPortrait::
+	INCBIN "gfx/duelists/imakuni.pal"
+
+NikkiPortrait::
+	INCBIN "gfx/duelists/nikki.2bpp"
+	INCBIN "gfx/duelists/nikki.attrmap.lz"
+PaletteNikkiPortrait::
+	INCBIN "gfx/duelists/nikki.pal"
+
+RickPortrait::
+	INCBIN "gfx/duelists/rick.2bpp"
+	INCBIN "gfx/duelists/rick.attrmap.lz"
+PaletteRickPortrait::
+	INCBIN "gfx/duelists/rick.pal"
+
+KenPortrait::
+	INCBIN "gfx/duelists/ken.2bpp"
+	INCBIN "gfx/duelists/ken.attrmap.lz"
+PaletteKenPortrait::
+	INCBIN "gfx/duelists/ken.pal"
+
+AmyPortrait::
+	INCBIN "gfx/duelists/amy.2bpp"
+	INCBIN "gfx/duelists/amy.attrmap.lz"
+PaletteAmyPortrait::
+	INCBIN "gfx/duelists/amy.pal"
+
+IsaacPortrait::
+	INCBIN "gfx/duelists/isaac.2bpp"
+	INCBIN "gfx/duelists/isaac.attrmap.lz"
+PaletteIsaacPortrait::
+	INCBIN "gfx/duelists/isaac.pal"
+
+SECTION "Portraits 2", ROMX
+
+MitchPortrait::
+	INCBIN "gfx/duelists/mitch.2bpp"
+	INCBIN "gfx/duelists/mitch.attrmap.lz"
+PaletteMitchPortrait::
+	INCBIN "gfx/duelists/mitch.pal"
+
+GenePortrait::
+	INCBIN "gfx/duelists/gene.2bpp"
+	INCBIN "gfx/duelists/gene.attrmap.lz"
+PaletteGenePortrait::
+	INCBIN "gfx/duelists/gene.pal"
+
+MurrayPortrait::
+	INCBIN "gfx/duelists/murray.2bpp"
+	INCBIN "gfx/duelists/murray.attrmap.lz"
+PaletteMurrayPortrait::
+	INCBIN "gfx/duelists/murray.pal"
+
+CourtneyPortrait::
+	INCBIN "gfx/duelists/courtney.2bpp"
+	INCBIN "gfx/duelists/courtney.attrmap.lz"
+PaletteCourtneyPortrait::
+	INCBIN "gfx/duelists/courtney.pal"
+
+StevePortrait::
+	INCBIN "gfx/duelists/steve.2bpp"
+	INCBIN "gfx/duelists/steve.attrmap.lz"
+PaletteStevePortrait::
+	INCBIN "gfx/duelists/steve.pal"
+
+JackPortrait::
+	INCBIN "gfx/duelists/jack.2bpp"
+	INCBIN "gfx/duelists/jack.attrmap.lz"
+PaletteJackPortrait::
+	INCBIN "gfx/duelists/jack.pal"
+
+RodPortrait::
+	INCBIN "gfx/duelists/rod.2bpp"
+	INCBIN "gfx/duelists/rod.attrmap.lz"
+PaletteRodPortrait::
+	INCBIN "gfx/duelists/rod.pal"
+
+JosephPortrait::
+	INCBIN "gfx/duelists/joseph.2bpp"
+	INCBIN "gfx/duelists/joseph.attrmap.lz"
+PaletteJosephPortrait::
+	INCBIN "gfx/duelists/joseph.pal"
+
+DavidPortrait::
+	INCBIN "gfx/duelists/david.2bpp"
+	INCBIN "gfx/duelists/david.attrmap.lz"
+PaletteDavidPortrait::
+	INCBIN "gfx/duelists/david.pal"
+
+SECTION "Portraits 3", ROMX
+
+ErikPortrait::
+	INCBIN "gfx/duelists/erik.2bpp"
+	INCBIN "gfx/duelists/erik.attrmap.lz"
+PaletteErikPortrait::
+	INCBIN "gfx/duelists/erik.pal"
+
+JohnPortrait::
+	INCBIN "gfx/duelists/john.2bpp"
+	INCBIN "gfx/duelists/john.attrmap.lz"
+PaletteJohnPortrait::
+	INCBIN "gfx/duelists/john.pal"
+
+AdamPortrait::
+	INCBIN "gfx/duelists/adam.2bpp"
+	INCBIN "gfx/duelists/adam.attrmap.lz"
+PaletteAdamPortrait::
+	INCBIN "gfx/duelists/adam.pal"
+
+JonathanPortrait::
+	INCBIN "gfx/duelists/jonathan.2bpp"
+	INCBIN "gfx/duelists/jonathan.attrmap.lz"
+PaletteJonathanPortrait::
+	INCBIN "gfx/duelists/jonathan.pal"
+
+JoshuaPortrait::
+	INCBIN "gfx/duelists/joshua.2bpp"
+	INCBIN "gfx/duelists/joshua.attrmap.lz"
+PaletteJoshuaPortrait::
+	INCBIN "gfx/duelists/joshua.pal"
+
+NicholasPortrait::
+	INCBIN "gfx/duelists/nicholas.2bpp"
+	INCBIN "gfx/duelists/nicholas.attrmap.lz"
+PaletteNicholasPortrait::
+	INCBIN "gfx/duelists/nicholas.pal"
+
+BrandonPortrait::
+	INCBIN "gfx/duelists/brandon.2bpp"
+	INCBIN "gfx/duelists/brandon.attrmap.lz"
+PaletteBrandonPortrait::
+	INCBIN "gfx/duelists/brandon.pal"
+
+MatthewPortrait::
+	INCBIN "gfx/duelists/matthew.2bpp"
+	INCBIN "gfx/duelists/matthew.attrmap.lz"
+PaletteMatthewPortrait::
+	INCBIN "gfx/duelists/matthew.pal"
+
+RyanPortrait::
+	INCBIN "gfx/duelists/ryan.2bpp"
+	INCBIN "gfx/duelists/ryan.attrmap.lz"
+PaletteRyanPortrait::
+	INCBIN "gfx/duelists/ryan.pal"
+
+SECTION "Portraits 4", ROMX
+
+AndrewPortrait::
+	INCBIN "gfx/duelists/andrew.2bpp"
+	INCBIN "gfx/duelists/andrew.attrmap.lz"
+PaletteAndrewPortrait::
+	INCBIN "gfx/duelists/andrew.pal"
+
+ChrisPortrait::
+	INCBIN "gfx/duelists/chris.2bpp"
+	INCBIN "gfx/duelists/chris.attrmap.lz"
+PaletteChrisPortrait::
+	INCBIN "gfx/duelists/chris.pal"
+
+MichaelPortrait::
+	INCBIN "gfx/duelists/michael.2bpp"
+	INCBIN "gfx/duelists/michael.attrmap.lz"
+PaletteMichaelPortrait::
+	INCBIN "gfx/duelists/michael.pal"
+
+DanielPortrait::
+	INCBIN "gfx/duelists/daniel.2bpp"
+	INCBIN "gfx/duelists/daniel.attrmap.lz"
+PaletteDanielPortrait::
+	INCBIN "gfx/duelists/daniel.pal"
+
+RobertPortrait::
+	INCBIN "gfx/duelists/robert.2bpp"
+	INCBIN "gfx/duelists/robert.attrmap.lz"
+PaletteRobertPortrait::
+	INCBIN "gfx/duelists/robert.pal"
+
+BrittanyPortrait::
+	INCBIN "gfx/duelists/brittany.2bpp"
+	INCBIN "gfx/duelists/brittany.attrmap.lz"
+PaletteBrittanyPortrait::
+	INCBIN "gfx/duelists/brittany.pal"
+
+KristinPortrait::
+	INCBIN "gfx/duelists/kristin.2bpp"
+	INCBIN "gfx/duelists/kristin.attrmap.lz"
+PaletteKristinPortrait::
+	INCBIN "gfx/duelists/kristin.pal"
+
+HeatherPortrait::
+	INCBIN "gfx/duelists/heather.2bpp"
+	INCBIN "gfx/duelists/heather.attrmap.lz"
+PaletteHeatherPortrait::
+	INCBIN "gfx/duelists/heather.pal"
+
+SaraPortrait::
+	INCBIN "gfx/duelists/sara.2bpp"
+	INCBIN "gfx/duelists/sara.attrmap.lz"
+PaletteSaraPortrait::
+	INCBIN "gfx/duelists/sara.pal"
+
+SECTION "Portraits 5", ROMX
+
+AmandaPortrait::
+	INCBIN "gfx/duelists/amanda.2bpp"
+	INCBIN "gfx/duelists/amanda.attrmap.lz"
+PaletteAmandaPortrait::
+	INCBIN "gfx/duelists/amanda.pal"
+
+JenniferPortrait::
+	INCBIN "gfx/duelists/jennifer.2bpp"
+	INCBIN "gfx/duelists/jennifer.attrmap.lz"
+PaletteJenniferPortrait::
+	INCBIN "gfx/duelists/jennifer.pal"
+
+JessicaPortrait::
+	INCBIN "gfx/duelists/jessica.2bpp"
+	INCBIN "gfx/duelists/jessica.attrmap.lz"
+PaletteJessicaPortrait::
+	INCBIN "gfx/duelists/jessica.pal"
+
+StephaniePortrait::
+	INCBIN "gfx/duelists/stephanie.2bpp"
+	INCBIN "gfx/duelists/stephanie.attrmap.lz"
+PaletteStephaniePortrait::
+	INCBIN "gfx/duelists/stephanie.pal"
+
+AaronPortrait::
+	INCBIN "gfx/duelists/aaron.2bpp"
+	INCBIN "gfx/duelists/aaron.attrmap.lz"
+PaletteAaronPortrait::
+	INCBIN "gfx/duelists/aaron.pal"
 
 SECTION "Card Gfx 1", ROMX
 

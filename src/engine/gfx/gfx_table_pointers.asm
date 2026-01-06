@@ -4,3 +4,4 @@ GfxTablePointers:
 	dw Sprites
 	dw SpriteAnimations
 	dw Palettes
+	dw Portraits

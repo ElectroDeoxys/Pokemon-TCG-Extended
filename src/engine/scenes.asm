@@ -113,49 +113,6 @@ _LoadScene::
 
 INCLUDE "data/scenes.asm"
 
-_DrawPortrait::
-	ld a, [wd291]
-	push af
-	push de
-	push bc
-	lb de, $d0, $07
-	ld a, [wCurTilemap]
-	cp TILEMAP_PLAYER
-	jr z, .asm_12fd9
-	lb de, $a0, $06
-.asm_12fd9
-	ld a, e
-	ld [wd291], a
-	farcall LoadTilemap_ToVRAM
-	ld a, [wCurPortrait]
-	add a
-	ld c, a
-	ld b, $00
-	ld hl, PortraitGfxData
-	add hl, bc
-	ld a, [hli]
-	push hl
-	ld [wCurTileset], a
-	ld a, d
-	ld [wd4ca], a
-	xor a
-	ld [wd4cb], a
-	farcall LoadTilesetGfx
-	pop hl
-	xor a
-	ld [wd4ca], a
-	ld a, [wd291]
-	ld [wd4cb], a
-	ld a, [hli]
-	farcall SetBGPAndLoadedPal
-	pop bc
-	pop de
-	pop af
-	ld [wd291], a
-	ret
-
-INCLUDE "data/duel/portraits.asm"
-
 LoadBoosterGfx:
 	push hl
 	push bc

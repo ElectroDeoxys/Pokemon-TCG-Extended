@@ -2478,11 +2478,15 @@ wSceneBaseY:: ; d61d
 
 wCurPortrait:: ; d61e
 	ds $1
+wPortraitSlot::
+	ds $1
+wPortraitEmotion::
+	ds $1
 
 wd61f:: ; d61f
 	ds $1
 
-	ds $4
+	ds $2
 
 ; whether there exists valid save data
 wHasSaveData:: ; d624

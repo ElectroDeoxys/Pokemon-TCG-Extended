@@ -241,15 +241,17 @@ LoadScene::
 
 ; draws player's portrait at b,c
 DrawPlayerPortrait::
-	ld a, PLAYER_PIC
+	ld a, PORTRAIT_PLAYER
 	ld [wCurPortrait], a
-	ld a, TILEMAP_PLAYER
+	ld a, PORTRAIT_SLOT_1
+	ld [wPortraitSlot], a
+	ld a, EMOTION_NEUTRAL ; Player is always neutral
 ;	fallthrough
 
 ; input:
-; a = TILEMAP_* constant
+; a = EMOTION_* constant
 DrawPortrait::
-	ld [wCurTilemap], a
+	ld [wPortraitEmotion], a
 	ldh a, [hBankROM]
 	push af
 	ld a, BANK(_DrawPortrait)
@@ -259,9 +261,12 @@ DrawPortrait::
 	jp BankswitchROM
 
 ; draws opponent's portrait given in a at b,c
+; with emotion given in e
 DrawOpponentPortrait::
 	ld [wCurPortrait], a
-	ld a, TILEMAP_OPPONENT
+	ld a, PORTRAIT_SLOT_2
+	ld [wPortraitSlot], a
+	ld a, e
 	jr DrawPortrait
 
 Func_3e31::

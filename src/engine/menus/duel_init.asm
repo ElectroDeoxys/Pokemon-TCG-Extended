@@ -39,6 +39,7 @@ Duel_Init:
 .skip_deck_name
 	lb bc, 7, 3
 	ld a, [wOpponentPortrait]
+	ld e, EMOTION_NEUTRAL
 	call DrawOpponentPortrait
 	ld a, [wMatchStartTheme]
 	call PlaySong
