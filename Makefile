@@ -133,18 +133,12 @@ src/gfx/tilesets/waterclub.2bpp: RGBGFXFLAGS += -x 15
 
 src/gfx/titlescreen/title_screen.2bpp: RGBGFXFLAGS += -x 12
 
+src/gfx/cards/%.2bpp: RGBGFXFLAGS += -Z -P -A
+src/gfx/duelists/%.2bpp: RGBGFXFLAGS += -P -A
 
 ### Catch-all graphics rules
 
 %.png: ;
-
-src/gfx/cards/%.attrmap: src/gfx/cards/%.png
-	$(RGBGFX) $(RGBGFXFLAGS) -Z -P -A $<
-	tools/pal_fix $(tools/pal_fix) src/gfx/cards/$*.pal
-	tools/attr_fix $(tools/attr_fix) $@
-
-src/gfx/duelists/%.attrmap: src/gfx/duelists/%.png
-	$(RGBGFX) $(RGBGFXFLAGS) -P -A $<
 
 %.pal: ;
 
@@ -163,3 +157,9 @@ src/gfx/duelists/%.attrmap: src/gfx/duelists/%.png
 
 %.lz: %
 	tools/compressor $(tools/compressor) $< $@
+
+src/gfx/cards/%.attrmap: src/gfx/cards/%.2bpp
+	tools/pal_fix $(tools/pal_fix) src/gfx/cards/$*.pal
+	tools/attr_fix $(tools/attr_fix) $@
+
+src/gfx/duelists/%.attrmap: src/gfx/duelists/%.2bpp ;
