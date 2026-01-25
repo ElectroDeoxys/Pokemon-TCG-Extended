@@ -2790,7 +2790,7 @@ wddc3:: ; ddc3
 wMusicEcho:: ; ddc7
 	ds $4
 
-; the pitch offset to apply to each note (see Music1_Pitches)
+; the pitch offset to apply to each note (see Pitches)
 wMusicPitchOffset:: ; ddcb
 	ds $4
 
@@ -2882,6 +2882,9 @@ wde43:: ; de43
 
 wSFXCommandPointers:: ; de4b
 	ds $8
+
+wSFXBank::
+	ds $1
 
 wSFXIsPlaying:: ; de53
 	ds $1
@@ -2975,5 +2978,11 @@ wMusicChannelStackPointersBackup:: ; dead
 
 wMusicCh1StackBackup:: ; deb5
 	ds $c * 4
+
+wAudioCmd::
+	ds $1
+
+wAudioArg::
+	ds $2
 
 INCLUDE "sram.asm"

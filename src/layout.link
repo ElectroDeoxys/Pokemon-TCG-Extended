@@ -29,8 +29,6 @@ ROM0
 	"romheader"
 	org $0150
 	"start"
-	org $3fe0
-	"Audio Callback"
 ROMX $01
 	"Game Loop"
 	"Duel Core"
@@ -170,11 +168,13 @@ ROMX $3b
 ROMX $3c
 	"Card Gfx 12"
 ROMX $3d
-	"Audio 1"
+	"Audio Engine"
+	"Sfx 1"
 ROMX $3e
-	"Audio 2"
+	"Music 1"
 ROMX $3f
-	"Audio 3"
+	"Music 2"
+	"Sfx 2"
 WRAM0
 	"WRAM0"
 	"WRAM0 Duels 1"

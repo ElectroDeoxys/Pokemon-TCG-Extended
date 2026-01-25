@@ -106,391 +106,486 @@ Sfx_Stop:
 
 Sfx_Cursor:
 	db %0010
+	db BANK(Sfx_Cursor_Ch1) ; bank
 	dw Sfx_Cursor_Ch1
 
 Sfx_Confirm:
 	db %0010
+	db BANK(Sfx_Confirm_Ch1) ; bank
 	dw Sfx_Confirm_Ch1
 
 Sfx_Cancel:
 	db %0010
+	db BANK(Sfx_Cancel_Ch1) ; bank
 	dw Sfx_Cancel_Ch1
 
 Sfx_Denied:
 	db %0010
+	db BANK(Sfx_Denied_Ch1) ; bank
 	dw Sfx_Denied_Ch1
 
 Sfx_Unused05:
 	db %0010
+	db BANK(Sfx_Unused05_Ch1) ; bank
 	dw Sfx_Unused05_Ch1
 
 Sfx_Unused06:
 	db %0010
+	db BANK(Sfx_Unused06_Ch1) ; bank
 	dw Sfx_Unused06_Ch1
 
 Sfx_CardShuffle:
 	db %1000
+	db BANK(Sfx_CardShuffle_Ch1) ; bank
 	dw Sfx_CardShuffle_Ch1
 
 Sfx_PlacePrize:
 	db %1000
+	db BANK(Sfx_PlacePrize_Ch1) ; bank
 	dw Sfx_PlacePrize_Ch1
 
 Sfx_Unused09:
 	db %1000
+	db BANK(Sfx_Unused09_Ch1) ; bank
 	dw Sfx_Unused09_Ch1
 
 Sfx_Unused0a:
 	db %0010
+	db BANK(Sfx_Unused0a_Ch1) ; bank
 	dw Sfx_Unused0a_Ch1
 
 Sfx_CoinToss:
 	db %0010
+	db BANK(Sfx_CoinToss_Ch1) ; bank
 	dw Sfx_CoinToss_Ch1
 
 Sfx_Warp:
 	db %1000
+	db BANK(Sfx_Warp_Ch1) ; bank
 	dw Sfx_Warp_Ch1
 
 Sfx_Unused0d:
 	db %0010
+	db BANK(Sfx_Unused0d_Ch1) ; bank
 	dw Sfx_Unused0d_Ch1
 
 Sfx_Unused0e:
 	db %0010
+	db BANK(Sfx_Unused0e_Ch1) ; bank
 	dw Sfx_Unused0e_Ch1
 
 Sfx_PokemonDomeDoors:
 	db %1000
+	db BANK(Sfx_PokemonDomeDoors_Ch1) ; bank
 	dw Sfx_PokemonDomeDoors_Ch1
 
 Sfx_LegendaryCards:
 	db %0010
+	db BANK(Sfx_LegendaryCards_Ch1) ; bank
 	dw Sfx_LegendaryCards_Ch1
 
 Sfx_Glow:
 	db %0010
+	db BANK(Sfx_Glow_Ch1) ; bank
 	dw Sfx_Glow_Ch1
 
 Sfx_Paralysis:
 	db %0010
+	db BANK(Sfx_Paralysis_Ch1) ; bank
 	dw Sfx_Paralysis_Ch1
 
 Sfx_Sleep:
 	db %0010
+	db BANK(Sfx_Sleep_Ch1) ; bank
 	dw Sfx_Sleep_Ch1
 
 Sfx_Confusion:
 	db %0010
+	db BANK(Sfx_Confusion_Ch1) ; bank
 	dw Sfx_Confusion_Ch1
 
 Sfx_Poison:
 	db %0010
+	db BANK(Sfx_Poison_Ch1) ; bank
 	dw Sfx_Poison_Ch1
 
 Sfx_SingleHit:
 	db %1000
+	db BANK(Sfx_SingleHit_Ch1) ; bank
 	dw Sfx_SingleHit_Ch1
 
 Sfx_BigHit:
 	db %1000
+	db BANK(Sfx_BigHit_Ch1) ; bank
 	dw Sfx_BigHit_Ch1
 
 Sfx_ThunderShock:
 	db %1000
+	db BANK(Sfx_ThunderShock_Ch1) ; bank
 	dw Sfx_ThunderShock_Ch1
 
 Sfx_Lightning:
 	db %1000
+	db BANK(Sfx_Lightning_Ch1) ; bank
 	dw Sfx_Lightning_Ch1
 
 Sfx_BorderSpark:
 	db %1000
+	db BANK(Sfx_BorderSpark_Ch1) ; bank
 	dw Sfx_BorderSpark_Ch1
 
 Sfx_BigLightning:
 	db %1000
+	db BANK(Sfx_BigLightning_Ch1) ; bank
 	dw Sfx_BigLightning_Ch1
 
 Sfx_SmallFlame:
 	db %1000
+	db BANK(Sfx_SmallFlame_Ch1) ; bank
 	dw Sfx_SmallFlame_Ch1
 
 Sfx_BigFlame:
 	db %1000
+	db BANK(Sfx_BigFlame_Ch1) ; bank
 	dw Sfx_BigFlame_Ch1
 
 Sfx_FireSpin:
 	db %1000
+	db BANK(Sfx_FireSpin_Ch1) ; bank
 	dw Sfx_FireSpin_Ch1
 
 Sfx_DiveBomb:
 	db %1000
+	db BANK(Sfx_DiveBomb_Ch1) ; bank
 	dw Sfx_DiveBomb_Ch1
 
 Sfx_WaterJets:
 	db %1000
+	db BANK(Sfx_WaterJets_Ch1) ; bank
 	dw Sfx_WaterJets_Ch1
 
 Sfx_WaterGun:
 	db %1000
+	db BANK(Sfx_WaterGun_Ch1) ; bank
 	dw Sfx_WaterGun_Ch1
 
 Sfx_Whirlpool:
 	db %1000
+	db BANK(Sfx_Whirlpool_Ch1) ; bank
 	dw Sfx_Whirlpool_Ch1
 
 Sfx_HydroPump:
 	db %1000
+	db BANK(Sfx_HydroPump_Ch1) ; bank
 	dw Sfx_HydroPump_Ch1
 
 Sfx_Blizzard:
 	db %1000
+	db BANK(Sfx_Blizzard_Ch1) ; bank
 	dw Sfx_Blizzard_Ch1
 
 Sfx_Psychic:
 	db %0010
+	db BANK(Sfx_Psychic_Ch1) ; bank
 	dw Sfx_Psychic_Ch1
 
 Sfx_Leer:
 	db %0010
+	db BANK(Sfx_Leer_Ch1) ; bank
 	dw Sfx_Leer_Ch1
 
 Sfx_Beam:
 	db %0010
+	db BANK(Sfx_Beam_Ch1) ; bank
 	dw Sfx_Beam_Ch1
 
 Sfx_HyperBeam:
 	db %1010
+	db BANK(Sfx_HyperBeam_Ch1) ; bank
 	dw Sfx_HyperBeam_Ch1
 	dw Sfx_HyperBeam_Ch2
 
 Sfx_RockThrow:
 	db %1000
+	db BANK(Sfx_RockThrow_Ch1) ; bank
 	dw Sfx_RockThrow_Ch1
 
 Sfx_StoneBarrage:
 	db %1000
+	db BANK(Sfx_StoneBarrage_Ch1) ; bank
 	dw Sfx_StoneBarrage_Ch1
 
 Sfx_Punch:
 	db %0010
+	db BANK(Sfx_Punch_Ch1) ; bank
 	dw Sfx_Punch_Ch1
 
 Sfx_StretchKick:
 	db %0010
+	db BANK(Sfx_StretchKick_Ch1) ; bank
 	dw Sfx_StretchKick_Ch1
 
 Sfx_Slash:
 	db %1000
+	db BANK(Sfx_Slash_Ch1) ; bank
 	dw Sfx_Slash_Ch1
 
 Sfx_Sonicboom:
 	db %1000
+	db BANK(Sfx_Sonicboom_Ch1) ; bank
 	dw Sfx_Sonicboom_Ch1
 
 Sfx_FurySwipes:
 	db %1000
+	db BANK(Sfx_FurySwipes_Ch1) ; bank
 	dw Sfx_FurySwipes_Ch1
 
 Sfx_Drill:
 	db %1000
+	db BANK(Sfx_Drill_Ch1) ; bank
 	dw Sfx_Drill_Ch1
 
 Sfx_PotSmash:
 	db %0010
+	db BANK(Sfx_PotSmash_Ch1) ; bank
 	dw Sfx_PotSmash_Ch1
 
 Sfx_Bonemerang:
 	db %1010
+	db BANK(Sfx_Bonemerang_Ch1) ; bank
 	dw Sfx_Bonemerang_Ch1
 	dw Sfx_Bonemerang_Ch2
 
 Sfx_SeismicToss:
 	db %1010
+	db BANK(Sfx_SeismicToss_Ch1) ; bank
 	dw Sfx_SeismicToss_Ch1
 	dw Sfx_SeismicToss_Ch2
 
 Sfx_Needles:
 	db %0010
+	db BANK(Sfx_Needles_Ch1) ; bank
 	dw Sfx_Needles_Ch1
 
 Sfx_WhiteGas:
 	db %1000
+	db BANK(Sfx_WhiteGas_Ch1) ; bank
 	dw Sfx_WhiteGas_Ch1
 
 Sfx_Powder:
 	db %0010
+	db BANK(Sfx_Powder_Ch1) ; bank
 	dw Sfx_Powder_Ch1
 
 Sfx_Goo:
 	db %1010
+	db BANK(Sfx_Goo_Ch1) ; bank
 	dw Sfx_Goo_Ch1
 	dw Sfx_Goo_Ch2
 
 Sfx_Bubbles:
 	db %0010
+	db BANK(Sfx_Bubbles_Ch1) ; bank
 	dw Sfx_Bubbles_Ch1
 
 Sfx_StringShot:
 	db %1010
+	db BANK(Sfx_StringShot_Ch1) ; bank
 	dw Sfx_StringShot_Ch1
 	dw Sfx_StringShot_Ch2
 
 Sfx_Boyfriends:
 	db %0010
+	db BANK(Sfx_Boyfriends_Ch1) ; bank
 	dw Sfx_Boyfriends_Ch1
 
 Sfx_Lure:
 	db %0010
+	db BANK(Sfx_Lure_Ch1) ; bank
 	dw Sfx_Lure_Ch1
 
 Sfx_Toxic:
 	db %0010
+	db BANK(Sfx_Toxic_Ch1) ; bank
 	dw Sfx_Toxic_Ch1
 
 Sfx_ConfuseRay:
 	db %0010
+	db BANK(Sfx_ConfuseRay_Ch1) ; bank
 	dw Sfx_ConfuseRay_Ch1
 
 Sfx_Sing:
 	db %0010
+	db BANK(Sfx_Sing_Ch1) ; bank
 	dw Sfx_Sing_Ch1
 
 Sfx_Supersonic:
 	db %1000
+	db BANK(Sfx_Supersonic_Ch1) ; bank
 	dw Sfx_Supersonic_Ch1
 
 Sfx_PetalDance:
 	db %0010
+	db BANK(Sfx_PetalDance_Ch1) ; bank
 	dw Sfx_PetalDance_Ch1
 
 Sfx_Protect:
 	db %0010
+	db BANK(Sfx_Protect_Ch1) ; bank
 	dw Sfx_Protect_Ch1
 
 Sfx_Barrier:
 	db %0010
+	db BANK(Sfx_Barrier_Ch1) ; bank
 	dw Sfx_Barrier_Ch1
 
 Sfx_Speed:
 	db %1000
+	db BANK(Sfx_Speed_Ch1) ; bank
 	dw Sfx_Speed_Ch1
 
 Sfx_Whirlwind:
 	db %1000
+	db BANK(Sfx_Whirlwind_Ch1) ; bank
 	dw Sfx_Whirlwind_Ch1
 
 Sfx_Cry:
 	db %0010
+	db BANK(Sfx_Cry_Ch1) ; bank
 	dw Sfx_Cry_Ch1
 
 Sfx_QuestionMark:
 	db %0010
+	db BANK(Sfx_QuestionMark_Ch1) ; bank
 	dw Sfx_QuestionMark_Ch1
 
 Sfx_Selfdestruct:
 	db %1000
+	db BANK(Sfx_Selfdestruct_Ch1) ; bank
 	dw Sfx_Selfdestruct_Ch1
 
 Sfx_BigSelfdestruct:
 	db %1000
+	db BANK(Sfx_BigSelfdestruct_Ch1) ; bank
 	dw Sfx_BigSelfdestruct_Ch1
 
 Sfx_Heal:
 	db %0010
+	db BANK(Sfx_Heal_Ch1) ; bank
 	dw Sfx_Heal_Ch1
 
 Sfx_Drain:
 	db %0010
+	db BANK(Sfx_Drain_Ch1) ; bank
 	dw Sfx_Drain_Ch1
 
 Sfx_DarkGas:
 	db %1000
+	db BANK(Sfx_DarkGas_Ch1) ; bank
 	dw Sfx_DarkGas_Ch1
 
 Sfx_HealingWind:
 	db %0010
+	db BANK(Sfx_HealingWind_Ch1) ; bank
 	dw Sfx_HealingWind_Ch1
 
 Sfx_BenchWhirlwind:
 	db %0010
+	db BANK(Sfx_BenchWhirlwind_Ch1) ; bank
 	dw Sfx_BenchWhirlwind_Ch1
 
 Sfx_Expand:
 	db %0010
+	db BANK(Sfx_Expand_Ch1) ; bank
 	dw Sfx_Expand_Ch1
 
 Sfx_CatPunch:
 	db %0010
+	db BANK(Sfx_CatPunch_Ch1) ; bank
 	dw Sfx_CatPunch_Ch1
 
 Sfx_ThunderWave:
 	db %1010
+	db BANK(Sfx_ThunderWave_Ch1) ; bank
 	dw Sfx_ThunderWave_Ch1
 	dw Sfx_ThunderWave_Ch2
 
 Sfx_Firegiver:
 	db %1010
+	db BANK(Sfx_Firegiver_Ch1) ; bank
 	dw Sfx_Firegiver_Ch1
 	dw Sfx_Firegiver_Ch2
 
 Sfx_Thunderpunch:
 	db %1010
+	db BANK(Sfx_Thunderpunch_Ch1) ; bank
 	dw Sfx_Thunderpunch_Ch1
 	dw Sfx_Thunderpunch_Ch2
 
 Sfx_FirePunch:
 	db %1010
+	db BANK(Sfx_FirePunch_Ch1) ; bank
 	dw Sfx_FirePunch_Ch1
 	dw Sfx_FirePunch_Ch2
 
 Sfx_CoinTossHeads:
 	db %0010
+	db BANK(Sfx_CoinTossHeads_Ch1) ; bank
 	dw Sfx_CoinTossHeads_Ch1
 
 Sfx_CoinTossTails:
 	db %0010
+	db BANK(Sfx_CoinTossTails_Ch1) ; bank
 	dw Sfx_CoinTossTails_Ch1
 
 Sfx_SaveGame:
 	db %0010
+	db BANK(Sfx_SaveGame_Ch1) ; bank
 	dw Sfx_SaveGame_Ch1
 
 Sfx_PlayerWalkMap:
 	db %0010
+	db BANK(Sfx_PlayerWalkMap_Ch1) ; bank
 	dw Sfx_PlayerWalkMap_Ch1
 
 Sfx_IntroOrb:
 	db %0010
+	db BANK(Sfx_IntroOrb_Ch1) ; bank
 	dw Sfx_IntroOrb_Ch1
 
 Sfx_IntroOrbSwoop:
 	db %0010
+	db BANK(Sfx_IntroOrbSwoop_Ch1) ; bank
 	dw Sfx_IntroOrbSwoop_Ch1
 
 Sfx_IntroOrbTitle:
 	db %0010
+	db BANK(Sfx_IntroOrbTitle_Ch1) ; bank
 	dw Sfx_IntroOrbTitle_Ch1
 
 Sfx_IntroOrbScatter:
 	db %0010
+	db BANK(Sfx_IntroOrbScatter_Ch1) ; bank
 	dw Sfx_IntroOrbScatter_Ch1
 
 Sfx_FiregiverStart:
 	db %1000
+	db BANK(Sfx_FiregiverStart_Ch1) ; bank
 	dw Sfx_FiregiverStart_Ch1
 
 Sfx_ReceiveCardPop:
 	db %1011
+	db BANK(Sfx_ReceiveCardPop_Ch1) ; bank
 	dw Sfx_ReceiveCardPop_Ch1
 	dw Sfx_ReceiveCardPop_Ch2
 	dw Sfx_ReceiveCardPop_Ch3
 
 Sfx_PokemonEvolution:
 	db %0010
+	db BANK(Sfx_PokemonEvolution_Ch1) ; bank
 	dw Sfx_PokemonEvolution_Ch1
 
 Sfx_Unused5f:
 	db %1000
+	db BANK(Sfx_Unused5f_Ch1) ; bank
 	dw Sfx_Unused5f_Ch1
