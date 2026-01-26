@@ -1,171 +1,170 @@
 ; \1 = palette pointer
 ; \2 = number of palettes
-; \3 = number of OBJ colors
 MACRO palette_pointer
 	dwb \1, BANK(\1) - BANK(Palettes)
-	db (\2 << 4) + \3
+	db \2
 ENDM
 
 Palettes:
 	table_width 4
-	palette_pointer Palette0,   8, 1 ; PALETTE_0
-	palette_pointer Palette1,   8, 0 ; PALETTE_1
-	palette_pointer Palette2,   8, 0 ; PALETTE_2
-	palette_pointer Palette3,   8, 0 ; PALETTE_3
-	palette_pointer Palette4,   8, 0 ; PALETTE_4
-	palette_pointer Palette5,   8, 0 ; PALETTE_5
-	palette_pointer Palette6,   8, 0 ; PALETTE_6
-	palette_pointer Palette7,   8, 0 ; PALETTE_7
-	palette_pointer Palette8,   8, 0 ; PALETTE_8
-	palette_pointer Palette9,   8, 0 ; PALETTE_9
-	palette_pointer Palette10,  8, 0 ; PALETTE_10
-	palette_pointer Palette11,  8, 0 ; PALETTE_11
-	palette_pointer Palette12,  8, 0 ; PALETTE_12
-	palette_pointer Palette13,  8, 0 ; PALETTE_13
-	palette_pointer Palette14,  8, 0 ; PALETTE_14
-	palette_pointer Palette15,  8, 0 ; PALETTE_15
-	palette_pointer Palette16,  8, 0 ; PALETTE_16
-	palette_pointer Palette17,  8, 0 ; PALETTE_17
-	palette_pointer Palette18,  8, 0 ; PALETTE_18
-	palette_pointer Palette19,  8, 0 ; PALETTE_19
-	palette_pointer Palette20,  8, 0 ; PALETTE_20
-	palette_pointer Palette21,  8, 0 ; PALETTE_21
-	palette_pointer Palette22,  8, 0 ; PALETTE_22
-	palette_pointer Palette23,  8, 0 ; PALETTE_23
-	palette_pointer Palette24,  8, 0 ; PALETTE_24
-	palette_pointer Palette25,  8, 0 ; PALETTE_25
-	palette_pointer Palette26,  8, 0 ; PALETTE_26
-	palette_pointer Palette27,  8, 0 ; PALETTE_27
-	palette_pointer Palette28,  8, 0 ; PALETTE_28
-	palette_pointer Palette29,  8, 2 ; PALETTE_29
-	palette_pointer Palette30,  8, 2 ; PALETTE_30
-	palette_pointer Palette31,  1, 1 ; PALETTE_31
-	palette_pointer Palette32,  1, 1 ; PALETTE_32
-	palette_pointer Palette33,  1, 1 ; PALETTE_33
-	palette_pointer Palette34,  1, 1 ; PALETTE_34
-	palette_pointer Palette35,  1, 1 ; PALETTE_35
-	palette_pointer Palette36,  1, 1 ; PALETTE_36
-	palette_pointer Palette37,  1, 1 ; PALETTE_37
-	palette_pointer Palette38,  1, 1 ; PALETTE_38
-	palette_pointer Palette39,  1, 1 ; PALETTE_39
-	palette_pointer Palette40,  1, 1 ; PALETTE_40
-	palette_pointer Palette41,  1, 1 ; PALETTE_41
-	palette_pointer Palette42,  1, 1 ; PALETTE_42
-	palette_pointer Palette43,  1, 1 ; PALETTE_43
-	palette_pointer Palette44,  1, 1 ; PALETTE_44
-	palette_pointer Palette45,  1, 1 ; PALETTE_45
-	palette_pointer Palette46,  1, 1 ; PALETTE_46
-	palette_pointer Palette47,  1, 1 ; PALETTE_47
-	palette_pointer Palette48,  1, 1 ; PALETTE_48
-	palette_pointer Palette49,  1, 1 ; PALETTE_49
-	palette_pointer Palette50,  1, 1 ; PALETTE_50
-	palette_pointer Palette51,  1, 1 ; PALETTE_51
-	palette_pointer Palette52,  1, 1 ; PALETTE_52
-	palette_pointer Palette53,  1, 1 ; PALETTE_53
-	palette_pointer Palette54,  1, 1 ; PALETTE_54
-	palette_pointer Palette55,  1, 1 ; PALETTE_55
-	palette_pointer Palette56,  1, 1 ; PALETTE_56
-	palette_pointer Palette57,  1, 1 ; PALETTE_57
-	palette_pointer Palette58,  1, 1 ; PALETTE_58
-	palette_pointer Palette59,  1, 1 ; PALETTE_59
-	palette_pointer Palette60,  1, 1 ; PALETTE_60
-	palette_pointer Palette61,  1, 1 ; PALETTE_61
-	palette_pointer Palette62,  1, 1 ; PALETTE_62
-	palette_pointer Palette63,  1, 1 ; PALETTE_63
-	palette_pointer Palette64,  1, 1 ; PALETTE_64
-	palette_pointer Palette65,  1, 1 ; PALETTE_65
-	palette_pointer Palette66,  1, 1 ; PALETTE_66
-	palette_pointer Palette67,  1, 1 ; PALETTE_67
-	palette_pointer Palette68,  1, 1 ; PALETTE_68
-	palette_pointer Palette69,  1, 1 ; PALETTE_69
-	palette_pointer Palette70,  1, 1 ; PALETTE_70
-	palette_pointer Palette71,  1, 1 ; PALETTE_71
-	palette_pointer Palette72,  1, 1 ; PALETTE_72
-	palette_pointer Palette73,  1, 1 ; PALETTE_73
-	palette_pointer Palette74,  1, 1 ; PALETTE_74
-	palette_pointer Palette75,  1, 1 ; PALETTE_75
-	palette_pointer Palette76,  1, 1 ; PALETTE_76
-	palette_pointer Palette77,  1, 1 ; PALETTE_77
-	palette_pointer Palette78,  1, 1 ; PALETTE_78
-	palette_pointer Palette79,  1, 1 ; PALETTE_79
-	palette_pointer Palette80,  1, 1 ; PALETTE_80
-	palette_pointer Palette81,  1, 1 ; PALETTE_81
-	palette_pointer Palette82,  1, 1 ; PALETTE_82
-	palette_pointer Palette83,  1, 1 ; PALETTE_83
-	palette_pointer Palette84,  1, 1 ; PALETTE_84
-	palette_pointer Palette85,  1, 1 ; PALETTE_85
-	palette_pointer Palette86,  1, 1 ; PALETTE_86
-	palette_pointer Palette87,  1, 1 ; PALETTE_87
-	palette_pointer Palette88,  1, 1 ; PALETTE_88
-	palette_pointer Palette89,  1, 1 ; PALETTE_89
-	palette_pointer Palette90,  1, 1 ; PALETTE_90
-	palette_pointer Palette91,  1, 1 ; PALETTE_91
-	palette_pointer Palette92,  1, 1 ; PALETTE_92
-	palette_pointer Palette93,  1, 1 ; PALETTE_93
-	palette_pointer Palette94,  8, 0 ; PALETTE_94
-	palette_pointer Palette95,  8, 0 ; PALETTE_95
-	palette_pointer Palette96,  8, 0 ; PALETTE_96
-	palette_pointer Palette97,  8, 0 ; PALETTE_97
-	palette_pointer Palette98,  8, 0 ; PALETTE_98
-	palette_pointer Palette99,  8, 0 ; PALETTE_99
-	palette_pointer Palette100, 8, 0 ; PALETTE_100
-	palette_pointer Palette101, 7, 0 ; PALETTE_101
-	palette_pointer Palette102, 7, 0 ; PALETTE_102
-	palette_pointer Palette103, 7, 0 ; PALETTE_103
-	palette_pointer Palette104, 7, 0 ; PALETTE_104
-	palette_pointer Palette105, 7, 0 ; PALETTE_105
-	palette_pointer Palette106, 7, 0 ; PALETTE_106
-	palette_pointer Palette107, 7, 0 ; PALETTE_107
-	palette_pointer Palette108, 0, 1 ; PALETTE_108
-	palette_pointer Palette109, 0, 1 ; PALETTE_109
-	palette_pointer Palette110, 0, 0 ; PALETTE_110
-	palette_pointer Palette111, 8, 1 ; PALETTE_111
-	palette_pointer Palette112, 8, 1 ; PALETTE_112
-	palette_pointer Palette113, 8, 1 ; PALETTE_113
-	palette_pointer Palette114, 4, 2 ; PALETTE_114
-	palette_pointer Palette115, 4, 2 ; PALETTE_115
-	palette_pointer Palette116, 4, 2 ; PALETTE_116
-	palette_pointer Palette117, 1, 0 ; PALETTE_117
-	palette_pointer Palette118, 7, 0 ; PALETTE_118
-	palette_pointer PalettePlayerPortrait,    3, 0 ; PALETTE_PLAYER_PORTRAIT
-	palette_pointer PaletteRonaldPortrait,    3, 0 ; PALETTE_RONALD_PORTRAIT
-	palette_pointer PaletteSamPortrait,       3, 0 ; PALETTE_SAM_PORTRAIT
-	palette_pointer PaletteImakuniPortrait,   3, 0 ; PALETTE_IMAKUNI_PORTRAIT
-	palette_pointer PaletteNikkiPortrait,     3, 0 ; PALETTE_NIKKI_PORTRAIT
-	palette_pointer PaletteRickPortrait,      3, 0 ; PALETTE_RICK_PORTRAIT
-	palette_pointer PaletteKenPortrait,       3, 0 ; PALETTE_KEN_PORTRAIT
-	palette_pointer PaletteAmyPortrait,       3, 0 ; PALETTE_AMY_PORTRAIT
-	palette_pointer PaletteIsaacPortrait,     3, 0 ; PALETTE_ISAAC_PORTRAIT
-	palette_pointer PaletteMitchPortrait,     3, 0 ; PALETTE_MITCH_PORTRAIT
-	palette_pointer PaletteGenePortrait,      3, 0 ; PALETTE_GENE_PORTRAIT
-	palette_pointer PaletteMurrayPortrait,    3, 0 ; PALETTE_MURRAY_PORTRAIT
-	palette_pointer PaletteCourtneyPortrait,  3, 0 ; PALETTE_COURTNEY_PORTRAIT
-	palette_pointer PaletteStevePortrait,     3, 0 ; PALETTE_STEVE_PORTRAIT
-	palette_pointer PaletteJackPortrait,      3, 0 ; PALETTE_JACK_PORTRAIT
-	palette_pointer PaletteRodPortrait,       3, 0 ; PALETTE_ROD_PORTRAIT
-	palette_pointer PaletteJosephPortrait,    3, 0 ; PALETTE_JOSEPH_PORTRAIT
-	palette_pointer PaletteDavidPortrait,     3, 0 ; PALETTE_DAVID_PORTRAIT
-	palette_pointer PaletteErikPortrait,      3, 0 ; PALETTE_ERIK_PORTRAIT
-	palette_pointer PaletteJohnPortrait,      3, 0 ; PALETTE_JOHN_PORTRAIT
-	palette_pointer PaletteAdamPortrait,      3, 0 ; PALETTE_ADAM_PORTRAIT
-	palette_pointer PaletteJonathanPortrait,  3, 0 ; PALETTE_JONATHAN_PORTRAIT
-	palette_pointer PaletteJoshuaPortrait,    3, 0 ; PALETTE_JOSHUA_PORTRAIT
-	palette_pointer PaletteNicholasPortrait,  3, 0 ; PALETTE_NICHOLAS_PORTRAIT
-	palette_pointer PaletteBrandonPortrait,   3, 0 ; PALETTE_BRANDON_PORTRAIT
-	palette_pointer PaletteMatthewPortrait,   3, 0 ; PALETTE_MATTHEW_PORTRAIT
-	palette_pointer PaletteRyanPortrait,      3, 0 ; PALETTE_RYAN_PORTRAIT
-	palette_pointer PaletteAndrewPortrait,    3, 0 ; PALETTE_ANDREW_PORTRAIT
-	palette_pointer PaletteChrisPortrait,     3, 0 ; PALETTE_CHRIS_PORTRAIT
-	palette_pointer PaletteMichaelPortrait,   3, 0 ; PALETTE_MICHAEL_PORTRAIT
-	palette_pointer PaletteDanielPortrait,    3, 0 ; PALETTE_DANIEL_PORTRAIT
-	palette_pointer PaletteRobertPortrait,    3, 0 ; PALETTE_ROBERT_PORTRAIT
-	palette_pointer PaletteBrittanyPortrait,  3, 0 ; PALETTE_BRITTANY_PORTRAIT
-	palette_pointer PaletteKristinPortrait,   3, 0 ; PALETTE_KRISTIN_PORTRAIT
-	palette_pointer PaletteHeatherPortrait,   3, 0 ; PALETTE_HEATHER_PORTRAIT
-	palette_pointer PaletteSaraPortrait,      3, 0 ; PALETTE_SARA_PORTRAIT
-	palette_pointer PaletteAmandaPortrait,    3, 0 ; PALETTE_AMANDA_PORTRAIT
-	palette_pointer PaletteJenniferPortrait,  3, 0 ; PALETTE_JENNIFER_PORTRAIT
-	palette_pointer PaletteJessicaPortrait,   3, 0 ; PALETTE_JESSICA_PORTRAIT
-	palette_pointer PaletteStephaniePortrait, 3, 0 ; PALETTE_STEPHANIE_PORTRAIT
-	palette_pointer PaletteAaronPortrait,     3, 0 ; PALETTE_AARON_PORTRAIT
+	palette_pointer Palette0,   8 ; PALETTE_0
+	palette_pointer Palette1,   8 ; PALETTE_1
+	palette_pointer Palette2,   8 ; PALETTE_2
+	palette_pointer Palette3,   8 ; PALETTE_3
+	palette_pointer Palette4,   8 ; PALETTE_4
+	palette_pointer Palette5,   8 ; PALETTE_5
+	palette_pointer Palette6,   8 ; PALETTE_6
+	palette_pointer Palette7,   8 ; PALETTE_7
+	palette_pointer Palette8,   8 ; PALETTE_8
+	palette_pointer Palette9,   8 ; PALETTE_9
+	palette_pointer Palette10,  8 ; PALETTE_10
+	palette_pointer Palette11,  8 ; PALETTE_11
+	palette_pointer Palette12,  8 ; PALETTE_12
+	palette_pointer Palette13,  8 ; PALETTE_13
+	palette_pointer Palette14,  8 ; PALETTE_14
+	palette_pointer Palette15,  8 ; PALETTE_15
+	palette_pointer Palette16,  8 ; PALETTE_16
+	palette_pointer Palette17,  8 ; PALETTE_17
+	palette_pointer Palette18,  8 ; PALETTE_18
+	palette_pointer Palette19,  8 ; PALETTE_19
+	palette_pointer Palette20,  8 ; PALETTE_20
+	palette_pointer Palette21,  8 ; PALETTE_21
+	palette_pointer Palette22,  8 ; PALETTE_22
+	palette_pointer Palette23,  8 ; PALETTE_23
+	palette_pointer Palette24,  8 ; PALETTE_24
+	palette_pointer Palette25,  8 ; PALETTE_25
+	palette_pointer Palette26,  8 ; PALETTE_26
+	palette_pointer Palette27,  8 ; PALETTE_27
+	palette_pointer Palette28,  8 ; PALETTE_28
+	palette_pointer Palette29,  8 ; PALETTE_29
+	palette_pointer Palette30,  8 ; PALETTE_30
+	palette_pointer Palette31,  1 ; PALETTE_31
+	palette_pointer Palette32,  1 ; PALETTE_32
+	palette_pointer Palette33,  1 ; PALETTE_33
+	palette_pointer Palette34,  1 ; PALETTE_34
+	palette_pointer Palette35,  1 ; PALETTE_35
+	palette_pointer Palette36,  1 ; PALETTE_36
+	palette_pointer Palette37,  1 ; PALETTE_37
+	palette_pointer Palette38,  1 ; PALETTE_38
+	palette_pointer Palette39,  1 ; PALETTE_39
+	palette_pointer Palette40,  1 ; PALETTE_40
+	palette_pointer Palette41,  1 ; PALETTE_41
+	palette_pointer Palette42,  1 ; PALETTE_42
+	palette_pointer Palette43,  1 ; PALETTE_43
+	palette_pointer Palette44,  1 ; PALETTE_44
+	palette_pointer Palette45,  1 ; PALETTE_45
+	palette_pointer Palette46,  1 ; PALETTE_46
+	palette_pointer Palette47,  1 ; PALETTE_47
+	palette_pointer Palette48,  1 ; PALETTE_48
+	palette_pointer Palette49,  1 ; PALETTE_49
+	palette_pointer Palette50,  1 ; PALETTE_50
+	palette_pointer Palette51,  1 ; PALETTE_51
+	palette_pointer Palette52,  1 ; PALETTE_52
+	palette_pointer Palette53,  1 ; PALETTE_53
+	palette_pointer Palette54,  1 ; PALETTE_54
+	palette_pointer Palette55,  1 ; PALETTE_55
+	palette_pointer Palette56,  1 ; PALETTE_56
+	palette_pointer Palette57,  1 ; PALETTE_57
+	palette_pointer Palette58,  1 ; PALETTE_58
+	palette_pointer Palette59,  1 ; PALETTE_59
+	palette_pointer Palette60,  1 ; PALETTE_60
+	palette_pointer Palette61,  1 ; PALETTE_61
+	palette_pointer Palette62,  1 ; PALETTE_62
+	palette_pointer Palette63,  1 ; PALETTE_63
+	palette_pointer Palette64,  1 ; PALETTE_64
+	palette_pointer Palette65,  1 ; PALETTE_65
+	palette_pointer Palette66,  1 ; PALETTE_66
+	palette_pointer Palette67,  1 ; PALETTE_67
+	palette_pointer Palette68,  1 ; PALETTE_68
+	palette_pointer Palette69,  1 ; PALETTE_69
+	palette_pointer Palette70,  1 ; PALETTE_70
+	palette_pointer Palette71,  1 ; PALETTE_71
+	palette_pointer Palette72,  1 ; PALETTE_72
+	palette_pointer Palette73,  1 ; PALETTE_73
+	palette_pointer Palette74,  1 ; PALETTE_74
+	palette_pointer Palette75,  1 ; PALETTE_75
+	palette_pointer Palette76,  1 ; PALETTE_76
+	palette_pointer Palette77,  1 ; PALETTE_77
+	palette_pointer Palette78,  1 ; PALETTE_78
+	palette_pointer Palette79,  1 ; PALETTE_79
+	palette_pointer Palette80,  1 ; PALETTE_80
+	palette_pointer Palette81,  1 ; PALETTE_81
+	palette_pointer Palette82,  1 ; PALETTE_82
+	palette_pointer Palette83,  1 ; PALETTE_83
+	palette_pointer Palette84,  1 ; PALETTE_84
+	palette_pointer Palette85,  1 ; PALETTE_85
+	palette_pointer Palette86,  1 ; PALETTE_86
+	palette_pointer Palette87,  1 ; PALETTE_87
+	palette_pointer Palette88,  1 ; PALETTE_88
+	palette_pointer Palette89,  1 ; PALETTE_89
+	palette_pointer Palette90,  1 ; PALETTE_90
+	palette_pointer Palette91,  1 ; PALETTE_91
+	palette_pointer Palette92,  1 ; PALETTE_92
+	palette_pointer Palette93,  1 ; PALETTE_93
+	palette_pointer Palette94,  8 ; PALETTE_94
+	palette_pointer Palette95,  8 ; PALETTE_95
+	palette_pointer Palette96,  8 ; PALETTE_96
+	palette_pointer Palette97,  8 ; PALETTE_97
+	palette_pointer Palette98,  8 ; PALETTE_98
+	palette_pointer Palette99,  8 ; PALETTE_99
+	palette_pointer Palette100, 8 ; PALETTE_100
+	palette_pointer Palette101, 7 ; PALETTE_101
+	palette_pointer Palette102, 7 ; PALETTE_102
+	palette_pointer Palette103, 7 ; PALETTE_103
+	palette_pointer Palette104, 7 ; PALETTE_104
+	palette_pointer Palette105, 7 ; PALETTE_105
+	palette_pointer Palette106, 7 ; PALETTE_106
+	palette_pointer Palette107, 7 ; PALETTE_107
+	palette_pointer Palette108, 0 ; PALETTE_108
+	palette_pointer Palette109, 0 ; PALETTE_109
+	palette_pointer Palette110, 0 ; PALETTE_110
+	palette_pointer Palette111, 8 ; PALETTE_111
+	palette_pointer Palette112, 8 ; PALETTE_112
+	palette_pointer Palette113, 8 ; PALETTE_113
+	palette_pointer Palette114, 4 ; PALETTE_114
+	palette_pointer Palette115, 4 ; PALETTE_115
+	palette_pointer Palette116, 4 ; PALETTE_116
+	palette_pointer Palette117, 1 ; PALETTE_117
+	palette_pointer Palette118, 7 ; PALETTE_118
+	palette_pointer PalettePlayerPortrait,    3 ; PALETTE_PLAYER_PORTRAIT
+	palette_pointer PaletteRonaldPortrait,    3 ; PALETTE_RONALD_PORTRAIT
+	palette_pointer PaletteSamPortrait,       3 ; PALETTE_SAM_PORTRAIT
+	palette_pointer PaletteImakuniPortrait,   3 ; PALETTE_IMAKUNI_PORTRAIT
+	palette_pointer PaletteNikkiPortrait,     3 ; PALETTE_NIKKI_PORTRAIT
+	palette_pointer PaletteRickPortrait,      3 ; PALETTE_RICK_PORTRAIT
+	palette_pointer PaletteKenPortrait,       3 ; PALETTE_KEN_PORTRAIT
+	palette_pointer PaletteAmyPortrait,       3 ; PALETTE_AMY_PORTRAIT
+	palette_pointer PaletteIsaacPortrait,     3 ; PALETTE_ISAAC_PORTRAIT
+	palette_pointer PaletteMitchPortrait,     3 ; PALETTE_MITCH_PORTRAIT
+	palette_pointer PaletteGenePortrait,      3 ; PALETTE_GENE_PORTRAIT
+	palette_pointer PaletteMurrayPortrait,    3 ; PALETTE_MURRAY_PORTRAIT
+	palette_pointer PaletteCourtneyPortrait,  3 ; PALETTE_COURTNEY_PORTRAIT
+	palette_pointer PaletteStevePortrait,     3 ; PALETTE_STEVE_PORTRAIT
+	palette_pointer PaletteJackPortrait,      3 ; PALETTE_JACK_PORTRAIT
+	palette_pointer PaletteRodPortrait,       3 ; PALETTE_ROD_PORTRAIT
+	palette_pointer PaletteJosephPortrait,    3 ; PALETTE_JOSEPH_PORTRAIT
+	palette_pointer PaletteDavidPortrait,     3 ; PALETTE_DAVID_PORTRAIT
+	palette_pointer PaletteErikPortrait,      3 ; PALETTE_ERIK_PORTRAIT
+	palette_pointer PaletteJohnPortrait,      3 ; PALETTE_JOHN_PORTRAIT
+	palette_pointer PaletteAdamPortrait,      3 ; PALETTE_ADAM_PORTRAIT
+	palette_pointer PaletteJonathanPortrait,  3 ; PALETTE_JONATHAN_PORTRAIT
+	palette_pointer PaletteJoshuaPortrait,    3 ; PALETTE_JOSHUA_PORTRAIT
+	palette_pointer PaletteNicholasPortrait,  3 ; PALETTE_NICHOLAS_PORTRAIT
+	palette_pointer PaletteBrandonPortrait,   3 ; PALETTE_BRANDON_PORTRAIT
+	palette_pointer PaletteMatthewPortrait,   3 ; PALETTE_MATTHEW_PORTRAIT
+	palette_pointer PaletteRyanPortrait,      3 ; PALETTE_RYAN_PORTRAIT
+	palette_pointer PaletteAndrewPortrait,    3 ; PALETTE_ANDREW_PORTRAIT
+	palette_pointer PaletteChrisPortrait,     3 ; PALETTE_CHRIS_PORTRAIT
+	palette_pointer PaletteMichaelPortrait,   3 ; PALETTE_MICHAEL_PORTRAIT
+	palette_pointer PaletteDanielPortrait,    3 ; PALETTE_DANIEL_PORTRAIT
+	palette_pointer PaletteRobertPortrait,    3 ; PALETTE_ROBERT_PORTRAIT
+	palette_pointer PaletteBrittanyPortrait,  3 ; PALETTE_BRITTANY_PORTRAIT
+	palette_pointer PaletteKristinPortrait,   3 ; PALETTE_KRISTIN_PORTRAIT
+	palette_pointer PaletteHeatherPortrait,   3 ; PALETTE_HEATHER_PORTRAIT
+	palette_pointer PaletteSaraPortrait,      3 ; PALETTE_SARA_PORTRAIT
+	palette_pointer PaletteAmandaPortrait,    3 ; PALETTE_AMANDA_PORTRAIT
+	palette_pointer PaletteJenniferPortrait,  3 ; PALETTE_JENNIFER_PORTRAIT
+	palette_pointer PaletteJessicaPortrait,   3 ; PALETTE_JESSICA_PORTRAIT
+	palette_pointer PaletteStephaniePortrait, 3 ; PALETTE_STEPHANIE_PORTRAIT
+	palette_pointer PaletteAaronPortrait,     3 ; PALETTE_AARON_PORTRAIT
 	assert_table_length NUM_PALETTES

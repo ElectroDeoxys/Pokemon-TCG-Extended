@@ -58,7 +58,13 @@ SetupResetBackUpRamScreen:
 ; shows disclaimer in case player is not playing in CGB
 ; return carry if disclaimer was shown
 CGBDisclaimer:
-	call SetupResetBackUpRamScreen
+	xor a ; SYM_SPACE
+	ld [wTileMapFill], a
+	call DisableLCD
+	call LoadSymbolsFont
+	farcall SetDefaultPalettes
+	lb de, $38, $7f
+	call SetupText
 	call EmptyScreen
 
 	lb de, 0, 11

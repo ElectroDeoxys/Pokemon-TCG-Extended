@@ -660,15 +660,6 @@ SetBGPAndLoadedPal:
 	ld hl, wLoadedPalData
 	ld a, [hli]
 	or a
-	jr z, .skip_bgp
-	ld a, [hli]
-	push hl
-	call SetBGP
-	pop hl
-.skip_bgp
-
-	ld a, [hli]
-	or a
 	jr z, .skip_pal
 	ld c, a
 	ld a, [wd4cb]
@@ -737,36 +728,6 @@ LoadPaletteData:
 
 	ld hl, wLoadedPalData
 	ld a, [hli] ; number palettes
-	ld c, a
-	or a
-	jr z, .check_palette_size
-
-	ld a, [wd4ca]
-	cp $01
-	jr z, .obp1
-
-	ld a, [hli] ; palette for OBP0
-	push hl
-	push bc
-	call SetOBP0
-	pop bc
-	pop hl
-	dec c
-	jr z, .check_palette_size
-
-.obp1
-	ld a, [hli] ; palette for OBP1
-	push hl
-	push bc
-	call SetOBP1
-	pop bc
-	pop hl
-	dec c
-	jr z, .check_palette_size
-	inc hl
-
-.check_palette_size
-	ld a, [hli]
 	or a
 	jr z, .done
 
@@ -795,15 +756,10 @@ LoadPaletteDataToBuffer:
 
 ; size parameter
 	ld a, [hl]
-	ld b, a
-	and $0f
+	add a
+	add a
+	add a
 	inc a
-	ld c, a
-	ld a, b
-	and $f0
-	srl a
-	inc a
-	add c
 	ld c, a
 	ld b, $00
 

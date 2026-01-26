@@ -38,7 +38,7 @@ SFXHeaderPointers:
 	dw Sfx_Leer
 	dw Sfx_Beam
 	dw Sfx_HyperBeam
-	dw Sfx_RockThrow
+	dw Sfx_Avalanche
 	dw Sfx_StoneBarrage
 	dw Sfx_Punch
 	dw Sfx_StretchKick
@@ -303,7 +303,7 @@ Sfx_HyperBeam:
 	dw Sfx_HyperBeam_Ch1
 	dw Sfx_HyperBeam_Ch2
 
-Sfx_RockThrow:
+Sfx_Avalanche:
 	db %1000
 	db BANK(Sfx_RockThrow_Ch1) ; bank
 	dw Sfx_RockThrow_Ch1

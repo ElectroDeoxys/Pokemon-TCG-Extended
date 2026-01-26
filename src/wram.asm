@@ -3,7 +3,7 @@ INCLUDE "constants.asm"
 
 INCLUDE "vram.asm"
 
-SECTION "WRAM0", WRAM0
+SECTION "WRAM", WRAM0
 
 UNION
 
@@ -39,7 +39,7 @@ wDeckToBuild:: ; c000
 
 ENDU
 
-SECTION "WRAM0 Duels 1", WRAM0
+SECTION "WRAM Duels 1", WRAM0
 
 ; In order to be identified during a duel, the 60 cards of each duelist are given an index between 0 and 59.
 ; These indexes are assigned following the order of the card list in wPlayerDeck or wOpponentDeck,
@@ -100,7 +100,7 @@ wCurDeckCardChanges:: ; c590
 
 ENDU
 
-SECTION "WRAM0 Text Engine", WRAM0
+SECTION "WRAM Text Engine", WRAM0
 
 wc600:: ; c600
 	ds $100
@@ -114,7 +114,7 @@ wc800:: ; c800
 wc900:: ; c900
 	ds $100
 
-SECTION "WRAM0 1", WRAM0
+SECTION "WRAM 1", WRAM0
 
 wOAM:: ; ca00
 	ds OAM_SIZE
@@ -299,7 +299,7 @@ wObjectPalettesCGB:: ; cb30
 wListPointer:: ; cb72
 	ds $2
 
-SECTION "WRAM0 Duels 2", WRAM0
+SECTION "WRAM Duels 2", WRAM0
 
 ; In a duel, the main menu current or last selected menu item
 ; From 0 to 5: Hand, Attack, Check, Pkmn Power, Retreat, Done
@@ -721,7 +721,7 @@ wNoEffectFromWhichStatus:: ; ccf1
 wSkipDelayAllowed:: ; ccf2
 	ds $1
 
-SECTION "WRAM0 2", WRAM0
+SECTION "WRAM 2", WRAM0
 
 ; on CGB, attributes of the text box borders. (values 0-7 seem to be used, which only affect palette)
 wTextBoxFrameType:: ; ccf3
@@ -1657,7 +1657,6 @@ wNamingScreenBuffer:: ; cfe7
 wNamingScreenBufferLength:: ; cfff
 	ds $1
 
-SECTION "WRAM1", WRAMX
 wNamingScreenDestPointer:: ; d000
 	ds $2
 
@@ -2677,7 +2676,7 @@ wFilteredCardList::
 wUniqueDeckCardList::
 	ds DECK_SIZE * 2
 
-SECTION "WRAM1 Audio", WRAMX
+SECTION "WRAM Audio", WRAM0
 
 ; bit 7 is set once the song has been started
 wCurSongID:: ; dd80

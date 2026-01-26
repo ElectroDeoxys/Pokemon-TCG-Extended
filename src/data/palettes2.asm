@@ -1,5 +1,4 @@
 Palette100::
-	db 0
 	db 8
 
 	rgb 31, 31, 31
@@ -43,7 +42,6 @@ Palette100::
 	rgb 31, 31,  0
 
 Palette102::
-	db 0
 	db 7
 
 	rgb 28, 28, 28
@@ -82,7 +80,6 @@ Palette102::
 	rgb 28, 28,  0
 
 Palette103::
-	db 0
 	db 7
 
 	rgb 28, 28, 28
@@ -121,7 +118,6 @@ Palette103::
 	rgb 28, 28,  0
 
 Palette104::
-	db 0
 	db 7
 
 	rgb 28, 28, 28
@@ -160,7 +156,6 @@ Palette104::
 	rgb 28, 28,  0
 
 Palette105::
-	db 0
 	db 7
 
 	rgb  0,  0,  4
@@ -199,7 +194,6 @@ Palette105::
 	rgb 31, 24,  0
 
 Palette106::
-	db 0
 	db 7
 
 	rgb  8,  1,  1
@@ -238,7 +232,6 @@ Palette106::
 	rgb 31, 31,  0
 
 Palette107::
-	db 0
 	db 7
 
 	rgb  3,  1,  1
@@ -277,9 +270,6 @@ Palette107::
 	rgb 31, 31,  0
 
 Palette111::
-	db 1
-	gbpal SHADE_WHITE, SHADE_LIGHT, SHADE_DARK, SHADE_BLACK ; OBP0
-
 	db 8
 
 	rgb 28, 28, 24
@@ -323,9 +313,6 @@ Palette111::
 	rgb 31, 31,  0
 
 Palette112::
-	db 1
-	gbpal SHADE_WHITE, SHADE_LIGHT, SHADE_DARK, SHADE_BLACK ; OBP0
-
 	db 8
 
 	rgb 28, 28, 24
@@ -369,9 +356,6 @@ Palette112::
 	rgb 25, 14,  0
 
 Palette113::
-	db 1
-	gbpal SHADE_WHITE, SHADE_LIGHT, SHADE_DARK, SHADE_BLACK ; OBP0
-
 	db 8
 
 	rgb 28, 28, 24
@@ -415,10 +399,6 @@ Palette113::
 	rgb 31, 31,  0
 
 Palette114::
-	db 2
-	gbpal SHADE_WHITE, SHADE_LIGHT, SHADE_DARK, SHADE_BLACK ; OBP0
-	gbpal SHADE_BLACK, SHADE_WHITE, SHADE_WHITE, SHADE_WHITE ; OBP1
-
 	db 4
 
 	rgb  0,  0,  0
@@ -442,10 +422,6 @@ Palette114::
 	rgb 31, 31,  0
 
 Palette115::
-	db 2
-	gbpal SHADE_WHITE, SHADE_LIGHT, SHADE_DARK, SHADE_BLACK ; OBP0
-	gbpal SHADE_BLACK, SHADE_WHITE, SHADE_WHITE, SHADE_WHITE ; OBP1
-
 	db 4
 
 	rgb 28, 28, 24
@@ -469,10 +445,6 @@ Palette115::
 	rgb 31, 31,  0
 
 Palette116::
-	db 2
-	gbpal SHADE_DARK, SHADE_WHITE, SHADE_LIGHT, SHADE_BLACK ; OBP0
-	gbpal SHADE_WHITE, SHADE_LIGHT, SHADE_DARK, SHADE_BLACK ; OBP1
-
 	db 4
 
 	rgb 28, 28, 24
@@ -496,7 +468,6 @@ Palette116::
 	rgb 31, 31,  0
 
 Palette118::
-	db 0
 	db 7
 
 	rgb 28, 28, 24

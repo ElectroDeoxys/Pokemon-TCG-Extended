@@ -35,8 +35,6 @@ _LoadScene::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ldgbpal a, SHADE_WHITE, SHADE_LIGHT, SHADE_DARK, SHADE_BLACK
-	ld [wBGP], a
 	ld a, [hli]
 	push af ; palette
 	xor a
