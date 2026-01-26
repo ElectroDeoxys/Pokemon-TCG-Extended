@@ -69,20 +69,15 @@ Sfx_Goo_Ch1:
 	sfx_pitch_offset -1
 	sfx_env 15, -7
 	sfx_freq $705
-	sfx_env 0, 0
-	sfx_pitch_offset 0
-	sfx_wait 1
-	sfx_pitch_offset -1
-	sfx_env 15, -7
 	sfx_end
 
 Sfx_Goo_Ch2:
 	sfx_pan TRUE, TRUE
-	sfx_env 13, -7
 	sfx_env 0, 0
 	sfx_pitch_offset 0
 	sfx_wait 18
 	sfx_pitch_offset -1
+	sfx_env 0, 1
 	sfx_env 13, -7
 	sfx_freq $31
 	sfx_freq $37

@@ -2690,10 +2690,6 @@ wCurSongBank:: ; dd81
 wCurSfxID:: ; dd82
 	ds $1
 
-; priority value of current sfx (0 if nothing is playing)
-wSfxPriority:: ; dd83
-	ds $1
-
 ; 8-bit output enable mask for left/right output for each channel
 wMusicStereoPanning:: ; dd84
 	ds $1

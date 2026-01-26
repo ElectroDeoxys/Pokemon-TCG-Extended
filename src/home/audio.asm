@@ -1,4 +1,5 @@
-; gets far word a:hl, outputs value in bc
+; gets audio command and argument bytes from a:hl
+; outputs data in wAudioCmd and wAudioArg
 GetAudioCmdAndArgs::
 	push hl
 	push bc

@@ -16,19 +16,15 @@ Sfx_StretchKick_Ch1:
 	sfx_freq $759
 	sfx_freq $76b
 	sfx_env 15, -7
-	sfx_pan TRUE, TRUE
 	sfx_duty 2
 	sfx_freq $77b
 	sfx_env 8, -7
-	sfx_pan TRUE, TRUE
 	sfx_duty 2
 	sfx_freq $783
 	sfx_env 4, -7
-	sfx_pan TRUE, TRUE
 	sfx_duty 2
 	sfx_freq $790
 	sfx_env 1, -7
-	sfx_pan TRUE, TRUE
 	sfx_duty 2
 	sfx_freq $79d
 	sfx_end

@@ -222,7 +222,7 @@ Animations:
 	db PALETTE_54 ; palette ID
 	db SPRITE_ANIM_114 ; anim ID
 	db NONE ; anim flags
-	db SFX_ROCK_THROW ; sfx id
+	db SFX_AVALANCHE ; sfx id
 	db NONE ; handler function
 
 	; DUEL_ANIM_STONE_BARRAGE
@@ -598,7 +598,7 @@ Animations:
 	db PALETTE_80 ; palette ID
 	db SPRITE_ANIM_145 ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
-	db SFX_BENCH_WHIRLWIND ; sfx id
+	db SFX_WHIRLWIND_BENCH ; sfx id
 	db NONE ; handler function
 
 	; DUEL_ANIM_EXPAND

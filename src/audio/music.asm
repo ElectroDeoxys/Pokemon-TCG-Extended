@@ -5,10 +5,10 @@ SoundTimerHandler::
 	jp MusicUpdate
 
 _PlaySong::
-	jp PlaySong
+	jp SetCurSong
 
 _PlaySFX::
-	jp PlaySFX
+	jp SetCurSFX
 
 _AssertSongFinished::
 	jp AssertSongFinished
@@ -22,7 +22,7 @@ _PauseSong::
 _ResumeSong::
 	jp ResumeSong
 
-PlaySong:
+SetCurSong:
 	push hl
 	ld hl, NumberOfSongs
 	cp [hl]
@@ -32,29 +32,8 @@ PlaySong:
 	pop hl
 	ret
 
-PlaySFX:
-	push bc
-	push hl
-	ld b, $0
-	ld c, a
-	or a
-	jr z, .play_sfx ; SFX_STOP
-	ld hl, SFXPriorities
-	add hl, bc
-	ld b, [hl]
-	ld a, [wSfxPriority]
-	or a
-	jr z, .play_sfx ; no sfx is currently playing
-	cp b
-	jr c, .skip ; lower priority
-.play_sfx
-	ld a, b
-	ld [wSfxPriority], a
-	ld a, c
+SetCurSFX:
 	ld [wCurSfxID], a
-.skip
-	pop hl
-	pop bc
 	ret
 
 AssertSongFinished:
@@ -1916,14 +1895,5 @@ INCLUDE "audio/noise_instruments.asm"
 
 VibratoTypes:
 INCLUDE "audio/vibrato_types.asm"
-
-; all real SFX have the same priority (SFX_STOP does not use this table)
-SFXPriorities:
-	db $00, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a
-	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a
-	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a
-	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a
-	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a
-	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a
 
 INCLUDE "audio/music_headers.asm"

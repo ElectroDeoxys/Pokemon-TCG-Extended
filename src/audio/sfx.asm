@@ -136,7 +136,7 @@ SFX_CommandTable:
 	dw SFX_wait
 	dw SFX_wave
 	dw SFX_pan
-	dw SFX_unused
+	dw SFX_sweep
 	dw SFX_unused
 	dw SFX_unused
 	dw SFX_unused
@@ -456,6 +456,12 @@ SFX_pan:
 	pop hl
 	jp ExecuteNextSFXCommand
 
+SFX_sweep:
+	pop hl
+	ld a, [hli]
+	ldh [rAUD1SWEEP], a
+	jp ExecuteNextSFXCommand
+
 SFX_end:
 	ld e, c
 	inc e
@@ -487,7 +493,6 @@ SFX_end:
 Func_fc26c:
 	xor a
 	ld [wSFXIsPlaying], a
-	ld [wSfxPriority], a
 	ld a, $80
 	ld [wCurSfxID], a
 	ret

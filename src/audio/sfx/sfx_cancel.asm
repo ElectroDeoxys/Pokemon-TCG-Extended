@@ -22,11 +22,9 @@ Sfx_Cancel_Ch1:
 	sfx_env 13, 4
 	sfx_freq $74f
 	sfx_env 6, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $7a7
 	sfx_env 3, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $7a7
 	sfx_end

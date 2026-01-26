@@ -50,7 +50,6 @@ Sfx_StringShot_Ch1:
 	sfx_wait 22
 	sfx_pitch_offset -1
 	sfx_env 9, -7
-	sfx_pan TRUE, TRUE
 	sfx_env 9, -7
 	sfx_duty 0
 	sfx_freq $7ce

@@ -2,42 +2,10 @@ Sfx_Protect_Ch1:
 	sfx_env 14, -7
 	sfx_pan TRUE, TRUE
 	sfx_duty 0
+	sfx_loop 18
 	sfx_freq $60b
 	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
-	sfx_freq $60b
-	sfx_freq $642
+	sfx_endloop
 	sfx_freq $672
 	sfx_freq $642
 	sfx_freq $672
@@ -53,28 +21,11 @@ Sfx_Protect_Ch1:
 	sfx_freq $6b2
 	sfx_freq $689
 	sfx_env 8, -7
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
+	sfx_loop 10
 	sfx_freq $642
 	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
-	sfx_freq $642
-	sfx_freq $672
+	sfx_endloop
 	sfx_freq $689
 	sfx_freq $672
 	sfx_freq $689
@@ -89,7 +40,6 @@ Sfx_Protect_Ch1:
 	sfx_freq $6b2
 	sfx_freq $689
 	sfx_env 4, -7
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $689
 	sfx_freq $6b2
@@ -99,7 +49,6 @@ Sfx_Protect_Ch1:
 	sfx_freq $6b2
 	sfx_freq $689
 	sfx_env 1, -7
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $689
 	sfx_freq $6b2

@@ -29,7 +29,6 @@ Sfx_PotSmash_Ch1:
 	sfx_freq $689
 	sfx_freq $672
 	sfx_freq $642
-	sfx_pan TRUE, TRUE
 	sfx_env 9, -7
 	sfx_duty 2
 	sfx_freq $79d

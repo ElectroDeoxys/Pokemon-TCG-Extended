@@ -193,6 +193,18 @@ MACRO sfx_pan
 	dn !!\1, !!\2
 ENDM
 
+MACRO sfx_sweep_up
+ASSERT \1 < 8
+ASSERT \2 < 8
+	db $90, (((\1) << 4) | (\2)) | AUD1SWEEP_UP
+ENDM
+
+MACRO sfx_sweep_down
+ASSERT \1 < 8
+ASSERT \2 < 8
+	db $90, (((\1) << 4) | (\2)) | AUD1SWEEP_DOWN
+ENDM
+
 MACRO sfx_end
 	db $f0
 ENDM

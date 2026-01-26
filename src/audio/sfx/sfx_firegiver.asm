@@ -29,7 +29,6 @@ Sfx_Firegiver_Ch1:
 	sfx_freq $6f6
 	sfx_wait 1
 	sfx_env 6, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $705
 	sfx_wait 1
@@ -52,7 +51,6 @@ Sfx_Firegiver_Ch1:
 	sfx_freq $77b
 	sfx_wait 1
 	sfx_env 3, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $783
 	sfx_wait 1
@@ -81,7 +79,6 @@ Sfx_Firegiver_Ch1:
 	sfx_env 3, 4
 	sfx_loop 6
 	sfx_env 14, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $705
 	sfx_env 0, 0

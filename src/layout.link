@@ -175,6 +175,8 @@ ROMX $3e
 ROMX $3f
 	"Music 2"
 	"Sfx 2"
+ROMX $40
+	"Sfx 3"
 WRAM0
 	"WRAM0"
 	"WRAM0 Duels 1"

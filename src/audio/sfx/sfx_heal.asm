@@ -13,7 +13,6 @@ Sfx_Heal_Ch1:
 	sfx_freq $7df
 	sfx_freq $7ce
 	sfx_env 12, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 1
 	sfx_freq $7ce
 	sfx_freq $7b6
@@ -26,7 +25,6 @@ Sfx_Heal_Ch1:
 	sfx_freq $7df
 	sfx_freq $7ce
 	sfx_env 8, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 1
 	sfx_freq $7ce
 	sfx_freq $7b6
@@ -39,7 +37,6 @@ Sfx_Heal_Ch1:
 	sfx_freq $7df
 	sfx_freq $7ce
 	sfx_env 6, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 1
 	sfx_freq $7ce
 	sfx_freq $7b6
@@ -52,7 +49,6 @@ Sfx_Heal_Ch1:
 	sfx_freq $7df
 	sfx_freq $7ce
 	sfx_env 4, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $7ce
 	sfx_freq $7b6
@@ -65,7 +61,6 @@ Sfx_Heal_Ch1:
 	sfx_freq $7df
 	sfx_freq $7ce
 	sfx_env 2, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $7ce
 	sfx_freq $7b6
@@ -78,7 +73,6 @@ Sfx_Heal_Ch1:
 	sfx_freq $7df
 	sfx_freq $7ce
 	sfx_env 1, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $7ce
 	sfx_freq $7b6

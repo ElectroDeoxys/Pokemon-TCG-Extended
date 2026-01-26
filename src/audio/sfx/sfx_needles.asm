@@ -12,17 +12,7 @@ Sfx_Needles_Ch1:
 	sfx_freq $7df
 	sfx_env 0, 0
 	sfx_pitch_offset 0
-	sfx_wait 1
-	sfx_pitch_offset -1
-	sfx_env 7, -7
-	sfx_env 0, 0
-	sfx_pitch_offset 0
-	sfx_wait 1
-	sfx_pitch_offset -1
-	sfx_env 7, -7
-	sfx_env 0, 0
-	sfx_pitch_offset 0
-	sfx_wait 10
+	sfx_wait 12
 	sfx_pitch_offset -1
 	sfx_env 7, -7
 	sfx_endloop

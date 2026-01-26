@@ -39,7 +39,6 @@ Sfx_Sleep_Ch1:
 	sfx_pitch_offset -1
 	sfx_env 14, 4
 	sfx_env 14, 4
-	sfx_pan TRUE, TRUE
 	sfx_duty 0
 	sfx_freq $759
 	sfx_pitch_offset 0
@@ -78,7 +77,6 @@ Sfx_Sleep_Ch1:
 	sfx_pitch_offset 0
 	sfx_env 14, 4
 	sfx_env 14, 4
-	sfx_pan 2, 2
 	sfx_duty 0
 	sfx_freq $642
 	sfx_wait 1
@@ -130,9 +128,4 @@ Sfx_Sleep_Ch1:
 	sfx_wait 1
 	sfx_freq $5ac
 	sfx_wait 1
-	sfx_env 0, 0
-	sfx_pitch_offset 0
-	sfx_wait 2
-	sfx_pitch_offset 0
-	sfx_env 14, 4
 	sfx_end

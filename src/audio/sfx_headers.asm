@@ -8,16 +8,10 @@ SFXHeaderPointers:
 	dw Sfx_Confirm
 	dw Sfx_Cancel
 	dw Sfx_Denied
-	dw Sfx_Unused05
-	dw Sfx_Unused06
 	dw Sfx_CardShuffle
 	dw Sfx_PlacePrize
-	dw Sfx_Unused09
-	dw Sfx_Unused0a
 	dw Sfx_CoinToss
 	dw Sfx_Warp
-	dw Sfx_Unused0d
-	dw Sfx_Unused0e
 	dw Sfx_PokemonDomeDoors
 	dw Sfx_LegendaryCards
 	dw Sfx_Glow
@@ -80,7 +74,7 @@ SFXHeaderPointers:
 	dw Sfx_Drain
 	dw Sfx_DarkGas
 	dw Sfx_HealingWind
-	dw Sfx_BenchWhirlwind
+	dw Sfx_Whirlwind_Bench
 	dw Sfx_Expand
 	dw Sfx_CatPunch
 	dw Sfx_ThunderWave
@@ -98,7 +92,41 @@ SFXHeaderPointers:
 	dw Sfx_FiregiverStart
 	dw Sfx_ReceiveCardPop
 	dw Sfx_PokemonEvolution
-	dw Sfx_Unused5f
+	dw Sfx_Fireball
+	dw Sfx_ContinuousFireball
+	dw Sfx_BenchManipulation
+	dw Sfx_PsychicBeam
+	dw Sfx_PsychicBeam_Bench
+	dw Sfx_BoulderSmash
+	dw Sfx_MegaPunch
+	dw Sfx_PsyPunch
+	dw Sfx_SludgePunch
+	dw Sfx_IcePunch
+	dw Sfx_Kick
+	dw Sfx_TailSlap
+	dw Sfx_TailWhip
+	dw Sfx_Slap
+	dw Sfx_QuestionMark_Bench
+	dw Sfx_SkullBash
+	dw Sfx_CoinHurl
+	dw Sfx_Teleport
+	dw Sfx_FollowMe
+	dw Sfx_Swift
+	dw Sfx_3dAttack
+	dw Sfx_DryUp
+	dw Sfx_FocusBlast
+	dw Sfx_FocusBlast_Bench
+	dw Sfx_BoneToss_Bench
+	dw Sfx_CoinHurl_Bench
+	dw Sfx_BigSnore
+	dw Sfx_RazorLeaf
+	dw Sfx_Guillotine
+	dw Sfx_VinePull
+	dw Sfx_Perplex
+	dw Sfx_NineTails
+	dw Sfx_BoneHeadbutt
+	dw Sfx_DrillDive
+	dw Sfx_DarkSong
 	assert_table_length NUM_SFX
 
 Sfx_Stop:
@@ -124,16 +152,6 @@ Sfx_Denied:
 	db BANK(Sfx_Denied_Ch1) ; bank
 	dw Sfx_Denied_Ch1
 
-Sfx_Unused05:
-	db %0010
-	db BANK(Sfx_Unused05_Ch1) ; bank
-	dw Sfx_Unused05_Ch1
-
-Sfx_Unused06:
-	db %0010
-	db BANK(Sfx_Unused06_Ch1) ; bank
-	dw Sfx_Unused06_Ch1
-
 Sfx_CardShuffle:
 	db %1000
 	db BANK(Sfx_CardShuffle_Ch1) ; bank
@@ -144,16 +162,6 @@ Sfx_PlacePrize:
 	db BANK(Sfx_PlacePrize_Ch1) ; bank
 	dw Sfx_PlacePrize_Ch1
 
-Sfx_Unused09:
-	db %1000
-	db BANK(Sfx_Unused09_Ch1) ; bank
-	dw Sfx_Unused09_Ch1
-
-Sfx_Unused0a:
-	db %0010
-	db BANK(Sfx_Unused0a_Ch1) ; bank
-	dw Sfx_Unused0a_Ch1
-
 Sfx_CoinToss:
 	db %0010
 	db BANK(Sfx_CoinToss_Ch1) ; bank
@@ -163,16 +171,6 @@ Sfx_Warp:
 	db %1000
 	db BANK(Sfx_Warp_Ch1) ; bank
 	dw Sfx_Warp_Ch1
-
-Sfx_Unused0d:
-	db %0010
-	db BANK(Sfx_Unused0d_Ch1) ; bank
-	dw Sfx_Unused0d_Ch1
-
-Sfx_Unused0e:
-	db %0010
-	db BANK(Sfx_Unused0e_Ch1) ; bank
-	dw Sfx_Unused0e_Ch1
 
 Sfx_PokemonDomeDoors:
 	db %1000
@@ -489,10 +487,10 @@ Sfx_HealingWind:
 	db BANK(Sfx_HealingWind_Ch1) ; bank
 	dw Sfx_HealingWind_Ch1
 
-Sfx_BenchWhirlwind:
+Sfx_Whirlwind_Bench:
 	db %0010
-	db BANK(Sfx_BenchWhirlwind_Ch1) ; bank
-	dw Sfx_BenchWhirlwind_Ch1
+	db BANK(Sfx_Whirlwind_Bench_Ch1) ; bank
+	dw Sfx_Whirlwind_Bench_Ch1
 
 Sfx_Expand:
 	db %0010
@@ -585,7 +583,199 @@ Sfx_PokemonEvolution:
 	db BANK(Sfx_PokemonEvolution_Ch1) ; bank
 	dw Sfx_PokemonEvolution_Ch1
 
-Sfx_Unused5f:
+Sfx_Fireball:
+	db %1001
+	db BANK(Sfx_Fireball_Ch1) ; bank
+	dw Sfx_Fireball_Ch1
+	dw Sfx_Fireball_Ch2
+
+Sfx_ContinuousFireball:
+	db %1001
+	db BANK(Sfx_ContinuousFireball_Ch1) ; bank
+	dw Sfx_ContinuousFireball_Ch1
+	dw Sfx_ContinuousFireball_Ch2
+
+Sfx_BenchManipulation:
+	db %0001
+	db BANK(Sfx_BenchManipulation_Ch1) ; bank
+	dw Sfx_BenchManipulation_Ch1
+
+Sfx_PsychicBeam:
+	db %1001
+	db BANK(Sfx_PsychicBeam_Ch1) ; bank
+	dw Sfx_PsychicBeam_Ch1
+	dw Sfx_PsychicBeam_Ch2
+
+Sfx_PsychicBeam_Bench:
+	db %1001
+	db BANK(Sfx_PsychicBeam_Bench_Ch1) ; bank
+	dw Sfx_PsychicBeam_Bench_Ch1
+	dw Sfx_PsychicBeam_Bench_Ch2
+
+Sfx_BoulderSmash:
+	db %1001
+	db BANK(Sfx_BoulderSmash_Ch1) ; bank
+	dw Sfx_BoulderSmash_Ch1
+	dw Sfx_BoulderSmash_Ch2
+
+Sfx_MegaPunch:
+	db %1001
+	db BANK(Sfx_MegaPunch_Ch1) ; bank
+	dw Sfx_MegaPunch_Ch1
+	dw Sfx_MegaPunch_Ch2
+
+Sfx_PsyPunch:
+	db %0001
+	db BANK(Sfx_PsyPunch_Ch1) ; bank
+	dw Sfx_PsyPunch_Ch1
+
+Sfx_SludgePunch:
+	db %1001
+	db BANK(Sfx_SludgePunch_Ch1) ; bank
+	dw Sfx_SludgePunch_Ch1
+	dw Sfx_SludgePunch_Ch2
+
+Sfx_IcePunch:
+	db %0001
+	db BANK(Sfx_IcePunch_Ch1) ; bank
+	dw Sfx_IcePunch_Ch1
+
+Sfx_Kick:
+	db %1001
+	db BANK(Sfx_Kick_Ch1) ; bank
+	dw Sfx_Kick_Ch1
+	dw Sfx_Kick_Ch2
+
+Sfx_TailSlap:
+	db %1001
+	db BANK(Sfx_TailSlap_Ch1) ; bank
+	dw Sfx_TailSlap_Ch1
+	dw Sfx_TailSlap_Ch2
+
+Sfx_TailWhip:
+	db %0001
+	db BANK(Sfx_TailWhip_Ch1) ; bank
+	dw Sfx_TailWhip_Ch1
+
+Sfx_Slap:
+	db %1001
+	db BANK(Sfx_Slap_Ch1) ; bank
+	dw Sfx_Slap_Ch1
+	dw Sfx_Slap_Ch2
+
+Sfx_QuestionMark_Bench:
+	db %0001
+	db BANK(Sfx_QuestionMark_Bench_Ch1) ; bank
+	dw Sfx_QuestionMark_Bench_Ch1
+
+Sfx_SkullBash:
+	db %1001
+	db BANK(Sfx_SkullBash_Ch1) ; bank
+	dw Sfx_SkullBash_Ch1
+	dw Sfx_SkullBash_Ch2
+
+Sfx_CoinHurl:
+	db %1001
+	db BANK(Sfx_CoinHurl_Ch1) ; bank
+	dw Sfx_CoinHurl_Ch1
+	dw Sfx_CoinHurl_Ch2
+
+Sfx_Teleport:
+	db %1001
+	db BANK(Sfx_Teleport_Ch1) ; bank
+	dw Sfx_Teleport_Ch1
+	dw Sfx_Teleport_Ch2
+
+Sfx_FollowMe:
+	db %0001
+	db BANK(Sfx_FollowMe_Ch1) ; bank
+	dw Sfx_FollowMe_Ch1
+
+Sfx_Swift:
+	db %0001
+	db BANK(Sfx_Swift_Ch1) ; bank
+	dw Sfx_Swift_Ch1
+
+Sfx_3dAttack:
+	db %0001
+	db BANK(Sfx_3dAttack_Ch1) ; bank
+	dw Sfx_3dAttack_Ch1
+
+Sfx_DryUp:
 	db %1000
-	db BANK(Sfx_Unused5f_Ch1) ; bank
-	dw Sfx_Unused5f_Ch1
+	db BANK(Sfx_DryUp_Ch1) ; bank
+	dw Sfx_DryUp_Ch1
+
+Sfx_FocusBlast:
+	db %1001
+	db BANK(Sfx_FocusBlast_Ch1) ; bank
+	dw Sfx_FocusBlast_Ch1
+	dw Sfx_FocusBlast_Ch2
+
+Sfx_FocusBlast_Bench:
+	db %1001
+	db BANK(Sfx_FocusBlast_Bench_Ch1) ; bank
+	dw Sfx_FocusBlast_Bench_Ch1
+	dw Sfx_FocusBlast_Bench_Ch2
+
+Sfx_BoneToss_Bench:
+	db %1001
+	db BANK(Sfx_BoneToss_Bench_Ch1) ; bank
+	dw Sfx_BoneToss_Bench_Ch1
+	dw Sfx_BoneToss_Bench_Ch2
+
+Sfx_CoinHurl_Bench:
+	db %1001
+	db BANK(Sfx_CoinHurl_Bench_Ch1) ; bank
+	dw Sfx_CoinHurl_Bench_Ch1
+	dw Sfx_CoinHurl_Bench_Ch2
+
+Sfx_BigSnore:
+	db %1001
+	db BANK(Sfx_BigSnore_Ch1) ; bank
+	dw Sfx_BigSnore_Ch1
+	dw Sfx_BigSnore_Ch2
+
+Sfx_RazorLeaf:
+	db %1000
+	db BANK(Sfx_RazorLeaf_Ch1) ; bank
+	dw Sfx_RazorLeaf_Ch1
+
+Sfx_Guillotine:
+	db %1001
+	db BANK(Sfx_Guillotine_Ch1) ; bank
+	dw Sfx_Guillotine_Ch1
+	dw Sfx_Guillotine_Ch2
+
+Sfx_VinePull:
+	db %0001
+	db BANK(Sfx_VinePull_Ch1) ; bank
+	dw Sfx_VinePull_Ch1
+
+Sfx_Perplex:
+	db %0001
+	db BANK(Sfx_Perplex_Ch1) ; bank
+	dw Sfx_Perplex_Ch1
+
+Sfx_NineTails:
+	db %1001
+	db BANK(Sfx_NineTails_Ch1) ; bank
+	dw Sfx_NineTails_Ch1
+	dw Sfx_NineTails_Ch2
+
+Sfx_BoneHeadbutt:
+	db %1001
+	db BANK(Sfx_BoneHeadbutt_Ch1) ; bank
+	dw Sfx_BoneHeadbutt_Ch1
+	dw Sfx_BoneHeadbutt_Ch2
+
+Sfx_DrillDive:
+	db %1001
+	db BANK(Sfx_DrillDive_Ch1) ; bank
+	dw Sfx_DrillDive_Ch1
+	dw Sfx_DrillDive_Ch2
+
+Sfx_DarkSong:
+	db %0001
+	db BANK(Sfx_DarkSong_Ch1) ; bank
+	dw Sfx_DarkSong_Ch1

@@ -62,7 +62,6 @@ Sfx_IntroOrbSwoop_Ch1:
 	sfx_freq $60b
 	sfx_freq $416
 	sfx_env 12, -7
-	sfx_pan TRUE, TRUE
 	sfx_duty 2
 	sfx_freq $416
 	sfx_freq $60b
