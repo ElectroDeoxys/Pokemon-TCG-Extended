@@ -170,7 +170,7 @@ TextOffsets::
 	textpointer NotEnoughPsychicEnergyText
 	textpointer NotEnoughWaterEnergyText
 	textpointer ThereAreNoTrainerCardsInDiscardPileText
-	textpointer NoAttackMayBeChoosenText
+	textpointer NoAttackMayBeChosenText
 	textpointer YouDidNotReceiveAnAttackToMirrorMoveText
 	textpointer ThisAttackCannotBeUsedTwiceText
 	textpointer NoWeaknessText

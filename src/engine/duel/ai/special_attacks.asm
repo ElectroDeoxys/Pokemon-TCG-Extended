@@ -354,23 +354,19 @@ HandleSpecialAIAttacks:
 	jr z, .count_prizes
 	ld a, e
 	add DUELVARS_ARENA_CARD_HP
-	; bug, GetTurnDuelistVariable clobbers hl
-	; uncomment the following lines to preserve hl
-	; push hl
+	push hl
 	call GetTurnDuelistVariable
-	; pop hl
+	pop hl
 	cp 20
 	jr nc, .loop_earthquake
 	inc d
 	jr .loop_earthquake
 
 .count_prizes
-	; bug, this is supposed to count the player's prize cards
-	; not the opponent's, missing calls to SwapTurn
 	push de
-	; call SwapTurn
+	call SwapTurn
 	call CountPrizes
-	; call SwapTurn
+	call SwapTurn
 	pop de
 	cp d
 	jp c, .zero_score

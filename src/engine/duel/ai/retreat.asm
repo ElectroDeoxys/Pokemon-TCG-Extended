@@ -695,9 +695,11 @@ AIDecideBenchPokemonToSwitchTo:
 	jr z, .raise_score
 	cphl MEW_LV8
 	jr nz, .check_if_has_bench_utility
+	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
-	call GetNonTurnDuelistVariable
+	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer2_FromDeckIndex
+	call SwapTurn
 	ld a, [wLoadedCard2Stage]
 	or a
 	jr z, .check_if_has_bench_utility
@@ -788,7 +790,12 @@ AIDecideBenchPokemonToSwitchTo:
 ; input:
 ;	- a = Play Area location (PLAY_AREA_*) of card to retreat to.
 AITryToRetreat:
-	push af
+	ld b, a
+	call CheckUnableToRetreatDueToEffect
+	ret c
+	bank1call CheckIfActiveCardParalyzedOrAsleep
+	ret c
+	push bc
 	ld a, [wAIPlayEnergyCardForRetreat]
 	or a
 	jr z, .check_id
@@ -796,16 +803,6 @@ AITryToRetreat:
 ; AI is allowed to play an energy card
 ; from the hand in order to provide
 ; the necessary energy for retreat cost
-
-; check status
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jp z, .check_id
-	cp PARALYZED
-	jp z, .check_id
-
 ; if an energy card hasn't been played yet,
 ; checks if the Pokémon needs just one more energy to retreat
 ; if it does, check if there are any energy cards in hand
@@ -851,13 +848,6 @@ AITryToRetreat:
 	ldh [hTempPlayAreaLocation_ffa1], a
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
-	ld b, a
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jp z, .set_carry
-	cp PARALYZED
-	jp z, .set_carry
-	ld a, b
 	ldh [hTemp_ffa0], a
 	ld a, $ff
 	ldh [hTempRetreatCostCards], a

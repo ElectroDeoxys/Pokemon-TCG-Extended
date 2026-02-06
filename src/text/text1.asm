@@ -761,8 +761,8 @@ ThereAreNoTrainerCardsInDiscardPileText:
 	line "in the Discard Pile."
 	done
 
-NoAttackMayBeChoosenText:
-	text "No Attacks may be choosen."
+NoAttackMayBeChosenText:
+	text "No Attacks may be chosen."
 	done
 
 YouDidNotReceiveAnAttackToMirrorMoveText:

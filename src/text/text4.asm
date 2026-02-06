@@ -85,7 +85,7 @@ Mail6Part1Text:
 	line "You must be wary of Exeggutor's"
 	line "Big Eggsplosion with Nikki's deck."
 	line "Use your Fire Pokémon to knock out"
-	line "Exeggute and Exeggutor at an"
+	line "Exeggcute and Exeggutor at an"
 	line "early stage!"
 	line "I suggest you study the Deck from"
 	line "the Fire Medal Deck Machine."

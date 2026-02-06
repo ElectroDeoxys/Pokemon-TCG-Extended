@@ -98,7 +98,7 @@ Clerk12ChallengeCupIntroText:
 	done
 
 Clerk12ChallengeCupContenderText:
-	text "Presently, <RAMNAME> is still"
+	text "Presently, <RAMTEXT> is still"
 	line "a contender!"
 	done
 
@@ -512,7 +512,7 @@ Text0578:
 
 Text0579:
 	text "Hmm-hmm-hmm...I lose."
-	line "But that's no suprise, seeing "
+	line "But that's no surprise, seeing "
 	line "as how you've come this far."
 	line "Your next opponent is waiting "
 	line "for you!"

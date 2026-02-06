@@ -165,7 +165,8 @@ AIPerformScriptedTurn:
 
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
-	cp16 MACHOP ; wrong
+	call GetCardIDFromDeckIndex
+	cp16 MACHOP
 	ld a, PLAY_AREA_BENCH_1
 	jr nz, .retreat
 	inc a ; PLAY_AREA_BENCH_2

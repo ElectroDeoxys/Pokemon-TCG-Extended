@@ -556,7 +556,7 @@ LegendaryMoltresDescriptionText:
 
 LegendaryZapdosDescriptionText:
 	text "Zap opponents with the"
-	line "Legandary Zapdos!"
+	line "Legendary Zapdos!"
 	done
 
 LegendaryArticunoDescriptionText:

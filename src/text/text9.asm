@@ -19,7 +19,7 @@ Text073f:
 	line "So...<RAMNAME>..."
 	line "Will you play with me again?"
 	line "With all sorts of different Decks?"
-	line "And this time, I not gonna lose!"
+	line "And this time, I'm not gonna lose!"
 	done
 
 Text0740:

@@ -848,7 +848,7 @@ Clerk9DefaultText:
 
 Clerk9ChallengeCupOverText:
 	text "Greetings! Welcome to the "
-	line "Challenge Hall! This is where the"
+	line "Challenge Hall! This is where"
 	line "the Challenge Cup is held. The "
 	line "Challenge Cup may start at any"
 	line "time, so please visit the "
@@ -942,7 +942,7 @@ RonaldChallengeCup1LostActive2Text:
 	line "I lost to the third opponent!"
 	line "I just lost my concentration."
 	line "But I'll win the next Challenge "
-	line "Cup! Of course I'll puverize you!"
+	line "Cup! Of course I'll pulverize you!"
 	line "See ya! Ha ha ha ha ha ha!"
 	done
 

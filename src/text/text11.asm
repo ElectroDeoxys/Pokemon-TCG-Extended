@@ -579,7 +579,7 @@ BallName:
 
 VoltorbDescription:
 	text "Usually found in power plants."
-	line "Easily mistaken for a Poke Ball, it"
+	line "Easily mistaken for a Poké Ball, it"
 	line "has zapped many people."
 	done
 

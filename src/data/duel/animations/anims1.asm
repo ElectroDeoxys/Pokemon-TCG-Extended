@@ -591,14 +591,14 @@ AnimFrameTable7::
 
 .data_a9459
 	db 4 ; size
-	db 0, 0, 6, %011 | OAM_PAL1
+	db 0, 0, 12, %011 | OAM_PAL1
 	db 0, 8, 13, %011 | OAM_PAL1
 	db 8, 0, 14, %011 | OAM_PAL1
 	db 8, 8, 15, %011 | OAM_PAL1
 
 .data_a946a
 	db 4 ; size
-	db 0, 0, 8, %011 | OAM_PAL1
+	db 0, 0, 16, %011 | OAM_PAL1
 	db 0, 8, 17, %011 | OAM_PAL1
 	db 8, 0, 18, %011 | OAM_PAL1
 	db 8, 8, 19, %011 | OAM_PAL1
@@ -628,14 +628,14 @@ AnimFrameTable7::
 	db 4 ; size
 	db 0, 0, 13, %011 | OAM_PAL1 | OAM_XFLIP
 	db 8, 0, 15, %011 | OAM_PAL1 | OAM_XFLIP
-	db 0, 8, 6, %011 | OAM_PAL1 | OAM_XFLIP
+	db 0, 8, 12, %011 | OAM_PAL1 | OAM_XFLIP
 	db 8, 8, 14, %011 | OAM_PAL1 | OAM_XFLIP
 
 .data_a94bf
 	db 4 ; size
 	db 0, 0, 17, %011 | OAM_PAL1 | OAM_XFLIP
 	db 8, 0, 19, %011 | OAM_PAL1 | OAM_XFLIP
-	db 0, 8, 8, %011 | OAM_PAL1 | OAM_XFLIP
+	db 0, 8, 16, %011 | OAM_PAL1 | OAM_XFLIP
 	db 8, 8, 18, %011 | OAM_PAL1 | OAM_XFLIP
 
 AnimData27::

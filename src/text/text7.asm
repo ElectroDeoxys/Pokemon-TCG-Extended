@@ -551,7 +551,7 @@ Text0629:
 	line "for this stage."
 	line "It looks cool with all these"
 	line "lights, but it takes a lot of work "
-	line "to keep it 'em lit!"
+	line "to keep 'em lit!"
 	done
 
 Text062a:

@@ -626,7 +626,7 @@ Text06e6:
 
 Text06e7:
 	text "Humph! Whenever I lose, I "
-	line "get irritated me!"
+	line "get irritated!"
 	done
 
 Text06e8:

@@ -630,7 +630,7 @@ ClefairysMetronomeDescription:
 	line "attacks. Metronome copies that"
 	line "attack except for its Energy costs."
 	line "(No matter what type the Defending"
-	line "Pokemon is, Clefairy's type is"
+	line "Pokémon is, Clefairy's type is"
 	line "still Colorless.)"
 	done
 

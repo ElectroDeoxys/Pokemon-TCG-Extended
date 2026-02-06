@@ -5069,7 +5069,7 @@ Scavenge_AddToHandEffect:
 ; returns carry if Defending Pokemon has no attacks
 Amnesia_CheckAttacks:
 	call CheckIfDefendingPokemonHasAnyAttack
-	ldtx hl, NoAttackMayBeChoosenText
+	ldtx hl, NoAttackMayBeChosenText
 	ret
 
 Amnesia_PlayerSelectEffect:
@@ -7071,7 +7071,7 @@ HandleEnergyDiscardEffectSelection:
 ; return carry if Defending Pokemon has no attacks
 ClefableMetronome_CheckAttacks:
 	call CheckIfDefendingPokemonHasAnyAttack
-	ldtx hl, NoAttackMayBeChoosenText
+	ldtx hl, NoAttackMayBeChosenText
 	ret
 
 ClefableMetronome_AISelectEffect:
@@ -7134,7 +7134,7 @@ SingEffect:
 ; return carry if Defending Pokemon has no attacks
 ClefairyMetronome_CheckAttacks:
 	call CheckIfDefendingPokemonHasAnyAttack
-	ldtx hl, NoAttackMayBeChoosenText
+	ldtx hl, NoAttackMayBeChosenText
 	ret
 
 ClefairyMetronome_AISelectEffect:
