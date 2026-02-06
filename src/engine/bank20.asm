@@ -432,8 +432,6 @@ LoadGfxDataFromTempPointer:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	inc hl
-	inc hl
 	call CopyGfxDataFromTempBank
 	call BankswitchVRAM0
 	pop de

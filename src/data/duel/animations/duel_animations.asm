@@ -1,779 +1,886 @@
 ; data for each animation ID (see src/constants/sprite_constants.asm)
 Animations:
-	table_width 6
+	table_width 5
 	; DUEL_ANIM_NONE
 	db NONE ; sprite ID
 	db NONE ; palette ID
 	db NONE ; anim ID
 	db NONE ; anim flags
 	db NONE ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_GLOW
 	db SPRITE_DUEL_GLOW ; sprite ID
-	db PALETTE_31 ; palette ID
-	db SPRITE_ANIM_71 ; anim ID
+	db PALETTE_DUEL_GLOW ; palette ID
+	db SPRITE_ANIM_GLOW ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_GLOW ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_PARALYSIS
 	db SPRITE_DUEL_PARALYSIS ; sprite ID
-	db PALETTE_32 ; palette ID
-	db SPRITE_ANIM_72 ; anim ID
+	db PALETTE_DUEL_PARALYSIS ; palette ID
+	db SPRITE_ANIM_PARALYSIS ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_PARALYSIS ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SLEEP
 	db SPRITE_DUEL_SLEEP ; sprite ID
-	db PALETTE_33 ; palette ID
-	db SPRITE_ANIM_73 ; anim ID
+	db PALETTE_DUEL_SLEEP ; palette ID
+	db SPRITE_ANIM_SLEEP ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_SLEEP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_CONFUSION
 	db SPRITE_DUEL_STAR ; sprite ID
-	db PALETTE_34 ; palette ID
-	db SPRITE_ANIM_74 ; anim ID
+	db PALETTE_DUEL_STAR ; palette ID
+	db SPRITE_ANIM_CONFUSION ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_CONFUSION ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_POISON
 	db SPRITE_DUEL_POISON ; sprite ID
-	db PALETTE_35 ; palette ID
-	db SPRITE_ANIM_75 ; anim ID
+	db PALETTE_DUEL_POISON ; palette ID
+	db SPRITE_ANIM_POISON ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_POISON ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SINGLE_HIT
 	db SPRITE_DUEL_HIT ; sprite ID
-	db PALETTE_36 ; palette ID
-	db SPRITE_ANIM_76 ; anim ID
+	db PALETTE_DUEL_HIT ; palette ID
+	db SPRITE_ANIM_SINGLE_HIT ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_SINGLE_HIT ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_HIT
 	db SPRITE_DUEL_HIT ; sprite ID
-	db PALETTE_36 ; palette ID
-	db SPRITE_ANIM_77 ; anim ID
+	db PALETTE_DUEL_HIT ; palette ID
+	db SPRITE_ANIM_HIT ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_SINGLE_HIT ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BIG_HIT
 	db SPRITE_DUEL_HIT ; sprite ID
-	db PALETTE_36 ; palette ID
-	db SPRITE_ANIM_78 ; anim ID
+	db PALETTE_DUEL_HIT ; palette ID
+	db SPRITE_ANIM_BIG_HIT ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_BIG_HIT ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SHOW_DAMAGE
 	db SPRITE_DUEL_DAMAGE ; sprite ID
-	db PALETTE_37 ; palette ID
+	db PALETTE_DUEL_DAMAGE ; palette ID
 	db NONE ; anim ID
 	db NONE ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_THUNDER_SHOCK
 	db SPRITE_DUEL_THUNDER ; sprite ID
-	db PALETTE_38 ; palette ID
-	db SPRITE_ANIM_92 ; anim ID
+	db PALETTE_DUEL_THUNDER ; palette ID
+	db SPRITE_ANIM_THUNDER_SHOCK ; anim ID
 	db NONE ; anim flags
 	db SFX_THUNDER_SHOCK ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_LIGHTNING
 	db SPRITE_DUEL_LIGHTNING ; sprite ID
-	db PALETTE_39 ; palette ID
-	db SPRITE_ANIM_94 ; anim ID
+	db PALETTE_DUEL_LIGHTNING ; palette ID
+	db SPRITE_ANIM_LIGHTNING ; anim ID
 	db NONE ; anim flags
 	db SFX_LIGHTNING ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BORDER_SPARK
 	db SPRITE_DUEL_SPARK ; sprite ID
-	db PALETTE_40 ; palette ID
-	db SPRITE_ANIM_95 ; anim ID
+	db PALETTE_DUEL_SPARK ; palette ID
+	db SPRITE_ANIM_BORDER_SPARK ; anim ID
 	db NONE ; anim flags
 	db SFX_BORDER_SPARK ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BIG_LIGHTNING
 	db SPRITE_DUEL_BIG_LIGHTNING ; sprite ID
-	db PALETTE_41 ; palette ID
-	db SPRITE_ANIM_96 ; anim ID
+	db PALETTE_DUEL_BIG_LIGHTNING ; palette ID
+	db SPRITE_ANIM_BIG_LIGHTNING ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_BIG_LIGHTNING ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SMALL_FLAME
 	db SPRITE_DUEL_FLAME ; sprite ID
-	db PALETTE_42 ; palette ID
-	db SPRITE_ANIM_97 ; anim ID
+	db PALETTE_DUEL_FLAME ; palette ID
+	db SPRITE_ANIM_SMALL_FLAME ; anim ID
 	db NONE ; anim flags
 	db SFX_SMALL_FLAME ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BIG_FLAME
 	db SPRITE_DUEL_FLAME ; sprite ID
-	db PALETTE_42 ; palette ID
-	db SPRITE_ANIM_98 ; anim ID
+	db PALETTE_DUEL_FLAME ; palette ID
+	db SPRITE_ANIM_BIG_FLAME ; anim ID
 	db NONE ; anim flags
 	db SFX_BIG_FLAME ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_FIRE_SPIN
 	db SPRITE_DUEL_FIRE_SPIN ; sprite ID
-	db PALETTE_43 ; palette ID
-	db SPRITE_ANIM_99 ; anim ID
+	db PALETTE_DUEL_FIRE_SPIN ; palette ID
+	db SPRITE_ANIM_FIRE_SPIN ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_FIRE_SPIN ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_DIVE_BOMB
 	db SPRITE_DUEL_FIRE_BIRD ; sprite ID
-	db PALETTE_44 ; palette ID
-	db SPRITE_ANIM_100 ; anim ID
+	db PALETTE_DUEL_FIRE_BIRD ; palette ID
+	db SPRITE_ANIM_DIVE_BOMB ; anim ID
 	db NONE ; anim flags
 	db SFX_DIVE_BOMB ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_WATER_JETS
 	db SPRITE_DUEL_WATER_DROP ; sprite ID
-	db PALETTE_45 ; palette ID
-	db SPRITE_ANIM_105 ; anim ID
+	db PALETTE_DUEL_WATER_DROP ; palette ID
+	db SPRITE_ANIM_WATER_JETS ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_WATER_JETS ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_WATER_GUN
 	db SPRITE_DUEL_WATER_GUN ; sprite ID
-	db PALETTE_46 ; palette ID
-	db SPRITE_ANIM_106 ; anim ID
+	db PALETTE_DUEL_WATER_GUN ; palette ID
+	db SPRITE_ANIM_WATER_GUN ; anim ID
 	db NONE ; anim flags
 	db SFX_WATER_GUN ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_WHIRLPOOL
 	db SPRITE_DUEL_WHIRLPOOL ; sprite ID
-	db PALETTE_47 ; palette ID
-	db SPRITE_ANIM_107 ; anim ID
+	db PALETTE_DUEL_WHIRLPOOL ; palette ID
+	db SPRITE_ANIM_WHIRLPOOL ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_WHIRLPOOL ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_HYDRO_PUMP
 	db SPRITE_DUEL_HYDRO_PUMP ; sprite ID
-	db PALETTE_48 ; palette ID
-	db SPRITE_ANIM_108 ; anim ID
+	db PALETTE_DUEL_HYDRO_PUMP ; palette ID
+	db SPRITE_ANIM_HYDRO_PUMP ; anim ID
 	db NONE ; anim flags
 	db SFX_HYDRO_PUMP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BLIZZARD
 	db SPRITE_DUEL_SNOW ; sprite ID
-	db PALETTE_49 ; palette ID
-	db SPRITE_ANIM_109 ; anim ID
+	db PALETTE_DUEL_SNOW ; palette ID
+	db SPRITE_ANIM_BLIZZARD ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_BLIZZARD ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_PSYCHIC
 	db SPRITE_DUEL_PSYCHIC ; sprite ID
-	db PALETTE_50 ; palette ID
-	db SPRITE_ANIM_110 ; anim ID
+	db PALETTE_DUEL_PSYCHIC ; palette ID
+	db SPRITE_ANIM_PSYCHIC ; anim ID
 	db NONE ; anim flags
 	db SFX_PSYCHIC ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_LEER
 	db SPRITE_DUEL_LEER ; sprite ID
-	db PALETTE_51 ; palette ID
-	db SPRITE_ANIM_111 ; anim ID
+	db PALETTE_DUEL_LEER ; palette ID
+	db SPRITE_ANIM_LEER ; anim ID
 	db NONE ; anim flags
 	db SFX_LEER ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BEAM
 	db SPRITE_DUEL_BEAM ; sprite ID
-	db PALETTE_52 ; palette ID
-	db SPRITE_ANIM_112 ; anim ID
+	db PALETTE_DUEL_BEAM ; palette ID
+	db SPRITE_ANIM_BEAM ; anim ID
 	db SPRITE_ANIM_FLAG_Y_FLIP | SPRITE_ANIM_FLAG_Y_INVERTED ; anim flags
 	db SFX_BEAM ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_HYPER_BEAM
 	db SPRITE_DUEL_HYPER_BEAM ; sprite ID
-	db PALETTE_53 ; palette ID
-	db SPRITE_ANIM_113 ; anim ID
+	db PALETTE_DUEL_HYPER_BEAM ; palette ID
+	db SPRITE_ANIM_HYPER_BEAM ; anim ID
 	db SPRITE_ANIM_FLAG_Y_FLIP | SPRITE_ANIM_FLAG_Y_INVERTED ; anim flags
 	db SFX_HYPER_BEAM ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_ROCK_THROW
 	db SPRITE_DUEL_ROCK_THROW ; sprite ID
-	db PALETTE_54 ; palette ID
-	db SPRITE_ANIM_114 ; anim ID
+	db PALETTE_DUEL_ROCK_THROW ; palette ID
+	db SPRITE_ANIM_ROCK_THROW ; anim ID
 	db NONE ; anim flags
 	db SFX_AVALANCHE ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_STONE_BARRAGE
 	db SPRITE_DUEL_ROCK_THROW ; sprite ID
-	db PALETTE_54 ; palette ID
-	db SPRITE_ANIM_115 ; anim ID
+	db PALETTE_DUEL_ROCK_THROW ; palette ID
+	db SPRITE_ANIM_STONE_BARRAGE ; anim ID
 	db NONE ; anim flags
 	db SFX_STONE_BARRAGE ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_PUNCH
 	db SPRITE_DUEL_PUNCH ; sprite ID
-	db PALETTE_55 ; palette ID
-	db SPRITE_ANIM_116 ; anim ID
+	db PALETTE_DUEL_PUNCH ; palette ID
+	db SPRITE_ANIM_PUNCH ; anim ID
 	db NONE ; anim flags
 	db SFX_PUNCH ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_THUNDERPUNCH
 	db SPRITE_DUEL_PUNCH ; sprite ID
-	db PALETTE_55 ; palette ID
-	db SPRITE_ANIM_117 ; anim ID
+	db PALETTE_DUEL_PUNCH ; palette ID
+	db SPRITE_ANIM_THUNDERPUNCH ; anim ID
 	db NONE ; anim flags
 	db SFX_THUNDERPUNCH ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_FIRE_PUNCH
 	db SPRITE_DUEL_PUNCH ; sprite ID
-	db PALETTE_55 ; palette ID
-	db SPRITE_ANIM_118 ; anim ID
+	db PALETTE_DUEL_PUNCH ; palette ID
+	db SPRITE_ANIM_FIRE_PUNCH ; anim ID
 	db NONE ; anim flags
 	db SFX_FIRE_PUNCH ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_STRETCH_KICK
 	db SPRITE_DUEL_STRETCH_KICK ; sprite ID
-	db PALETTE_56 ; palette ID
-	db SPRITE_ANIM_119 ; anim ID
+	db PALETTE_DUEL_STRETCH_KICK ; palette ID
+	db SPRITE_ANIM_STRETCH_KICK ; anim ID
 	db SPRITE_ANIM_FLAG_X_FLIP | SPRITE_ANIM_FLAG_X_INVERTED ; anim flags
 	db SFX_STRETCH_KICK ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SLASH
 	db SPRITE_DUEL_SLASH ; sprite ID
-	db PALETTE_57 ; palette ID
-	db SPRITE_ANIM_120 ; anim ID
+	db PALETTE_DUEL_SLASH ; palette ID
+	db SPRITE_ANIM_SLASH ; anim ID
 	db NONE ; anim flags
 	db SFX_SLASH ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_WHIP
 	db SPRITE_DUEL_WHIP ; sprite ID
-	db PALETTE_58 ; palette ID
-	db SPRITE_ANIM_122 ; anim ID
+	db PALETTE_DUEL_WHIP ; palette ID
+	db SPRITE_ANIM_WHIP ; anim ID
 	db NONE ; anim flags
 	db SFX_SLASH ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SONICBOOM
 	db SPRITE_DUEL_SONICBOOM ; sprite ID
-	db PALETTE_59 ; palette ID
-	db SPRITE_ANIM_123 ; anim ID
+	db PALETTE_DUEL_SONICBOOM ; palette ID
+	db SPRITE_ANIM_SONICBOOM ; anim ID
 	db NONE ; anim flags
 	db SFX_SONICBOOM ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_FURY_SWIPES
 	db SPRITE_DUEL_SLASH ; sprite ID
-	db PALETTE_57 ; palette ID
-	db SPRITE_ANIM_121 ; anim ID
+	db PALETTE_DUEL_SLASH ; palette ID
+	db SPRITE_ANIM_FURY_SWIPES ; anim ID
 	db NONE ; anim flags
 	db SFX_FURY_SWIPES ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_DRILL
 	db SPRITE_DUEL_DRILL ; sprite ID
-	db PALETTE_60 ; palette ID
-	db SPRITE_ANIM_124 ; anim ID
+	db PALETTE_DUEL_DRILL ; palette ID
+	db SPRITE_ANIM_DRILL ; anim ID
 	db SPRITE_ANIM_FLAG_X_FLIP | SPRITE_ANIM_FLAG_X_INVERTED ; anim flags
 	db SFX_DRILL ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_POT_SMASH
 	db SPRITE_DUEL_POT ; sprite ID
-	db PALETTE_61 ; palette ID
-	db SPRITE_ANIM_125 ; anim ID
+	db PALETTE_DUEL_POT ; palette ID
+	db SPRITE_ANIM_POT_SMASH ; anim ID
 	db NONE ; anim flags
 	db SFX_POT_SMASH ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BONEMERANG
 	db SPRITE_DUEL_BONE ; sprite ID
-	db PALETTE_62 ; palette ID
-	db SPRITE_ANIM_126 ; anim ID
+	db PALETTE_DUEL_BONE ; palette ID
+	db SPRITE_ANIM_BONEMERANG ; anim ID
 	db NONE ; anim flags
 	db SFX_BONEMERANG ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SEISMIC_TOSS
 	db SPRITE_DUEL_PLANET ; sprite ID
-	db PALETTE_63 ; palette ID
-	db SPRITE_ANIM_127 ; anim ID
+	db PALETTE_DUEL_PLANET ; palette ID
+	db SPRITE_ANIM_SEISMIC_TOSS ; anim ID
 	db NONE ; anim flags
 	db SFX_SEISMIC_TOSS ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_NEEDLES
 	db SPRITE_DUEL_NEEDLES ; sprite ID
-	db PALETTE_64 ; palette ID
-	db SPRITE_ANIM_128 ; anim ID
+	db PALETTE_DUEL_NEEDLES ; palette ID
+	db SPRITE_ANIM_NEEDLES ; anim ID
 	db NONE ; anim flags
 	db SFX_NEEDLES; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_WHITE_GAS
 	db SPRITE_DUEL_GAS ; sprite ID
-	db PALETTE_65 ; palette ID
-	db SPRITE_ANIM_129 ; anim ID
+	db PALETTE_DUEL_WHITE_GAS ; palette ID
+	db SPRITE_ANIM_WHITE_GAS ; anim ID
 	db NONE ; anim flags
 	db SFX_WHITE_GAS ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_POWDER
 	db SPRITE_DUEL_POWDER ; sprite ID
-	db PALETTE_66 ; palette ID
-	db SPRITE_ANIM_130 ; anim ID
+	db PALETTE_DUEL_POWDER ; palette ID
+	db SPRITE_ANIM_POWDER ; anim ID
 	db NONE ; anim flags
 	db SFX_POWDER ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_GOO
 	db SPRITE_DUEL_GOO ; sprite ID
-	db PALETTE_67 ; palette ID
-	db SPRITE_ANIM_131 ; anim ID
+	db PALETTE_DUEL_GOO ; palette ID
+	db SPRITE_ANIM_GOO ; anim ID
 	db NONE ; anim flags
 	db SFX_GOO ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BUBBLES
 	db SPRITE_DUEL_BUBBLE ; sprite ID
-	db PALETTE_68 ; palette ID
-	db SPRITE_ANIM_132 ; anim ID
+	db PALETTE_DUEL_BUBBLE ; palette ID
+	db SPRITE_ANIM_BUBBLES ; anim ID
 	db NONE ; anim flags
 	db SFX_BUBBLES ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_STRING_SHOT
 	db SPRITE_DUEL_STRING ; sprite ID
-	db PALETTE_69 ; palette ID
-	db SPRITE_ANIM_133 ; anim ID
+	db PALETTE_DUEL_STRING ; palette ID
+	db SPRITE_ANIM_STRING_SHOT ; anim ID
 	db NONE ; anim flags
 	db SFX_STRING_SHOT ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BOYFRIENDS
 	db SPRITE_DUEL_HEART ; sprite ID
-	db PALETTE_70 ; palette ID
-	db SPRITE_ANIM_134 ; anim ID
+	db PALETTE_DUEL_HEART ; palette ID
+	db SPRITE_ANIM_BOYFRIENDS ; anim ID
 	db NONE ; anim flags
 	db SFX_BOYFRIENDS ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_LURE
 	db SPRITE_DUEL_LURE ; sprite ID
-	db PALETTE_71 ; palette ID
-	db SPRITE_ANIM_135 ; anim ID
+	db PALETTE_DUEL_LURE ; palette ID
+	db SPRITE_ANIM_LURE ; anim ID
 	db SPRITE_ANIM_FLAG_X_FLIP | SPRITE_ANIM_FLAG_X_INVERTED ; anim flags
 	db SFX_LURE ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_TOXIC
 	db SPRITE_DUEL_SKULL ; sprite ID
-	db PALETTE_72 ; palette ID
-	db SPRITE_ANIM_136 ; anim ID
+	db PALETTE_DUEL_SKULL ; palette ID
+	db SPRITE_ANIM_TOXIC ; anim ID
 	db NONE ; anim flags
 	db SFX_TOXIC ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_CONFUSE_RAY
 	db SPRITE_DUEL_SMALL_STAR ; sprite ID
-	db PALETTE_73 ; palette ID
-	db SPRITE_ANIM_137 ; anim ID
+	db PALETTE_DUEL_SMALL_STAR ; palette ID
+	db SPRITE_ANIM_CONFUSE_RAY ; anim ID
 	db NONE ; anim flags
 	db SFX_CONFUSE_RAY ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SING
 	db SPRITE_DUEL_NOTE ; sprite ID
-	db PALETTE_74 ; palette ID
-	db SPRITE_ANIM_138 ; anim ID
+	db PALETTE_DUEL_NOTE ; palette ID
+	db SPRITE_ANIM_SING ; anim ID
 	db NONE ; anim flags
 	db SFX_SING ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SUPERSONIC
 	db SPRITE_DUEL_SOUND ; sprite ID
-	db PALETTE_75 ; palette ID
-	db SPRITE_ANIM_139 ; anim ID
+	db PALETTE_DUEL_SOUND ; palette ID
+	db SPRITE_ANIM_SUPERSONIC ; anim ID
 	db NONE ; anim flags
 	db SFX_SUPERSONIC ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_PETAL_DANCE
 	db SPRITE_DUEL_PETAL ; sprite ID
-	db PALETTE_76 ; palette ID
-	db SPRITE_ANIM_140 ; anim ID
+	db PALETTE_DUEL_PETAL ; palette ID
+	db SPRITE_ANIM_PETAL_DANCE ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_PETAL_DANCE ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_PROTECT
 	db SPRITE_DUEL_PROTECT ; sprite ID
-	db PALETTE_77 ; palette ID
-	db SPRITE_ANIM_141 ; anim ID
+	db PALETTE_DUEL_PROTECT ; palette ID
+	db SPRITE_ANIM_PROTECT ; anim ID
 	db NONE ; anim flags
 	db SFX_PROTECT ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BARRIER
 	db SPRITE_DUEL_BARRIER ; sprite ID
-	db PALETTE_78 ; palette ID
-	db SPRITE_ANIM_142 ; anim ID
+	db PALETTE_DUEL_BARRIER ; palette ID
+	db SPRITE_ANIM_BARRIER ; anim ID
 	db NONE ; anim flags
 	db SFX_BARRIER ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SPEED
 	db SPRITE_DUEL_SPEED ; sprite ID
-	db PALETTE_79 ; palette ID
-	db SPRITE_ANIM_143 ; anim ID
+	db PALETTE_DUEL_SPEED ; palette ID
+	db SPRITE_ANIM_SPEED ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_SPEED ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_WHIRLWIND
 	db SPRITE_DUEL_WHIRLWIND ; sprite ID
-	db PALETTE_80 ; palette ID
-	db SPRITE_ANIM_144 ; anim ID
+	db PALETTE_DUEL_WHIRLWIND ; palette ID
+	db SPRITE_ANIM_WHIRLWIND ; anim ID
 	db NONE ; anim flags
 	db SFX_WHIRLWIND ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_CRY
 	db SPRITE_DUEL_CRY ; sprite ID
-	db PALETTE_81 ; palette ID
-	db SPRITE_ANIM_146 ; anim ID
+	db PALETTE_DUEL_CRY ; palette ID
+	db SPRITE_ANIM_CRY ; anim ID
 	db NONE ; anim flags
 	db SFX_CRY ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_QUESTION_MARK
 	db SPRITE_DUEL_QUESTION_MARK ; sprite ID
-	db PALETTE_82 ; palette ID
-	db SPRITE_ANIM_147 ; anim ID
+	db PALETTE_DUEL_QUESTION_MARK ; palette ID
+	db SPRITE_ANIM_QUESTION_MARK ; anim ID
 	db NONE ; anim flags
 	db SFX_QUESTION_MARK ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_SELFDESTRUCT
 	db SPRITE_DUEL_EXPLOSION ; sprite ID
-	db PALETTE_83 ; palette ID
-	db SPRITE_ANIM_148 ; anim ID
+	db PALETTE_DUEL_EXPLOSION ; palette ID
+	db SPRITE_ANIM_SELFDESTRUCT ; anim ID
 	db NONE ; anim flags
 	db SFX_SELFDESTRUCT ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BIG_SELFDESTRUCT_1
 	db SPRITE_DUEL_EXPLOSION ; sprite ID
-	db PALETTE_83 ; palette ID
-	db SPRITE_ANIM_149 ; anim ID
+	db PALETTE_DUEL_EXPLOSION ; palette ID
+	db SPRITE_ANIM_BIG_SELFDESTRUCT_1 ; anim ID
 	db NONE ; anim flags
 	db SFX_BIG_SELFDESTRUCT ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_HEAL
 	db SPRITE_DUEL_HEAL ; sprite ID
-	db PALETTE_84 ; palette ID
-	db SPRITE_ANIM_151 ; anim ID
+	db PALETTE_DUEL_HEAL ; palette ID
+	db SPRITE_ANIM_HEAL ; anim ID
 	db NONE ; anim flags
 	db SFX_HEAL ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_DRAIN
 	db SPRITE_DUEL_DRAIN ; sprite ID
-	db PALETTE_85 ; palette ID
-	db SPRITE_ANIM_153 ; anim ID
+	db PALETTE_DUEL_DRAIN ; palette ID
+	db SPRITE_ANIM_DRAIN ; anim ID
 	db NONE ; anim flags
 	db SFX_DRAIN ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_DARK_GAS
 	db SPRITE_DUEL_GAS ; sprite ID
-	db PALETTE_86 ; palette ID
-	db SPRITE_ANIM_129 ; anim ID
+	db PALETTE_DUEL_BLACK_GAS ; palette ID
+	db SPRITE_ANIM_DARK_GAS ; anim ID
 	db NONE ; anim flags
 	db SFX_DARK_GAS ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BIG_SELFDESTRUCT_2
 	db SPRITE_DUEL_EXPLOSION ; sprite ID
-	db PALETTE_83 ; palette ID
-	db SPRITE_ANIM_150 ; anim ID
+	db PALETTE_DUEL_EXPLOSION ; palette ID
+	db SPRITE_ANIM_BIG_SELFDESTRUCT_2 ; anim ID
 	db NONE ; anim flags
 	db SFX_SELFDESTRUCT ; sfx id
-	db NONE ; handler function
-
-	; DUEL_ANIM_UNUSED_42
-	db SPRITE_DUEL_HIT ; sprite ID
-	db PALETTE_36 ; palette ID
-	db SPRITE_ANIM_77 ; anim ID
-	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
-	db SFX_SINGLE_HIT ; sfx id
-	db NONE ; handler function
-
-	; DUEL_ANIM_UNUSED_43
-	db SPRITE_DUEL_HIT ; sprite ID
-	db PALETTE_36 ; palette ID
-	db SPRITE_ANIM_78 ; anim ID
-	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
-	db SFX_BIG_HIT ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BENCH_THUNDER
 	db SPRITE_DUEL_THUNDER ; sprite ID
-	db PALETTE_38 ; palette ID
-	db SPRITE_ANIM_92 ; anim ID
+	db PALETTE_DUEL_THUNDER ; palette ID
+	db SPRITE_ANIM_THUNDER_SHOCK ; anim ID
 	db NONE ; anim flags
 	db SFX_THUNDER_SHOCK ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_QUICKFREEZE
 	db SPRITE_DUEL_SNOW ; sprite ID
-	db PALETTE_49 ; palette ID
-	db SPRITE_ANIM_109 ; anim ID
+	db PALETTE_DUEL_SNOW ; palette ID
+	db SPRITE_ANIM_BLIZZARD ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_BLIZZARD ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BENCH_GLOW
 	db SPRITE_DUEL_SMALL_GLOW ; sprite ID
-	db PALETTE_87 ; palette ID
-	db SPRITE_ANIM_154 ; anim ID
+	db PALETTE_DUEL_SMALL_GLOW ; palette ID
+	db SPRITE_ANIM_GLOW_BENCH ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE ; anim flags
 	db SFX_GLOW ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_FIREGIVER_START
 	db SPRITE_DUEL_FIRE_BIRD ; sprite ID
-	db PALETTE_44 ; palette ID
-	db SPRITE_ANIM_101 ; anim ID
+	db PALETTE_DUEL_FIRE_BIRD ; palette ID
+	db SPRITE_ANIM_FIREGIVER_START ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_FIREGIVER_START ; sfx id
-	db NONE ; handler function
-
-	; DUEL_ANIM_UNUSED_48
-	db SPRITE_DUEL_FIRE_BIRD ; sprite ID
-	db PALETTE_44 ; palette ID
-	db SPRITE_ANIM_102 ; anim ID
-	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
-	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_HEALING_WIND
 	db SPRITE_DUEL_HEAL ; sprite ID
-	db PALETTE_84 ; palette ID
-	db SPRITE_ANIM_152 ; anim ID
+	db PALETTE_DUEL_HEAL ; palette ID
+	db SPRITE_ANIM_HEALING_WIND ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_HEALING_WIND ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BENCH_WHIRLWIND
 	db SPRITE_DUEL_WHIRLWIND ; sprite ID
-	db PALETTE_80 ; palette ID
-	db SPRITE_ANIM_145 ; anim ID
+	db PALETTE_DUEL_WHIRLWIND ; palette ID
+	db SPRITE_ANIM_WHIRLWIND_BENCH ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_WHIRLWIND_BENCH ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_EXPAND
 	db SPRITE_DUEL_BALL ; sprite ID
-	db PALETTE_88 ; palette ID
-	db SPRITE_ANIM_155 ; anim ID
+	db PALETTE_DUEL_EXPAND ; palette ID
+	db SPRITE_ANIM_EXPAND ; anim ID
 	db NONE ; anim flags
 	db SFX_EXPAND ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_CAT_PUNCH
-	db SPRITE_DUEL_CAT_POW ; sprite ID
-	db PALETTE_89 ; palette ID
-	db SPRITE_ANIM_156 ; anim ID
+	db SPRITE_DUEL_CAT_PAW ; sprite ID
+	db PALETTE_DUEL_CAT_PUNCH ; palette ID
+	db SPRITE_ANIM_CAT_PUNCH ; anim ID
 	db NONE ; anim flags
 	db SFX_CAT_PUNCH ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_THUNDER_WAVE
 	db SPRITE_DUEL_WAVE ; sprite ID
-	db PALETTE_90 ; palette ID
-	db SPRITE_ANIM_157 ; anim ID
+	db PALETTE_DUEL_ELECTRIC_WAVE ; palette ID
+	db SPRITE_ANIM_THUNDER_WAVE ; anim ID
 	db NONE ; anim flags
 	db SFX_THUNDER_WAVE ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_FIREGIVER_PLAYER
 	db SPRITE_DUEL_FIRE_BIRD ; sprite ID
-	db PALETTE_44 ; palette ID
-	db SPRITE_ANIM_103 ; anim ID
+	db PALETTE_DUEL_FIRE_BIRD ; palette ID
+	db SPRITE_ANIM_FIREGIVER_PLAYER ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_FIREGIVER ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_FIREGIVER_OPP
 	db SPRITE_DUEL_FIRE_BIRD ; sprite ID
-	db PALETTE_44 ; palette ID
-	db SPRITE_ANIM_104 ; anim ID
+	db PALETTE_DUEL_FIRE_BIRD ; palette ID
+	db SPRITE_ANIM_FIREGIVER_OPP ; anim ID
 	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_FIREGIVER ; sfx id
-	db NONE ; handler function
-
-	; DUEL_ANIM_UNUSED_50
-	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_158 ; anim ID
-	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
-	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_PLAYER_SHUFFLE
 	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_159 ; anim ID
+	db PALETTE_DUEL_CARD ; palette ID
+	db SPRITE_ANIM_PLAYER_SHUFFLE ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_CARD_SHUFFLE ; sfx ID
-	db NONE ; handler function
 
 	; DUEL_ANIM_OPP_SHUFFLE
 	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_160 ; anim ID
+	db PALETTE_DUEL_CARD ; palette ID
+	db SPRITE_ANIM_OPP_SHUFFLE ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_CARD_SHUFFLE ; sfx ID
-	db NONE ; handler function
 
 	; DUEL_ANIM_BOTH_SHUFFLE
 	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_161 ; anim ID
+	db PALETTE_DUEL_CARD ; palette ID
+	db SPRITE_ANIM_BOTH_SHUFFLE ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_CARD_SHUFFLE ; sfx ID
-	db NONE ; handler function
-
-	; DUEL_ANIM_UNUSED_54
-	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_162 ; anim ID
-	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_CENTERED ; anim flags
-	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_BOTH_DRAW
 	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_163 ; anim ID
+	db PALETTE_DUEL_CARD ; palette ID
+	db SPRITE_ANIM_BOTH_DRAW ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_PLAYER_DRAW
 	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_164 ; anim ID
+	db PALETTE_DUEL_CARD ; palette ID
+	db SPRITE_ANIM_PLAYER_DRAW ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_OPP_DRAW
 	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_165 ; anim ID
+	db PALETTE_DUEL_CARD ; palette ID
+	db SPRITE_ANIM_OPP_DRAW ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_COIN_SPIN
 	db SPRITE_DUEL_COIN ; sprite ID
-	db PALETTE_92 ; palette ID
-	db SPRITE_ANIM_167 ; anim ID
+	db PALETTE_DUEL_COIN ; palette ID
+	db SPRITE_ANIM_COIN_SPIN ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_COIN_TOSS_GOING_HEADS
 	db SPRITE_DUEL_COIN ; sprite ID
-	db PALETTE_92 ; palette ID
-	db SPRITE_ANIM_168 ; anim ID
+	db PALETTE_DUEL_COIN ; palette ID
+	db SPRITE_ANIM_COIN_TOSS_GOING_HEADS ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_COIN_TOSS ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_COIN_TOSS_GOING_TAILS
 	db SPRITE_DUEL_COIN ; sprite ID
-	db PALETTE_92 ; palette ID
-	db SPRITE_ANIM_169 ; anim ID
+	db PALETTE_DUEL_COIN ; palette ID
+	db SPRITE_ANIM_COIN_TOSS_GOING_TAILS ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_COIN_TOSS ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_COIN_TAILS
 	db SPRITE_DUEL_COIN ; sprite ID
-	db PALETTE_92 ; palette ID
-	db SPRITE_ANIM_170 ; anim ID
+	db PALETTE_DUEL_COIN ; palette ID
+	db SPRITE_ANIM_COIN_TAILS ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_COIN_HEADS
 	db SPRITE_DUEL_COIN ; sprite ID
-	db PALETTE_92 ; palette ID
-	db SPRITE_ANIM_171 ; anim ID
+	db PALETTE_DUEL_COIN ; palette ID
+	db SPRITE_ANIM_COIN_HEADS ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_DUEL_WIN
 	db SPRITE_DUEL_RESULT ; sprite ID
-	db PALETTE_93 ; palette ID
-	db SPRITE_ANIM_172 ; anim ID
+	db PALETTE_DUEL_RESULT ; palette ID
+	db SPRITE_ANIM_DUEL_WIN ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_DUEL_LOSS
 	db SPRITE_DUEL_RESULT ; sprite ID
-	db PALETTE_93 ; palette ID
-	db SPRITE_ANIM_173 ; anim ID
+	db PALETTE_DUEL_RESULT ; palette ID
+	db SPRITE_ANIM_DUEL_LOSS ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
 	; DUEL_ANIM_DUEL_DRAW
 	db SPRITE_DUEL_RESULT ; sprite ID
-	db PALETTE_93 ; palette ID
-	db SPRITE_ANIM_174 ; anim ID
+	db PALETTE_DUEL_RESULT ; palette ID
+	db SPRITE_ANIM_DUEL_DRAW ; anim ID
 	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_CENTERED ; anim flags
 	db SFX_STOP ; sfx id
-	db NONE ; handler function
 
-	; DUEL_ANIM_UNUSED_60
-	db SPRITE_DUEL_CARD ; sprite ID
-	db PALETTE_91 ; palette ID
-	db SPRITE_ANIM_166 ; anim ID
-	db SPRITE_ANIM_FLAG_UNSKIPPABLE | SPRITE_ANIM_FLAG_CENTERED ; anim flags
-	db SFX_STOP ; sfx id
-	db NONE ; handler function
+	; DUEL_ANIM_FIREBALL
+	db SPRITE_DUEL_FIREBALLS ; sprite ID
+	db PALETTE_DUEL_FIREBALLS ; palette ID
+	db SPRITE_ANIM_FIREBALL ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_Y_INVERTED | SPRITE_ANIM_FLAG_X_FLIP | SPRITE_ANIM_FLAG_Y_FLIP ; anim flags
+	db SFX_FIREBALL ; sfx ID
+
+	; DUEL_ANIM_CONTINUOUS_FIREBALL
+	db SPRITE_DUEL_FIREBALLS ; sprite ID
+	db PALETTE_DUEL_FIREBALLS ; palette ID
+	db SPRITE_ANIM_CONTINUOUS_FIREBALL ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_Y_INVERTED | SPRITE_ANIM_FLAG_X_FLIP | SPRITE_ANIM_FLAG_Y_FLIP ; anim flags
+	db SFX_CONTINUOUS_FIREBALL ; sfx ID
+
+	; DUEL_ANIM_BENCH_MANIPULATION
+	db SPRITE_DUEL_BENCH_MANIPULATION ; sprite ID
+	db PALETTE_DUEL_BENCH_MANIPULATION ; palette ID
+	db SPRITE_ANIM_BENCH_MANIPULATION ; anim ID
+	db SPRITE_ANIM_FLAG_Y_INVERTED | SPRITE_ANIM_FLAG_CENTERED | SPRITE_ANIM_FLAG_Y_FLIP ; anim flags
+	db SFX_BENCH_MANIPULATION ; sfx ID
+
+	; DUEL_ANIM_PSYCHIC_BEAM
+	db SPRITE_DUEL_PSYCHIC_BEAM ; sprite ID
+	db PALETTE_DUEL_PSYCHIC_BEAM ; palette ID
+	db SPRITE_ANIM_PSYCHIC_BEAM ; anim ID
+	db SPRITE_ANIM_FLAG_Y_INVERTED | SPRITE_ANIM_FLAG_Y_FLIP ; anim flags
+	db SFX_PSYCHIC_BEAM ; sfx ID
+
+	; DUEL_ANIM_PSYCHIC_BEAM_BENCH
+	db SPRITE_DUEL_PSYCHIC_BEAM_BENCH ; sprite ID
+	db PALETTE_DUEL_PSYCHIC_BEAM_BENCH ; palette ID
+	db SPRITE_ANIM_PSYCHIC_BEAM_BENCH ; anim ID
+	db SPRITE_ANIM_FLAG_Y_INVERTED | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_Y_FLIP ; anim flags
+	db SFX_PSYCHIC_BEAM_BENCH ; sfx ID
+
+	; DUEL_ANIM_BOULDER_SMASH
+	db SPRITE_DUEL_BOULDER ; sprite ID
+	db PALETTE_DUEL_BOULDER_SMASH ; palette ID
+	db SPRITE_ANIM_BOULDER_SMASH ; anim ID
+	db NONE ; anim flags
+	db SFX_BOULDER_SMASH ; sfx ID
+
+	; DUEL_ANIM_MEGA_PUNCH
+	db SPRITE_DUEL_MEGA_PUNCH ; sprite ID
+	db PALETTE_DUEL_MEGA_PUNCH ; palette ID
+	db SPRITE_ANIM_MEGA_PUNCH ; anim ID
+	db NONE ; anim flags
+	db SFX_MEGA_PUNCH ; sfx ID
+
+	; DUEL_ANIM_PSYPUNCH
+	db SPRITE_DUEL_PSYPUNCH ; sprite ID
+	db PALETTE_DUEL_PSYPUNCH ; palette ID
+	db SPRITE_ANIM_PSYPUNCH ; anim ID
+	db NONE ; anim flags
+	db SFX_PSYPUNCH ; sfx ID
+
+	; DUEL_ANIM_SLUDGE_PUNCH
+	db SPRITE_DUEL_SLUDGE_PUNCH ; sprite ID
+	db PALETTE_DUEL_SLUDGE_PUNCH ; palette ID
+	db SPRITE_ANIM_SLUDGE_PUNCH ; anim ID
+	db NONE ; anim flags
+	db SFX_SLUDGE_PUNCH ; sfx ID
+
+	; DUEL_ANIM_ICE_PUNCH
+	db SPRITE_DUEL_ICE_PUNCH ; sprite ID
+	db PALETTE_DUEL_ICE_PUNCH ; palette ID
+	db SPRITE_ANIM_ICE_PUNCH ; anim ID
+	db NONE ; anim flags
+	db SFX_ICE_PUNCH ; sfx ID
+
+	; DUEL_ANIM_KICK
+	db SPRITE_DUEL_KICK ; sprite ID
+	db PALETTE_DUEL_KICK ; palette ID
+	db SPRITE_ANIM_KICK ; anim ID
+	db NONE ; anim flags
+	db SFX_KICK ; sfx ID
+
+	; DUEL_ANIM_TAIL_SLAP
+	db SPRITE_DUEL_TAIL_SLAP ; sprite ID
+	db PALETTE_DUEL_TAIL_SLAP ; palette ID
+	db SPRITE_ANIM_TAIL_SLAP ; anim ID
+	db NONE ; anim flags
+	db SFX_TAIL_SLAP ; sfx ID
+
+	; DUEL_ANIM_TAIL_WHIP
+	db SPRITE_DUEL_TAIL_WHIP ; sprite ID
+	db PALETTE_DUEL_TAIL_WHIP ; palette ID
+	db SPRITE_ANIM_TAIL_WHIP ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_X_FLIP ; anim flags
+	db SFX_TAIL_WHIP ; sfx ID
+
+	; DUEL_ANIM_SLAP
+	db SPRITE_DUEL_SLAP ; sprite ID
+	db PALETTE_DUEL_SLAP ; palette ID
+	db SPRITE_ANIM_SLAP ; anim ID
+	db NONE ; anim flags
+	db SFX_SLAP ; sfx ID
+
+	; DUEL_ANIM_QUESTION_MARK_BENCH
+	db SPRITE_DUEL_QUESTION_MARK_SMALL ; sprite ID
+	db PALETTE_DUEL_QUESTION_MARK_SMALL ; palette ID
+	db SPRITE_ANIM_QUESTION_MARK_BENCH ; anim ID
+	db NONE ; anim flags
+	db SFX_QUESTION_MARK_BENCH ; sfx ID
+
+	; DUEL_ANIM_SKULL_BASH
+	db SPRITE_DUEL_SKULL_BASH ; sprite ID
+	db PALETTE_DUEL_SKULL_BASH ; palette ID
+	db SPRITE_ANIM_SKULL_BASH ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_X_FLIP ; anim flags
+	db SFX_SKULL_BASH ; sfx ID
+
+	; DUEL_ANIM_COIN_HURL
+	db SPRITE_DUEL_COIN_HURL ; sprite ID
+	db PALETTE_DUEL_COIN_HURL ; palette ID
+	db SPRITE_ANIM_COIN_HURL ; anim ID
+	db NONE ; anim flags
+	db SFX_COIN_HURL ; sfx ID
+
+	; DUEL_ANIM_TELEPORT
+	db SPRITE_DUEL_TELEPORT ; sprite ID
+	db PALETTE_DUEL_TELEPORT ; palette ID
+	db SPRITE_ANIM_TELEPORT ; anim ID
+	db SPRITE_ANIM_FLAG_8x16 ; anim flags
+	db SFX_TELEPORT ; sfx ID
+
+	; DUEL_ANIM_FOLLOW_ME
+	db SPRITE_DUEL_FOLLOW_ME ; sprite ID
+	db PALETTE_DUEL_FOLLOW_ME ; palette ID
+	db SPRITE_ANIM_FOLLOW_ME ; anim ID
+	db NONE ; anim flags
+	db SFX_FOLLOW_ME ; sfx ID
+
+	; DUEL_ANIM_SWIFT
+	db SPRITE_DUEL_SWIFT ; sprite ID
+	db PALETTE_DUEL_SWIFT ; palette ID
+	db SPRITE_ANIM_SWIFT ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_X_FLIP ; anim flags
+	db SFX_SWIFT ; sfx ID
+
+	; DUEL_ANIM_3D_ATTACK
+	db SPRITE_DUEL_3D_ATTACK ; sprite ID
+	db PALETTE_DUEL_3D_ATTACK ; palette ID
+	db SPRITE_ANIM_3D_ATTACK ; anim ID
+	db NONE ; anim flags
+	db SFX_3D_ATTACK ; sfx ID
+
+	; DUEL_ANIM_DRY_UP
+	db SPRITE_DUEL_WATER_DROP ; sprite ID
+	db PALETTE_DUEL_WATER_DROP ; palette ID
+	db SPRITE_ANIM_WATER_JETS ; anim ID
+	db SPRITE_ANIM_FLAG_CENTERED ; anim flags
+	db SFX_DRY_UP ; sfx ID
+
+	; DUEL_ANIM_FOCUS_BLAST
+	db SPRITE_DUEL_FOCUS_BLAST ; sprite ID
+	db PALETTE_DUEL_FOCUS_BLAST ; palette ID
+	db SPRITE_ANIM_FOCUS_BLAST ; anim ID
+	db SPRITE_ANIM_FLAG_Y_INVERTED | SPRITE_ANIM_FLAG_Y_FLIP ; anim flags
+	db SFX_FOCUS_BLAST ; sfx ID
+
+	; DUEL_ANIM_FOCUS_BLAST_BENCH
+	db SPRITE_DUEL_FOCUS_BLAST_BENCH ; sprite ID
+	db PALETTE_DUEL_FOCUS_BLAST_BENCH ; palette ID
+	db SPRITE_ANIM_FOCUS_BLAST_BENCH ; anim ID
+	db SPRITE_ANIM_FLAG_Y_INVERTED | SPRITE_ANIM_FLAG_3 | SPRITE_ANIM_FLAG_Y_FLIP ; anim flags
+	db SFX_FOCUS_BLAST_BENCH ; sfx ID
+
+	; DUEL_ANIM_BONE_TOSS_BENCH
+	db SPRITE_DUEL_BONE2 ; sprite ID
+	db PALETTE_DUEL_BONE2 ; palette ID
+	db SPRITE_ANIM_BONE_TOSS_BENCH ; anim ID
+	db NONE ; anim flags
+	db SFX_BONE_TOSS_BENCH ; sfx ID
+
+	; DUEL_ANIM_COIN_HURL_BENCH
+	db SPRITE_DUEL_COIN_HURL ; sprite ID
+	db PALETTE_DUEL_COIN_HURL ; palette ID
+	db SPRITE_ANIM_COIN_HURL_BENCH ; anim ID
+	db NONE ; anim flags
+	db SFX_COIN_HURL_BENCH ; sfx ID
+
+	; DUEL_ANIM_BIG_SNORE
+	db SPRITE_DUEL_BIG_SNORE ; sprite ID
+	db PALETTE_DUEL_BIG_SNORE ; palette ID
+	db SPRITE_ANIM_BIG_SNORE ; anim ID
+	db NONE ; anim flags
+	db SFX_BIG_SNORE ; sfx ID
+
+	; DUEL_ANIM_RAZOR_LEAF
+	db SPRITE_DUEL_RAZOR_LEAF ; sprite ID
+	db PALETTE_DUEL_RAZOR_LEAF ; palette ID
+	db SPRITE_ANIM_RAZOR_LEAF ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_X_FLIP ; anim flags
+	db SFX_RAZOR_LEAF ; sfx ID
+
+	; DUEL_ANIM_GUILLOTINE
+	db SPRITE_DUEL_GUILLOTINE ; sprite ID
+	db PALETTE_DUEL_GUILLOTINE ; palette ID
+	db SPRITE_ANIM_GUILLOTINE ; anim ID
+	db NONE ; anim flags
+	db SFX_GUILLOTINE ; sfx ID
+
+	; DUEL_ANIM_VINE_PULL
+	db SPRITE_DUEL_VINE_PULL ; sprite ID
+	db PALETTE_DUEL_VINE_PULL ; palette ID
+	db SPRITE_ANIM_VINE_PULL ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_Y_INVERTED | SPRITE_ANIM_FLAG_X_FLIP | SPRITE_ANIM_FLAG_Y_FLIP ; anim flags
+	db SFX_VINE_PULL ; sfx ID
+
+	; DUEL_ANIM_PERPLEX
+	db SPRITE_DUEL_PERPLEX ; sprite ID
+	db PALETTE_DUEL_PERPLEX ; palette ID
+	db SPRITE_ANIM_PERPLEX ; anim ID
+	db NONE ; anim flags
+	db SFX_PERPLEX ; sfx ID
+
+	; DUEL_ANIM_NINE_TAILS
+	db SPRITE_DUEL_NINE_TAILS ; sprite ID
+	db PALETTE_DUEL_NINE_TAILS ; palette ID
+	db SPRITE_ANIM_NINE_TAILS ; anim ID
+	db NONE ; anim flags
+	db SFX_NINE_TAILS ; sfx ID
+
+	; DUEL_ANIM_BONE_HEADBUTT
+	db SPRITE_DUEL_BONE_HEADBUTT ; sprite ID
+	db PALETTE_DUEL_BONE_HEADBUTT ; palette ID
+	db SPRITE_ANIM_BONE_HEADBUTT ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_X_FLIP ; anim flags
+	db SFX_BONE_HEADBUTT ; sfx ID
+
+	; DUEL_ANIM_DRILL_DIVE
+	db SPRITE_DUEL_DRILL_DIVE ; sprite ID
+	db PALETTE_DUEL_DRILL_DIVE ; palette ID
+	db SPRITE_ANIM_DRILL_DIVE ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_X_FLIP ; anim flags
+	db SFX_DRILL_DIVE ; sfx ID
+
+	; DUEL_ANIM_DARK_SONG
+	db SPRITE_DUEL_DARK_SONG ; sprite ID
+	db PALETTE_DUEL_DARK_SONG ; palette ID
+	db SPRITE_ANIM_DARK_SONG ; anim ID
+	db SPRITE_ANIM_FLAG_X_INVERTED | SPRITE_ANIM_FLAG_X_FLIP ; anim flags
+	db SFX_DARK_SONG ; sfx ID
+
 	assert_table_length NUM_REGULAR_DUEL_ANIMS

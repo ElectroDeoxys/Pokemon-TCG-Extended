@@ -45,6 +45,10 @@ PlayLoadedDuelAnimation::
 	push hl
 	push bc
 	push de
+
+	farcall ClearSpriteVRAMBuffer
+	call ZeroObjectPositions
+
 	call GetAnimationData
 ; hl: pointer
 
@@ -69,38 +73,7 @@ PlayLoadedDuelAnimation::
 	pop hl
 	or a
 	call nz, PlaySFX
-.calc_addr
-; this data field is always $00,
-; so this calculation is unnecessary
-; seems like there was supposed to be
-; more than 1 function to handle animation
-	push hl
-	ld bc, ANIM_HANDLER_FUNCTION
-	add hl, bc
-	ld a, [hl]
-	rlca
-	add LOW(.address) ; $48
-	ld l, a ; LO
-	ld a, HIGH(.address) ; $49
-	adc 0
-	ld h, a ; HI
-; hl: pointer
-	ld a, [hli]
-	ld b, [hl]
-	ld c, a
-	pop hl
 
-	call CallBC
-.return
-	pop de
-	pop bc
-	pop hl
-	ret
-
-.address
-	dw .handler_func
-
-.handler_func
 ; if any of ANIM_SPRITE_ID, ANIM_PALETTE_ID and ANIM_SPRITE_ANIM_ID
 ; are 0, then return
 	ld e, l
@@ -130,16 +103,21 @@ PlayLoadedDuelAnimation::
 	push af
 	ld a, [hli] ; ANIM_SPRITE_ANIM_FLAGS
 	ld [wAnimFlags], a
+	and SPRITE_ANIM_FLAG_8x16
+	call nz, Set_OBJ_8x16
 	call LoadAnimCoordsAndFlags
 	pop af
 
 	farcall StartNewSpriteAnimation
 	or a
-	jr .done
+	jr .return
 
 .return_with_carry
 	scf
-.done
+.return
+	pop de
+	pop bc
+	pop hl
 	ret
 
 ; loads the correct coordinates/flags for
@@ -342,6 +320,7 @@ PlayBufferedDuelAnimations:
 	ld a, [hl]
 	ld [wDuelAnimReturnBank], a
 
+	call Set_OBJ_8x8
 	call PlayLoadedDuelAnimation
 	call CheckAnyAnimationPlaying
 	jr nc, .next_duel_anim
@@ -358,11 +337,11 @@ GetAnimationData:
 	ld a, [wTempAnimation]
 	ld l, a
 	ld h, 0
-	add hl, hl ; hl = anim * 2
 	ld b, h
 	ld c, l
+	add hl, hl ; hl = anim * 2
 	add hl, hl ; hl = anim * 4
-	add hl, bc ; hl = anim * 6
+	add hl, bc ; hl = anim * 5
 	ld bc, Animations
 	add hl, bc
 	pop bc
@@ -497,7 +476,7 @@ Func_1cb5e:
 	ld [wVRAMTileOffset], a
 	ld [wd4cb], a
 
-	ld a, PALETTE_37
+	ld a, PALETTE_DUEL_DAMAGE
 	farcall LoadPaletteData
 
 	call DrawDamageAnimationNumbers
@@ -588,7 +567,7 @@ GetDamageNumberChars:
 	ld bc, -10
 	call .ConvertDigitToCharTile
 	ld a, l
-	add SPRITE_ANIM_79
+	add SPRITE_ANIM_DAMAGE_0
 	ld [de], a
 
 	; remove left padding zeroes
@@ -596,7 +575,7 @@ GetDamageNumberChars:
 	ld c, 2
 .loop_check_zeroes
 	ld a, [hl]
-	cp SPRITE_ANIM_79 ; 0 char
+	cp SPRITE_ANIM_DAMAGE_0 ; 0 char
 	jr nz, .done
 	ld [hl], $00
 	inc hl
@@ -606,7 +585,7 @@ GetDamageNumberChars:
 	ret
 
 .ConvertDigitToCharTile
-	ld a, SPRITE_ANIM_79 - 1
+	ld a, SPRITE_ANIM_DAMAGE_0 - 1
 .loop_sub
 	inc a
 	add hl, bc
@@ -627,7 +606,7 @@ DrawDamageAnimationWeak:
 	ld a, 3
 	ld [wDamageCharIndex], a
 	ld de, wAnimationQueue + 4
-	ld a, SPRITE_ANIM_91
+	ld a, SPRITE_ANIM_DAMAGE_WEAK
 	call CreateDamageCharSprite
 	pop hl
 	ret
@@ -637,7 +616,7 @@ DrawDamageAnimationResist:
 	ld a, 4
 	ld [wDamageCharIndex], a
 	ld de, wAnimationQueue + 5
-	ld a, SPRITE_ANIM_90
+	ld a, SPRITE_ANIM_DAMAGE_RESIST
 	call CreateDamageCharSprite
 	ld a, [wDamageCharAnimDelay]
 	add 18
@@ -650,7 +629,7 @@ DrawDamageAnimationArrow:
 	ld a, 5
 	ld [wDamageCharIndex], a
 	ld de, wAnimationQueue + 6
-	ld a, SPRITE_ANIM_89
+	ld a, SPRITE_ANIM_DAMAGE_ARROW
 	call CreateDamageCharSprite
 	pop hl
 	ret

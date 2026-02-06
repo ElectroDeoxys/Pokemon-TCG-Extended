@@ -571,7 +571,7 @@ ArbokCard:
 	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_TERROR_STRIKE ; animation
 
 	; attack 2
 	energy GRASS, 2, COLORLESS, 1 ; energies
@@ -685,7 +685,7 @@ NidorinaCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_LEG_SWEEP ; animation
 
 	db 1 ; retreat cost
 	db WR_PSYCHIC ; weakness
@@ -735,7 +735,7 @@ NidoqueenCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_MEGA_PUNCH ; animation
 
 	db 3 ; retreat cost
 	db WR_PSYCHIC ; weakness
@@ -821,7 +821,7 @@ NidorinoCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_LEG_SWEEP ; animation
 
 	; attack 2
 	energy GRASS, 2, COLORLESS, 2 ; energies
@@ -1435,7 +1435,7 @@ WeepinbellCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_WHIP ; animation
+	db ATK_ANIM_RAZOR_LEAF ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
@@ -1671,7 +1671,7 @@ ExeggutorCard:
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
 	db 0
-	db ATK_ANIM_GLOW_EFFECT ; animation
+	db ATK_ANIM_TELEPORT ; animation
 
 	; attack 2
 	energy COLORLESS, 1 ; energies
@@ -1985,7 +1985,7 @@ PinsirCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_SONICBOOM ; animation
+	db ATK_ANIM_GUILLOTINE ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
@@ -2471,7 +2471,7 @@ PonytaCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_LEG_SWEEP ; animation
 
 	; attack 2
 	energy FIRE, 2 ; energies
@@ -3185,7 +3185,7 @@ PoliwhirlCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_SLAP ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
@@ -3871,7 +3871,7 @@ StaryuCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_SLAP ; animation
 
 	; attack 2
 	energy 0 ; energies
@@ -5321,7 +5321,7 @@ JolteonLv24Card:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_LEG_SWEEP ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -6385,7 +6385,7 @@ HitmonleeCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PUNCH ; animation
+	db ATK_ANIM_LEG_SWEEP ; animation
 
 	db 1 ; retreat cost
 	db WR_PSYCHIC ; weakness
@@ -6435,7 +6435,7 @@ HitmonchanCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PUNCH ; animation
+	db ATK_ANIM_MEGA_PUNCH ; animation
 
 	db 2 ; retreat cost
 	db WR_PSYCHIC ; weakness
@@ -7421,7 +7421,7 @@ JynxCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_SLAP ; animation
 
 	; attack 2
 	energy PSYCHIC, 2, COLORLESS, 1 ; energies

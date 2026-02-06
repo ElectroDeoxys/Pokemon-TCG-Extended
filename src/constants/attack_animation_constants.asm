@@ -114,14 +114,14 @@
 	const ATK_ANIM_MAGNETIC_STORM         ; $6d
 	const ATK_ANIM_POISON_WHIP            ; $6e
 	const ATK_ANIM_THUNDER_WAVE           ; $6f
-	const ATK_ANIM_UNUSED_70              ; $70
+	const ATK_ANIM_TAIL_WHIP              ; $70
 	const ATK_ANIM_SPORE                  ; $71
 	const ATK_ANIM_HYPNOSIS               ; $72
 	const ATK_ANIM_ENERGY_CONVERSION      ; $73
 	const ATK_ANIM_LEER                   ; $74
 	const ATK_ANIM_CONFUSION_HIT          ; $75
-	const ATK_ANIM_UNUSED_76              ; $76
-	const ATK_ANIM_UNUSED_77              ; $77
+	const ATK_ANIM_SLAP                   ; $76
+	const ATK_ANIM_GUILLOTINE             ; $77
 	const ATK_ANIM_BENCH_HIT              ; $78
 	const ATK_ANIM_HEAL                   ; $79
 	const ATK_ANIM_RECOIL_HIT             ; $7a
@@ -131,7 +131,7 @@
 	const ATK_ANIM_SLEEP                  ; $7e
 	const ATK_ANIM_OWN_CONFUSION          ; $7f
 	const ATK_ANIM_SLEEPING_GAS           ; $80
-	const ATK_ANIM_UNUSED_81              ; $81
+	const ATK_ANIM_TELEPORT               ; $81
 	const ATK_ANIM_THUNDER_PLAY_AREA      ; $82
 	const ATK_ANIM_CAT_PUNCH_PLAY_AREA    ; $83
 	const ATK_ANIM_FIREGIVER_PLAYER       ; $84
@@ -139,13 +139,13 @@
 	const ATK_ANIM_HEALING_WIND_PLAY_AREA ; $86
 	const ATK_ANIM_GALE                   ; $87
 	const ATK_ANIM_EXPAND                 ; $88
-	const ATK_ANIM_UNUSED_89              ; $89
+	const ATK_ANIM_RAZOR_LEAF             ; $89
 	const ATK_ANIM_FULL_HEAL              ; $8a
-	const ATK_ANIM_UNUSED_8B              ; $8b
+	const ATK_ANIM_MEGA_PUNCH             ; $8b
 	const ATK_ANIM_SPIT_POISON_SUCCESS    ; $8c
 	const ATK_ANIM_GUST_OF_WIND           ; $8d
 	const ATK_ANIM_HEAL_BOTH_SIDES        ; $8e
-	const ATK_ANIM_UNUSED_8F              ; $8f
-	const ATK_ANIM_UNUSED_90              ; $90
+	const ATK_ANIM_LEG_SWEEP              ; $8f
+	const ATK_ANIM_TERROR_STRIKE          ; $90
 
 DEF NUM_ATK_ANIMS EQU const_value

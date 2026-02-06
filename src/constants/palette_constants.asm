@@ -1,163 +1,195 @@
 	const_def
-	const PALETTE_0                  ; $00
-	const PALETTE_1                  ; $01
-	const PALETTE_2                  ; $02
-	const PALETTE_3                  ; $03
-	const PALETTE_4                  ; $04
-	const PALETTE_5                  ; $05
-	const PALETTE_6                  ; $06
-	const PALETTE_7                  ; $07
-	const PALETTE_8                  ; $08
-	const PALETTE_9                  ; $09
-	const PALETTE_10                 ; $0a
-	const PALETTE_11                 ; $0b
-	const PALETTE_12                 ; $0c
-	const PALETTE_13                 ; $0d
-	const PALETTE_14                 ; $0e
-	const PALETTE_15                 ; $0f
-	const PALETTE_16                 ; $10
-	const PALETTE_17                 ; $11
-	const PALETTE_18                 ; $12
-	const PALETTE_19                 ; $13
-	const PALETTE_20                 ; $14
-	const PALETTE_21                 ; $15
-	const PALETTE_22                 ; $16
-	const PALETTE_23                 ; $17
-	const PALETTE_24                 ; $18
-	const PALETTE_25                 ; $19
-	const PALETTE_26                 ; $1a
-	const PALETTE_27                 ; $1b
-	const PALETTE_28                 ; $1c
-	const PALETTE_29                 ; $1d
-	const PALETTE_30                 ; $1e
-	const PALETTE_31                 ; $1f
-	const PALETTE_32                 ; $20
-	const PALETTE_33                 ; $21
-	const PALETTE_34                 ; $22
-	const PALETTE_35                 ; $23
-	const PALETTE_36                 ; $24
-	const PALETTE_37                 ; $25
-	const PALETTE_38                 ; $26
-	const PALETTE_39                 ; $27
-	const PALETTE_40                 ; $28
-	const PALETTE_41                 ; $29
-	const PALETTE_42                 ; $2a
-	const PALETTE_43                 ; $2b
-	const PALETTE_44                 ; $2c
-	const PALETTE_45                 ; $2d
-	const PALETTE_46                 ; $2e
-	const PALETTE_47                 ; $2f
-	const PALETTE_48                 ; $30
-	const PALETTE_49                 ; $31
-	const PALETTE_50                 ; $32
-	const PALETTE_51                 ; $33
-	const PALETTE_52                 ; $34
-	const PALETTE_53                 ; $35
-	const PALETTE_54                 ; $36
-	const PALETTE_55                 ; $37
-	const PALETTE_56                 ; $38
-	const PALETTE_57                 ; $39
-	const PALETTE_58                 ; $3a
-	const PALETTE_59                 ; $3b
-	const PALETTE_60                 ; $3c
-	const PALETTE_61                 ; $3d
-	const PALETTE_62                 ; $3e
-	const PALETTE_63                 ; $3f
-	const PALETTE_64                 ; $40
-	const PALETTE_65                 ; $41
-	const PALETTE_66                 ; $42
-	const PALETTE_67                 ; $43
-	const PALETTE_68                 ; $44
-	const PALETTE_69                 ; $45
-	const PALETTE_70                 ; $46
-	const PALETTE_71                 ; $47
-	const PALETTE_72                 ; $48
-	const PALETTE_73                 ; $49
-	const PALETTE_74                 ; $4a
-	const PALETTE_75                 ; $4b
-	const PALETTE_76                 ; $4c
-	const PALETTE_77                 ; $4d
-	const PALETTE_78                 ; $4e
-	const PALETTE_79                 ; $4f
-	const PALETTE_80                 ; $50
-	const PALETTE_81                 ; $51
-	const PALETTE_82                 ; $52
-	const PALETTE_83                 ; $53
-	const PALETTE_84                 ; $54
-	const PALETTE_85                 ; $55
-	const PALETTE_86                 ; $56
-	const PALETTE_87                 ; $57
-	const PALETTE_88                 ; $58
-	const PALETTE_89                 ; $59
-	const PALETTE_90                 ; $a5
-	const PALETTE_91                 ; $5b
-	const PALETTE_92                 ; $5c
-	const PALETTE_93                 ; $5d
-	const PALETTE_94                 ; $5e
-	const PALETTE_95                 ; $5f
-	const PALETTE_96                 ; $60
-	const PALETTE_97                 ; $61
-	const PALETTE_98                 ; $62
-	const PALETTE_99                 ; $63
-	const PALETTE_100                ; $64
-	const PALETTE_101                ; $65
-	const PALETTE_102                ; $66
-	const PALETTE_103                ; $67
-	const PALETTE_104                ; $68
-	const PALETTE_105                ; $69
-	const PALETTE_106                ; $6a
-	const PALETTE_107                ; $6b
-	const PALETTE_108                ; $6c
-	const PALETTE_109                ; $6d
-	const PALETTE_110                ; $6e
-	const PALETTE_111                ; $6f
-	const PALETTE_112                ; $70
-	const PALETTE_113                ; $71
-	const PALETTE_114                ; $72
-	const PALETTE_115                ; $73
-	const PALETTE_116                ; $74
-	const PALETTE_117                ; $75
-	const PALETTE_118                ; $76
-	const PALETTE_PLAYER_PORTRAIT    ; $77
-	const PALETTE_RONALD_PORTRAIT    ; $79
-	const PALETTE_SAM_PORTRAIT       ; $7a
-	const PALETTE_IMAKUNI_PORTRAIT   ; $7b
-	const PALETTE_NIKKI_PORTRAIT     ; $7c
-	const PALETTE_RICK_PORTRAIT      ; $7d
-	const PALETTE_KEN_PORTRAIT       ; $7e
-	const PALETTE_AMY_PORTRAIT       ; $7f
-	const PALETTE_ISAAC_PORTRAIT     ; $80
-	const PALETTE_MITCH_PORTRAIT     ; $81
-	const PALETTE_GENE_PORTRAIT      ; $82
-	const PALETTE_MURRAY_PORTRAIT    ; $83
-	const PALETTE_COURTNEY_PORTRAIT  ; $84
-	const PALETTE_STEVE_PORTRAIT     ; $85
-	const PALETTE_JACK_PORTRAIT      ; $86
-	const PALETTE_ROD_PORTRAIT       ; $87
-	const PALETTE_JOSEPH_PORTRAIT    ; $88
-	const PALETTE_DAVID_PORTRAIT     ; $89
-	const PALETTE_ERIK_PORTRAIT      ; $8a
-	const PALETTE_JOHN_PORTRAIT      ; $8b
-	const PALETTE_ADAM_PORTRAIT      ; $8c
-	const PALETTE_JONATHAN_PORTRAIT  ; $8d
-	const PALETTE_JOSHUA_PORTRAIT    ; $8e
-	const PALETTE_NICHOLAS_PORTRAIT  ; $8f
-	const PALETTE_BRANDON_PORTRAIT   ; $90
-	const PALETTE_MATTHEW_PORTRAIT   ; $91
-	const PALETTE_RYAN_PORTRAIT      ; $92
-	const PALETTE_ANDREW_PORTRAIT    ; $93
-	const PALETTE_CHRIS_PORTRAIT     ; $94
-	const PALETTE_MICHAEL_PORTRAIT   ; $95
-	const PALETTE_DANIEL_PORTRAIT    ; $96
-	const PALETTE_ROBERT_PORTRAIT    ; $97
-	const PALETTE_BRITTANY_PORTRAIT  ; $98
-	const PALETTE_KRISTIN_PORTRAIT   ; $99
-	const PALETTE_HEATHER_PORTRAIT   ; $9a
-	const PALETTE_SARA_PORTRAIT      ; $9b
-	const PALETTE_AMANDA_PORTRAIT    ; $9c
-	const PALETTE_JENNIFER_PORTRAIT  ; $9d
-	const PALETTE_JESSICA_PORTRAIT   ; $9e
-	const PALETTE_STEPHANIE_PORTRAIT ; $9f
-	const PALETTE_AARON_PORTRAIT     ; $a0
+	const PALETTE_0
+	const PALETTE_1
+	const PALETTE_2
+	const PALETTE_3
+	const PALETTE_4
+	const PALETTE_5
+	const PALETTE_6
+	const PALETTE_7
+	const PALETTE_8
+	const PALETTE_9
+	const PALETTE_10
+	const PALETTE_11
+	const PALETTE_12
+	const PALETTE_13
+	const PALETTE_14
+	const PALETTE_15
+	const PALETTE_16
+	const PALETTE_17
+	const PALETTE_18
+	const PALETTE_19
+	const PALETTE_20
+	const PALETTE_21
+	const PALETTE_22
+	const PALETTE_23
+	const PALETTE_24
+	const PALETTE_25
+	const PALETTE_26
+	const PALETTE_27
+	const PALETTE_28
+	const PALETTE_29
+	const PALETTE_30
+	const PALETTE_94
+	const PALETTE_95
+	const PALETTE_96
+	const PALETTE_97
+	const PALETTE_98
+	const PALETTE_99
+	const PALETTE_100
+	const PALETTE_101
+	const PALETTE_102
+	const PALETTE_103
+	const PALETTE_104
+	const PALETTE_105
+	const PALETTE_106
+	const PALETTE_107
+	const PALETTE_108
+	const PALETTE_109
+	const PALETTE_110
+	const PALETTE_111
+	const PALETTE_112
+	const PALETTE_113
+	const PALETTE_114
+	const PALETTE_115
+	const PALETTE_116
+	const PALETTE_117
+	const PALETTE_118
+	const PALETTE_DUEL_GLOW
+	const PALETTE_DUEL_PARALYSIS
+	const PALETTE_DUEL_SLEEP
+	const PALETTE_DUEL_STAR
+	const PALETTE_DUEL_POISON
+	const PALETTE_DUEL_HIT
+	const PALETTE_DUEL_DAMAGE
+	const PALETTE_DUEL_THUNDER
+	const PALETTE_DUEL_LIGHTNING
+	const PALETTE_DUEL_SPARK
+	const PALETTE_DUEL_BIG_LIGHTNING
+	const PALETTE_DUEL_FLAME
+	const PALETTE_DUEL_FIRE_SPIN
+	const PALETTE_DUEL_FIRE_BIRD
+	const PALETTE_DUEL_WATER_DROP
+	const PALETTE_DUEL_WATER_GUN
+	const PALETTE_DUEL_WHIRLPOOL
+	const PALETTE_DUEL_HYDRO_PUMP
+	const PALETTE_DUEL_SNOW
+	const PALETTE_DUEL_PSYCHIC
+	const PALETTE_DUEL_LEER
+	const PALETTE_DUEL_BEAM
+	const PALETTE_DUEL_HYPER_BEAM
+	const PALETTE_DUEL_ROCK_THROW
+	const PALETTE_DUEL_PUNCH
+	const PALETTE_DUEL_STRETCH_KICK
+	const PALETTE_DUEL_SLASH
+	const PALETTE_DUEL_WHIP
+	const PALETTE_DUEL_SONICBOOM
+	const PALETTE_DUEL_DRILL
+	const PALETTE_DUEL_POT
+	const PALETTE_DUEL_BONE
+	const PALETTE_DUEL_PLANET
+	const PALETTE_DUEL_NEEDLES
+	const PALETTE_DUEL_WHITE_GAS
+	const PALETTE_DUEL_POWDER
+	const PALETTE_DUEL_GOO
+	const PALETTE_DUEL_BUBBLE
+	const PALETTE_DUEL_STRING
+	const PALETTE_DUEL_HEART
+	const PALETTE_DUEL_LURE
+	const PALETTE_DUEL_SKULL
+	const PALETTE_DUEL_SMALL_STAR
+	const PALETTE_DUEL_NOTE
+	const PALETTE_DUEL_SOUND
+	const PALETTE_DUEL_PETAL
+	const PALETTE_DUEL_PROTECT
+	const PALETTE_DUEL_BARRIER
+	const PALETTE_DUEL_SPEED
+	const PALETTE_DUEL_WHIRLWIND
+	const PALETTE_DUEL_CRY
+	const PALETTE_DUEL_QUESTION_MARK
+	const PALETTE_DUEL_EXPLOSION
+	const PALETTE_DUEL_HEAL
+	const PALETTE_DUEL_DRAIN
+	const PALETTE_DUEL_BLACK_GAS
+	const PALETTE_DUEL_SMALL_GLOW
+	const PALETTE_DUEL_EXPAND
+	const PALETTE_DUEL_CAT_PUNCH
+	const PALETTE_DUEL_ELECTRIC_WAVE
+	const PALETTE_DUEL_FIREBALLS
+	const PALETTE_DUEL_BENCH_MANIPULATION
+	const PALETTE_DUEL_PSYCHIC_BEAM
+	const PALETTE_DUEL_PSYCHIC_BEAM_BENCH
+	const PALETTE_DUEL_BOULDER_SMASH
+	const PALETTE_DUEL_MEGA_PUNCH
+	const PALETTE_DUEL_PSYPUNCH
+	const PALETTE_DUEL_SLUDGE_PUNCH
+	const PALETTE_DUEL_ICE_PUNCH
+	const PALETTE_DUEL_KICK
+	const PALETTE_DUEL_TAIL_SLAP
+	const PALETTE_DUEL_TAIL_WHIP
+	const PALETTE_DUEL_SLAP
+	const PALETTE_DUEL_QUESTION_MARK_SMALL
+	const PALETTE_DUEL_SKULL_BASH
+	const PALETTE_DUEL_COIN_HURL
+	const PALETTE_DUEL_TELEPORT
+	const PALETTE_DUEL_FOLLOW_ME
+	const PALETTE_DUEL_SWIFT
+	const PALETTE_DUEL_3D_ATTACK
+	const PALETTE_DUEL_FOCUS_BLAST
+	const PALETTE_DUEL_FOCUS_BLAST_BENCH
+	const PALETTE_DUEL_BONE2
+	const PALETTE_DUEL_BIG_SNORE
+	const PALETTE_DUEL_RAZOR_LEAF
+	const PALETTE_DUEL_GUILLOTINE
+	const PALETTE_DUEL_VINE_PULL
+	const PALETTE_DUEL_PERPLEX
+	const PALETTE_DUEL_NINE_TAILS
+	const PALETTE_DUEL_BONE_HEADBUTT
+	const PALETTE_DUEL_DRILL_DIVE
+	const PALETTE_DUEL_DARK_SONG
+	const PALETTE_DUEL_CARD
+	const PALETTE_DUEL_COIN
+	const PALETTE_DUEL_RESULT
+	const PALETTE_PLAYER_PORTRAIT
+	const PALETTE_RONALD_PORTRAIT
+	const PALETTE_SAM_PORTRAIT
+	const PALETTE_IMAKUNI_PORTRAIT
+	const PALETTE_NIKKI_PORTRAIT
+	const PALETTE_RICK_PORTRAIT
+	const PALETTE_KEN_PORTRAIT
+	const PALETTE_AMY_PORTRAIT
+	const PALETTE_ISAAC_PORTRAIT
+	const PALETTE_MITCH_PORTRAIT
+	const PALETTE_GENE_PORTRAIT
+	const PALETTE_MURRAY_PORTRAIT
+	const PALETTE_COURTNEY_PORTRAIT
+	const PALETTE_STEVE_PORTRAIT
+	const PALETTE_JACK_PORTRAIT
+	const PALETTE_ROD_PORTRAIT
+	const PALETTE_JOSEPH_PORTRAIT
+	const PALETTE_DAVID_PORTRAIT
+	const PALETTE_ERIK_PORTRAIT
+	const PALETTE_JOHN_PORTRAIT
+	const PALETTE_ADAM_PORTRAIT
+	const PALETTE_JONATHAN_PORTRAIT
+	const PALETTE_JOSHUA_PORTRAIT
+	const PALETTE_NICHOLAS_PORTRAIT
+	const PALETTE_BRANDON_PORTRAIT
+	const PALETTE_MATTHEW_PORTRAIT
+	const PALETTE_RYAN_PORTRAIT
+	const PALETTE_ANDREW_PORTRAIT
+	const PALETTE_CHRIS_PORTRAIT
+	const PALETTE_MICHAEL_PORTRAIT
+	const PALETTE_DANIEL_PORTRAIT
+	const PALETTE_ROBERT_PORTRAIT
+	const PALETTE_BRITTANY_PORTRAIT
+	const PALETTE_KRISTIN_PORTRAIT
+	const PALETTE_HEATHER_PORTRAIT
+	const PALETTE_SARA_PORTRAIT
+	const PALETTE_AMANDA_PORTRAIT
+	const PALETTE_JENNIFER_PORTRAIT
+	const PALETTE_JESSICA_PORTRAIT
+	const PALETTE_STEPHANIE_PORTRAIT
+	const PALETTE_AARON_PORTRAIT
 
 DEF NUM_PALETTES EQU const_value

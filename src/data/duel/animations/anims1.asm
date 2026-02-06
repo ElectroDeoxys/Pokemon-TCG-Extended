@@ -6,6 +6,26 @@ AnimData0::
 	frame_data 1, 16, 0, 0
 	frame_data 0, 0, 0, 0
 
+AnimData1::
+	frame_table AnimFrameTable0
+	frame_data 3, 16, 0, 0
+	frame_data 4, 16, 0, 0
+	frame_data 0, 0, 0, 0
+
+AnimData2::
+	frame_table AnimFrameTable0
+	frame_data 5, 16, 0, 0
+	frame_data 6, 16, 0, 0
+	frame_data 7, 16, 0, 0
+	frame_data 6, 16, 0, 0
+	frame_data 0, 0, 0, 0
+
+AnimData3::
+	frame_table AnimFrameTable0
+	frame_data 8, 16, 0, 0
+	frame_data 9, 16, 0, 0
+	frame_data 0, 0, 0, 0
+
 AnimFrameTable0::
 	dw .data_a8e7f
 	dw .data_a8e90
@@ -94,6 +114,20 @@ AnimData4::
 	frame_data 1, 16, 0, 0
 	frame_data 2, 16, 0, 0
 	frame_data 1, 16, 0, 0
+	frame_data 0, 0, 0, 0
+
+AnimData5::
+	frame_table AnimFrameTable1
+	frame_data 3, 16, 0, 0
+	frame_data 4, 16, 0, 0
+	frame_data 0, 0, 0, 0
+
+AnimData6::
+	frame_table AnimFrameTable1
+	frame_data 5, 16, 0, 0
+	frame_data 6, 16, 0, 0
+	frame_data 7, 16, 0, 0
+	frame_data 6, 16, 0, 0
 	frame_data 0, 0, 0, 0
 
 AnimFrameTable1::
@@ -1577,600 +1611,553 @@ AnimData70::
 	frame_data -1, 2, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData71::
-	frame_table AnimFrameTable19
-	frame_data 0, 4, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data 0, 4, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data 0, 4, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data 2, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimFrameTableGlow::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
 
-AnimFrameTable19::
-	dw .data_aa253
-	dw .data_aa284
-	dw .data_aa2c5
+.frame_0
+	db 8 ; size
+	db   0,   0, $07, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  -8, $07, 0 | OAM_YFLIP
+	db  -8,   0, $07, 0 | OAM_XFLIP
+	db  -8,  -8, $07, 0
+	db  -7, -16, $08, 0
+	db -16,  -1, $08, 0 | OAM_XFLIP
+	db   8,  -7, $08, 0 | OAM_YFLIP
+	db  -1,   8, $08, 0 | OAM_XFLIP | OAM_YFLIP
 
-.data_aa253
-	db 12 ; size
-	db -8, -8, 9, $0
-	db -16, -8, 8, $0
-	db -8, -16, 10, $0
-	db -8, 0, 9, OAM_XFLIP
-	db -16, 0, 8, OAM_XFLIP
-	db -8, 8, 10, OAM_XFLIP
-	db 0, -8, 9, OAM_YFLIP
-	db 8, -8, 8, OAM_YFLIP
-	db 0, -16, 10, OAM_YFLIP
-	db 0, 0, 9, OAM_XFLIP | OAM_YFLIP
-	db 8, 0, 8, OAM_XFLIP | OAM_YFLIP
-	db 0, 8, 10, OAM_XFLIP | OAM_YFLIP
+.frame_1
+	db 8 ; size
+	db -12, -12, $04, 0
+	db -13,  -4, $05, 0
+	db  -4, -13, $06, 0
+	db -12,   4, $04, 0 | OAM_XFLIP
+	db  -4,   5, $06, 0 | OAM_XFLIP
+	db   4, -12, $04, 0 | OAM_YFLIP
+	db   5,  -4, $05, 0 | OAM_YFLIP
+	db   4,   4, $04, 0 | OAM_XFLIP | OAM_YFLIP
 
-.data_aa284
+.frame_2
 	db 16 ; size
-	db -16, -16, 4, $0
-	db -16, -8, 5, $0
-	db -8, -8, 7, $0
-	db -8, -16, 6, $0
-	db -16, 8, 4, OAM_XFLIP
-	db -16, 0, 5, OAM_XFLIP
-	db -8, 0, 7, OAM_XFLIP
-	db -8, 8, 6, OAM_XFLIP
-	db 8, -16, 4, OAM_YFLIP
-	db 8, -8, 5, OAM_YFLIP
-	db 0, -8, 7, OAM_YFLIP
-	db 0, -16, 6, OAM_YFLIP
-	db 8, 8, 4, OAM_XFLIP | OAM_YFLIP
-	db 8, 0, 5, OAM_XFLIP | OAM_YFLIP
-	db 0, 0, 7, OAM_XFLIP | OAM_YFLIP
-	db 0, 8, 6, OAM_XFLIP | OAM_YFLIP
+	db -16, -16, $00, 0
+	db -16,  -8, $01, 0
+	db  -8, -16, $02, 0
+	db  -8,  -8, $03, 0
+	db -16,   8, $00, 0 | OAM_XFLIP
+	db -16,   0, $01, 0 | OAM_XFLIP
+	db  -8,   8, $02, 0 | OAM_XFLIP
+	db  -8,   0, $03, 0 | OAM_XFLIP
+	db   8,   8, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8,   0, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,   8, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,   0, $03, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8, -16, $00, 0 | OAM_YFLIP
+	db   8,  -8, $01, 0 | OAM_YFLIP
+	db   0, -16, $02, 0 | OAM_YFLIP
+	db   0,  -8, $03, 0 | OAM_YFLIP
 
-.data_aa2c5
-	db 16 ; size
-	db -16, -16, 0, $0
-	db -16, -8, 1, $0
-	db -8, -16, 2, $0
-	db -8, -8, 3, $0
-	db -16, 8, 0, OAM_XFLIP
-	db -16, 0, 1, OAM_XFLIP
-	db -8, 8, 2, OAM_XFLIP
-	db -8, 0, 3, OAM_XFLIP
-	db 8, 8, 0, OAM_XFLIP | OAM_YFLIP
-	db 8, 0, 1, OAM_XFLIP | OAM_YFLIP
-	db 0, 8, 2, OAM_XFLIP | OAM_YFLIP
-	db 0, 0, 3, OAM_XFLIP | OAM_YFLIP
-	db 8, -16, 0, OAM_YFLIP
-	db 8, -8, 1, OAM_YFLIP
-	db 0, -16, 2, OAM_YFLIP
-	db 0, -8, 3, OAM_YFLIP
+AnimDataGlow::
+	frame_table AnimFrameTableGlow
+	frame_data  0,  4,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data  0,  4,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data  0,  4,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data  2, -1,   0,   0
+	frame_data  0,  0,   0,   0
 
-AnimData72::
-	frame_table AnimFrameTable20
-	frame_data 0, 7, 0, 0
-	frame_data 1, 7, 0, 0
-	frame_data 0, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 1, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimFrameTableParalysis::
+	dw .frame_0
+	dw .frame_1
 
-AnimFrameTable20::
-	dw .data_aa325
-	dw .data_aa386
-
-.data_aa325
+.frame_0
 	db 24 ; size
-	db -24, -32, 0, $0
-	db -24, -24, 1, $0
-	db -24, -16, 2, $0
-	db -24, 24, 3, $0
-	db -16, 24, 4, $0
-	db -8, 24, 5, $0
-	db -24, -8, 1, $0
-	db -24, 0, 2, $0
-	db -24, 8, 1, $0
-	db -24, 16, 2, $0
-	db 0, 24, 4, $0
-	db 8, 24, 5, $0
-	db 16, 24, 0, OAM_XFLIP | OAM_YFLIP
-	db 16, 16, 1, OAM_XFLIP | OAM_YFLIP
-	db 16, 8, 2, OAM_XFLIP | OAM_YFLIP
-	db 16, -32, 3, OAM_XFLIP | OAM_YFLIP
-	db 16, 0, 1, OAM_XFLIP | OAM_YFLIP
-	db 16, -8, 2, OAM_XFLIP | OAM_YFLIP
-	db 16, -16, 1, OAM_XFLIP | OAM_YFLIP
-	db 16, -24, 2, OAM_XFLIP | OAM_YFLIP
-	db 8, -32, 4, OAM_XFLIP | OAM_YFLIP
-	db 0, -32, 5, OAM_XFLIP | OAM_YFLIP
-	db -8, -32, 4, OAM_XFLIP | OAM_YFLIP
-	db -16, -32, 5, OAM_XFLIP | OAM_YFLIP
+	db -24, -32, $00, 0
+	db -24, -24, $01, 0
+	db -24, -16, $02, 0
+	db -24,  24, $03, 0
+	db -16,  24, $04, 0
+	db  -8,  24, $05, 0
+	db -24,  -8, $01, 0
+	db -24,   0, $02, 0
+	db -24,   8, $01, 0
+	db -24,  16, $02, 0
+	db   0,  24, $04, 0
+	db   8,  24, $05, 0
+	db  16,  24, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16,  16, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16,   8, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16, -32, $03, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16,   0, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16,  -8, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16, -16, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16, -24, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8, -32, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -32, $05, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -8, -32, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db -16, -32, $05, 0 | OAM_XFLIP | OAM_YFLIP
 
-.data_aa386
+.frame_1
 	db 24 ; size
-	db -24, 24, 0, OAM_XFLIP
-	db -24, 16, 1, OAM_XFLIP
-	db -24, 8, 2, OAM_XFLIP
-	db -24, -32, 3, OAM_XFLIP
-	db -16, -32, 4, OAM_XFLIP
-	db -8, -32, 5, OAM_XFLIP
-	db -24, 0, 1, OAM_XFLIP
-	db -24, -8, 2, OAM_XFLIP
-	db -24, -16, 1, OAM_XFLIP
-	db -24, -24, 2, OAM_XFLIP
-	db 0, -32, 4, OAM_XFLIP
-	db 8, -32, 5, OAM_XFLIP
-	db 16, -32, 0, OAM_YFLIP
-	db 16, -24, 1, OAM_YFLIP
-	db 16, -16, 2, OAM_YFLIP
-	db 16, 24, 3, OAM_YFLIP
-	db 16, -8, 1, OAM_YFLIP
-	db 16, 0, 2, OAM_YFLIP
-	db 16, 8, 1, OAM_YFLIP
-	db 16, 16, 2, OAM_YFLIP
-	db 8, 24, 4, OAM_YFLIP
-	db 0, 24, 5, OAM_YFLIP
-	db -8, 24, 4, OAM_YFLIP
-	db -16, 24, 5, OAM_YFLIP
+	db -24,  24, $00, 0 | OAM_XFLIP
+	db -24,  16, $01, 0 | OAM_XFLIP
+	db -24,   8, $02, 0 | OAM_XFLIP
+	db -24, -32, $03, 0 | OAM_XFLIP
+	db -16, -32, $04, 0 | OAM_XFLIP
+	db  -8, -32, $05, 0 | OAM_XFLIP
+	db -24,   0, $01, 0 | OAM_XFLIP
+	db -24,  -8, $02, 0 | OAM_XFLIP
+	db -24, -16, $01, 0 | OAM_XFLIP
+	db -24, -24, $02, 0 | OAM_XFLIP
+	db   0, -32, $04, 0 | OAM_XFLIP
+	db   8, -32, $05, 0 | OAM_XFLIP
+	db  16, -32, $00, 0 | OAM_YFLIP
+	db  16, -24, $01, 0 | OAM_YFLIP
+	db  16, -16, $02, 0 | OAM_YFLIP
+	db  16,  24, $03, 0 | OAM_YFLIP
+	db  16,  -8, $01, 0 | OAM_YFLIP
+	db  16,   0, $02, 0 | OAM_YFLIP
+	db  16,   8, $01, 0 | OAM_YFLIP
+	db  16,  16, $02, 0 | OAM_YFLIP
+	db   8,  24, $04, 0 | OAM_YFLIP
+	db   0,  24, $05, 0 | OAM_YFLIP
+	db  -8,  24, $04, 0 | OAM_YFLIP
+	db -16,  24, $05, 0 | OAM_YFLIP
 
-AnimData73::
-	frame_table AnimFrameTable21
-	frame_data 0, 10, 0, 0
-	frame_data 1, 14, 0, 0
-	frame_data 2, 10, 0, 0
-	frame_data 3, 7, 0, 0
-	frame_data 4, 7, 0, 0
-	frame_data 3, 7, 0, -1
-	frame_data 4, 7, 0, 0
-	frame_data 3, 7, 0, 1
-	frame_data 4, 7, 0, 0
-	frame_data 3, 7, 0, -1
-	frame_data 4, 7, 0, 0
-	frame_data 4, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimDataParalysis::
+	frame_table AnimFrameTableParalysis
+	frame_data  0,  7,   0,   0
+	frame_data  1,  7,   0,   0
+	frame_data  0,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  1, -1,   0,   0
+	frame_data  0,  0,   0,   0
 
-AnimFrameTable21::
-	dw .data_aa428
-	dw .data_aa449
-	dw .data_aa46a
-	dw .data_aa48b
-	dw .data_aa4b0
+AnimFrameTableSleep::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
 
-.data_aa428
+.frame_0
 	db 8 ; size
-	db 0, 8, 2, OAM_XFLIP
-	db 0, 0, 2, $0
-	db -8, 0, 2, OAM_YFLIP
-	db -8, 8, 2, OAM_XFLIP | OAM_YFLIP
-	db 0, -16, 2, $0
-	db 0, -8, 2, OAM_XFLIP
-	db -8, -8, 2, OAM_XFLIP | OAM_YFLIP
-	db -8, -16, 2, OAM_YFLIP
+	db   0,   8, $02, 0 | OAM_XFLIP
+	db   0,   0, $02, 0
+	db  -8,   0, $02, 0 | OAM_YFLIP
+	db  -8,   8, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -16, $02, 0
+	db   0,  -8, $02, 0 | OAM_XFLIP
+	db  -8,  -8, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -8, -16, $02, 0 | OAM_YFLIP
 
-.data_aa449
+.frame_1
 	db 8 ; size
-	db -7, -8, 0, OAM_XFLIP
-	db -7, -16, 1, OAM_XFLIP
-	db 1, -8, 2, OAM_XFLIP
-	db 1, -16, 3, OAM_XFLIP
-	db -7, 0, 0, $0
-	db -7, 8, 1, $0
-	db 1, 0, 2, $0
-	db 1, 8, 3, $0
+	db  -7,  -8, $00, 1 | OAM_XFLIP
+	db  -7, -16, $01, 1 | OAM_XFLIP
+	db   1,  -8, $02, 0 | OAM_XFLIP
+	db   1, -16, $03, 0 | OAM_XFLIP
+	db  -7,   0, $00, 1
+	db  -7,   8, $01, 1
+	db   1,   0, $02, 0
+	db   1,   8, $03, 0
 
-.data_aa46a
+.frame_2
 	db 8 ; size
-	db -6, -16, 1, OAM_XFLIP
-	db -6, -8, 1, $0
-	db 2, -16, 5, OAM_XFLIP
-	db 2, -8, 4, OAM_XFLIP
-	db -6, 8, 1, $0
-	db -6, 0, 1, OAM_XFLIP
-	db 2, 8, 5, $0
-	db 2, 0, 4, $0
+	db  -6, -16, $01, 1 | OAM_XFLIP
+	db  -6,  -8, $01, 1
+	db   2, -16, $05, 0 | OAM_XFLIP
+	db   2,  -8, $04, 0 | OAM_XFLIP
+	db  -6,   8, $01, 1
+	db  -6,   0, $01, 1 | OAM_XFLIP
+	db   2,   8, $05, 0
+	db   2,   0, $04, 0
 
-.data_aa48b
+.frame_3
 	db 9 ; size
-	db -5, -16, 1, OAM_XFLIP
-	db 3, -16, 5, OAM_XFLIP
-	db -5, -8, 1, $0
-	db 3, -8, 5, $0
-	db -5, 8, 1, $0
-	db 3, 8, 5, $0
-	db -5, 0, 1, OAM_XFLIP
-	db 3, 0, 5, OAM_XFLIP
-	db -14, 11, 6, $0
+	db  -5, -16, $01, 1 | OAM_XFLIP
+	db   3, -16, $05, 0 | OAM_XFLIP
+	db  -5,  -8, $01, 1
+	db   3,  -8, $05, 0
+	db  -5,   8, $01, 1
+	db   3,   8, $05, 0
+	db  -5,   0, $01, 1 | OAM_XFLIP
+	db   3,   0, $05, 0 | OAM_XFLIP
+	db -14,  11, $06, 2
 
-.data_aa4b0
-	db 9 ; size
-	db -5, -16, 1, OAM_XFLIP
-	db 3, -16, 5, OAM_XFLIP
-	db -5, -8, 1, $0
-	db 3, -8, 5, $0
-	db -5, 8, 1, $0
-	db 3, 8, 5, $0
-	db -5, 0, 1, OAM_XFLIP
-	db 3, 0, 5, OAM_XFLIP
-	db -18, 15, 7, $0
-
-AnimData74::
-	frame_table AnimFrameTable22
-	frame_data 0, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 3, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 5, 8, 0, 0
-	frame_data 6, 8, 0, 0
-	frame_data 7, 8, 0, 0
-	frame_data 7, -1, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimFrameTable22::
-	dw .data_aa510
-	dw .data_aa531
-	dw .data_aa552
-	dw .data_aa573
-	dw .data_aa594
-	dw .data_aa5b5
-	dw .data_aa5d6
-	dw .data_aa5f7
-
-.data_aa510
-	db 8 ; size
-	db -8, -8, 0, $0
-	db -8, 0, 0, OAM_XFLIP
-	db -24, -8, 0, $0
-	db -24, 0, 0, OAM_XFLIP
-	db -16, -8, 1, $0
-	db 0, -8, 1, $0
-	db -16, 0, 1, OAM_XFLIP
-	db 0, 0, 1, OAM_XFLIP
-
-.data_aa531
-	db 8 ; size
-	db -16, -24, 0, $0
-	db -16, -16, 0, OAM_XFLIP
-	db -16, 8, 0, $0
-	db -16, 16, 0, OAM_XFLIP
-	db -8, -24, 1, $0
-	db -8, -16, 1, OAM_XFLIP
-	db -8, 8, 1, $0
-	db -8, 16, 1, OAM_XFLIP
-
-.data_aa552
-	db 8 ; size
-	db -24, -32, 0, $0
-	db -24, -24, 0, OAM_XFLIP
-	db -8, 16, 0, $0
-	db -8, 24, 0, OAM_XFLIP
-	db -16, -32, 1, $0
-	db -16, -24, 1, OAM_XFLIP
-	db 0, 16, 1, $0
-	db 0, 24, 1, OAM_XFLIP
-
-.data_aa573
-	db 8 ; size
-	db -32, -24, 0, $0
-	db -32, -16, 0, OAM_XFLIP
-	db 0, 8, 0, $0
-	db 0, 16, 0, OAM_XFLIP
-	db -24, -24, 1, $0
-	db 8, 8, 1, $0
-	db -24, -16, 1, OAM_XFLIP
-	db 8, 16, 1, OAM_XFLIP
-
-.data_aa594
-	db 8 ; size
-	db -24, -8, 0, $0
-	db -24, 0, 0, OAM_XFLIP
-	db -8, -8, 0, $0
-	db -8, 0, 0, OAM_XFLIP
-	db -16, -8, 1, $0
-	db 0, -8, 1, $0
-	db -16, 0, 1, OAM_XFLIP
-	db 0, 0, 1, OAM_XFLIP
-
-.data_aa5b5
-	db 8 ; size
-	db -16, 8, 0, $0
-	db -16, 16, 0, OAM_XFLIP
-	db -16, -24, 0, $0
-	db -16, -16, 0, OAM_XFLIP
-	db -8, -24, 1, $0
-	db -8, -16, 1, OAM_XFLIP
-	db -8, 8, 1, $0
-	db -8, 16, 1, OAM_XFLIP
-
-.data_aa5d6
-	db 8 ; size
-	db -8, 16, 0, $0
-	db -8, 24, 0, OAM_XFLIP
-	db -24, -32, 0, $0
-	db -24, -24, 0, OAM_XFLIP
-	db -16, -32, 1, $0
-	db -16, -24, 1, OAM_XFLIP
-	db 0, 16, 1, $0
-	db 0, 24, 1, OAM_XFLIP
-
-.data_aa5f7
-	db 8 ; size
-	db 0, 8, 0, $0
-	db 0, 16, 0, OAM_XFLIP
-	db -32, -24, 0, $0
-	db -32, -16, 0, OAM_XFLIP
-	db -24, -24, 1, $0
-	db -24, -16, 1, OAM_XFLIP
-	db 8, 8, 1, $0
-	db 8, 16, 1, OAM_XFLIP
-
-AnimData75::
-	frame_table AnimFrameTable23
-	frame_data 0, 10, 1, 1
-	frame_data 1, 10, 0, 0
-	frame_data 2, 10, 0, 0
-	frame_data 3, 32, 0, 0
-	frame_data 3, -1, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimFrameTable23::
-	dw .data_aa63b
-	dw .data_aa64c
-	dw .data_aa675
-	dw .data_aa6b6
-
-.data_aa63b
-	db 4 ; size
-	db -24, -8, 3, $0
-	db -24, 24, 3, $0
-	db -24, -32, 1, $0
-	db -24, 8, 1, $0
-
-.data_aa64c
+.frame_4
 	db 10 ; size
-	db -16, -8, 3, $0
-	db -24, -8, 2, $0
-	db -24, 8, 0, $0
-	db -16, 24, 3, $0
-	db -24, 24, 2, $0
-	db -16, -32, 1, $0
-	db -24, -32, 0, $0
-	db -24, -16, 1, OAM_XFLIP
-	db -16, 8, 1, $0
-	db -24, 0, 3, $0
+	db -14,  15, $07, 2 | OAM_XFLIP | OAM_YFLIP
+	db  -5, -16, $01, 1 | OAM_XFLIP
+	db   3, -16, $05, 0 | OAM_XFLIP
+	db  -5,  -8, $01, 1
+	db   3,  -8, $05, 0
+	db  -5,   8, $01, 1
+	db   3,   8, $05, 0
+	db  -5,   0, $01, 1 | OAM_XFLIP
+	db   3,   0, $05, 0 | OAM_XFLIP
+	db -22,  15, $07, 2
 
-.data_aa675
-	db 16 ; size
-	db -8, -8, 3, $0
-	db -16, 8, 0, $0
-	db -16, -8, 2, $0
-	db -24, 8, 0, $0
-	db -24, -8, 2, $0
-	db -8, 24, 3, $0
-	db -16, 24, 2, $0
-	db -24, 24, 2, $0
-	db -24, 0, 2, $0
-	db -24, -16, 0, OAM_XFLIP
-	db -8, -32, 1, $0
-	db -16, -32, 0, $0
-	db -24, -32, 0, $0
-	db -16, -16, 1, OAM_XFLIP
-	db -8, 8, 1, $0
-	db -16, 0, 3, $0
+AnimDataSleep::
+	frame_table AnimFrameTableSleep
+	frame_data  0, 10,   0,   0
+	frame_data  1, 14,   0,   0
+	frame_data  2, 10,   0,   0
+	frame_data  3,  7,   0,   0
+	frame_data  4,  7,   0,   0
+	frame_data  3,  7,   0,  -1
+	frame_data  4,  7,   0,   0
+	frame_data  3,  7,   0,   1
+	frame_data  4,  7,   0,   0
+	frame_data  3,  7,   0,  -1
+	frame_data  4,  7,   0,   0
+	frame_data  4, -1,   0,   0
+	frame_data  0,  0,   0,   0
 
-.data_aa6b6
-	db 22 ; size
-	db 0, -8, 3, $0
-	db -8, 8, 0, $0
-	db -8, -8, 2, $0
-	db -16, 8, 0, $0
-	db -16, -8, 2, $0
-	db 0, 24, 3, $0
-	db -8, 24, 2, $0
-	db -16, 24, 2, $0
-	db -24, 8, 0, $0
-	db -24, -8, 2, $0
-	db -24, 24, 2, $0
-	db -16, 0, 2, $0
-	db -24, 0, 2, $0
-	db -24, -16, 0, OAM_XFLIP
-	db -16, -16, 0, OAM_XFLIP
-	db 0, -32, 1, $0
-	db -8, -32, 0, $0
-	db -16, -32, 0, $0
-	db -24, -32, 0, $0
-	db -8, -16, 1, OAM_XFLIP
-	db 0, 8, 1, $0
-	db -8, 0, 3, $0
+AnimFrameTableConfusion::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
 
-AnimData76::
-	frame_table AnimFrameTable24
-	frame_data 0, 5, 0, 0
-	frame_data 1, 5, 0, 0
-	frame_data 0, 5, 0, 0
-	frame_data 1, 5, 0, 0
-	frame_data -1, 16, 0, 0
-	frame_data -1, -1, 0, 0
-	frame_data 0, 0, 0, 0
+.frame_0
+	db 8 ; size
+	db  -8,  -8, $00, 1
+	db  -8,   0, $00, 1 | OAM_XFLIP
+	db -24,  -8, $00, 0
+	db -24,   0, $00, 0 | OAM_XFLIP
+	db -16,  -8, $01, 0
+	db   0,  -8, $01, 1
+	db -16,   0, $01, 0 | OAM_XFLIP
+	db   0,   0, $01, 1 | OAM_XFLIP
 
-AnimFrameTable24::
-	dw .data_aa73c
-	dw .data_aa74d
-	dw .data_aa772
-	dw .data_aa7a7
-	dw .data_aa7dc
-	dw .data_aa821
-	dw .data_aa866
+.frame_1
+	db 8 ; size
+	db -16, -24, $00, 1
+	db -16, -16, $00, 1 | OAM_XFLIP
+	db -16,   8, $00, 0
+	db -16,  16, $00, 0 | OAM_XFLIP
+	db  -8, -24, $01, 1
+	db  -8, -16, $01, 1 | OAM_XFLIP
+	db  -8,   8, $01, 0
+	db  -8,  16, $01, 0 | OAM_XFLIP
 
-.data_aa73c
+.frame_2
+	db 8 ; size
+	db -24, -32, $00, 1
+	db -24, -24, $00, 1 | OAM_XFLIP
+	db  -8,  16, $00, 0
+	db  -8,  24, $00, 0 | OAM_XFLIP
+	db -16, -32, $01, 1
+	db -16, -24, $01, 1 | OAM_XFLIP
+	db   0,  16, $01, 0
+	db   0,  24, $01, 0 | OAM_XFLIP
+
+.frame_3
+	db 8 ; size
+	db -32, -24, $00, 1
+	db -32, -16, $00, 1 | OAM_XFLIP
+	db   0,   8, $00, 0
+	db   0,  16, $00, 0 | OAM_XFLIP
+	db -24, -24, $01, 1
+	db   8,   8, $01, 0
+	db -24, -16, $01, 1 | OAM_XFLIP
+	db   8,  16, $01, 0 | OAM_XFLIP
+
+.frame_4
+	db 8 ; size
+	db -24,  -8, $00, 1
+	db -24,   0, $00, 1 | OAM_XFLIP
+	db  -8,  -8, $00, 0
+	db  -8,   0, $00, 0 | OAM_XFLIP
+	db -16,  -8, $01, 1
+	db   0,  -8, $01, 0
+	db -16,   0, $01, 1 | OAM_XFLIP
+	db   0,   0, $01, 0 | OAM_XFLIP
+
+.frame_5
+	db 8 ; size
+	db -16,   8, $00, 1
+	db -16,  16, $00, 1 | OAM_XFLIP
+	db -16, -24, $00, 0
+	db -16, -16, $00, 0 | OAM_XFLIP
+	db  -8, -24, $01, 0
+	db  -8, -16, $01, 0 | OAM_XFLIP
+	db  -8,   8, $01, 1
+	db  -8,  16, $01, 1 | OAM_XFLIP
+
+.frame_6
+	db 8 ; size
+	db  -8,  16, $00, 1
+	db  -8,  24, $00, 1 | OAM_XFLIP
+	db -24, -32, $00, 0
+	db -24, -24, $00, 0 | OAM_XFLIP
+	db -16, -32, $01, 0
+	db -16, -24, $01, 0 | OAM_XFLIP
+	db   0,  16, $01, 1
+	db   0,  24, $01, 1 | OAM_XFLIP
+
+.frame_7
+	db 8 ; size
+	db   0,   8, $00, 1
+	db   0,  16, $00, 1 | OAM_XFLIP
+	db -32, -24, $00, 0
+	db -32, -16, $00, 0 | OAM_XFLIP
+	db -24, -24, $01, 0
+	db -24, -16, $01, 0 | OAM_XFLIP
+	db   8,   8, $01, 1
+	db   8,  16, $01, 1 | OAM_XFLIP
+
+AnimDataConfusion::
+	frame_table AnimFrameTableConfusion
+	frame_data  0,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  3,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  5,  8,   0,   0
+	frame_data  6,  8,   0,   0
+	frame_data  7,  8,   0,   0
+	frame_data  7, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTablePoison::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+
+.frame_0
 	db 4 ; size
-	db -8, -8, 0, $0
-	db -8, 0, 1, $0
-	db 0, -8, 2, $0
-	db 0, 0, 3, $0
+	db -24,  -8, $03, 0
+	db -24,  24, $03, 0
+	db -24, -32, $01, 0
+	db -24,   8, $01, 0
 
-.data_aa74d
+.frame_1
+	db 10 ; size
+	db -16,  -8, $03, 0
+	db -24,  -8, $02, 1
+	db -24,   8, $00, 1
+	db -16,  24, $03, 0
+	db -24,  24, $02, 1
+	db -16, -32, $01, 0
+	db -24, -32, $00, 1
+	db -24, -16, $01, 0 | OAM_XFLIP
+	db -16,   8, $01, 0
+	db -24,   0, $03, 0
+
+.frame_2
+	db 16 ; size
+	db  -8,  -8, $03, 0
+	db -16,   8, $00, 1
+	db -16,  -8, $02, 1
+	db -24,   8, $00, 2
+	db -24,  -8, $02, 2
+	db  -8,  24, $03, 0
+	db -16,  24, $02, 1
+	db -24,  24, $02, 2
+	db -24,   0, $02, 1
+	db -24, -16, $00, 1 | OAM_XFLIP
+	db  -8, -32, $01, 0
+	db -16, -32, $00, 1
+	db -24, -32, $00, 2
+	db -16, -16, $01, 0 | OAM_XFLIP
+	db  -8,   8, $01, 0
+	db -16,   0, $03, 0
+
+.frame_3
+	db 22 ; size
+	db   0,  -8, $03, 0
+	db  -8,   8, $00, 1
+	db  -8,  -8, $02, 1
+	db -16,   8, $00, 2
+	db -16,  -8, $02, 2
+	db   0,  24, $03, 0
+	db  -8,  24, $02, 1
+	db -16,  24, $02, 2
+	db -24,   8, $00, 2
+	db -24,  -8, $02, 2
+	db -24,  24, $02, 2
+	db -16,   0, $02, 1
+	db -24,   0, $02, 2
+	db -24, -16, $00, 2 | OAM_XFLIP
+	db -16, -16, $00, 1 | OAM_XFLIP
+	db   0, -32, $01, 0
+	db  -8, -32, $00, 1
+	db -16, -32, $00, 2
+	db -24, -32, $00, 2
+	db  -8, -16, $01, 0 | OAM_XFLIP
+	db   0,   8, $01, 0
+	db  -8,   0, $03, 0
+
+AnimDataPoison::
+	frame_table AnimFrameTablePoison
+	frame_data  0, 10,   1,   1
+	frame_data  1, 10,   0,   0
+	frame_data  2, 10,   0,   0
+	frame_data  3, 32,   0,   0
+	frame_data  3, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableSingleHit::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+
+.frame_0
+	db 4 ; size
+	db  -8,  -8, $00, 0
+	db  -8,   0, $01, 0
+	db   0,  -8, $02, 0
+	db   0,   0, $03, 0
+
+.frame_1
 	db 9 ; size
-	db -12, -12, 4, $0
-	db -12, -4, 5, $0
-	db -4, -12, 6, $0
-	db -4, -4, 7, $0
-	db -12, 4, 4, OAM_XFLIP
-	db -4, 4, 6, OAM_XFLIP
-	db 4, -12, 4, OAM_YFLIP
-	db 4, -4, 5, OAM_YFLIP
-	db 4, 4, 4, OAM_XFLIP | OAM_YFLIP
+	db -12, -12, $04, 0
+	db -12,  -4, $05, 0
+	db  -4, -12, $06, 0
+	db  -4,  -4, $07, 1
+	db -12,   4, $04, 0 | OAM_XFLIP
+	db  -4,   4, $06, 0 | OAM_XFLIP
+	db   4, -12, $04, 0 | OAM_YFLIP
+	db   4,  -4, $05, 0 | OAM_YFLIP
+	db   4,   4, $04, 0 | OAM_XFLIP | OAM_YFLIP
 
-.data_aa772
+.frame_2
 	db 13 ; size
-	db -8, 8, 0, $0
-	db -8, 16, 1, $0
-	db 0, 8, 2, $0
-	db 0, 16, 3, $0
-	db -20, -28, 4, $0
-	db -20, -20, 5, $0
-	db -12, -28, 6, $0
-	db -12, -20, 7, $0
-	db -20, -12, 4, OAM_XFLIP
-	db -12, -12, 6, OAM_XFLIP
-	db -4, -28, 4, OAM_YFLIP
-	db -4, -20, 5, OAM_YFLIP
-	db -4, -12, 4, OAM_XFLIP | OAM_YFLIP
+	db  -8,   8, $00, 0
+	db  -8,  16, $01, 0
+	db   0,   8, $02, 0
+	db   0,  16, $03, 0
+	db -20, -28, $04, 0
+	db -20, -20, $05, 0
+	db -12, -28, $06, 0
+	db -12, -20, $07, 1
+	db -20, -12, $04, 0 | OAM_XFLIP
+	db -12, -12, $06, 0 | OAM_XFLIP
+	db  -4, -28, $04, 0 | OAM_YFLIP
+	db  -4, -20, $05, 0 | OAM_YFLIP
+	db  -4, -12, $04, 0 | OAM_XFLIP | OAM_YFLIP
 
-.data_aa7a7
+.frame_3
 	db 13 ; size
-	db 0, -12, 0, $0
-	db 0, -4, 1, $0
-	db 8, -12, 2, $0
-	db 8, -4, 3, $0
-	db -12, 4, 4, $0
-	db -12, 12, 5, $0
-	db -4, 4, 6, $0
-	db -4, 12, 7, $0
-	db -12, 20, 4, OAM_XFLIP
-	db -4, 20, 6, OAM_XFLIP
-	db 4, 4, 4, OAM_YFLIP
-	db 4, 12, 5, OAM_YFLIP
-	db 4, 20, 4, OAM_XFLIP | OAM_YFLIP
+	db   0, -12, $00, 0
+	db   0,  -4, $01, 0
+	db   8, -12, $02, 0
+	db   8,  -4, $03, 0
+	db -12,   4, $04, 0
+	db -12,  12, $05, 0
+	db  -4,   4, $06, 0
+	db  -4,  12, $07, 1
+	db -12,  20, $04, 0 | OAM_XFLIP
+	db  -4,  20, $06, 0 | OAM_XFLIP
+	db   4,   4, $04, 0 | OAM_YFLIP
+	db   4,  12, $05, 0 | OAM_YFLIP
+	db   4,  20, $04, 0 | OAM_XFLIP | OAM_YFLIP
 
-.data_aa7dc
+.frame_4
 	db 17 ; size
-	db 4, 8, 0, $0
-	db 4, 16, 1, $0
-	db 12, 8, 2, $0
-	db 12, 16, 3, $0
-	db -24, -32, 4, $0
-	db -24, -24, 5, $0
-	db -16, -32, 6, $0
-	db -16, -24, 7, $0
-	db -24, -16, 4, OAM_XFLIP
-	db -16, -16, 6, OAM_XFLIP
-	db -8, -32, 4, OAM_YFLIP
-	db -8, -24, 5, OAM_YFLIP
-	db -8, -16, 4, OAM_XFLIP | OAM_YFLIP
-	db -29, -11, 8, $0
-	db -29, -37, 8, OAM_XFLIP
-	db -3, -11, 8, OAM_YFLIP
-	db -3, -37, 8, OAM_XFLIP | OAM_YFLIP
+	db   4,   8, $00, 0
+	db   4,  16, $01, 0
+	db  12,   8, $02, 0
+	db  12,  16, $03, 0
+	db -24, -32, $04, 0
+	db -24, -24, $05, 0
+	db -16, -32, $06, 0
+	db -16, -24, $07, 1
+	db -24, -16, $04, 0 | OAM_XFLIP
+	db -16, -16, $06, 0 | OAM_XFLIP
+	db  -8, -32, $04, 0 | OAM_YFLIP
+	db  -8, -24, $05, 0 | OAM_YFLIP
+	db  -8, -16, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db -29, -11, $08, 0
+	db -29, -37, $08, 0 | OAM_XFLIP
+	db  -3, -11, $08, 0 | OAM_YFLIP
+	db  -3, -37, $08, 0 | OAM_XFLIP | OAM_YFLIP
 
-.data_aa821
+.frame_5
 	db 17 ; size
-	db 0, -24, 0, $0
-	db 0, -16, 1, $0
-	db 8, -24, 2, $0
-	db 8, -16, 3, $0
-	db 0, 4, 4, $0
-	db 0, 12, 5, $0
-	db 8, 4, 6, $0
-	db 8, 12, 7, $0
-	db 0, 20, 4, OAM_XFLIP
-	db 8, 20, 6, OAM_XFLIP
-	db 16, 4, 4, OAM_YFLIP
-	db 16, 12, 5, OAM_YFLIP
-	db 16, 20, 4, OAM_XFLIP | OAM_YFLIP
-	db -5, 25, 8, $0
-	db -5, -1, 8, OAM_XFLIP
-	db 21, 25, 8, OAM_YFLIP
-	db 21, -1, 8, OAM_XFLIP | OAM_YFLIP
+	db   0, -24, $00, 0
+	db   0, -16, $01, 0
+	db   8, -24, $02, 0
+	db   8, -16, $03, 0
+	db   0,   4, $04, 0
+	db   0,  12, $05, 0
+	db   8,   4, $06, 0
+	db   8,  12, $07, 1
+	db   0,  20, $04, 0 | OAM_XFLIP
+	db   8,  20, $06, 0 | OAM_XFLIP
+	db  16,   4, $04, 0 | OAM_YFLIP
+	db  16,  12, $05, 0 | OAM_YFLIP
+	db  16,  20, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -5,  25, $08, 0
+	db  -5,  -1, $08, 0 | OAM_XFLIP
+	db  21,  25, $08, 0 | OAM_YFLIP
+	db  21,  -1, $08, 0 | OAM_XFLIP | OAM_YFLIP
 
-.data_aa866
+.frame_6
 	db 13 ; size
-	db -4, -28, 4, $0
-	db -4, -20, 5, $0
-	db 4, -28, 6, $0
-	db 4, -20, 7, $0
-	db -4, -12, 4, OAM_XFLIP
-	db 4, -12, 6, OAM_XFLIP
-	db 12, -28, 4, OAM_YFLIP
-	db 12, -20, 5, OAM_YFLIP
-	db 12, -12, 4, OAM_XFLIP | OAM_YFLIP
-	db -9, -7, 8, $0
-	db -9, -33, 8, OAM_XFLIP
-	db 17, -7, 8, OAM_YFLIP
-	db 17, -33, 8, OAM_XFLIP | OAM_YFLIP
+	db  -4, -28, $04, 0
+	db  -4, -20, $05, 0
+	db   4, -28, $06, 0
+	db   4, -20, $07, 1
+	db  -4, -12, $04, 0 | OAM_XFLIP
+	db   4, -12, $06, 0 | OAM_XFLIP
+	db  12, -28, $04, 0 | OAM_YFLIP
+	db  12, -20, $05, 0 | OAM_YFLIP
+	db  12, -12, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -9,  -7, $08, 0
+	db  -9, -33, $08, 0 | OAM_XFLIP
+	db  17,  -7, $08, 0 | OAM_YFLIP
+	db  17, -33, $08, 0 | OAM_XFLIP | OAM_YFLIP
 
-AnimData77::
-	frame_table AnimFrameTable24
-	frame_data 0, 5, -16, -8
-	frame_data 2, 5, 16, 8
-	frame_data 3, 5, 0, 0
-	frame_data 1, 5, -4, 8
-	frame_data -1, 16, 0, 0
-	frame_data -1, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimDataSingleHit::
+	frame_table AnimFrameTableSingleHit
+	frame_data  0,  5,   0,   0
+	frame_data  1,  5,   0,   0
+	frame_data  0,  5,   0,   0
+	frame_data  1,  5,   0,   0
+	frame_data -1, 16,   0,   0
+	frame_data -1, -1,   0,   0
+	frame_data  0,  0,   0,   0
 
-AnimData78::
-	frame_table AnimFrameTable24
-	frame_data 0, 5, -20, -12
-	frame_data 4, 5, 20, 12
-	frame_data 5, 5, 0, 0
-	frame_data 6, 5, 0, 0
-	frame_data 1, 5, 8, -8
-	frame_data 6, 5, 16, -8
-	frame_data -1, 16, 0, 0
-	frame_data -1, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimDataHit::
+	frame_table AnimFrameTableSingleHit
+	frame_data  0,  5, -16,  -8
+	frame_data  2,  5,  16,   8
+	frame_data  3,  5,   0,   0
+	frame_data  1,  5,  -4,   8
+	frame_data -1, 16,   0,   0
+	frame_data -1, -1,   0,   0
+	frame_data  0,  0,   0,   0
 
-AnimData79::
-	frame_table AnimFrameTable25
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, 1, 0, 0
-	frame_data 0, 1, 0, -1
-	frame_data 0, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimDataBigHit::
+	frame_table AnimFrameTableSingleHit
+	frame_data  0,  5, -20, -12
+	frame_data  4,  5,  20,  12
+	frame_data  5,  5,   0,   0
+	frame_data  6,  5,   0,   0
+	frame_data  1,  5,   8,  -8
+	frame_data  6,  5,  16,  -8
+	frame_data -1, 16,   0,   0
+	frame_data -1, -1,   0,   0
+	frame_data  0,  0,   0,   0
 
-AnimFrameTable25::
+AnimFrameTableShowDamage::
 	dw .data_aa982
 	dw .data_aa987
 	dw .data_aa98c
@@ -2242,8 +2229,44 @@ AnimFrameTable25::
 	db 1 ; size
 	db 0, 0, 10, $0
 
-AnimData80::
-	frame_table AnimFrameTable25
+AnimDataDamage0::
+	frame_table AnimFrameTableShowDamage
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, 1, 0, 0
+	frame_data 0, 1, 0, -1
+	frame_data 0, -1, 0, 0
+	frame_data 0, 0, 0, 0
+
+AnimDataDamage1::
+	frame_table AnimFrameTableShowDamage
 	frame_data 1, 1, 0, -1
 	frame_data 1, 1, 0, 0
 	frame_data 1, 1, 0, -1
@@ -2278,8 +2301,8 @@ AnimData80::
 	frame_data 1, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData81::
-	frame_table AnimFrameTable25
+AnimDataDamage2::
+	frame_table AnimFrameTableShowDamage
 	frame_data 2, 1, 0, -1
 	frame_data 2, 1, 0, 0
 	frame_data 2, 1, 0, -1
@@ -2314,8 +2337,8 @@ AnimData81::
 	frame_data 2, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData82::
-	frame_table AnimFrameTable25
+AnimDataDamage3::
+	frame_table AnimFrameTableShowDamage
 	frame_data 3, 1, 0, -1
 	frame_data 3, 1, 0, 0
 	frame_data 3, 1, 0, -1
@@ -2350,8 +2373,8 @@ AnimData82::
 	frame_data 3, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData83::
-	frame_table AnimFrameTable25
+AnimDataDamage4::
+	frame_table AnimFrameTableShowDamage
 	frame_data 4, 1, 0, -1
 	frame_data 4, 1, 0, 0
 	frame_data 4, 1, 0, -1
@@ -2386,8 +2409,8 @@ AnimData83::
 	frame_data 4, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData84::
-	frame_table AnimFrameTable25
+AnimDataDamage5::
+	frame_table AnimFrameTableShowDamage
 	frame_data 5, 1, 0, -1
 	frame_data 5, 1, 0, 0
 	frame_data 5, 1, 0, -1
@@ -2422,8 +2445,8 @@ AnimData84::
 	frame_data 5, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData85::
-	frame_table AnimFrameTable25
+AnimDataDamage6::
+	frame_table AnimFrameTableShowDamage
 	frame_data 6, 1, 0, -1
 	frame_data 6, 1, 0, 0
 	frame_data 6, 1, 0, -1
@@ -2458,8 +2481,8 @@ AnimData85::
 	frame_data 6, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData86::
-	frame_table AnimFrameTable25
+AnimDataDamage7::
+	frame_table AnimFrameTableShowDamage
 	frame_data 7, 1, 0, -1
 	frame_data 7, 1, 0, 0
 	frame_data 7, 1, 0, -1
@@ -2494,8 +2517,8 @@ AnimData86::
 	frame_data 7, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData87::
-	frame_table AnimFrameTable25
+AnimDataDamage8::
+	frame_table AnimFrameTableShowDamage
 	frame_data 8, 1, 0, -1
 	frame_data 8, 1, 0, 0
 	frame_data 8, 1, 0, -1
@@ -2530,8 +2553,8 @@ AnimData87::
 	frame_data 8, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData88::
-	frame_table AnimFrameTable25
+AnimDataDamage9::
+	frame_table AnimFrameTableShowDamage
 	frame_data 9, 1, 0, -1
 	frame_data 9, 1, 0, 0
 	frame_data 9, 1, 0, -1
@@ -2566,8 +2589,8 @@ AnimData88::
 	frame_data 9, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData89::
-	frame_table AnimFrameTable25
+AnimDataDamageArrow::
+	frame_table AnimFrameTableShowDamage
 	frame_data 10, 1, 0, -1
 	frame_data 10, 1, 0, 0
 	frame_data 10, 1, 0, -1
@@ -2602,8 +2625,8 @@ AnimData89::
 	frame_data 10, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData90::
-	frame_table AnimFrameTable25
+AnimDataDamageResist::
+	frame_table AnimFrameTableShowDamage
 	frame_data 11, 1, 0, -1
 	frame_data 11, 1, 0, 0
 	frame_data 11, 1, 0, -1
@@ -2638,8 +2661,8 @@ AnimData90::
 	frame_data 11, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData91::
-	frame_table AnimFrameTable25
+AnimDataDamageWeak::
+	frame_table AnimFrameTableShowDamage
 	frame_data 12, 1, 0, -1
 	frame_data 12, 1, 0, 0
 	frame_data 12, 1, 0, -1
@@ -2674,1302 +2697,2675 @@ AnimData91::
 	frame_data 12, -1, 0, 0
 	frame_data 0, 0, 0, 0
 
-AnimData92::
-	frame_table AnimFrameTable26
-	frame_data 0, 2, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data 3, 2, 0, 0
-	frame_data 4, 2, 0, 0
-	frame_data 5, 2, 0, 0
-	frame_data 6, 2, 0, 0
-	frame_data 6, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimFrameTableThunderShock::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
 
-AnimFrameTable26::
-	dw .data_ab074
-	dw .data_ab07d
-	dw .data_ab09a
-	dw .data_ab0b7
-	dw .data_ab0c8
-	dw .data_ab0d9
-	dw .data_ab0ea
-
-.data_ab074
+.frame_0
 	db 2 ; size
-	db -32, -5, 0, $0
-	db -24, -4, 1, OAM_XFLIP
+	db -32,  -5, $00, 0
+	db -24,  -4, $01, 0 | OAM_XFLIP
 
-.data_ab07d
-	db 7 ; size
-	db -32, -3, 0, OAM_XFLIP
-	db -24, -4, 1, OAM_XFLIP
-	db -16, -2, 2, OAM_XFLIP
-	db -8, 0, 3, OAM_XFLIP
-	db -8, -8, 4, OAM_XFLIP
-	db 0, 0, 5, OAM_XFLIP
-	db 0, -8, 6, OAM_XFLIP
-
-.data_ab09a
-	db 7 ; size
-	db -32, -5, 0, $0
-	db -24, -4, 1, $0
-	db -16, -6, 2, $0
-	db -8, -8, 3, $0
-	db -8, 0, 4, $0
-	db 0, -8, 5, $0
-	db 0, 0, 6, $0
-
-.data_ab0b7
-	db 4 ; size
-	db -12, -14, 8, $0
-	db 4, 6, 8, $0
-	db 4, -14, 7, $0
-	db -12, 6, 7, $0
-
-.data_ab0c8
-	db 4 ; size
-	db -16, 10, 8, OAM_XFLIP
-	db 8, -18, 8, OAM_XFLIP
-	db 8, 10, 7, OAM_XFLIP
-	db -16, -18, 7, OAM_XFLIP
-
-.data_ab0d9
-	db 4 ; size
-	db -18, -22, 8, $0
-	db 10, 14, 8, $0
-	db 10, -22, 7, $0
-	db -18, 14, 7, $0
-
-.data_ab0ea
-	db 4 ; size
-	db -22, 18, 8, OAM_XFLIP
-	db 14, -26, 8, OAM_XFLIP
-	db 14, 18, 7, OAM_XFLIP
-	db -22, -26, 7, OAM_XFLIP
-
-AnimData93::
-	frame_table AnimFrameTable26
-	frame_data 8, 8, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimData94::
-	frame_table AnimFrameTable27
-	frame_data 0, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 3, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 4, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 5, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data -1, -1, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimFrameTable27::
-	dw .data_ab14d
-	dw .data_ab17a
-	dw .data_ab1c7
-	dw .data_ab1f4
-	dw .data_ab241
-	dw .data_ab26e
-
-.data_ab14d
-	db 11 ; size
-	db -40, -8, 0, $0
-	db -40, 0, 1, $0
-	db -32, -12, 2, $0
-	db -32, -4, 3, $0
-	db -24, -20, 4, $0
-	db -24, -12, 5, $0
-	db -24, -4, 6, $0
-	db -16, -4, 9, $0
-	db -16, 4, 10, $0
-	db -8, 0, 13, $0
-	db -8, 8, 14, $0
-
-.data_ab17a
-	db 19 ; size
-	db -40, -8, 0, $0
-	db -40, 0, 1, $0
-	db -32, -12, 2, $0
-	db -32, -4, 3, $0
-	db -24, -20, 4, $0
-	db -24, -12, 5, $0
-	db -24, -4, 6, $0
-	db -16, -4, 9, $0
-	db -16, 4, 10, $0
-	db -8, 0, 13, $0
-	db -8, 8, 14, $0
-	db -16, -24, 7, $0
-	db -16, -16, 8, $0
-	db -8, -24, 11, $0
-	db -8, -16, 12, $0
-	db 0, 8, 15, $0
-	db 0, 16, 16, $0
-	db 8, 16, 11, OAM_XFLIP
-	db 8, 8, 12, OAM_XFLIP
-
-.data_ab1c7
-	db 11 ; size
-	db -40, 0, 0, OAM_XFLIP
-	db -40, -8, 1, OAM_XFLIP
-	db -32, 4, 2, OAM_XFLIP
-	db -32, -4, 3, OAM_XFLIP
-	db -24, 12, 4, OAM_XFLIP
-	db -24, 4, 5, OAM_XFLIP
-	db -24, -4, 6, OAM_XFLIP
-	db -16, -4, 9, OAM_XFLIP
-	db -16, -12, 10, OAM_XFLIP
-	db -8, -8, 13, OAM_XFLIP
-	db -8, -16, 14, OAM_XFLIP
-
-.data_ab1f4
-	db 19 ; size
-	db -40, 0, 0, OAM_XFLIP
-	db -40, -8, 1, OAM_XFLIP
-	db -32, 4, 2, OAM_XFLIP
-	db -32, -4, 3, OAM_XFLIP
-	db -24, 12, 4, OAM_XFLIP
-	db -24, 4, 5, OAM_XFLIP
-	db -24, -4, 6, OAM_XFLIP
-	db -16, -4, 9, OAM_XFLIP
-	db -16, -12, 10, OAM_XFLIP
-	db -8, -8, 13, OAM_XFLIP
-	db -8, -16, 14, OAM_XFLIP
-	db -16, 16, 7, OAM_XFLIP
-	db -16, 8, 8, OAM_XFLIP
-	db -8, 16, 11, OAM_XFLIP
-	db -8, 8, 12, OAM_XFLIP
-	db 0, -16, 15, OAM_XFLIP
-	db 0, -24, 16, OAM_XFLIP
-	db 8, -24, 11, $0
-	db 8, -16, 12, $0
-
-.data_ab241
-	db 11 ; size
-	db -40, -8, 0, $0
-	db -40, 0, 1, $0
-	db -32, -12, 2, $0
-	db -32, -4, 3, $0
-	db -24, -4, 4, OAM_XFLIP
-	db -24, -12, 5, OAM_XFLIP
-	db -24, -20, 6, OAM_XFLIP
-	db -16, -20, 9, OAM_XFLIP
-	db -16, -28, 10, OAM_XFLIP
-	db -8, -32, 13, $0
-	db -8, -24, 14, $0
-
-.data_ab26e
-	db 19 ; size
-	db -40, -8, 0, $0
-	db -40, 0, 1, $0
-	db -32, -12, 2, $0
-	db -32, -4, 3, $0
-	db -24, -4, 4, OAM_XFLIP
-	db -24, -12, 5, OAM_XFLIP
-	db -24, -20, 6, OAM_XFLIP
-	db -16, -20, 9, OAM_XFLIP
-	db -16, -28, 10, OAM_XFLIP
-	db -8, -32, 13, $0
-	db -8, -24, 14, $0
-	db 0, -24, 15, $0
-	db 0, -16, 16, $0
-	db 8, -16, 11, OAM_XFLIP
-	db 8, -24, 12, OAM_XFLIP
-	db -16, 0, 7, OAM_XFLIP
-	db -16, -8, 8, OAM_XFLIP
-	db -8, 0, 11, OAM_XFLIP
-	db -8, -8, 12, OAM_XFLIP
-
-AnimData95::
-	frame_table AnimFrameTable28
-	frame_data 0, 2, 0, 0
-	frame_data 1, 2, 0, 0
-	frame_data 2, 2, 0, 0
-	frame_data 3, 2, 0, 0
-	frame_data 4, 2, 0, 0
-	frame_data 5, 2, 0, 0
-	frame_data 6, 2, 0, 0
-	frame_data 7, 2, 0, 0
-	frame_data 8, 2, 0, 0
-	frame_data 8, -1, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimFrameTable28::
-	dw .data_ab2fc
-	dw .data_ab305
-	dw .data_ab31e
-	dw .data_ab33f
-	dw .data_ab360
-	dw .data_ab381
-	dw .data_ab3a2
-	dw .data_ab3c3
-	dw .data_ab3e4
-
-.data_ab2fc
-	db 2 ; size
-	db -27, -35, 0, $0
-	db 20, 28, 0, $0
-
-.data_ab305
-	db 6 ; size
-	db -27, -27, 1, $0
-	db 20, 20, 1, $0
-	db -19, -35, 0, $0
-	db 12, 28, 0, $0
-	db -27, -35, 0, $0
-	db 20, 28, 0, $0
-
-.data_ab31e
+.frame_1
 	db 8 ; size
-	db -27, -20, 0, OAM_XFLIP
-	db 20, 11, 0, OAM_XFLIP
-	db -15, -35, 2, $0
-	db 8, 28, 2, $0
-	db -27, -27, 1, $0
-	db 20, 20, 1, $0
-	db -19, -35, 0, $0
-	db 12, 28, 0, $0
+	db  -8,  -4, $09, 0 | OAM_XFLIP
+	db -32,  -3, $00, 0 | OAM_XFLIP
+	db -24,  -4, $01, 0 | OAM_XFLIP
+	db -16,  -2, $02, 0 | OAM_XFLIP
+	db  -8,   0, $03, 1 | OAM_XFLIP
+	db  -8,  -8, $04, 1 | OAM_XFLIP
+	db   0,   0, $05, 1 | OAM_XFLIP
+	db   0,  -8, $06, 1 | OAM_XFLIP
 
-.data_ab33f
+.frame_2
 	db 8 ; size
-	db -27, -11, 2, $0
-	db 20, 4, 2, $0
-	db -12, -35, 0, OAM_YFLIP
-	db 3, 28, 0, OAM_YFLIP
-	db -27, -20, 0, OAM_XFLIP
-	db 20, 11, 0, OAM_XFLIP
-	db -15, -35, 2, $0
-	db 8, 28, 2, $0
+	db  -8,  -4, $09, 0
+	db -32,  -5, $00, 0
+	db -24,  -4, $01, 0
+	db -16,  -6, $02, 0
+	db  -8,  -8, $03, 1
+	db  -8,   0, $04, 1
+	db   0,  -8, $05, 1
+	db   0,   0, $06, 1
 
-.data_ab360
-	db 8 ; size
-	db 19, -4, 0, OAM_XFLIP | OAM_YFLIP
-	db -28, -5, 0, OAM_XFLIP | OAM_YFLIP
-	db -7, -35, 1, $0
-	db 0, 29, 1, $0
-	db -27, -11, 2, $0
-	db 20, 4, 2, $0
-	db -12, -35, 0, OAM_YFLIP
-	db 3, 28, 0, OAM_YFLIP
-
-.data_ab381
-	db 8 ; size
-	db -27, 3, 1, OAM_XFLIP
-	db 20, -12, 1, OAM_XFLIP
-	db -4, -36, 0, OAM_XFLIP | OAM_YFLIP
-	db -5, 27, 0, OAM_XFLIP | OAM_YFLIP
-	db 19, -4, 0, OAM_XFLIP | OAM_YFLIP
-	db -28, -5, 0, OAM_XFLIP | OAM_YFLIP
-	db -7, -35, 1, $0
-	db 0, 29, 1, $0
-
-.data_ab3a2
-	db 8 ; size
-	db 19, -19, 0, OAM_YFLIP
-	db -28, 12, 0, OAM_YFLIP
-	db 1, -35, 2, $0
-	db -8, 28, 2, $0
-	db -27, 3, 1, OAM_XFLIP
-	db 20, -12, 1, OAM_XFLIP
-	db -4, -36, 0, OAM_XFLIP | OAM_YFLIP
-	db -5, 27, 0, OAM_XFLIP | OAM_YFLIP
-
-.data_ab3c3
-	db 8 ; size
-	db -27, 19, 2, OAM_XFLIP
-	db 20, -28, 2, OAM_XFLIP
-	db 5, -36, 0, OAM_XFLIP
-	db -12, 27, 0, OAM_XFLIP
-	db 19, -19, 0, OAM_YFLIP
-	db -28, 12, 0, OAM_YFLIP
-	db 1, -35, 2, $0
-	db -8, 28, 2, $0
-
-.data_ab3e4
-	db 8 ; size
-	db 20, -35, 0, $0
-	db -27, 28, 0, $0
-	db 8, -35, 1, $0
-	db -16, 28, 1, $0
-	db -27, 19, 2, OAM_XFLIP
-	db 20, -28, 2, OAM_XFLIP
-	db 5, -36, 0, OAM_XFLIP
-	db -12, 27, 0, OAM_XFLIP
-
-AnimData96::
-	frame_table AnimFrameTable29
-	frame_data 0, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 3, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 4, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data 5, 4, 0, 0
-	frame_data -1, 2, 0, 0
-	frame_data -1, -1, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimFrameTable29::
-	dw .data_ab44c
-	dw .data_ab4b5
-	dw .data_ab506
-	dw .data_ab583
-	dw .data_ab5b4
-	dw .data_ab5fd
-
-.data_ab44c
-	db 26 ; size
-	db -72, -8, 0, $0
-	db -72, 0, 1, $0
-	db -64, 1, 2, OAM_XFLIP
-	db -64, -7, 3, OAM_XFLIP
-	db -56, -9, 4, $0
-	db -56, -1, 5, $0
-	db -48, -9, 15, $0
-	db -48, -1, 16, $0
-	db -48, 7, 17, $0
-	db -48, 15, 18, $0
-	db -40, -14, 19, $0
-	db -40, -6, 20, $0
-	db -40, 1, 21, $0
-	db -40, 9, 22, $0
-	db -40, 17, 23, $0
-	db -32, -8, 25, $0
-	db -32, 0, 26, $0
-	db -24, -8, 27, $0
-	db -24, 0, 28, $0
-	db -16, -8, 29, $0
-	db -16, 0, 30, $0
-	db -16, 8, 31, $0
-	db -8, -8, 32, $0
-	db -8, 0, 33, $0
-	db -8, 8, 34, $0
-	db -32, 8, 24, $0
-
-.data_ab4b5
-	db 20 ; size
-	db -72, 0, 0, OAM_XFLIP
-	db -72, -8, 1, OAM_XFLIP
-	db -64, 8, 2, OAM_XFLIP
-	db -64, 0, 3, OAM_XFLIP
-	db -56, 9, 4, OAM_XFLIP
-	db -56, 1, 5, OAM_XFLIP
-	db -48, 9, 15, OAM_XFLIP
-	db -40, 14, 19, OAM_XFLIP
-	db -40, 6, 20, OAM_XFLIP
-	db -32, 8, 25, OAM_XFLIP
-	db -32, 0, 26, OAM_XFLIP
-	db -24, 8, 27, OAM_XFLIP
-	db -24, 0, 28, OAM_XFLIP
-	db -48, 1, 35, OAM_XFLIP
-	db -16, -8, 36, $0
-	db -16, 0, 37, $0
-	db -16, 8, 38, $0
-	db -8, -8, 39, $0
-	db -8, 0, 40, $0
-	db -8, 8, 41, $0
-
-.data_ab506
-	db 31 ; size
-	db -72, -8, 0, $0
-	db -72, 0, 1, $0
-	db -64, -16, 2, $0
-	db -64, -8, 3, $0
-	db -56, -16, 4, $0
-	db -56, -8, 5, $0
-	db -48, -2, 6, OAM_XFLIP
-	db -48, -10, 7, OAM_XFLIP
-	db -48, -18, 8, OAM_XFLIP
-	db -40, 3, 9, OAM_XFLIP
-	db -40, -5, 10, OAM_XFLIP
-	db -40, -13, 11, OAM_XFLIP
-	db -40, -21, 12, OAM_XFLIP
-	db -32, -8, 13, $0
-	db -32, 1, 14, $0
-	db -32, -24, 15, $0
-	db -32, -16, 35, $0
-	db -24, -19, 19, OAM_XFLIP
-	db -24, -27, 20, OAM_XFLIP
-	db -16, -30, 25, $0
-	db -16, -22, 26, $0
-	db -8, -33, 25, $0
-	db -8, -25, 26, $0
-	db 0, -33, 27, OAM_XFLIP
-	db 0, -41, 28, OAM_XFLIP
-	db 8, -49, 36, $0
-	db 8, -41, 37, $0
-	db 8, -33, 38, $0
-	db 16, -49, 39, $0
-	db 16, -41, 40, $0
-	db 16, -33, 41, $0
-
-.data_ab583
-	db 12 ; size
-	db -72, 8, 0, OAM_XFLIP
-	db -72, 0, 1, OAM_XFLIP
-	db -64, 8, 44, OAM_XFLIP | OAM_YFLIP
-	db -64, 16, 42, $0
-	db -64, 24, 43, $0
-	db -64, 32, 44, $0
-	db -56, 25, 29, $0
-	db -56, 33, 30, $0
-	db -56, 41, 31, $0
-	db -48, 25, 32, $0
-	db -48, 33, 33, $0
-	db -48, 41, 34, $0
-
-.data_ab5b4
-	db 18 ; size
-	db -72, 8, 0, $0
-	db -72, 16, 1, $0
-	db -64, 8, 44, OAM_YFLIP
-	db -64, 0, 42, OAM_XFLIP
-	db -64, -8, 43, OAM_XFLIP
-	db -64, -16, 44, OAM_XFLIP
-	db -56, -16, 27, OAM_XFLIP
-	db -56, -24, 28, OAM_XFLIP
-	db -48, -23, 44, OAM_YFLIP
-	db -46, -31, 42, OAM_XFLIP | OAM_YFLIP
-	db -45, -39, 43, OAM_XFLIP | OAM_YFLIP
-	db -44, -47, 44, OAM_XFLIP
-	db -36, -57, 36, $0
-	db -36, -49, 37, $0
-	db -36, -41, 38, $0
-	db -28, -57, 39, $0
-	db -28, -49, 40, $0
-	db -28, -41, 41, $0
-
-.data_ab5fd
-	db 28 ; size
-	db -72, -8, 0, OAM_XFLIP
-	db -16, 32, 27, $0
-	db -16, 40, 28, $0
-	db -8, 32, 29, $0
-	db -8, 40, 30, $0
-	db 0, 32, 32, $0
-	db 0, 40, 33, $0
-	db -8, 48, 31, $0
-	db 0, 48, 34, $0
-	db -24, 32, 25, OAM_XFLIP
-	db -24, 24, 26, OAM_XFLIP
-	db -32, 21, 19, $0
-	db -32, 29, 20, $0
-	db -40, 26, 15, OAM_XFLIP
-	db -40, 18, 16, OAM_XFLIP
-	db -40, 10, 17, OAM_XFLIP
-	db -40, 2, 18, OAM_XFLIP
-	db -32, 16, 21, OAM_XFLIP
-	db -32, 8, 22, OAM_XFLIP
-	db -32, 0, 23, OAM_XFLIP
-	db -24, 8, 24, OAM_XFLIP
-	db -48, 15, 11, $0
-	db -48, 23, 12, $0
-	db -64, 8, 2, OAM_XFLIP
-	db -64, 0, 3, OAM_XFLIP
-	db -56, 18, 44, $0
-	db -56, 2, 44, OAM_XFLIP | OAM_YFLIP
-	db -56, 10, 42, $0
-
-AnimData97::
-	frame_table AnimFrameTable30
-	frame_data 0, 4, 0, 0
-	frame_data 1, 5, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data 3, 5, 0, 0
-	frame_data 0, 6, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data 2, 5, 0, 0
-	frame_data 3, 4, 0, 0
-	frame_data 4, 4, 0, 0
-	frame_data 5, 5, 0, 0
-	frame_data 6, 4, 0, 0
-	frame_data 7, 4, 0, 0
-	frame_data 8, 4, 0, 0
-	frame_data 8, -1, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimFrameTable30::
-	dw .data_ab6d5
-	dw .data_ab6e6
-	dw .data_ab6f7
-	dw .data_ab708
-	dw .data_ab719
-	dw .data_ab74a
-	dw .data_ab773
-	dw .data_ab79c
-	dw .data_ab7c5
-	dw .data_ab7da
-	dw .data_ab7ef
-	dw .data_ab808
-	dw .data_ab82d
-	dw .data_ab856
-	dw .data_ab88b
-	dw .data_ab8cc
-	dw .data_ab90d
-	dw .data_ab94e
-	dw .data_ab98f
-	dw .data_ab9b0
-
-.data_ab6d5
-	db 4 ; size
-	db -8, -8, 0, $0
-	db 0, -8, 1, $0
-	db -8, 0, 4, OAM_XFLIP
-	db 0, 0, 5, OAM_XFLIP
-
-.data_ab6e6
-	db 4 ; size
-	db -8, -8, 2, $0
-	db 0, -8, 3, $0
-	db -8, 0, 6, OAM_XFLIP
-	db 0, 0, 7, OAM_XFLIP
-
-.data_ab6f7
-	db 4 ; size
-	db -8, -8, 4, $0
-	db 0, -8, 5, $0
-	db -8, 0, 0, OAM_XFLIP
-	db 0, 0, 1, OAM_XFLIP
-
-.data_ab708
-	db 4 ; size
-	db -8, -8, 6, $0
-	db 0, -8, 7, $0
-	db -8, 0, 2, OAM_XFLIP
-	db 0, 0, 3, OAM_XFLIP
-
-.data_ab719
-	db 12 ; size
-	db -8, -8, 0, $0
-	db 0, -8, 1, $0
-	db -8, 0, 4, OAM_XFLIP
-	db 0, 0, 5, OAM_XFLIP
-	db -19, 2, 8, $0
-	db 1, -10, 8, $0
-	db -12, 2, 9, $0
-	db 9, -10, 9, $0
-	db -19, -10, 10, $0
-	db -11, -10, 11, $0
-	db 1, 2, 10, $0
-	db 9, 2, 11, $0
-
-.data_ab74a
-	db 10 ; size
-	db -24, -14, 8, $0
-	db -16, -14, 9, $0
-	db 4, 6, 9, $0
-	db -4, 6, 8, $0
-	db -23, 6, 10, $0
-	db -4, -14, 10, $0
-	db 4, -14, 11, $0
-	db -15, 6, 11, $0
-	db -8, -4, 8, $0
-	db 0, -4, 9, $0
-
-.data_ab773
-	db 10 ; size
-	db -28, -18, 10, $0
-	db -20, -18, 11, $0
-	db 6, 10, 11, $0
-	db -2, 10, 10, $0
-	db -28, 10, 8, $0
-	db -2, -18, 8, $0
-	db 6, -18, 9, $0
-	db -20, 10, 9, $0
-	db -8, -4, 10, $0
-	db 0, -4, 11, $0
-
-.data_ab79c
-	db 10 ; size
-	db -24, -20, 10, $0
-	db -16, -20, 11, $0
-	db 8, 12, 11, $0
-	db 0, 12, 10, $0
-	db -24, 12, 8, $0
-	db 0, -20, 8, $0
-	db 8, -20, 9, $0
-	db -16, 12, 9, $0
-	db -8, -4, 10, $0
-	db 0, -4, 11, $0
-
-.data_ab7c5
-	db 5 ; size
-	db -1, -4, 12, $0
-	db -16, -20, 12, $0
-	db 8, -20, 12, $0
-	db -16, 12, 12, $0
-	db 8, 12, 12, $0
-
-.data_ab7da
-	db 5 ; size
-	db -8, 10, 4, $0
-	db 0, 10, 5, $0
-	db -8, 18, 0, OAM_XFLIP
-	db 0, 18, 1, OAM_XFLIP
-	db -16, 12, 12, $0
-
-.data_ab7ef
-	db 6 ; size
-	db 2, 8, 6, $0
-	db 10, 8, 7, $0
-	db 2, 16, 2, OAM_XFLIP
-	db 10, 16, 3, OAM_XFLIP
-	db -19, 12, 10, $0
-	db -11, 12, 11, $0
-
-.data_ab808
+.frame_3
 	db 9 ; size
-	db 6, -8, 0, $0
-	db 14, -8, 1, $0
-	db 6, 0, 4, OAM_XFLIP
-	db 14, 0, 5, OAM_XFLIP
-	db 8, 12, 12, $0
-	db -21, 8, 0, $0
-	db -13, 8, 1, $0
-	db -21, 16, 4, OAM_XFLIP
-	db -13, 16, 5, OAM_XFLIP
+	db  -8,  -5, $09, 0
+	db  -8,   0, $03, 1 | OAM_XFLIP
+	db  -8,  -8, $04, 1 | OAM_XFLIP
+	db   0,   0, $05, 1 | OAM_XFLIP
+	db   0,  -8, $06, 1 | OAM_XFLIP
+	db -12, -14, $08, 1
+	db   4,   6, $08, 1
+	db   4, -14, $07, 1
+	db -12,   6, $07, 1
 
-.data_ab82d
-	db 10 ; size
-	db 2, -22, 2, $0
-	db 10, -22, 3, $0
-	db 2, -14, 6, OAM_XFLIP
-	db 10, -14, 7, OAM_XFLIP
-	db 5, 12, 8, $0
-	db 13, 12, 9, $0
-	db -21, 9, 2, $0
-	db -13, 9, 3, $0
-	db -21, 17, 6, OAM_XFLIP
-	db -13, 17, 7, OAM_XFLIP
-
-.data_ab856
-	db 13 ; size
-	db -8, -26, 4, $0
-	db 0, -26, 5, $0
-	db -8, -18, 0, OAM_XFLIP
-	db 0, -18, 1, OAM_XFLIP
-	db 8, -20, 12, $0
-	db -20, 8, 4, $0
-	db -12, 8, 5, $0
-	db -20, 16, 0, OAM_XFLIP
-	db -12, 16, 1, OAM_XFLIP
-	db 5, 8, 4, $0
-	db 13, 8, 5, $0
-	db 5, 16, 0, OAM_XFLIP
-	db 13, 16, 1, OAM_XFLIP
-
-.data_ab88b
-	db 16 ; size
-	db -20, -24, 6, $0
-	db -12, -24, 7, $0
-	db -20, -16, 2, OAM_XFLIP
-	db -12, -16, 3, OAM_XFLIP
-	db -20, 8, 6, $0
-	db -12, 8, 7, $0
-	db -20, 16, 2, OAM_XFLIP
-	db -12, 16, 3, OAM_XFLIP
-	db 5, 8, 6, $0
-	db 13, 8, 7, $0
-	db 5, 16, 2, OAM_XFLIP
-	db 13, 16, 3, OAM_XFLIP
-	db 5, -24, 6, $0
-	db 13, -24, 7, $0
-	db 5, -16, 2, OAM_XFLIP
-	db 13, -16, 3, OAM_XFLIP
-
-.data_ab8cc
-	db 16 ; size
-	db -20, -24, 0, $0
-	db -12, -24, 1, $0
-	db -20, -16, 4, OAM_XFLIP
-	db -12, -16, 5, OAM_XFLIP
-	db -20, 8, 0, $0
-	db -12, 8, 1, $0
-	db -20, 16, 4, OAM_XFLIP
-	db -12, 16, 5, OAM_XFLIP
-	db 5, -25, 0, $0
-	db 13, -25, 1, $0
-	db 5, -17, 4, OAM_XFLIP
-	db 13, -17, 5, OAM_XFLIP
-	db 6, 6, 0, $0
-	db 14, 6, 1, $0
-	db 6, 14, 4, OAM_XFLIP
-	db 14, 14, 5, OAM_XFLIP
-
-.data_ab90d
-	db 16 ; size
-	db -20, 16, 6, OAM_XFLIP
-	db -12, 16, 7, OAM_XFLIP
-	db -20, 8, 2, $0
-	db -12, 8, 3, $0
-	db -20, -16, 6, OAM_XFLIP
-	db -12, -16, 7, OAM_XFLIP
-	db -20, -24, 2, $0
-	db -12, -24, 3, $0
-	db 5, -16, 6, OAM_XFLIP
-	db 13, -16, 7, OAM_XFLIP
-	db 5, -24, 2, $0
-	db 13, -24, 3, $0
-	db 5, 16, 6, OAM_XFLIP
-	db 13, 16, 7, OAM_XFLIP
-	db 5, 8, 2, $0
-	db 13, 8, 3, $0
-
-.data_ab94e
-	db 16 ; size
-	db -20, -24, 4, $0
-	db -12, -24, 5, $0
-	db -20, -16, 0, OAM_XFLIP
-	db -12, -16, 1, OAM_XFLIP
-	db -19, 8, 4, $0
-	db -11, 8, 5, $0
-	db -19, 16, 0, OAM_XFLIP
-	db -11, 16, 1, OAM_XFLIP
-	db 4, 8, 4, $0
-	db 12, 8, 5, $0
-	db 4, 16, 0, OAM_XFLIP
-	db 12, 16, 1, OAM_XFLIP
-	db 5, -24, 4, $0
-	db 13, -24, 5, $0
-	db 5, -16, 0, OAM_XFLIP
-	db 13, -16, 1, OAM_XFLIP
-
-.data_ab98f
-	db 8 ; size
-	db -20, -20, 8, $0
-	db -20, 12, 8, $0
-	db 4, 12, 8, $0
-	db 4, -20, 8, $0
-	db -12, -20, 9, $0
-	db -12, 12, 9, $0
-	db 12, 12, 9, $0
-	db 12, -20, 9, $0
-
-.data_ab9b0
+.frame_4
 	db 4 ; size
-	db -16, -20, 12, $0
-	db -16, 12, 12, $0
-	db 8, 12, 12, $0
-	db 8, -20, 12, $0
+	db -16,  10, $08, 1 | OAM_XFLIP
+	db   8, -18, $08, 1 | OAM_XFLIP
+	db   8,  10, $07, 1 | OAM_XFLIP
+	db -16, -18, $07, 1 | OAM_XFLIP
 
-AnimData98::
-	frame_table AnimFrameTable30
-	frame_data 0, 5, 0, 0
-	frame_data 1, 5, 0, 0
-	frame_data 2, 5, 0, 0
-	frame_data 3, 5, 0, 0
-	frame_data 0, 4, 6, -6
-	frame_data 1, 4, 8, -4
-	frame_data 9, 4, -14, 10
-	frame_data 10, 4, 0, 0
-	frame_data 11, 4, 0, 0
-	frame_data 12, 4, 0, 0
-	frame_data 13, 4, 0, 0
-	frame_data 14, 4, 0, 0
-	frame_data 15, 4, 0, 0
-	frame_data 17, 4, 0, 0
-	frame_data 18, 5, 0, 0
-	frame_data 19, 5, 0, 0
-	frame_data 19, -1, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimData99::
-	frame_table AnimFrameTable31
-	frame_data 0, 5, 0, 0
-	frame_data 1, 5, 0, 0
-	frame_data 2, 5, 0, 0
-	frame_data 3, 5, 0, 0
-	frame_data 4, 4, 0, 0
-	frame_data 5, 4, 0, 0
-	frame_data 6, 4, 0, 0
-	frame_data 7, 4, 0, 0
-	frame_data 4, 2, -8, 0
-	frame_data 4, 2, 16, 0
-	frame_data 5, 2, -16, 0
-	frame_data 5, 2, 16, 0
-	frame_data 6, 2, -16, 0
-	frame_data 6, 2, 16, 0
-	frame_data 7, 2, -16, 0
-	frame_data 7, 2, 16, 0
-	frame_data 4, 2, -32, 0
-	frame_data 4, 2, 48, 0
-	frame_data 5, 2, -48, 0
-	frame_data 5, 2, 48, 0
-	frame_data 6, 2, -48, 0
-	frame_data 6, 2, 48, 0
-	frame_data 7, 2, -48, 0
-	frame_data 7, 2, 48, 0
-	frame_data 4, 2, -64, 0
-	frame_data 4, 2, 80, 0
-	frame_data 5, 2, -80, 0
-	frame_data 5, 2, 80, 0
-	frame_data 6, 2, -80, 0
-	frame_data 6, 2, 80, 0
-	frame_data 7, 2, -80, 0
-	frame_data 7, 2, 80, 0
-	frame_data 0, 2, -80, 0
-	frame_data 0, 2, 80, 0
-	frame_data 1, 2, -80, 0
-	frame_data 1, 2, 80, 0
-	frame_data 2, 2, -80, 0
-	frame_data 2, 2, 80, 0
-	frame_data 3, 2, -80, 0
-	frame_data 3, 2, 80, 0
-	frame_data 3, -1, 0, 0
-	frame_data 0, 0, 0, 0
-
-AnimFrameTable31::
-	dw .data_abac7
-	dw .data_abad8
-	dw .data_abae9
-	dw .data_abafa
-	dw .data_abb0b
-	dw .data_abb38
-	dw .data_abb6d
-	dw .data_abb9a
-
-.data_abac7
+.frame_5
 	db 4 ; size
-	db -42, -10, 24, OAM_XFLIP
-	db -42, -18, 25, OAM_XFLIP
-	db -34, -10, 26, OAM_XFLIP
-	db -34, -18, 27, OAM_XFLIP
+	db -18, -22, $08, 2
+	db  10,  14, $08, 2
+	db  10, -22, $07, 2
+	db -18,  14, $07, 2
 
-.data_abad8
+.frame_6
 	db 4 ; size
-	db -14, -10, 24, OAM_XFLIP | OAM_YFLIP
-	db -14, -18, 25, OAM_XFLIP | OAM_YFLIP
-	db -22, -10, 26, OAM_XFLIP | OAM_YFLIP
-	db -22, -18, 27, OAM_XFLIP | OAM_YFLIP
+	db -22,  18, $08, 2 | OAM_XFLIP
+	db  14, -26, $08, 2 | OAM_XFLIP
+	db  14,  18, $07, 2 | OAM_XFLIP
+	db -22, -26, $07, 2 | OAM_XFLIP
 
-.data_abae9
-	db 4 ; size
-	db -14, 2, 24, OAM_YFLIP
-	db -14, 10, 25, OAM_YFLIP
-	db -22, 2, 26, OAM_YFLIP
-	db -22, 10, 27, OAM_YFLIP
+AnimDataThunderShock::
+	frame_table AnimFrameTableThunderShock
+	frame_data  0,  2,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data  3,  2,   0,   0
+	frame_data  4,  2,   0,   0
+	frame_data  5,  2,   0,   0
+	frame_data  6,  2,   0,   0
+	frame_data  6, -1,   0,   0
+	frame_data  0,  0,   0,   0
 
-.data_abafa
-	db 4 ; size
-	db -42, 2, 24, $0
-	db -42, 10, 25, $0
-	db -34, 2, 26, $0
-	db -34, 10, 27, $0
+AnimFrameTableLightning::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
 
-.data_abb0b
-	db 11 ; size
-	db -32, -24, 13, OAM_XFLIP | OAM_YFLIP
-	db -32, -32, 14, OAM_XFLIP | OAM_YFLIP
-	db -40, -32, 17, OAM_XFLIP | OAM_YFLIP
-	db -48, -32, 20, OAM_XFLIP | OAM_YFLIP
-	db -56, -28, 22, OAM_XFLIP | OAM_YFLIP
-	db -56, -20, 21, OAM_XFLIP | OAM_YFLIP
-	db -48, -16, 18, OAM_XFLIP | OAM_YFLIP
-	db -48, -24, 19, OAM_XFLIP | OAM_YFLIP
-	db -40, -24, 16, OAM_XFLIP | OAM_YFLIP
-	db -40, -16, 15, OAM_XFLIP | OAM_YFLIP
-	db -56, -8, 23, OAM_XFLIP | OAM_YFLIP
+.frame_0
+	db 9 ; size
+	db -40,  -5, $00, 0
+	db -32, -12, $02, 0
+	db -32,  -4, $03, 0
+	db -24, -20, $04, 0
+	db -24, -12, $05, 0
+	db -24,  -4, $06, 0
+	db -16,  -4, $09, 0
+	db -16,   4, $0a, 0
+	db  -8,   6, $0e, 0
 
-.data_abb38
-	db 13 ; size
-	db 1, -8, 0, OAM_XFLIP | OAM_YFLIP
-	db -7, -8, 5, OAM_XFLIP | OAM_YFLIP
-	db 1, -16, 1, OAM_XFLIP | OAM_YFLIP
-	db -7, -16, 6, OAM_XFLIP | OAM_YFLIP
-	db 0, -24, 2, OAM_XFLIP | OAM_YFLIP
-	db -8, -24, 7, OAM_XFLIP | OAM_YFLIP
-	db -16, -24, 10, OAM_XFLIP | OAM_YFLIP
-	db -1, -32, 3, OAM_XFLIP | OAM_YFLIP
-	db -1, -40, 4, OAM_XFLIP | OAM_YFLIP
-	db -9, -40, 9, OAM_XFLIP | OAM_YFLIP
-	db -17, -40, 12, OAM_XFLIP | OAM_YFLIP
-	db -17, -32, 11, OAM_XFLIP | OAM_YFLIP
-	db -9, -32, 8, OAM_XFLIP | OAM_YFLIP
+.frame_1
+	db 19 ; size
+	db   0,   9, $0d, 0
+	db -16, -17, $01, 0
+	db -40,  -5, $00, 0
+	db -32, -12, $02, 0
+	db -32,  -4, $03, 0
+	db -24, -20, $04, 0
+	db -24, -12, $05, 0
+	db -24,  -4, $06, 0
+	db -16,  -4, $09, 0
+	db -16,   4, $0a, 0
+	db  -8,   6, $0e, 0
+	db -16, -24, $07, 1
+	db -16, -16, $08, 1
+	db  -8, -24, $0b, 1
+	db  -8, -16, $0c, 1
+	db   0,   8, $0f, 1
+	db   0,  16, $10, 1
+	db   8,  16, $0b, 1 | OAM_XFLIP
+	db   8,   8, $0c, 1 | OAM_XFLIP
 
-.data_abb6d
-	db 11 ; size
-	db -24, 16, 13, $0
-	db -24, 24, 14, $0
-	db -16, 24, 17, $0
-	db -8, 24, 20, $0
-	db 0, 20, 22, $0
-	db 0, 12, 21, $0
-	db -8, 8, 18, $0
-	db -8, 16, 19, $0
-	db -16, 16, 16, $0
-	db -16, 8, 15, $0
-	db 0, 0, 23, $0
+.frame_2
+	db 9 ; size
+	db -40,  -3, $00, 0 | OAM_XFLIP
+	db -32,   4, $02, 0 | OAM_XFLIP
+	db -32,  -4, $03, 0 | OAM_XFLIP
+	db -24,  12, $04, 0 | OAM_XFLIP
+	db -24,   4, $05, 0 | OAM_XFLIP
+	db -24,  -4, $06, 0 | OAM_XFLIP
+	db -16,  -4, $09, 0 | OAM_XFLIP
+	db -16, -12, $0a, 0 | OAM_XFLIP
+	db  -8, -14, $0e, 0 | OAM_XFLIP
 
-.data_abb9a
-	db 13 ; size
-	db -57, 0, 0, $0
-	db -49, 0, 5, $0
-	db -57, 8, 1, $0
-	db -49, 8, 6, $0
-	db -56, 16, 2, $0
-	db -48, 16, 7, $0
-	db -40, 16, 10, $0
-	db -55, 24, 3, $0
-	db -55, 32, 4, $0
-	db -47, 32, 9, $0
-	db -39, 32, 12, $0
-	db -39, 24, 11, $0
-	db -47, 24, 8, $0
+.frame_3
+	db 19 ; size
+	db   0, -17, $0d, 0 | OAM_XFLIP
+	db -16,   9, $01, 0 | OAM_XFLIP
+	db -40,  -3, $00, 0 | OAM_XFLIP
+	db -32,   4, $02, 0 | OAM_XFLIP
+	db -32,  -4, $03, 0 | OAM_XFLIP
+	db -24,  12, $04, 0 | OAM_XFLIP
+	db -24,   4, $05, 0 | OAM_XFLIP
+	db -24,  -4, $06, 0 | OAM_XFLIP
+	db -16,  -4, $09, 0 | OAM_XFLIP
+	db -16, -12, $0a, 0 | OAM_XFLIP
+	db  -8, -14, $0e, 0 | OAM_XFLIP
+	db -16,  16, $07, 1 | OAM_XFLIP
+	db -16,   8, $08, 1 | OAM_XFLIP
+	db  -8,  16, $0b, 1 | OAM_XFLIP
+	db  -8,   8, $0c, 1 | OAM_XFLIP
+	db   0, -16, $0f, 1 | OAM_XFLIP
+	db   0, -24, $10, 1 | OAM_XFLIP
+	db   8, -24, $0b, 1
+	db   8, -16, $0c, 1
 
-AnimData101::
-	frame_table AnimFrameTable32
-	frame_data 0, 12, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 2, -1, 0, 0
-	frame_data 0, 0, 0, 0
+.frame_4
+	db 9 ; size
+	db -40,  -5, $00, 0
+	db -32, -12, $02, 0
+	db -32,  -4, $03, 0
+	db -24,  -4, $04, 0 | OAM_XFLIP
+	db -24, -12, $05, 0 | OAM_XFLIP
+	db -24, -20, $06, 0 | OAM_XFLIP
+	db -16, -20, $09, 0 | OAM_XFLIP
+	db -16, -28, $0a, 0 | OAM_XFLIP
+	db  -8, -26, $0e, 0
 
-AnimData102::
-	frame_table AnimFrameTable32
-	frame_data 0, 8, 0, 0
-	frame_data -1, 8, 0, 0
-	frame_data -1, -1, 0, 0
-	frame_data 0, 0, 0, 0
+.frame_5
+	db 19 ; size
+	db   0, -23, $0d, 0
+	db -16,  -7, $01, 0 | OAM_XFLIP
+	db -40,  -5, $00, 0
+	db -32, -12, $02, 0
+	db -32,  -4, $03, 0
+	db -24,  -4, $04, 0 | OAM_XFLIP
+	db -24, -12, $05, 0 | OAM_XFLIP
+	db -24, -20, $06, 0 | OAM_XFLIP
+	db -16, -20, $09, 0 | OAM_XFLIP
+	db -16, -28, $0a, 0 | OAM_XFLIP
+	db  -8, -26, $0e, 0
+	db   0, -24, $0f, 1
+	db   0, -16, $10, 1
+	db   8, -16, $0b, 1 | OAM_XFLIP
+	db   8, -24, $0c, 1 | OAM_XFLIP
+	db -16,   0, $07, 1 | OAM_XFLIP
+	db -16,  -8, $08, 1 | OAM_XFLIP
+	db  -8,   0, $0b, 1 | OAM_XFLIP
+	db  -8,  -8, $0c, 1 | OAM_XFLIP
 
-AnimData103::
-	frame_table AnimFrameTable32
-	frame_data 1, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 3, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 3, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 5, 8, 0, 0
-	frame_data 6, 8, 0, 0
-	frame_data 7, 8, 0, 0
-	frame_data 8, 8, 0, 0
-	frame_data 9, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 9, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 9, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 9, 8, 0, 0
-	frame_data 9, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimDataLightning::
+	frame_table AnimFrameTableLightning
+	frame_data  0,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  3,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  4,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  5,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data -1, -1,   0,   0
+	frame_data  0,  0,   0,   0
 
-AnimData104::
-	frame_table AnimFrameTable32
-	frame_data 1, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 3, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 3, 8, 0, 0
-	frame_data 4, 8, 0, 0
-	frame_data 5, 8, 0, 0
-	frame_data 10, 8, 0, 0
-	frame_data 11, 8, 0, 0
-	frame_data 12, 8, 0, 0
-	frame_data 13, 8, 0, 0
-	frame_data 14, 8, 0, 0
-	frame_data 15, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 15, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 15, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 15, 8, 0, 0
-	frame_data 2, 8, 0, 0
-	frame_data 2, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimFrameTableBorderSpark::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
 
-AnimData105::
-	frame_table AnimFrameTable33
-	frame_data 0, 6, 0, 4
-	frame_data 1, 6, 0, 0
-	frame_data 2, 6, 0, 0
-	frame_data 3, 6, 0, 0
-	frame_data 4, 6, 0, 0
-	frame_data 5, 6, 0, 0
-	frame_data 6, 6, 0, 0
-	frame_data 7, 6, 0, 0
-	frame_data 0, 4, 0, 0
-	frame_data 1, 4, 0, 0
-	frame_data 2, 4, 0, 0
-	frame_data 3, 4, 0, 0
-	frame_data 4, 4, 0, 0
-	frame_data 5, 4, 0, 0
-	frame_data 6, 4, 0, 0
-	frame_data 7, 4, 0, 0
-	frame_data -1, 4, 0, 0
-	frame_data -1, -1, 0, 0
-	frame_data 0, 0, 0, 0
+.frame_0
+	db 2 ; size
+	db -27, -35, $00, 0
+	db  20,  28, $00, 0
 
-AnimFrameTable33::
-	dw .data_abd4a
-	dw .data_abd57
-	dw .data_abd70
-	dw .data_abd99
-	dw .data_abdda
-	dw .data_abe23
-	dw .data_abe64
-	dw .data_abe95
-
-.data_abd4a
-	db 3 ; size
-	db 17, -24, 1, $0
-	db 17, 0, 1, $0
-	db 17, 24, 1, $0
-
-.data_abd57
+.frame_1
 	db 6 ; size
-	db 13, -24, 1, $0
-	db 18, 16, 1, $0
-	db 10, 0, 2, $0
-	db 11, 24, 2, $0
-	db 16, -56, 1, $0
-	db 16, 56, 1, $0
+	db -27, -27, $01, 0
+	db  20,  20, $01, 0
+	db -19, -35, $00, 0
+	db  12,  28, $00, 0
+	db -27, -35, $00, 0
+	db  20,  28, $00, 0
 
-.data_abd70
-	db 10 ; size
-	db -10, 0, 0, $0
-	db -7, 24, 0, $0
-	db 8, -24, 2, $0
-	db 12, 16, 2, $0
-	db 16, -8, 1, $0
-	db 12, -56, 2, $0
-	db 16, 40, 1, $0
-	db 12, 56, 2, $0
-	db -2, 0, 0, OAM_YFLIP
-	db 1, 24, 0, OAM_YFLIP
+.frame_2
+	db 8 ; size
+	db -27, -20, $00, 0 | OAM_XFLIP
+	db  20,  11, $00, 0 | OAM_XFLIP
+	db -15, -35, $02, 0
+	db   8,  28, $02, 0
+	db -27, -27, $01, 0
+	db  20,  20, $01, 0
+	db -19, -35, $00, 0
+	db  12,  28, $00, 0
 
-.data_abd99
-	db 16 ; size
-	db -7, 16, 0, $0
-	db -17, -24, 0, $0
-	db 16, -32, 1, $0
-	db 16, 8, 1, $0
-	db 8, -8, 2, $0
-	db -26, 0, 0, $0
-	db -24, 24, 0, $0
-	db 0, -56, 0, $0
-	db 8, 40, 2, $0
-	db 0, 56, 0, $0
-	db 8, -56, 0, OAM_YFLIP
-	db -9, -24, 0, OAM_YFLIP
-	db -18, 0, 0, OAM_YFLIP
-	db -16, 24, 0, OAM_YFLIP
-	db 1, 16, 0, OAM_YFLIP
-	db 8, 56, 0, OAM_YFLIP
+.frame_3
+	db 8 ; size
+	db -27, -11, $02, 0
+	db  20,   4, $02, 0
+	db -12, -35, $00, 0 | OAM_YFLIP
+	db   3,  28, $00, 0 | OAM_YFLIP
+	db -27, -20, $00, 0 | OAM_XFLIP
+	db  20,  11, $00, 0 | OAM_XFLIP
+	db -15, -35, $02, 0
+	db   8,  28, $02, 0
 
-.data_abdda
-	db 18 ; size
-	db 8, -32, 2, $0
-	db 5, 8, 2, $0
-	db -12, -8, 0, $0
-	db -27, -24, 0, $0
-	db -21, 16, 0, $0
-	db -50, 0, 0, $0
-	db -34, 24, 0, $0
-	db -8, 40, 0, $0
-	db -16, -56, 0, $0
-	db -8, 56, 0, $0
-	db -8, -56, 0, OAM_YFLIP
-	db -19, -24, 0, OAM_YFLIP
-	db -4, -8, 0, OAM_YFLIP
-	db -42, 0, 0, OAM_YFLIP
-	db -13, 16, 0, OAM_YFLIP
-	db -26, 24, 0, OAM_YFLIP
-	db 0, 40, 0, OAM_YFLIP
-	db 0, 56, 0, OAM_YFLIP
+.frame_4
+	db 8 ; size
+	db  19,  -4, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db -28,  -5, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -7, -35, $01, 0
+	db   0,  29, $01, 0
+	db -27, -11, $02, 0
+	db  20,   4, $02, 0
+	db -12, -35, $00, 0 | OAM_YFLIP
+	db   3,  28, $00, 0 | OAM_YFLIP
 
-.data_abe23
-	db 16 ; size
-	db -19, -32, 0, $0
-	db -9, 8, 0, $0
-	db -51, -24, 0, $0
-	db -32, -8, 0, $0
-	db -29, 40, 0, $0
-	db -40, -56, 0, $0
-	db -40, 56, 0, $0
-	db -64, 16, 0, $0
-	db -32, -56, 0, OAM_YFLIP
-	db -11, -32, 0, OAM_YFLIP
-	db -43, -24, 0, OAM_YFLIP
-	db -24, -8, 0, OAM_YFLIP
-	db -1, 8, 0, OAM_YFLIP
-	db -56, 16, 0, OAM_YFLIP
-	db -21, 40, 0, OAM_YFLIP
-	db -32, 56, 0, OAM_YFLIP
+.frame_5
+	db 8 ; size
+	db -27,   3, $01, 0 | OAM_XFLIP
+	db  20, -12, $01, 0 | OAM_XFLIP
+	db  -4, -36, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -5,  27, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  19,  -4, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db -28,  -5, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -7, -35, $01, 0
+	db   0,  29, $01, 0
 
-.data_abe64
+.frame_6
+	db 8 ; size
+	db  19, -19, $00, 0 | OAM_YFLIP
+	db -28,  12, $00, 0 | OAM_YFLIP
+	db   1, -35, $02, 0
+	db  -8,  28, $02, 0
+	db -27,   3, $01, 0 | OAM_XFLIP
+	db  20, -12, $01, 0 | OAM_XFLIP
+	db  -4, -36, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -5,  27, $00, 0 | OAM_XFLIP | OAM_YFLIP
+
+.frame_7
+	db 8 ; size
+	db -27,  19, $02, 0 | OAM_XFLIP
+	db  20, -28, $02, 0 | OAM_XFLIP
+	db   5, -36, $00, 0 | OAM_XFLIP
+	db -12,  27, $00, 0 | OAM_XFLIP
+	db  19, -19, $00, 0 | OAM_YFLIP
+	db -28,  12, $00, 0 | OAM_YFLIP
+	db   1, -35, $02, 0
+	db  -8,  28, $02, 0
+
+.frame_8
+	db 8 ; size
+	db  20, -35, $00, 0
+	db -27,  28, $00, 0
+	db   8, -35, $01, 0
+	db -16,  28, $01, 0
+	db -27,  19, $02, 0 | OAM_XFLIP
+	db  20, -28, $02, 0 | OAM_XFLIP
+	db   5, -36, $00, 0 | OAM_XFLIP
+	db -12,  27, $00, 0 | OAM_XFLIP
+
+AnimDataBorderSpark::
+	frame_table AnimFrameTableBorderSpark
+	frame_data  0,  2,   0,   0
+	frame_data  1,  2,   0,   0
+	frame_data  2,  2,   0,   0
+	frame_data  3,  2,   0,   0
+	frame_data  4,  2,   0,   0
+	frame_data  5,  2,   0,   0
+	frame_data  6,  2,   0,   0
+	frame_data  7,  2,   0,   0
+	frame_data  8,  2,   0,   0
+	frame_data  8, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableBigLightning::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+
+.frame_0
+	db 27 ; size
+	db -16,   0, $2d, 0
+	db -72,  -8, $00, 0
+	db -72,   0, $01, 0
+	db -64,   1, $02, 0 | OAM_XFLIP
+	db -64,  -7, $03, 0 | OAM_XFLIP
+	db -56,  -9, $04, 0
+	db -56,  -1, $05, 0
+	db -48,  -9, $0f, 0
+	db -48,  -1, $10, 0
+	db -48,   7, $11, 0
+	db -48,  15, $12, 0
+	db -40, -14, $13, 0
+	db -40,  -6, $14, 0
+	db -40,   1, $15, 0
+	db -40,   9, $16, 0
+	db -40,  17, $17, 0
+	db -32,  -8, $19, 0
+	db -32,   0, $1a, 0
+	db -24,  -8, $1b, 0
+	db -24,   0, $1c, 0
+	db -16,  -8, $1d, 1
+	db -16,   0, $1e, 1
+	db -16,   8, $1f, 1
+	db  -8,  -8, $20, 1
+	db  -8,   0, $21, 1
+	db  -8,   8, $22, 1
+	db -32,   8, $18, 0
+
+.frame_1
+	db 21 ; size
+	db -16,   0, $2d, 0 | OAM_XFLIP
+	db -72,   0, $00, 0 | OAM_XFLIP
+	db -72,  -8, $01, 0 | OAM_XFLIP
+	db -64,   8, $02, 0 | OAM_XFLIP
+	db -64,   0, $03, 0 | OAM_XFLIP
+	db -56,   9, $04, 0 | OAM_XFLIP
+	db -56,   1, $05, 0 | OAM_XFLIP
+	db -48,   9, $0f, 0 | OAM_XFLIP
+	db -40,  14, $13, 0 | OAM_XFLIP
+	db -40,   6, $14, 0 | OAM_XFLIP
+	db -32,   8, $19, 0 | OAM_XFLIP
+	db -32,   0, $1a, 0 | OAM_XFLIP
+	db -24,   8, $1b, 0 | OAM_XFLIP
+	db -24,   0, $1c, 0 | OAM_XFLIP
+	db -48,   1, $23, 0 | OAM_XFLIP
+	db -16,  -8, $24, 1
+	db -16,   0, $25, 1
+	db -16,   8, $26, 1
+	db  -8,  -8, $27, 1
+	db  -8,   0, $28, 1
+	db  -8,   8, $29, 1
+
+.frame_2
+	db 32 ; size
+	db   8, -41, $2d, 0 | OAM_XFLIP
+	db -72,  -8, $00, 0
+	db -72,   0, $01, 0
+	db -64, -16, $02, 0
+	db -64,  -8, $03, 0
+	db -56, -16, $04, 0
+	db -56,  -8, $05, 0
+	db -48,  -2, $06, 0 | OAM_XFLIP
+	db -48, -10, $07, 0 | OAM_XFLIP
+	db -48, -18, $08, 0 | OAM_XFLIP
+	db -40,   3, $09, 0 | OAM_XFLIP
+	db -40,  -5, $0a, 0 | OAM_XFLIP
+	db -40, -13, $0b, 0 | OAM_XFLIP
+	db -40, -21, $0c, 0 | OAM_XFLIP
+	db -32,  -8, $0d, 0
+	db -32,   1, $0e, 0
+	db -32, -24, $0f, 0
+	db -32, -16, $23, 0
+	db -24, -19, $13, 0 | OAM_XFLIP
+	db -24, -27, $14, 0 | OAM_XFLIP
+	db -16, -30, $19, 0
+	db -16, -22, $1a, 0
+	db  -8, -33, $19, 0
+	db  -8, -25, $1a, 0
+	db   0, -33, $1b, 0 | OAM_XFLIP
+	db   0, -41, $1c, 0 | OAM_XFLIP
+	db   8, -49, $24, 1
+	db   8, -41, $25, 1
+	db   8, -33, $26, 1
+	db  16, -49, $27, 1
+	db  16, -41, $28, 1
+	db  16, -33, $29, 1
+
+.frame_3
+	db 13 ; size
+	db -56,  33, $2d, 0
+	db -72,   8, $00, 0 | OAM_XFLIP
+	db -72,   0, $01, 0 | OAM_XFLIP
+	db -64,   8, $2c, 0 | OAM_XFLIP | OAM_YFLIP
+	db -64,  16, $2a, 0
+	db -64,  24, $2b, 0
+	db -64,  32, $2c, 0
+	db -56,  25, $1d, 1
+	db -56,  33, $1e, 1
+	db -56,  41, $1f, 1
+	db -48,  25, $20, 1
+	db -48,  33, $21, 1
+	db -48,  41, $22, 1
+
+.frame_4
+	db 19 ; size
+	db -36, -49, $2d, 0 | OAM_XFLIP
+	db -72,   8, $00, 0
+	db -72,  16, $01, 0
+	db -64,   8, $2c, 0 | OAM_YFLIP
+	db -64,   0, $2a, 0 | OAM_XFLIP
+	db -64,  -8, $2b, 0 | OAM_XFLIP
+	db -64, -16, $2c, 0 | OAM_XFLIP
+	db -56, -16, $1b, 0 | OAM_XFLIP
+	db -56, -24, $1c, 0 | OAM_XFLIP
+	db -48, -23, $2c, 0 | OAM_YFLIP
+	db -46, -31, $2a, 0 | OAM_XFLIP | OAM_YFLIP
+	db -45, -39, $2b, 0 | OAM_XFLIP | OAM_YFLIP
+	db -44, -47, $2c, 0 | OAM_XFLIP
+	db -36, -57, $24, 1
+	db -36, -49, $25, 1
+	db -36, -41, $26, 1
+	db -28, -57, $27, 1
+	db -28, -49, $28, 1
+	db -28, -41, $29, 1
+
+.frame_5
+	db 30 ; size
+	db  -8,  40, $2d, 0
+	db -72,   0, $00, 0 | OAM_XFLIP
+	db -72,  -8, $01, 0 | OAM_XFLIP
+	db -16,  32, $1b, 0
+	db -16,  40, $1c, 0
+	db  -8,  32, $1d, 1
+	db  -8,  40, $1e, 1
+	db   0,  32, $20, 1
+	db   0,  40, $21, 1
+	db  -8,  48, $1f, 1
+	db   0,  48, $22, 1
+	db -24,  32, $19, 0 | OAM_XFLIP
+	db -24,  24, $1a, 0 | OAM_XFLIP
+	db -32,  21, $13, 0
+	db -32,  29, $14, 0
+	db -40,  26, $0f, 0 | OAM_XFLIP
+	db -40,  18, $10, 0 | OAM_XFLIP
+	db -40,  10, $11, 0 | OAM_XFLIP
+	db -40,   2, $12, 0 | OAM_XFLIP
+	db -32,  16, $15, 0 | OAM_XFLIP
+	db -32,   8, $16, 0 | OAM_XFLIP
+	db -32,   0, $17, 0 | OAM_XFLIP
+	db -24,   8, $18, 0 | OAM_XFLIP
+	db -48,  15, $0b, 0
+	db -48,  23, $0c, 0
+	db -64,   8, $02, 0 | OAM_XFLIP
+	db -64,   0, $03, 0 | OAM_XFLIP
+	db -56,  18, $2c, 0
+	db -56,   2, $2c, 0 | OAM_XFLIP | OAM_YFLIP
+	db -56,  10, $2a, 0
+
+AnimDataBigLightning::
+	frame_table AnimFrameTableBigLightning
+	frame_data  0,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  3,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  4,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data  5,  4,   0,   0
+	frame_data -1,  2,   0,   0
+	frame_data -1, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableSmallFlame::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+	dw .frame_17
+	dw .frame_18
+	dw .frame_19
+
+.frame_0
+	db 4 ; size
+	db  -8,  -8, $00, 0
+	db   0,  -8, $01, 1
+	db  -8,   0, $04, 0 | OAM_XFLIP
+	db   0,   0, $05, 1 | OAM_XFLIP
+
+.frame_1
+	db 4 ; size
+	db  -8,  -8, $02, 0
+	db   0,  -8, $03, 1
+	db  -8,   0, $06, 0 | OAM_XFLIP
+	db   0,   0, $07, 1 | OAM_XFLIP
+
+.frame_2
+	db 4 ; size
+	db  -8,  -8, $04, 0
+	db   0,  -8, $05, 1
+	db  -8,   0, $00, 0 | OAM_XFLIP
+	db   0,   0, $01, 1 | OAM_XFLIP
+
+.frame_3
+	db 4 ; size
+	db  -8,  -8, $06, 0
+	db   0,  -8, $07, 1
+	db  -8,   0, $02, 0 | OAM_XFLIP
+	db   0,   0, $03, 1 | OAM_XFLIP
+
+.frame_4
 	db 12 ; size
-	db -32, 8, 0, $0
-	db -48, -32, 0, $0
-	db -64, -8, 0, $0
-	db -61, 40, 0, $0
-	db -40, -32, 0, OAM_YFLIP
-	db -56, -8, 0, OAM_YFLIP
-	db -24, 8, 0, OAM_YFLIP
-	db -53, 40, 0, OAM_YFLIP
-	db -80, -56, 0, $0
-	db -72, -56, 0, OAM_YFLIP
-	db -80, 56, 0, $0
-	db -72, 56, 0, OAM_YFLIP
+	db  -8,  -8, $00, 0
+	db   0,  -8, $01, 1
+	db  -8,   0, $04, 0 | OAM_XFLIP
+	db   0,   0, $05, 1 | OAM_XFLIP
+	db -19,   2, $08, 0
+	db   1, -10, $08, 0
+	db -12,   2, $09, 1
+	db   9, -10, $09, 1
+	db -19, -10, $0a, 0
+	db -11, -10, $0b, 1
+	db   1,   2, $0a, 0
+	db   9,   2, $0b, 1
 
-.data_abe95
-	db 4 ; size
-	db -64, 0, 0, $0
-	db -56, 0, 0, OAM_YFLIP
-	db -80, -32, 0, $0
-	db -72, -32, 0, OAM_YFLIP
+.frame_5
+	db 10 ; size
+	db -24, -14, $08, 0
+	db -16, -14, $09, 1
+	db   4,   6, $09, 1
+	db  -4,   6, $08, 0
+	db -23,   6, $0a, 0
+	db  -4, -14, $0a, 0
+	db   4, -14, $0b, 1
+	db -15,   6, $0b, 1
+	db  -8,  -4, $08, 0
+	db   0,  -4, $09, 1
 
-AnimData106::
-	frame_table AnimFrameTable34
-	frame_data 0, 3, 0, 12
-	frame_data 1, 3, 0, 0
-	frame_data 2, 3, 0, 0
-	frame_data 3, 3, 0, 0
-	frame_data 4, 3, 0, 0
-	frame_data 5, 3, 0, 0
-	frame_data 6, 3, 0, 0
-	frame_data 7, 3, 0, 0
-	frame_data 8, 3, 0, 0
-	frame_data 6, 3, 0, 0
-	frame_data 7, 3, 0, 0
-	frame_data 8, 3, 0, 0
-	frame_data 6, 4, 0, 0
-	frame_data 7, 4, 0, 0
-	frame_data 8, 4, 0, 0
-	frame_data 6, 4, 0, 0
-	frame_data 7, 4, 0, 0
-	frame_data 8, 4, 0, 0
-	frame_data 8, -1, 0, 0
-	frame_data 0, 0, 0, 0
+.frame_6
+	db 10 ; size
+	db -28, -18, $0a, 0
+	db -20, -18, $0b, 1
+	db   6,  10, $0b, 1
+	db  -2,  10, $0a, 0
+	db -28,  10, $08, 0
+	db  -2, -18, $08, 0
+	db   6, -18, $09, 1
+	db -20,  10, $09, 1
+	db  -8,  -4, $0a, 0
+	db   0,  -4, $0b, 1
 
-AnimFrameTable34::
-	dw .data_abf0b
-	dw .data_abf1c
-	dw .data_abf2d
-	dw .data_abf3e
-	dw .data_abf57
-	dw .data_abf70
-	dw .data_abf89
-	dw .data_abfaa
-	dw .data_abfcb
+.frame_7
+	db 10 ; size
+	db -24, -20, $0a, 0
+	db -16, -20, $0b, 1
+	db   8,  12, $0b, 1
+	db   0,  12, $0a, 0
+	db -24,  12, $08, 0
+	db   0, -20, $08, 0
+	db   8, -20, $09, 1
+	db -16,  12, $09, 1
+	db  -8,  -4, $0a, 0
+	db   0,  -4, $0b, 1
 
-.data_abf0b
-	db 4 ; size
-	db -11, -8, 0, $0
-	db -3, -8, 1, $0
-	db -11, 0, 0, OAM_XFLIP
-	db -3, 0, 1, OAM_XFLIP
+.frame_8
+	db 5 ; size
+	db  -1,  -4, $0c, 0
+	db -16, -20, $0c, 0
+	db   8, -20, $0c, 0
+	db -16,  12, $0c, 0
+	db   8,  12, $0c, 0
 
-.data_abf1c
-	db 4 ; size
-	db -11, -8, 2, $0
-	db -3, -8, 3, $0
-	db -11, 0, 2, OAM_XFLIP
-	db -3, 0, 3, OAM_XFLIP
+.frame_9
+	db 5 ; size
+	db  -8,  10, $04, 0
+	db   0,  10, $05, 1
+	db  -8,  18, $00, 0 | OAM_XFLIP
+	db   0,  18, $01, 1 | OAM_XFLIP
+	db -16,  12, $0c, 0
 
-.data_abf2d
-	db 4 ; size
-	db -11, -8, 4, $0
-	db -3, -8, 5, $0
-	db -11, 0, 4, OAM_XFLIP
-	db -3, 0, 5, OAM_XFLIP
-
-.data_abf3e
+.frame_10
 	db 6 ; size
-	db -19, -8, 6, $0
-	db -11, -8, 7, $0
-	db -3, -8, 8, $0
-	db -19, 0, 6, OAM_XFLIP
-	db -11, 0, 7, OAM_XFLIP
-	db -3, 0, 8, OAM_XFLIP
+	db   2,   8, $06, 0
+	db  10,   8, $07, 1
+	db   2,  16, $02, 0 | OAM_XFLIP
+	db  10,  16, $03, 1 | OAM_XFLIP
+	db -19,  12, $0a, 0
+	db -11,  12, $0b, 1
 
-.data_abf57
+.frame_11
+	db 9 ; size
+	db   6,  -8, $00, 0
+	db  14,  -8, $01, 1
+	db   6,   0, $04, 0 | OAM_XFLIP
+	db  14,   0, $05, 1 | OAM_XFLIP
+	db   8,  12, $0c, 0
+	db -21,   8, $00, 0
+	db -13,   8, $01, 1
+	db -21,  16, $04, 0 | OAM_XFLIP
+	db -13,  16, $05, 1 | OAM_XFLIP
+
+.frame_12
+	db 10 ; size
+	db   2, -22, $02, 0
+	db  10, -22, $03, 1
+	db   2, -14, $06, 0 | OAM_XFLIP
+	db  10, -14, $07, 1 | OAM_XFLIP
+	db   5,  12, $08, 0
+	db  13,  12, $09, 1
+	db -21,   9, $02, 0
+	db -13,   9, $03, 1
+	db -21,  17, $06, 0 | OAM_XFLIP
+	db -13,  17, $07, 1 | OAM_XFLIP
+
+.frame_13
+	db 13 ; size
+	db  -8, -26, $04, 0
+	db   0, -26, $05, 1
+	db  -8, -18, $00, 0 | OAM_XFLIP
+	db   0, -18, $01, 1 | OAM_XFLIP
+	db   8, -20, $0c, 0
+	db -20,   8, $04, 0
+	db -12,   8, $05, 1
+	db -20,  16, $00, 0 | OAM_XFLIP
+	db -12,  16, $01, 1 | OAM_XFLIP
+	db   5,   8, $04, 0
+	db  13,   8, $05, 1
+	db   5,  16, $00, 0 | OAM_XFLIP
+	db  13,  16, $01, 1 | OAM_XFLIP
+
+.frame_14
+	db 16 ; size
+	db -20, -24, $06, 0
+	db -12, -24, $07, 1
+	db -20, -16, $02, 0 | OAM_XFLIP
+	db -12, -16, $03, 1 | OAM_XFLIP
+	db -20,   8, $06, 0
+	db -12,   8, $07, 1
+	db -20,  16, $02, 0 | OAM_XFLIP
+	db -12,  16, $03, 1 | OAM_XFLIP
+	db   5,   8, $06, 0
+	db  13,   8, $07, 1
+	db   5,  16, $02, 0 | OAM_XFLIP
+	db  13,  16, $03, 1 | OAM_XFLIP
+	db   5, -24, $06, 0
+	db  13, -24, $07, 1
+	db   5, -16, $02, 0 | OAM_XFLIP
+	db  13, -16, $03, 1 | OAM_XFLIP
+
+.frame_15
+	db 16 ; size
+	db -20, -24, $00, 0
+	db -12, -24, $01, 1
+	db -20, -16, $04, 0 | OAM_XFLIP
+	db -12, -16, $05, 1 | OAM_XFLIP
+	db -20,   8, $00, 0
+	db -12,   8, $01, 1
+	db -20,  16, $04, 0 | OAM_XFLIP
+	db -12,  16, $05, 1 | OAM_XFLIP
+	db   5, -25, $00, 0
+	db  13, -25, $01, 1
+	db   5, -17, $04, 0 | OAM_XFLIP
+	db  13, -17, $05, 1 | OAM_XFLIP
+	db   6,   6, $00, 0
+	db  14,   6, $01, 1
+	db   6,  14, $04, 0 | OAM_XFLIP
+	db  14,  14, $05, 1 | OAM_XFLIP
+
+.frame_16
+	db 16 ; size
+	db -20,  16, $06, 0 | OAM_XFLIP
+	db -12,  16, $07, 1 | OAM_XFLIP
+	db -20,   8, $02, 0
+	db -12,   8, $03, 1
+	db -20, -16, $06, 0 | OAM_XFLIP
+	db -12, -16, $07, 1 | OAM_XFLIP
+	db -20, -24, $02, 0
+	db -12, -24, $03, 1
+	db   5, -16, $06, 0 | OAM_XFLIP
+	db  13, -16, $07, 1 | OAM_XFLIP
+	db   5, -24, $02, 0
+	db  13, -24, $03, 1
+	db   5,  16, $06, 0 | OAM_XFLIP
+	db  13,  16, $07, 1 | OAM_XFLIP
+	db   5,   8, $02, 0
+	db  13,   8, $03, 1
+
+.frame_17
+	db 16 ; size
+	db -20, -24, $04, 0
+	db -12, -24, $05, 1
+	db -20, -16, $00, 0 | OAM_XFLIP
+	db -12, -16, $01, 1 | OAM_XFLIP
+	db -19,   8, $04, 0
+	db -11,   8, $05, 1
+	db -19,  16, $00, 0 | OAM_XFLIP
+	db -11,  16, $01, 1 | OAM_XFLIP
+	db   4,   8, $04, 0
+	db  12,   8, $05, 1
+	db   4,  16, $00, 0 | OAM_XFLIP
+	db  12,  16, $01, 1 | OAM_XFLIP
+	db   5, -24, $04, 0
+	db  13, -24, $05, 1
+	db   5, -16, $00, 0 | OAM_XFLIP
+	db  13, -16, $01, 1 | OAM_XFLIP
+
+.frame_18
+	db 8 ; size
+	db -20, -20, $08, 0
+	db -20,  12, $08, 0
+	db   4,  12, $08, 0
+	db   4, -20, $08, 0
+	db -12, -20, $09, 1
+	db -12,  12, $09, 1
+	db  12,  12, $09, 1
+	db  12, -20, $09, 1
+
+.frame_19
+	db 4 ; size
+	db -16, -20, $0c, 0
+	db -16,  12, $0c, 0
+	db   8,  12, $0c, 0
+	db   8, -20, $0c, 0
+
+AnimDataSmallFlame::
+	frame_table AnimFrameTableSmallFlame
+	frame_data  0,  4,   0,   0
+	frame_data  1,  5,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data  3,  5,   0,   0
+	frame_data  0,  6,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data  2,  5,   0,   0
+	frame_data  3,  4,   0,   0
+	frame_data  4,  4,   0,   0
+	frame_data  5,  5,   0,   0
+	frame_data  6,  4,   0,   0
+	frame_data  7,  4,   0,   0
+	frame_data  8,  4,   0,   0
+	frame_data  8, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimDataBigFlame::
+	frame_table AnimFrameTableSmallFlame
+	frame_data  0,  5,   0,   0
+	frame_data  1,  5,   0,   0
+	frame_data  2,  5,   0,   0
+	frame_data  3,  5,   0,   0
+	frame_data  0,  4,   6,  -6
+	frame_data  1,  4,   8,  -4
+	frame_data  9,  4, -14,  10
+	frame_data 10,  4,   0,   0
+	frame_data 11,  4,   0,   0
+	frame_data 12,  4,   0,   0
+	frame_data 13,  4,   0,   0
+	frame_data 14,  4,   0,   0
+	frame_data 15,  4,   0,   0
+	frame_data 17,  4,   0,   0
+	frame_data 18,  5,   0,   0
+	frame_data 19,  5,   0,   0
+	frame_data 19, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableFireSpin::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+
+.frame_0
+	db 4 ; size
+	db -42, -10, $18, 0 | OAM_XFLIP
+	db -42, -18, $19, 0 | OAM_XFLIP
+	db -34, -10, $1a, 0 | OAM_XFLIP
+	db -34, -18, $1b, 0 | OAM_XFLIP
+
+.frame_1
+	db 4 ; size
+	db -14, -10, $18, 0 | OAM_XFLIP | OAM_YFLIP
+	db -14, -18, $19, 0 | OAM_XFLIP | OAM_YFLIP
+	db -22, -10, $1a, 0 | OAM_XFLIP | OAM_YFLIP
+	db -22, -18, $1b, 0 | OAM_XFLIP | OAM_YFLIP
+
+.frame_2
+	db 4 ; size
+	db -14,   2, $18, 0 | OAM_YFLIP
+	db -14,  10, $19, 0 | OAM_YFLIP
+	db -22,   2, $1a, 0 | OAM_YFLIP
+	db -22,  10, $1b, 0 | OAM_YFLIP
+
+.frame_3
+	db 4 ; size
+	db -42,   2, $18, 0
+	db -42,  10, $19, 0
+	db -34,   2, $1a, 0
+	db -34,  10, $1b, 0
+
+.frame_4
+	db 11 ; size
+	db -32, -24, $0d, 0 | OAM_XFLIP | OAM_YFLIP
+	db -32, -32, $0e, 0 | OAM_XFLIP | OAM_YFLIP
+	db -40, -32, $11, 0 | OAM_XFLIP | OAM_YFLIP
+	db -48, -32, $14, 0 | OAM_XFLIP | OAM_YFLIP
+	db -56, -28, $16, 0 | OAM_XFLIP | OAM_YFLIP
+	db -56, -20, $15, 0 | OAM_XFLIP | OAM_YFLIP
+	db -48, -16, $12, 0 | OAM_XFLIP | OAM_YFLIP
+	db -48, -24, $13, 0 | OAM_XFLIP | OAM_YFLIP
+	db -40, -24, $10, 0 | OAM_XFLIP | OAM_YFLIP
+	db -40, -16, $0f, 0 | OAM_XFLIP | OAM_YFLIP
+	db -56,  -8, $17, 0 | OAM_XFLIP | OAM_YFLIP
+
+.frame_5
+	db 13 ; size
+	db   1,  -8, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -7,  -8, $05, 0 | OAM_XFLIP | OAM_YFLIP
+	db   1, -16, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -7, -16, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -24, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -8, -24, $07, 0 | OAM_XFLIP | OAM_YFLIP
+	db -16, -24, $0a, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -1, -32, $03, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -1, -40, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -9, -40, $09, 0 | OAM_XFLIP | OAM_YFLIP
+	db -17, -40, $0c, 0 | OAM_XFLIP | OAM_YFLIP
+	db -17, -32, $0b, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -9, -32, $08, 0 | OAM_XFLIP | OAM_YFLIP
+
+.frame_6
+	db 11 ; size
+	db -24,  16, $0d, 0
+	db -24,  24, $0e, 0
+	db -16,  24, $11, 0
+	db  -8,  24, $14, 0
+	db   0,  20, $16, 0
+	db   0,  12, $15, 0
+	db  -8,   8, $12, 0
+	db  -8,  16, $13, 0
+	db -16,  16, $10, 0
+	db -16,   8, $0f, 0
+	db   0,   0, $17, 0
+
+.frame_7
+	db 13 ; size
+	db -57,   0, $00, 0
+	db -49,   0, $05, 0
+	db -57,   8, $01, 0
+	db -49,   8, $06, 0
+	db -56,  16, $02, 0
+	db -48,  16, $07, 0
+	db -40,  16, $0a, 0
+	db -55,  24, $03, 0
+	db -55,  32, $04, 0
+	db -47,  32, $09, 0
+	db -39,  32, $0c, 0
+	db -39,  24, $0b, 0
+	db -47,  24, $08, 0
+
+AnimDataFireSpin::
+	frame_table AnimFrameTableFireSpin
+	frame_data  0,  5,   0,   0
+	frame_data  1,  5,   0,   0
+	frame_data  2,  5,   0,   0
+	frame_data  3,  5,   0,   0
+	frame_data  4,  4,   0,   0
+	frame_data  5,  4,   0,   0
+	frame_data  6,  4,   0,   0
+	frame_data  7,  4,   0,   0
+	frame_data  4,  2,  -8,   0
+	frame_data  4,  2,  16,   0
+	frame_data  5,  2, -16,   0
+	frame_data  5,  2,  16,   0
+	frame_data  6,  2, -16,   0
+	frame_data  6,  2,  16,   0
+	frame_data  7,  2, -16,   0
+	frame_data  7,  2,  16,   0
+	frame_data  4,  2, -32,   0
+	frame_data  4,  2,  48,   0
+	frame_data  5,  2, -48,   0
+	frame_data  5,  2,  48,   0
+	frame_data  6,  2, -48,   0
+	frame_data  6,  2,  48,   0
+	frame_data  7,  2, -48,   0
+	frame_data  7,  2,  48,   0
+	frame_data  4,  2, -64,   0
+	frame_data  4,  2,  80,   0
+	frame_data  5,  2, -80,   0
+	frame_data  5,  2,  80,   0
+	frame_data  6,  2, -80,   0
+	frame_data  6,  2,  80,   0
+	frame_data  7,  2, -80,   0
+	frame_data  7,  2,  80,   0
+	frame_data  0,  2, -80,   0
+	frame_data  0,  2,  80,   0
+	frame_data  1,  2, -80,   0
+	frame_data  1,  2,  80,   0
+	frame_data  2,  2, -80,   0
+	frame_data  2,  2,  80,   0
+	frame_data  3,  2, -80,   0
+	frame_data  3,  2,  80,   0
+	frame_data  3, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableDiveBomb::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+	dw .frame_17
+	dw .frame_18
+	dw .frame_19
+	dw .frame_20
+	dw .frame_21
+	dw .frame_22
+	dw .frame_23
+
+.frame_0
+	db 8 ; size
+	db -24,  -8, $14, 1
+	db -24,   0, $15, 1
+	db -24,   8, $16, 1
+	db -16,   8, $18, 1
+	db -16,   0, $17, 1
+	db -16,  -8, $17, 1 | OAM_XFLIP
+	db -24, -16, $16, 1 | OAM_XFLIP
+	db -16, -16, $18, 1 | OAM_XFLIP
+
+.frame_1
+	db 20 ; size
+	db -32, -20, $34, 1
+	db -33, -12, $35, 1
+	db -32,  -4, $36, 1
+	db -33,   4, $37, 1
+	db -32,  12, $38, 1
+	db -24, -20, $39, 1
+	db -25, -12, $3a, 1
+	db -24,  -4, $3b, 1
+	db -25,   4, $3c, 1
+	db -24,  12, $3d, 1
+	db -16, -20, $3e, 1
+	db -17, -12, $3f, 1
+	db -16,  -4, $40, 1
+	db -17,   4, $41, 1
+	db -16,  12, $42, 1
+	db  -9, -12, $43, 1
+	db  -8,  -4, $44, 1
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+
+.frame_2
+	db 20 ; size
+	db -32,  12, $34, 1 | OAM_XFLIP
+	db -33,   4, $35, 1 | OAM_XFLIP
+	db -32,  -4, $46, 1
+	db -33, -12, $37, 1 | OAM_XFLIP
+	db -32, -20, $38, 1 | OAM_XFLIP
+	db -24,  12, $39, 1 | OAM_XFLIP
+	db -25,   4, $48, 1
+	db -24,  -4, $3b, 1
+	db -25, -12, $47, 1
+	db -24, -20, $3d, 1 | OAM_XFLIP
+	db -16,  12, $3e, 1 | OAM_XFLIP
+	db -17,   4, $3f, 1 | OAM_XFLIP
+	db -16,  -4, $40, 1
+	db -17, -12, $41, 1 | OAM_XFLIP
+	db -16, -20, $42, 1 | OAM_XFLIP
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -8,  -4, $44, 1
+	db  -9, -12, $43, 1
+	db  -1,   4, $45, 0 | OAM_XFLIP
+	db  -1, -12, $45, 0
+
+.frame_3
+	db 23 ; size
+	db -38, -10, $49, 2
+	db -38,  -2, $4a, 2
+	db -30,  -2, $4b, 2
+	db -32, -20, $34, 1
+	db -33, -12, $35, 1
+	db -32,  -4, $36, 1
+	db -33,   4, $37, 1
+	db -32,  12, $38, 1
+	db -24, -20, $39, 1
+	db -25, -12, $3a, 1
+	db -24,  -4, $3b, 1
+	db -25,   4, $3c, 1
+	db -24,  12, $3d, 1
+	db -16, -20, $3e, 1
+	db -17, -12, $3f, 1
+	db -16,  -4, $40, 1
+	db -17,   4, $41, 1
+	db -16,  12, $42, 1
+	db  -9, -12, $43, 1
+	db  -8,  -4, $44, 1
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+
+.frame_4
+	db 23 ; size
+	db -38, -10, $49, 2
+	db -38,  -2, $4a, 2
+	db -30,  -2, $4b, 2
+	db -32,  12, $34, 1 | OAM_XFLIP
+	db -33,   4, $35, 1 | OAM_XFLIP
+	db -32,  -4, $46, 1
+	db -33, -12, $37, 1 | OAM_XFLIP
+	db -32, -20, $38, 1 | OAM_XFLIP
+	db -24,  12, $39, 1 | OAM_XFLIP
+	db -25,   4, $48, 1
+	db -24,  -4, $3b, 1
+	db -25, -12, $47, 1
+	db -24, -20, $3d, 1 | OAM_XFLIP
+	db -16,  12, $3e, 1 | OAM_XFLIP
+	db -17,   4, $3f, 1 | OAM_XFLIP
+	db -16,  -4, $40, 1
+	db -17, -12, $41, 1 | OAM_XFLIP
+	db -16, -20, $42, 1 | OAM_XFLIP
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -8,  -4, $44, 1
+	db  -9, -12, $43, 1
+	db  -1,   4, $45, 0 | OAM_XFLIP
+	db  -1, -12, $45, 0
+
+.frame_5
+	db 23 ; size
+	db -46, -10, $49, 2
+	db -46,  -2, $4a, 2
+	db -38,  -2, $4b, 2
+	db -32, -20, $34, 1
+	db -33, -12, $35, 1
+	db -32,  -4, $36, 1
+	db -33,   4, $37, 1
+	db -32,  12, $38, 1
+	db -24, -20, $39, 1
+	db -25, -12, $3a, 1
+	db -24,  -4, $3b, 1
+	db -25,   4, $3c, 1
+	db -24,  12, $3d, 1
+	db -16, -20, $3e, 1
+	db -17, -12, $3f, 1
+	db -16,  -4, $40, 1
+	db -17,   4, $41, 1
+	db -16,  12, $42, 1
+	db  -9, -12, $43, 1
+	db  -8,  -4, $44, 1
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -1, -12, $45, 0
+	db  -1,   4, $45, 0 | OAM_XFLIP
+
+.frame_6
+	db 23 ; size
+	db -46,  -2, $49, 2
+	db -46,   6, $4a, 2
+	db -38,   6, $4b, 2
+	db -32,  12, $34, 1 | OAM_XFLIP
+	db -33,   4, $35, 1 | OAM_XFLIP
+	db -32,  -4, $46, 1
+	db -33, -12, $37, 1 | OAM_XFLIP
+	db -32, -20, $38, 1 | OAM_XFLIP
+	db -24,  12, $39, 1 | OAM_XFLIP
+	db -25,   4, $48, 1
+	db -24,  -4, $3b, 1
+	db -25, -12, $47, 1
+	db -24, -20, $3d, 1 | OAM_XFLIP
+	db -16,  12, $3e, 1 | OAM_XFLIP
+	db -17,   4, $3f, 1 | OAM_XFLIP
+	db -16,  -4, $40, 1
+	db -17, -12, $41, 1 | OAM_XFLIP
+	db -16, -20, $42, 1 | OAM_XFLIP
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -8,  -4, $44, 1
+	db  -9, -12, $43, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+
+.frame_7
+	db 23 ; size
+	db -46,  14, $49, 2
+	db -46,  22, $4a, 2
+	db -38,  22, $4b, 2
+	db -32, -20, $34, 1
+	db -33, -12, $35, 1
+	db -32,  -4, $36, 1
+	db -33,   4, $37, 1
+	db -32,  12, $38, 1
+	db -24, -20, $39, 1
+	db -25, -12, $3a, 1
+	db -24,  -4, $3b, 1
+	db -25,   4, $3c, 1
+	db -24,  12, $3d, 1
+	db -16, -20, $3e, 1
+	db -17, -12, $3f, 1
+	db -16,  -4, $40, 1
+	db -17,   4, $41, 1
+	db -16,  12, $42, 1
+	db  -9, -12, $43, 1
+	db  -8,  -4, $44, 1
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+
+.frame_8
+	db 23 ; size
+	db -38,  30, $49, 2
+	db -38,  38, $4a, 2
+	db -30,  38, $4b, 2
+	db -32,  12, $34, 1 | OAM_XFLIP
+	db -33,   4, $35, 1 | OAM_XFLIP
+	db -32,  -4, $46, 1
+	db -33, -12, $37, 1 | OAM_XFLIP
+	db -32, -20, $38, 1 | OAM_XFLIP
+	db -24,  12, $39, 1 | OAM_XFLIP
+	db -25,   4, $48, 1
+	db -24,  -4, $3b, 1
+	db -25, -12, $47, 1
+	db -24, -20, $3d, 1 | OAM_XFLIP
+	db -16,  12, $3e, 1 | OAM_XFLIP
+	db -17,   4, $3f, 1 | OAM_XFLIP
+	db -16,  -4, $40, 1
+	db -17, -12, $41, 1 | OAM_XFLIP
+	db -16, -20, $42, 1 | OAM_XFLIP
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -8,  -4, $44, 1
+	db  -9, -12, $43, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+
+.frame_9
+	db 23 ; size
+	db -22,  38, $49, 2
+	db -22,  46, $4a, 2
+	db -14,  46, $4b, 2
+	db -32, -20, $34, 1
+	db -33, -12, $35, 1
+	db -32,  -4, $36, 1
+	db -33,   4, $37, 1
+	db -32,  12, $38, 1
+	db -24, -20, $39, 1
+	db -25, -12, $3a, 1
+	db -24,  -4, $3b, 1
+	db -25,   4, $3c, 1
+	db -24,  12, $3d, 1
+	db -16, -20, $3e, 1
+	db -17, -12, $3f, 1
+	db -16,  -4, $40, 1
+	db -17,   4, $41, 1
+	db -16,  12, $42, 1
+	db  -9, -12, $43, 1
+	db  -8,  -4, $44, 1
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+
+.frame_10
+	db 23 ; size
+	db -54, -18, $49, 2
+	db -54, -10, $4a, 2
+	db -46, -10, $4b, 2
+	db -32,  12, $34, 1 | OAM_XFLIP
+	db -33,   4, $35, 1 | OAM_XFLIP
+	db -32,  -4, $46, 1
+	db -33, -12, $37, 1 | OAM_XFLIP
+	db -32, -20, $38, 1 | OAM_XFLIP
+	db -24,  12, $39, 1 | OAM_XFLIP
+	db -25,   4, $48, 1
+	db -24,  -4, $3b, 1
+	db -25, -12, $47, 1
+	db -24, -20, $3d, 1 | OAM_XFLIP
+	db -16,  12, $3e, 1 | OAM_XFLIP
+	db -17,   4, $3f, 1 | OAM_XFLIP
+	db -16,  -4, $40, 1
+	db -17, -12, $41, 1 | OAM_XFLIP
+	db -16, -20, $42, 1 | OAM_XFLIP
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -8,  -4, $44, 1
+	db  -9, -12, $43, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+
+.frame_11
+	db 23 ; size
+	db -54, -34, $49, 2
+	db -54, -26, $4a, 2
+	db -46, -26, $4b, 2
+	db -32, -20, $34, 1
+	db -33, -12, $35, 1
+	db -32,  -4, $36, 1
+	db -33,   4, $37, 1
+	db -32,  12, $38, 1
+	db -24, -20, $39, 1
+	db -25, -12, $3a, 1
+	db -24,  -4, $3b, 1
+	db -25,   4, $3c, 1
+	db -24,  12, $3d, 1
+	db -16, -20, $3e, 1
+	db -17, -12, $3f, 1
+	db -16,  -4, $40, 1
+	db -17,   4, $41, 1
+	db -16,  12, $42, 1
+	db  -9, -12, $43, 1
+	db  -8,  -4, $44, 1
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+
+.frame_12
+	db 23 ; size
+	db -54, -50, $49, 2
+	db -54, -42, $4a, 2
+	db -46, -42, $4b, 2
+	db -32,  12, $34, 1 | OAM_XFLIP
+	db -33,   4, $35, 1 | OAM_XFLIP
+	db -32,  -4, $46, 1
+	db -33, -12, $37, 1 | OAM_XFLIP
+	db -32, -20, $38, 1 | OAM_XFLIP
+	db -24,  12, $39, 1 | OAM_XFLIP
+	db -25,   4, $48, 1
+	db -24,  -4, $3b, 1
+	db -25, -12, $47, 1
+	db -24, -20, $3d, 1 | OAM_XFLIP
+	db -16,  12, $3e, 1 | OAM_XFLIP
+	db -17,   4, $3f, 1 | OAM_XFLIP
+	db -16,  -4, $40, 1
+	db -17, -12, $41, 1 | OAM_XFLIP
+	db -16, -20, $42, 1 | OAM_XFLIP
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -8,  -4, $44, 1
+	db  -9, -12, $43, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+
+.frame_13
+	db 23 ; size
+	db -46, -66, $49, 2
+	db -46, -58, $4a, 2
+	db -38, -58, $4b, 2
+	db -32, -20, $34, 1
+	db -33, -12, $35, 1
+	db -32,  -4, $36, 1
+	db -33,   4, $37, 1
+	db -32,  12, $38, 1
+	db -24, -20, $39, 1
+	db -25, -12, $3a, 1
+	db -24,  -4, $3b, 1
+	db -25,   4, $3c, 1
+	db -24,  12, $3d, 1
+	db -16, -20, $3e, 1
+	db -17, -12, $3f, 1
+	db -16,  -4, $40, 1
+	db -17,   4, $41, 1
+	db -16,  12, $42, 1
+	db  -9, -12, $43, 1
+	db  -8,  -4, $44, 1
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -1, -12, $45, 0
+	db  -1,   4, $45, 0 | OAM_XFLIP
+
+.frame_14
+	db 23 ; size
+	db -38, -74, $49, 2
+	db -38, -66, $4a, 2
+	db -30, -66, $4b, 2
+	db -32,  12, $34, 1 | OAM_XFLIP
+	db -33,   4, $35, 1 | OAM_XFLIP
+	db -32,  -4, $46, 1
+	db -33, -12, $37, 1 | OAM_XFLIP
+	db -32, -20, $38, 1 | OAM_XFLIP
+	db -24,  12, $39, 1 | OAM_XFLIP
+	db -25,   4, $48, 1
+	db -24,  -4, $3b, 1
+	db -25, -12, $47, 1
+	db -24, -20, $3d, 1 | OAM_XFLIP
+	db -16,  12, $3e, 1 | OAM_XFLIP
+	db -17,   4, $3f, 1 | OAM_XFLIP
+	db -16,  -4, $40, 1
+	db -17, -12, $41, 1 | OAM_XFLIP
+	db -16, -20, $42, 1 | OAM_XFLIP
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -8,  -4, $44, 1
+	db  -9, -12, $43, 1
+	db  -1,   4, $45, 0 | OAM_XFLIP
+	db  -1, -12, $45, 0
+
+.frame_15
+	db 23 ; size
+	db -38, -74, $49, 2
+	db -38, -66, $4a, 2
+	db -30, -66, $4b, 2
+	db -32, -20, $34, 1
+	db -33, -12, $35, 1
+	db -32,  -4, $36, 1
+	db -33,   4, $37, 1
+	db -32,  12, $38, 1
+	db -24, -20, $39, 1
+	db -25, -12, $3a, 1
+	db -24,  -4, $3b, 1
+	db -25,   4, $3c, 1
+	db -24,  12, $3d, 1
+	db -16, -20, $3e, 1
+	db -17, -12, $3f, 1
+	db -16,  -4, $40, 1
+	db -17,   4, $41, 1
+	db -16,  12, $42, 1
+	db  -9, -12, $43, 1
+	db  -8,  -4, $44, 1
+	db  -9,   4, $43, 1 | OAM_XFLIP
+	db  -1, -12, $45, 1
+	db  -1,   4, $45, 1 | OAM_XFLIP
+
+.frame_16
+	db 12 ; size
+	db   0, -32, $00, 0
+	db   0, -24, $01, 0
+	db   8, -32, $03, 0
+	db   8, -24, $04, 0
+	db  16, -32, $06, 0
+	db  16, -24, $07, 0
+	db   0,  16, $0b, 0 | OAM_XFLIP
+	db   0,  24, $0a, 0 | OAM_XFLIP
+	db   8,  24, $0d, 0 | OAM_XFLIP
+	db   8,  16, $0e, 0 | OAM_XFLIP
+	db  16,  16, $11, 0 | OAM_XFLIP
+	db  16,  24, $10, 0 | OAM_XFLIP
+
+.frame_17
+	db 12 ; size
+	db   0,  24, $00, 0 | OAM_XFLIP
+	db   0,  16, $01, 0 | OAM_XFLIP
+	db   8,  24, $03, 0 | OAM_XFLIP
+	db   8,  16, $04, 0 | OAM_XFLIP
+	db  16,  24, $06, 0 | OAM_XFLIP
+	db  16,  16, $07, 0 | OAM_XFLIP
+	db   0, -24, $0b, 0
+	db   0, -32, $0a, 0
+	db   8, -32, $0d, 0
+	db   8, -24, $0e, 0
+	db  16, -24, $11, 0
+	db  16, -32, $10, 0
+
+.frame_18
+	db 19 ; size
+	db  -8, -24, $00, 0
+	db  -8, -16, $01, 0
+	db   0, -32, $02, 0
+	db   0, -24, $03, 0
+	db   0, -16, $04, 0
+	db   8, -32, $05, 0
+	db   8, -24, $06, 0
+	db   8, -16, $07, 0
+	db  16, -32, $08, 0
+	db  16, -24, $09, 0
+	db  -8,   8, $0b, 0 | OAM_XFLIP
+	db  -8,  16, $0a, 0 | OAM_XFLIP
+	db   0,  24, $0a, 0 | OAM_XFLIP
+	db   0,  16, $0d, 0 | OAM_XFLIP
+	db   0,   8, $0e, 0 | OAM_XFLIP
+	db   8,   8, $11, 0 | OAM_XFLIP
+	db   8,  16, $10, 0 | OAM_XFLIP
+	db   8,  24, $0f, 0 | OAM_XFLIP
+	db  16,  24, $12, 0 | OAM_XFLIP
+
+.frame_19
+	db 19 ; size
+	db  -8,  16, $00, 0 | OAM_XFLIP
+	db  -8,   8, $01, 0 | OAM_XFLIP
+	db   0,  24, $02, 0 | OAM_XFLIP
+	db   0,  16, $03, 0 | OAM_XFLIP
+	db   0,   8, $04, 0 | OAM_XFLIP
+	db   8,  24, $05, 0 | OAM_XFLIP
+	db   8,  16, $06, 0 | OAM_XFLIP
+	db   8,   8, $07, 0 | OAM_XFLIP
+	db  16,  24, $08, 0 | OAM_XFLIP
+	db  16,  16, $09, 0 | OAM_XFLIP
+	db  -8, -16, $0b, 0
+	db  -8, -24, $0a, 0
+	db   0, -32, $0a, 0
+	db   0, -24, $0d, 0
+	db   0, -16, $0e, 0
+	db   8, -16, $11, 0
+	db   8, -24, $10, 0
+	db   8, -32, $0f, 0
+	db  16, -32, $12, 0
+
+.frame_20
+	db 29 ; size
+	db  -8, -24, $00, 0
+	db  -8, -16, $01, 0
+	db   0, -32, $02, 0
+	db   0, -24, $03, 0
+	db   0, -16, $04, 0
+	db   8, -32, $05, 0
+	db   8, -24, $06, 0
+	db   8, -16, $07, 0
+	db  16, -32, $08, 0
+	db  16, -24, $09, 0
+	db  -8,   8, $0b, 0 | OAM_XFLIP
+	db  -8,  16, $0a, 0 | OAM_XFLIP
+	db   0,  24, $0a, 0 | OAM_XFLIP
+	db   0,  16, $0d, 0 | OAM_XFLIP
+	db   0,   8, $0e, 0 | OAM_XFLIP
+	db   8,   8, $11, 0 | OAM_XFLIP
+	db   8,  16, $10, 0 | OAM_XFLIP
+	db   8,  24, $0f, 0 | OAM_XFLIP
+	db  16,  24, $12, 0 | OAM_XFLIP
+	db  -8,  -8, $19, 0
+	db  -8,   0, $1a, 0
+	db  -8,   8, $1b, 0
+	db   0,   8, $1e, 0
+	db   8,   8, $21, 0
+	db   8,   0, $20, 0
+	db   8,  -8, $1f, 0
+	db   0,  -8, $1c, 0
+	db   0,   0, $1d, 0
+	db  16,  16, $13, 0 | OAM_XFLIP
+
+.frame_21
+	db 9 ; size
+	db -16, -16, $22, 0
+	db -16,  -8, $23, 0
+	db -16,   0, $24, 0
+	db  -8,   0, $27, 0
+	db  -8,  -8, $26, 0
+	db  -8, -16, $25, 0
+	db   0, -16, $28, 0
+	db   0,  -8, $29, 0
+	db   0,   0, $2a, 0
+
+.frame_22
+	db 9 ; size
+	db  -8,   0, $2d, 0
+	db  -8,  -8, $2c, 0
+	db  -8, -16, $2b, 0
+	db   0, -16, $2e, 0
+	db   0,  -8, $2f, 0
+	db   0,   0, $30, 0
+	db   8,   0, $33, 0
+	db   8,  -8, $32, 0
+	db   8, -16, $31, 0
+
+.frame_23
+	db 9 ; size
+	db  -8,  -8, $19, 0
+	db  -8,   0, $1a, 0
+	db  -8,   8, $1b, 0
+	db   0,   8, $1e, 0
+	db   8,   8, $21, 0
+	db   8,   0, $20, 0
+	db   8,  -8, $1f, 0
+	db   0,  -8, $1c, 0
+	db   0,   0, $1d, 0
+
+AnimDataDiveBomb::
+	frame_table AnimFrameTableDiveBomb
+	frame_data 16,  3,   0,   0
+	frame_data 17,  3,   0,   0
+	frame_data 16,  3,   0,   0
+	frame_data 17,  3,   0,   0
+	frame_data 18,  3,   0,   0
+	frame_data 19,  3,   0,   0
+	frame_data 18,  3,   0,   0
+	frame_data 19,  3,   0,   0
+	frame_data 18,  3,   0,   0
+	frame_data 19,  3,   0,   0
+	frame_data 20,  6,   0,   0
+	frame_data 21,  6,   0,   0
+	frame_data 22,  6,   0,   0
+	frame_data 23,  6,   0,   0
+	frame_data 21,  6,   0,   0
+	frame_data 22,  6,   0,   0
+	frame_data 23,  6,   0,   0
+	frame_data 21,  6,   0,   0
+	frame_data 22,  6,   0,   0
+	frame_data 23,  6,   0,   0
+	frame_data  0, 12,   0,  16
+	frame_data  1,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  2,  5,   0,   0
+	frame_data  2, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimDataFiregiverStart::
+	frame_table AnimFrameTableDiveBomb
+	frame_data  0, 12,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  2, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimDataFiregiverPlayer::
+	frame_table AnimFrameTableDiveBomb
+	frame_data  1,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  3,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  3,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  5,  8,   0,   0
+	frame_data  6,  8,   0,   0
+	frame_data  7,  8,   0,   0
+	frame_data  8,  8,   0,   0
+	frame_data  9,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  9,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  9,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  9,  8,   0,   0
+	frame_data  9, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimDataFiregiverOpp::
+	frame_table AnimFrameTableDiveBomb
+	frame_data  1,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  1,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  3,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  3,  8,   0,   0
+	frame_data  4,  8,   0,   0
+	frame_data  5,  8,   0,   0
+	frame_data 10,  8,   0,   0
+	frame_data 11,  8,   0,   0
+	frame_data 12,  8,   0,   0
+	frame_data 13,  8,   0,   0
+	frame_data 14,  8,   0,   0
+	frame_data 15,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data 15,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data 15,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data 15,  8,   0,   0
+	frame_data  2,  8,   0,   0
+	frame_data  2, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableWaterJets::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+
+.frame_0
+	db 3 ; size
+	db  17, -24, $01, 0
+	db  17,   0, $01, 0
+	db  17,  24, $01, 0
+
+.frame_1
 	db 6 ; size
-	db -20, -8, 9, $0
-	db -12, -8, 10, $0
-	db -4, -8, 11, $0
-	db -20, 0, 9, OAM_XFLIP
-	db -12, 0, 10, OAM_XFLIP
-	db -4, 0, 11, OAM_XFLIP
+	db  13, -24, $01, 0
+	db  18,  16, $01, 0
+	db  10,   0, $02, 0
+	db  11,  24, $02, 0
+	db  16, -56, $01, 0
+	db  16,  56, $01, 0
 
-.data_abf70
+.frame_2
+	db 10 ; size
+	db -10,   0, $00, 1
+	db  -7,  24, $00, 1
+	db   8, -24, $02, 0
+	db  12,  16, $02, 0
+	db  16,  -8, $01, 0
+	db  12, -56, $02, 0
+	db  16,  40, $01, 0
+	db  12,  56, $02, 0
+	db  -2,   0, $00, 0 | OAM_YFLIP
+	db   1,  24, $00, 0 | OAM_YFLIP
+
+.frame_3
+	db 16 ; size
+	db  -7,  16, $00, 1
+	db -17, -24, $00, 1
+	db  16, -32, $01, 0
+	db  16,   8, $01, 0
+	db   8,  -8, $02, 0
+	db -26,   0, $00, 1
+	db -24,  24, $00, 1
+	db   0, -56, $00, 1
+	db   8,  40, $02, 0
+	db   0,  56, $00, 1
+	db   8, -56, $00, 0 | OAM_YFLIP
+	db  -9, -24, $00, 0 | OAM_YFLIP
+	db -18,   0, $00, 0 | OAM_YFLIP
+	db -16,  24, $00, 0 | OAM_YFLIP
+	db   1,  16, $00, 0 | OAM_YFLIP
+	db   8,  56, $00, 0 | OAM_YFLIP
+
+.frame_4
+	db 18 ; size
+	db   8, -32, $02, 0
+	db   5,   8, $02, 0
+	db -12,  -8, $00, 1
+	db -27, -24, $00, 1
+	db -21,  16, $00, 1
+	db -50,   0, $00, 1
+	db -34,  24, $00, 1
+	db  -8,  40, $00, 1
+	db -16, -56, $00, 1
+	db  -8,  56, $00, 1
+	db  -8, -56, $00, 0 | OAM_YFLIP
+	db -19, -24, $00, 0 | OAM_YFLIP
+	db  -4,  -8, $00, 0 | OAM_YFLIP
+	db -42,   0, $00, 0 | OAM_YFLIP
+	db -13,  16, $00, 0 | OAM_YFLIP
+	db -26,  24, $00, 0 | OAM_YFLIP
+	db   0,  40, $00, 0 | OAM_YFLIP
+	db   0,  56, $00, 0 | OAM_YFLIP
+
+.frame_5
+	db 16 ; size
+	db -19, -32, $00, 1
+	db  -9,   8, $00, 1
+	db -51, -24, $00, 1
+	db -32,  -8, $00, 1
+	db -29,  40, $00, 1
+	db -40, -56, $00, 1
+	db -40,  56, $00, 1
+	db -64,  16, $00, 1
+	db -32, -56, $00, 0 | OAM_YFLIP
+	db -11, -32, $00, 0 | OAM_YFLIP
+	db -43, -24, $00, 0 | OAM_YFLIP
+	db -24,  -8, $00, 0 | OAM_YFLIP
+	db  -1,   8, $00, 0 | OAM_YFLIP
+	db -56,  16, $00, 0 | OAM_YFLIP
+	db -21,  40, $00, 0 | OAM_YFLIP
+	db -32,  56, $00, 0 | OAM_YFLIP
+
+.frame_6
+	db 12 ; size
+	db -32,   8, $00, 1
+	db -48, -32, $00, 1
+	db -64,  -8, $00, 1
+	db -61,  40, $00, 1
+	db -40, -32, $00, 0 | OAM_YFLIP
+	db -56,  -8, $00, 0 | OAM_YFLIP
+	db -24,   8, $00, 0 | OAM_YFLIP
+	db -53,  40, $00, 0 | OAM_YFLIP
+	db -80, -56, $00, 1
+	db -72, -56, $00, 0 | OAM_YFLIP
+	db -80,  56, $00, 1
+	db -72,  56, $00, 0 | OAM_YFLIP
+
+.frame_7
+	db 4 ; size
+	db -64,   0, $00, 1
+	db -56,   0, $00, 0 | OAM_YFLIP
+	db -80, -32, $00, 1
+	db -72, -32, $00, 0 | OAM_YFLIP
+
+AnimDataWaterJets::
+	frame_table AnimFrameTableWaterJets
+	frame_data  0,  6,   0,   4
+	frame_data  1,  6,   0,   0
+	frame_data  2,  6,   0,   0
+	frame_data  3,  6,   0,   0
+	frame_data  4,  6,   0,   0
+	frame_data  5,  6,   0,   0
+	frame_data  6,  6,   0,   0
+	frame_data  7,  6,   0,   0
+	frame_data  0,  4,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data  3,  4,   0,   0
+	frame_data  4,  4,   0,   0
+	frame_data  5,  4,   0,   0
+	frame_data  6,  4,   0,   0
+	frame_data  7,  4,   0,   0
+	frame_data -1,  4,   0,   0
+	frame_data -1, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableWaterGun::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+
+.frame_0
+	db 4 ; size
+	db -11,  -8, $00, 0
+	db  -3,  -8, $01, 0
+	db -11,   0, $00, 0 | OAM_XFLIP
+	db  -3,   0, $01, 0 | OAM_XFLIP
+
+.frame_1
+	db 4 ; size
+	db -11,  -8, $02, 0
+	db  -3,  -8, $03, 0
+	db -11,   0, $02, 0 | OAM_XFLIP
+	db  -3,   0, $03, 0 | OAM_XFLIP
+
+.frame_2
+	db 4 ; size
+	db -11,  -8, $04, 0
+	db  -3,  -8, $05, 0
+	db -11,   0, $04, 0 | OAM_XFLIP
+	db  -3,   0, $05, 0 | OAM_XFLIP
+
+.frame_3
 	db 6 ; size
-	db -19, -8, 12, $0
-	db -11, -8, 13, $0
-	db -3, -8, 14, $0
-	db -19, 0, 12, OAM_XFLIP
-	db -11, 0, 13, OAM_XFLIP
-	db -3, 0, 14, OAM_XFLIP
+	db -19,  -8, $06, 0
+	db -11,  -8, $07, 0
+	db  -3,  -8, $08, 0
+	db -19,   0, $06, 0 | OAM_XFLIP
+	db -11,   0, $07, 0 | OAM_XFLIP
+	db  -3,   0, $08, 0 | OAM_XFLIP
 
-.data_abf89
+.frame_4
+	db 6 ; size
+	db -20,  -8, $09, 0
+	db -12,  -8, $0a, 0
+	db  -4,  -8, $0b, 0
+	db -20,   0, $09, 0 | OAM_XFLIP
+	db -12,   0, $0a, 0 | OAM_XFLIP
+	db  -4,   0, $0b, 0 | OAM_XFLIP
+
+.frame_5
+	db 6 ; size
+	db -19,  -8, $0c, 0
+	db -11,  -8, $0d, 0
+	db  -3,  -8, $0e, 0
+	db -19,   0, $0c, 0 | OAM_XFLIP
+	db -11,   0, $0d, 0 | OAM_XFLIP
+	db  -3,   0, $0e, 0 | OAM_XFLIP
+
+.frame_6
 	db 8 ; size
-	db -27, -8, 15, $0
-	db -19, -8, 16, $0
-	db -11, -8, 17, $0
-	db -3, -8, 18, $0
-	db -27, 0, 15, OAM_XFLIP
-	db -19, 0, 16, OAM_XFLIP
-	db -11, 0, 17, OAM_XFLIP
-	db -3, 0, 18, OAM_XFLIP
+	db -27,  -8, $0f, 0
+	db -19,  -8, $10, 0
+	db -11,  -8, $11, 0
+	db  -3,  -8, $12, 0
+	db -27,   0, $0f, 0 | OAM_XFLIP
+	db -19,   0, $10, 0 | OAM_XFLIP
+	db -11,   0, $11, 0 | OAM_XFLIP
+	db  -3,   0, $12, 0 | OAM_XFLIP
 
-.data_abfaa
+.frame_7
 	db 8 ; size
-	db -27, -8, 19, $0
-	db -19, -8, 20, $0
-	db -11, -8, 21, $0
-	db -3, -8, 22, $0
-	db -19, 0, 20, OAM_XFLIP
-	db -11, 0, 21, OAM_XFLIP
-	db -3, 0, 22, OAM_XFLIP
-	db -29, 0, 19, OAM_XFLIP
+	db -27,  -8, $13, 0
+	db -19,  -8, $14, 0
+	db -11,  -8, $15, 0
+	db  -3,  -8, $16, 0
+	db -19,   0, $14, 0 | OAM_XFLIP
+	db -11,   0, $15, 0 | OAM_XFLIP
+	db  -3,   0, $16, 0 | OAM_XFLIP
+	db -29,   0, $13, 0 | OAM_XFLIP
 
-.data_abfcb
+.frame_8
 	db 8 ; size
-	db -27, -8, 23, $0
-	db -19, -8, 24, $0
-	db -11, -8, 25, $0
-	db -3, -8, 26, $0
-	db -27, 0, 23, OAM_XFLIP
-	db -19, 0, 24, OAM_XFLIP
-	db -11, 0, 25, OAM_XFLIP
-	db -3, 0, 26, OAM_XFLIP
+	db -27,  -8, $17, 0
+	db -19,  -8, $18, 0
+	db -11,  -8, $19, 0
+	db  -3,  -8, $1a, 0
+	db -27,   0, $17, 0 | OAM_XFLIP
+	db -19,   0, $18, 0 | OAM_XFLIP
+	db -11,   0, $19, 0 | OAM_XFLIP
+	db  -3,   0, $1a, 0 | OAM_XFLIP
 
-AnimData149::
-	frame_table AnimFrameTable71
-	frame_data 0, 5, 0, 0
-	frame_data 1, 8, 0, 0
-	frame_data 1, -1, 0, 0
-	frame_data 0, 0, 0, 0
+AnimDataWaterGun::
+	frame_table AnimFrameTableWaterGun
+	frame_data  0,  3,   0,  12
+	frame_data  1,  3,   0,   0
+	frame_data  2,  3,   0,   0
+	frame_data  3,  3,   0,   0
+	frame_data  4,  3,   0,   0
+	frame_data  5,  3,   0,   0
+	frame_data  6,  3,   0,   0
+	frame_data  7,  3,   0,   0
+	frame_data  8,  3,   0,   0
+	frame_data  6,  3,   0,   0
+	frame_data  7,  3,   0,   0
+	frame_data  8,  3,   0,   0
+	frame_data  6,  4,   0,   0
+	frame_data  7,  4,   0,   0
+	frame_data  8,  4,   0,   0
+	frame_data  6,  4,   0,   0
+	frame_data  7,  4,   0,   0
+	frame_data  8,  4,   0,   0
+	frame_data  8, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableWhirlpool::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+
+.frame_0
+	db 9 ; size
+	db -16,  16, $05, 0
+	db  -8,   8, $06, 0
+	db  -8,  16, $04, 0
+	db -16,   8, $04, 0
+	db -24,   8, $06, 0
+	db -24,  -8, $00, 1
+	db -24,   0, $01, 0
+	db -16,  -8, $02, 0
+	db -16,   0, $03, 0
+
+.frame_1
+	db 10 ; size
+	db -24,   0, $04, 0
+	db -16,   8, $05, 0
+	db -24,   8, $06, 0
+	db  -8, -24, $00, 1 | OAM_YFLIP
+	db  -8, -16, $01, 0 | OAM_YFLIP
+	db -16, -24, $02, 0 | OAM_YFLIP
+	db -16, -16, $00, 0 | OAM_YFLIP
+	db -16,  -8, $01, 0 | OAM_YFLIP
+	db -24, -16, $02, 0 | OAM_YFLIP
+	db -24,  -8, $03, 0 | OAM_YFLIP
+
+.frame_2
+	db 11 ; size
+	db -24, -16, $04, 0
+	db -24, -32, $05, 0
+	db -32, -24, $06, 0
+	db  -8, -16, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -8, -24, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db -16, -16, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db -16, -24, $03, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8, -16, $00, 1 | OAM_XFLIP | OAM_YFLIP
+	db   8, -24, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -16, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -24, $03, 0 | OAM_XFLIP | OAM_YFLIP
+
+.frame_3
+	db 10 ; size
+	db   0, -24, $06, 0
+	db   0, -16, $05, 0
+	db   8, -24, $04, 0
+	db  -8, -24, $04, 0
+	db  -8, -32, $06, 0
+	db -24, -24, $06, 0
+	db  16,  -8, $00, 1 | OAM_XFLIP | OAM_YFLIP
+	db  16, -16, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8,  -8, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8, -16, $03, 0 | OAM_XFLIP | OAM_YFLIP
+
+.frame_4
+	db 9 ; size
+	db   8, -24, $05, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -16, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -24, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8, -16, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16, -16, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16,   0, $00, 1 | OAM_XFLIP | OAM_YFLIP
+	db  16,  -8, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8,   0, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8,  -8, $03, 0 | OAM_XFLIP | OAM_YFLIP
+
+.frame_5
+	db 10 ; size
+	db  16,  -8, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8, -16, $05, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16, -16, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  16, $00, 1 | OAM_XFLIP
+	db   0,   8, $01, 0 | OAM_XFLIP
+	db   8,  16, $02, 0 | OAM_XFLIP
+	db   8,   8, $00, 0 | OAM_XFLIP
+	db   8,   0, $01, 0 | OAM_XFLIP
+	db  16,   8, $02, 0 | OAM_XFLIP
+	db  16,   0, $03, 0 | OAM_XFLIP
+
+.frame_6
+	db 10 ; size
+	db   8,  16, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  24, $05, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8,  24, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db -16,   0, $00, 1
+	db -16,   8, $01, 0
+	db  -8,   0, $02, 0
+	db  -8,   8, $00, 0
+	db  -8,  16, $01, 0
+	db   0,   8, $02, 0
+	db   0,  16, $03, 0
+
+.frame_7
+	db 10 ; size
+	db  -8,  16, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -8,   8, $05, 0 | OAM_XFLIP | OAM_YFLIP
+	db -16,  16, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  16, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  24, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16,  16, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db -24,   0, $00, 1
+	db -24,   8, $01, 0
+	db -16,   0, $02, 0
+	db -16,   8, $03, 0
+
+.frame_8
+	db 12 ; size
+	db  16,  -8, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -8, -24, $06, 0
+	db   8,  -8, $06, 0
+	db   0, -24, $05, 0
+	db   0,  16, $00, 1 | OAM_XFLIP
+	db   0,   8, $01, 0 | OAM_XFLIP
+	db   8,  16, $02, 0 | OAM_XFLIP
+	db   8,   8, $00, 0 | OAM_XFLIP
+	db   8,   0, $01, 0 | OAM_XFLIP
+	db  16,   8, $02, 0 | OAM_XFLIP
+	db  16,   0, $03, 0 | OAM_XFLIP
+	db   8, -16, $04, 0
+
+.frame_9
+	db 5 ; size
+	db  -8,   8, $06, 0
+	db   8,   0, $05, 0
+	db -16, -16, $04, 0
+	db   0,  -8, $06, 0
+	db   0, -24, $04, 0
+
+.frame_10
+	db 5 ; size
+	db  -8,   0, $06, 0
+	db -16, -16, $05, 0
+	db   8,   8, $06, 0
+	db   0, -16, $06, 0
+	db -16,   0, $06, 0
+
+.frame_11
+	db 2 ; size
+	db  -8,  16, $06, 0
+	db   0,  -8, $06, 0
+
+AnimDataWhirlpool::
+	frame_table AnimFrameTableWhirlpool
+	frame_data  6,  5,  40, -24
+	frame_data  7,  5, -20, -16
+	frame_data  0,  5, -20,  -8
+	frame_data  1,  5, -24,  10
+	frame_data  2,  5,  -6,  20
+	frame_data  3,  5,  12,  16
+	frame_data  4,  5,  20,   6
+	frame_data  5,  5,  16,  -6
+	frame_data  6,  5,   0, -14
+	frame_data  7,  5, -16,  -8
+	frame_data  0,  4,   0,   0
+	frame_data  1,  4,   0,   0
+	frame_data  2,  4,   0,   0
+	frame_data  3,  4,   0,   0
+	frame_data  8,  4,   0,   0
+	frame_data  9,  5,   0,   0
+	frame_data 10,  5,   0,   0
+	frame_data 11,  5,   0,   0
+	frame_data 11, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTableBlizzard::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+
+.frame_0
+	db 20 ; size
+	db -72, -128, $00, 0
+	db -72, -88, $00, 0
+	db -62, -104, $00, 0
+	db -62, -64, $00, 0
+	db -52, -120, $00, 0
+	db -52, -80, $00, 0
+	db -42, -96, $00, 0
+	db -32, -112, $00, 0
+	db -32, -72, $00, 0
+	db -42, -56, $00, 0
+	db -22, -128, $00, 0
+	db -22, -88, $00, 0
+	db -12, -104, $00, 0
+	db -12, -64, $00, 0
+	db  -2, -120, $00, 0
+	db  -2, -80, $00, 0
+	db   8, -96, $00, 0
+	db  18, -112, $00, 0
+	db  18, -72, $00, 0
+	db   8, -56, $00, 0
+
+.frame_1
+	db 36 ; size
+	db -72, -104, $00, 0
+	db -72, -64, $00, 0
+	db -72, -24, $00, 0
+	db -62, -120, $00, 0
+	db -62, -80, $00, 0
+	db -62, -40, $00, 0
+	db -62,   0, $00, 0
+	db -52, -96, $00, 0
+	db -52, -56, $00, 0
+	db -52, -16, $00, 0
+	db -42, -112, $00, 0
+	db -42, -72, $00, 0
+	db -42, -32, $00, 0
+	db -32, -128, $00, 0
+	db -32, -88, $00, 0
+	db -32, -48, $00, 0
+	db -32,  -8, $00, 0
+	db -42,   8, $00, 0
+	db -22, -104, $00, 0
+	db -22, -64, $00, 0
+	db -22, -24, $00, 0
+	db -12, -120, $00, 0
+	db -12, -80, $00, 0
+	db -12, -40, $00, 0
+	db -12,   0, $00, 0
+	db  -2, -96, $00, 0
+	db  -2, -56, $00, 0
+	db  -2, -16, $00, 0
+	db   8, -112, $00, 0
+	db   8, -72, $00, 0
+	db   8, -32, $00, 0
+	db  18, -128, $00, 0
+	db  18, -88, $00, 0
+	db  18, -48, $00, 0
+	db  18,  -8, $00, 0
+	db   8,   8, $00, 0
+
+.frame_2
+	db 40 ; size
+	db -72, -80, $00, 0
+	db -72, -40, $00, 0
+	db -72,   0, $00, 0
+	db -72,  40, $00, 0
+	db -62, -56, $00, 0
+	db -62, -16, $00, 0
+	db -62,  24, $00, 0
+	db -62,  64, $00, 0
+	db -52, -72, $00, 0
+	db -52, -32, $00, 0
+	db -52,   8, $00, 0
+	db -52,  48, $00, 0
+	db -42, -48, $00, 0
+	db -42,  -8, $00, 0
+	db -42,  32, $00, 0
+	db -32, -64, $00, 0
+	db -32, -24, $00, 0
+	db -32,  16, $00, 0
+	db -32,  56, $00, 0
+	db -42,  72, $00, 0
+	db -22, -80, $00, 0
+	db -22, -40, $00, 0
+	db -22,   0, $00, 0
+	db -22,  40, $00, 0
+	db -12, -56, $00, 0
+	db -12, -16, $00, 0
+	db -12,  24, $00, 0
+	db -12,  64, $00, 0
+	db  -2, -72, $00, 0
+	db  -2, -32, $00, 0
+	db  -2,   8, $00, 0
+	db  -2,  48, $00, 0
+	db   8, -48, $00, 0
+	db   8,  -8, $00, 0
+	db   8,  32, $00, 0
+	db  18, -64, $00, 0
+	db  18, -24, $00, 0
+	db  18,  16, $00, 0
+	db  18,  56, $00, 0
+	db   8,  72, $00, 0
+
+.frame_3
+	db 40 ; size
+	db -72, -64, $00, 0
+	db -72, -24, $00, 0
+	db -72,  16, $00, 0
+	db -72,  56, $00, 0
+	db -62, -40, $00, 0
+	db -62,   0, $00, 0
+	db -62,  40, $00, 0
+	db -52, -56, $00, 0
+	db -52, -16, $00, 0
+	db -52,  24, $00, 0
+	db -52,  64, $00, 0
+	db -42, -32, $00, 0
+	db -42,   8, $00, 0
+	db -42,  48, $00, 0
+	db -32, -48, $00, 0
+	db -32,  -8, $00, 0
+	db -32,  32, $00, 0
+	db -32,  72, $00, 0
+	db -22, -64, $00, 0
+	db -22, -24, $00, 0
+	db -22,  16, $00, 0
+	db -22,  56, $00, 0
+	db -12, -40, $00, 0
+	db -12,   0, $00, 0
+	db -12,  40, $00, 0
+	db  -2, -56, $00, 0
+	db  -2, -16, $00, 0
+	db  -2,  24, $00, 0
+	db  -2,  64, $00, 0
+	db   8, -32, $00, 0
+	db   8,   8, $00, 0
+	db   8,  48, $00, 0
+	db  18, -48, $00, 0
+	db  18,  -8, $00, 0
+	db  18,  32, $00, 0
+	db  18,  72, $00, 0
+	db -62, -80, $00, 0
+	db -42, -72, $00, 0
+	db -12, -80, $00, 0
+	db   8, -72, $00, 0
+
+.frame_4
+	db 40 ; size
+	db -72, -48, $00, 0
+	db -72,  -8, $00, 0
+	db -72,  32, $00, 0
+	db -72,  72, $00, 0
+	db -62, -24, $00, 0
+	db -62,  16, $00, 0
+	db -62,  56, $00, 0
+	db -52, -40, $00, 0
+	db -52,   0, $00, 0
+	db -52,  40, $00, 0
+	db -42, -16, $00, 0
+	db -42,  24, $00, 0
+	db -42,  64, $00, 0
+	db -32, -32, $00, 0
+	db -32,   8, $00, 0
+	db -32,  48, $00, 0
+	db -22, -48, $00, 0
+	db -22,  -8, $00, 0
+	db -22,  32, $00, 0
+	db -22,  72, $00, 0
+	db -12, -24, $00, 0
+	db -12,  16, $00, 0
+	db -12,  56, $00, 0
+	db  -2, -40, $00, 0
+	db  -2,   0, $00, 0
+	db  -2,  40, $00, 0
+	db   8, -16, $00, 0
+	db   8,  24, $00, 0
+	db   8,  64, $00, 0
+	db  18, -32, $00, 0
+	db  18,   8, $00, 0
+	db  18,  48, $00, 0
+	db -62, -64, $00, 0
+	db -42, -56, $00, 0
+	db -12, -64, $00, 0
+	db   8, -56, $00, 0
+	db -52, -80, $00, 0
+	db -32, -72, $00, 0
+	db  -2, -80, $00, 0
+	db  18, -72, $00, 0
+
+.frame_5
+	db 40 ; size
+	db -72, -32, $00, 0
+	db -72,   8, $00, 0
+	db -72,  48, $00, 0
+	db -62,  -8, $00, 0
+	db -62,  32, $00, 0
+	db -62,  72, $00, 0
+	db -52, -24, $00, 0
+	db -52,  16, $00, 0
+	db -52,  56, $00, 0
+	db -42,   0, $00, 0
+	db -42,  40, $00, 0
+	db -32, -16, $00, 0
+	db -32,  24, $00, 0
+	db -32,  64, $00, 0
+	db -22, -32, $00, 0
+	db -22,   8, $00, 0
+	db -22,  48, $00, 0
+	db -12,  -8, $00, 0
+	db -12,  32, $00, 0
+	db -12,  72, $00, 0
+	db  -2, -24, $00, 0
+	db  -2,  16, $00, 0
+	db  -2,  56, $00, 0
+	db   8,   0, $00, 0
+	db   8,  40, $00, 0
+	db  18, -16, $00, 0
+	db  18,  24, $00, 0
+	db  18,  64, $00, 0
+	db -62, -48, $00, 0
+	db -42, -40, $00, 0
+	db -12, -48, $00, 0
+	db   8, -40, $00, 0
+	db -52, -64, $00, 0
+	db -32, -56, $00, 0
+	db  -2, -64, $00, 0
+	db  18, -56, $00, 0
+	db -72, -72, $00, 0
+	db -42, -80, $00, 0
+	db -22, -72, $00, 0
+	db   8, -80, $00, 0
+
+.frame_6
+	db 40 ; size
+	db -72, -16, $00, 0
+	db -72,  24, $00, 0
+	db -72,  64, $00, 0
+	db -62,   8, $00, 0
+	db -62,  48, $00, 0
+	db -52,  -8, $00, 0
+	db -52,  32, $00, 0
+	db -52,  72, $00, 0
+	db -42,  16, $00, 0
+	db -42,  56, $00, 0
+	db -32,   0, $00, 0
+	db -32,  40, $00, 0
+	db -22, -16, $00, 0
+	db -22,  24, $00, 0
+	db -22,  64, $00, 0
+	db -12,   8, $00, 0
+	db -12,  48, $00, 0
+	db  -2,  -8, $00, 0
+	db  -2,  32, $00, 0
+	db  -2,  72, $00, 0
+	db   8,  16, $00, 0
+	db   8,  56, $00, 0
+	db  18,   0, $00, 0
+	db  18,  40, $00, 0
+	db -62, -32, $00, 0
+	db -42, -24, $00, 0
+	db -12, -32, $00, 0
+	db   8, -24, $00, 0
+	db -52, -48, $00, 0
+	db -32, -40, $00, 0
+	db  -2, -48, $00, 0
+	db  18, -40, $00, 0
+	db -72, -56, $00, 0
+	db -42, -64, $00, 0
+	db -22, -56, $00, 0
+	db   8, -64, $00, 0
+	db -62, -72, $00, 0
+	db -32, -80, $00, 0
+	db -12, -72, $00, 0
+	db  18, -80, $00, 0
+
+.frame_7
+	db 34 ; size
+	db -72, -48, $00, 0
+	db -72,  -8, $00, 0
+	db -62, -24, $00, 0
+	db -62,  16, $00, 0
+	db -52, -40, $00, 0
+	db -52,   0, $00, 0
+	db -42, -16, $00, 0
+	db -42,  24, $00, 0
+	db -32, -32, $00, 0
+	db -32,   8, $00, 0
+	db -22, -48, $00, 0
+	db -22,  -8, $00, 0
+	db -12, -24, $00, 0
+	db -12,  16, $00, 0
+	db  -2, -40, $00, 0
+	db  -2,   0, $00, 0
+	db   8, -16, $00, 0
+	db   8,  24, $00, 0
+	db  18, -32, $00, 0
+	db  18,   8, $00, 0
+	db  -8, -72, $00, 0
+	db -48, -96, $00, 0
+	db -72,  32, $00, 0
+	db -72,  72, $00, 0
+	db -62,  56, $00, 0
+	db -52,  40, $00, 0
+	db -42,  64, $00, 0
+	db -32,  48, $00, 0
+	db -22,  32, $00, 0
+	db -22,  72, $00, 0
+	db -12,  56, $00, 0
+	db  -2,  40, $00, 0
+	db   8,  64, $00, 0
+	db  18,  48, $00, 0
+
+.frame_8
+	db 18 ; size
+	db -72,  16, $00, 0
+	db -72,  56, $00, 0
+	db -62,  40, $00, 0
+	db -52,  24, $00, 0
+	db -52,  64, $00, 0
+	db -42,  48, $00, 0
+	db -32,  32, $00, 0
+	db -32,  72, $00, 0
+	db -22,  16, $00, 0
+	db -22,  56, $00, 0
+	db -12,  40, $00, 0
+	db  -2,  24, $00, 0
+	db  -2,  64, $00, 0
+	db   8,  48, $00, 0
+	db  18,  32, $00, 0
+	db  18,  72, $00, 0
+	db  -8,  -8, $00, 0
+	db -48, -32, $00, 0
+
+AnimDataBlizzard::
+	frame_table AnimFrameTableBlizzard
+	frame_data  0,  3,   0,   0
+	frame_data  0,  3,  16,   0
+	frame_data  0,  3,  16,   0
+	frame_data  0,  3,  16,   0
+	frame_data  1,  3, -48,   0
+	frame_data  1,  3,  16,   0
+	frame_data  1,  3,  16,   0
+	frame_data  1,  3,  16,   0
+	frame_data  2,  3, -48,   0
+	frame_data  3,  3,   0,   0
+	frame_data  4,  3,   0,   0
+	frame_data  5,  3,   0,   0
+	frame_data  6,  3,   0,   0
+	frame_data  2,  3,   0,   0
+	frame_data  3,  3,   0,   0
+	frame_data  4,  3,   0,   0
+	frame_data  5,  3,   0,   0
+	frame_data  6,  3,   0,   0
+	frame_data  2,  3,   0,   0
+	frame_data  2,  3,  16,   0
+	frame_data  7,  3, -16,   0
+	frame_data  7,  3,  16,   0
+	frame_data  7,  3,  16,   0
+	frame_data  7,  3,  16,   0
+	frame_data  8,  3, -48,   0
+	frame_data  8,  3,  16,   0
+	frame_data  8,  3,  16,   0
+	frame_data  8,  3,  16,   0
+	frame_data  8,  3,  16,   0
+	frame_data  8, -1,   0,   0
+	frame_data  0,  0,   0,   0
+
+AnimFrameTablePsychic::
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+
+.frame_0
+	db 4 ; size
+	db -26, -35, $00, 0
+	db -26,  27, $00, 0 | OAM_XFLIP
+	db  18,  27, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  18, -35, $00, 0 | OAM_YFLIP
+
+.frame_1
+	db 4 ; size
+	db -25, -34, $00, 0
+	db -25,  26, $00, 0 | OAM_XFLIP
+	db  17,  26, $00, 0 | OAM_XFLIP | OAM_YFLIP
+	db  17, -34, $00, 0 | OAM_YFLIP
+
+.frame_2
+	db 4 ; size
+	db -24, -32, $01, 0
+	db -24,  24, $01, 0 | OAM_XFLIP
+	db  16,  24, $01, 0 | OAM_XFLIP | OAM_YFLIP
+	db  16, -32, $01, 0 | OAM_YFLIP
+
+.frame_3
+	db 4 ; size
+	db -23, -28, $02, 0
+	db -23,  20, $02, 0 | OAM_XFLIP
+	db  15,  20, $02, 0 | OAM_XFLIP | OAM_YFLIP
+	db  15, -28, $02, 0 | OAM_YFLIP
+
+.frame_4
+	db 4 ; size
+	db -20, -24, $03, 0
+	db -20,  16, $03, 0 | OAM_XFLIP
+	db  12,  16, $03, 0 | OAM_XFLIP | OAM_YFLIP
+	db  12, -24, $03, 0 | OAM_YFLIP
+
+.frame_5
+	db 8 ; size
+	db -17, -21, $04, 0
+	db -17,  13, $04, 0 | OAM_XFLIP
+	db   9,  13, $04, 0 | OAM_XFLIP | OAM_YFLIP
+	db   9, -21, $04, 0 | OAM_YFLIP
+	db -17, -13, $05, 0
+	db -17,   5, $05, 0 | OAM_XFLIP
+	db   9,   5, $05, 0 | OAM_XFLIP | OAM_YFLIP
+	db   9, -13, $05, 0 | OAM_YFLIP
+
+.frame_6
+	db 12 ; size
+	db -17, -24, $06, 0
+	db -17,  16, $06, 0 | OAM_XFLIP
+	db   9,  16, $06, 0 | OAM_XFLIP | OAM_YFLIP
+	db   9, -24, $06, 0 | OAM_YFLIP
+	db -17, -16, $07, 0
+	db -17,   8, $07, 0 | OAM_XFLIP
+	db   9,   8, $07, 0 | OAM_XFLIP | OAM_YFLIP
+	db   9, -16, $07, 0 | OAM_YFLIP
+	db  -9, -16, $08, 0
+	db  -9,   8, $08, 0 | OAM_XFLIP
+	db   1,   8, $08, 0 | OAM_XFLIP | OAM_YFLIP
+	db   1, -16, $08, 0 | OAM_YFLIP
+
+.frame_7
+	db 12 ; size
+	db -16, -16, $09, 0
+	db -16,   8, $09, 0 | OAM_XFLIP
+	db   8,   8, $09, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8, -16, $09, 0 | OAM_YFLIP
+	db -16,  -8, $0a, 0
+	db -16,   0, $0a, 0 | OAM_XFLIP
+	db   8,   0, $0a, 0 | OAM_XFLIP | OAM_YFLIP
+	db   8,  -8, $0a, 0 | OAM_YFLIP
+	db  -8, -16, $0b, 0
+	db  -8,   8, $0b, 0 | OAM_XFLIP
+	db   0,   8, $0b, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -16, $0b, 0 | OAM_YFLIP
+
+.frame_8
+	db 12 ; size
+	db -11, -12, $0c, 0
+	db  -3, -10, $08, 0
+	db -14,  -4, $0a, 0
+	db -11,   4, $0c, 0 | OAM_XFLIP
+	db   3,   4, $0c, 0 | OAM_XFLIP | OAM_YFLIP
+	db   3, -12, $0c, 0 | OAM_YFLIP
+	db -14,  -4, $0a, 0 | OAM_XFLIP
+	db   6,  -4, $0a, 0 | OAM_XFLIP | OAM_YFLIP
+	db   6,  -4, $0a, 0 | OAM_YFLIP
+	db  -3,   2, $08, 0 | OAM_XFLIP
+	db  -5,   2, $08, 0 | OAM_XFLIP | OAM_YFLIP
+	db  -5, -10, $08, 0 | OAM_YFLIP
+
+.frame_9
+	db 8 ; size
+	db -16,  -4, $0d, 0
+	db   8,  -4, $0d, 0 | OAM_YFLIP
+	db  -4, -16, $0e, 0
+	db  -4,   8, $0e, 0 | OAM_XFLIP
+	db  -8,  -8, $0f, 0
+	db  -8,   0, $0f, 0 | OAM_XFLIP
+	db   0,   0, $0f, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  -8, $0f, 0 | OAM_YFLIP
+
+.frame_10
+	db 4 ; size
+	db  -8,  -8, $10, 0
+	db  -8,   0, $10, 0 | OAM_XFLIP
+	db   0,   0, $10, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  -8, $10, 0 | OAM_YFLIP
+
+.frame_11
+	db 6 ; size
+	db  -8, -12, $11, 0
+	db  -8,   4, $11, 0 | OAM_XFLIP
+	db   0,   4, $11, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0, -12, $11, 0 | OAM_YFLIP
+	db  -8,  -4, $12, 0
+	db   0,  -4, $12, 0 | OAM_XFLIP | OAM_YFLIP
+
+.frame_12
+	db 9 ; size
+	db  -4,  -4, $22, 1
+	db -16,  -4, $13, 0
+	db   8,  -4, $13, 0 | OAM_YFLIP
+	db  -4, -16, $14, 0
+	db  -4,   8, $14, 0 | OAM_XFLIP
+	db  -8,  -8, $15, 0
+	db  -8,   0, $15, 0 | OAM_XFLIP
+	db   0,   0, $15, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  -8, $15, 0 | OAM_YFLIP
+
+.frame_13
+	db 9 ; size
+	db  -4,  -4, $23, 1
+	db -16,  -4, $16, 0
+	db   8,  -4, $16, 0 | OAM_YFLIP
+	db  -4, -16, $17, 0
+	db  -4,   8, $17, 0 | OAM_XFLIP
+	db  -8,  -8, $18, 0
+	db  -8,   0, $18, 0 | OAM_XFLIP
+	db   0,   0, $18, 0 | OAM_XFLIP | OAM_YFLIP
+	db   0,  -8, $18, 0 | OAM_YFLIP
+
+.frame_14
+	db 8 ; size
+	db -16,  -4, $19, 0
+	db   8,  -4, $19, 0 | OAM_YFLIP
+	db  -4, -16, $1a, 0
+	db  -4,   8, $1a, 0 | OAM_XFLIP
+	db  -8,  -8, $1b, 1
+	db  -8,   0, $1b, 1 | OAM_XFLIP
+	db   0,   0, $1b, 1 | OAM_XFLIP | OAM_YFLIP
+	db   0,  -8, $1b, 1 | OAM_YFLIP
+
+.frame_15
+	db 8 ; size
+	db -16,  -4, $1c, 1
+	db   8,  -4, $1c, 1 | OAM_YFLIP
+	db  -4, -16, $1d, 1
+	db  -4,   8, $1d, 1 | OAM_XFLIP
+	db  -8,  -8, $1e, 1
+	db  -8,   0, $1e, 1 | OAM_XFLIP
+	db   0,   0, $1e, 1 | OAM_XFLIP | OAM_YFLIP
+	db   0,  -8, $1e, 1 | OAM_YFLIP
+
+.frame_16
+	db 8 ; size
+	db -16,  -4, $1f, 1
+	db   8,  -4, $1f, 1 | OAM_YFLIP
+	db  -4, -16, $20, 1
+	db  -4,   8, $20, 1 | OAM_XFLIP
+	db  -8,  -8, $21, 1
+	db  -8,   0, $21, 1 | OAM_XFLIP
+	db   0,   0, $21, 1 | OAM_XFLIP | OAM_YFLIP
+	db   0,  -8, $21, 1 | OAM_YFLIP
+
+AnimDataPsychic::
+	frame_table AnimFrameTablePsychic
+	frame_data  0,  3,   0,   0
+	frame_data  1,  3,   0,   0
+	frame_data  2,  3,   0,   0
+	frame_data  3,  3,   0,   0
+	frame_data  4,  3,   0,   0
+	frame_data  5,  3,   0,   0
+	frame_data  6,  3,   0,   0
+	frame_data  7,  3,   0,   0
+	frame_data  8,  3,   0,   0
+	frame_data  9,  3,   0,   0
+	frame_data 10,  3,   0,   0
+	frame_data 11,  3,   0,   0
+	frame_data 12,  3,   0,   0
+	frame_data 13,  3,   0,   0
+	frame_data 14,  4,   0,   0
+	frame_data 15,  5,   0,   0
+	frame_data 16,  6,   0,   0
+	frame_data  0,  3,   0,   0
+	frame_data  1,  3,   0,   0
+	frame_data  2,  3,   0,   0
+	frame_data  3,  3,   0,   0
+	frame_data  4,  3,   0,   0
+	frame_data  5,  3,   0,   0
+	frame_data  6,  3,   0,   0
+	frame_data  7,  3,   0,   0
+	frame_data  8,  3,   0,   0
+	frame_data  9,  3,   0,   0
+	frame_data 10,  3,   0,   0
+	frame_data 11,  3,   0,   0
+	frame_data 12,  3,   0,   0
+	frame_data 13,  3,   0,   0
+	frame_data 14,  5,   0,   0
+	frame_data 15,  6,   0,   0
+	frame_data 16,  7,   0,   0
+	frame_data 16, -1,   0,   0
+	frame_data  0,  0,   0,   0

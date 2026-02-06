@@ -6607,7 +6607,7 @@ TailWagEffect:
 	ldtx de, IfHeadsOpponentCannotAttackText
 	call TossCoin
 	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_LURE
+	ld a, ATK_ANIM_TAIL_WHIP
 	ld [wLoadedAttackAnimation], a
 	ld a, SUBSTATUS2_TAIL_WAG
 	jp ApplySubstatus2ToDefendingCard

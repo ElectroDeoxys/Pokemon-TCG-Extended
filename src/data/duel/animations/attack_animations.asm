@@ -112,14 +112,14 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_MagneticStorm       ; ATK_ANIM_MAGNETIC_STORM
 	dw AttackAnimation_PoisonWhip          ; ATK_ANIM_POISON_WHIP
 	dw AttackAnimation_ThunderWave         ; ATK_ANIM_THUNDER_WAVE
-	dw AttackAnimation_ThunderWave         ; ATK_ANIM_UNUSED_70
+	dw AttackAnimation_TailWhip            ; ATK_ANIM_TAIL_WHIP
 	dw AttackAnimation_Spore               ; ATK_ANIM_SPORE
 	dw AttackAnimation_Hypnosis            ; ATK_ANIM_HYPNOSIS
 	dw AttackAnimation_EnergyConversion    ; ATK_ANIM_ENERGY_CONVERSION
 	dw AttackAnimation_Leer                ; ATK_ANIM_LEER
 	dw AttackAnimation_ConfusionHit        ; ATK_ANIM_CONFUSION_HIT
-	dw AttackAnimation_WaterJets           ; ATK_ANIM_UNUSED_76
-	dw AttackAnimation_Stub1               ; ATK_ANIM_UNUSED_77
+	dw AttackAnimation_Slap                ; ATK_ANIM_SLAP
+	dw AttackAnimation_Guillotine          ; ATK_ANIM_GUILLOTINE
 	dw AttackAnimation_BenchHit            ; ATK_ANIM_BENCH_HIT
 	dw AttackAnimation_Heal                ; ATK_ANIM_HEAL
 	dw AttackAnimation_RecoilHit           ; ATK_ANIM_RECOIL_HIT
@@ -129,7 +129,7 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_Sleep               ; ATK_ANIM_SLEEP
 	dw AttackAnimation_OwnConfusion        ; ATK_ANIM_OWN_CONFUSION
 	dw AttackAnimation_SleepingGas         ; ATK_ANIM_SLEEPING_GAS
-	dw AttackAnimation_QuestionMark        ; ATK_ANIM_UNUSED_81
+	dw AttackAnimation_Teleport            ; ATK_ANIM_TELEPORT
 	dw AttackAnimation_ThunderPlayArea     ; ATK_ANIM_THUNDER_PLAY_AREA
 	dw AttackAnimation_CatPunchPlayArea    ; ATK_ANIM_CAT_PUNCH_PLAY_AREA
 	dw AttackAnimation_FiregiverPlayer     ; ATK_ANIM_FIREGIVER_PLAYER
@@ -137,14 +137,14 @@ PointerTable_AttackAnimation:
 	dw AttackAnimation_HealingWindPlayArea ; ATK_ANIM_HEALING_WIND_PLAY_AREA
 	dw AttackAnimation_Gale                ; ATK_ANIM_GALE
 	dw AttackAnimation_Expand              ; ATK_ANIM_EXPAND
-	dw AttackAnimation_PoisonDamage        ; ATK_ANIM_UNUSED_89
+	dw AttackAnimation_RazorLeaf           ; ATK_ANIM_RAZOR_LEAF
 	dw AttackAnimation_FullHeal            ; ATK_ANIM_FULL_HEAL
-	dw AttackAnimation_SleepUpdateHUD      ; ATK_ANIM_UNUSED_8B
+	dw AttackAnimation_MegaPunch           ; ATK_ANIM_MEGA_PUNCH
 	dw AttackAnimation_SpitPoisonSuccess   ; ATK_ANIM_SPIT_POISON_SUCCESS
 	dw AttackAnimation_GustOfWind          ; ATK_ANIM_GUST_OF_WIND
 	dw AttackAnimation_HealBothSides       ; ATK_ANIM_HEAL_BOTH_SIDES
-	dw AttackAnimation_Stub2               ; ATK_ANIM_UNUSED_8F
-	dw AttackAnimation_Stub2               ; ATK_ANIM_UNUSED_90
+	dw AttackAnimation_LegSweep            ; ATK_ANIM_LEG_SWEEP
+	dw AttackAnimation_TerrorStrike        ; ATK_ANIM_TERROR_STRIKE
 	assert_table_length NUM_ATK_ANIMS
 
 AttackAnimation_Hit:
@@ -754,12 +754,27 @@ AttackAnimation_ConfusionHit:
 	anim_player         DUEL_ANIM_SHOW_DAMAGE
 	anim_end
 
-AttackAnimation_WaterJets:
-	anim_player         DUEL_ANIM_GLOW
-	anim_normal         DUEL_ANIM_WATER_JETS
+AttackAnimation_TailWhip:
+	anim_player    DUEL_ANIM_GLOW
+	anim_player    DUEL_ANIM_TAIL_WHIP
+	anim_normal    DUEL_ANIM_DISTORT
+	anim_opponent  DUEL_ANIM_QUESTION_MARK
 	anim_end
 
-AttackAnimation_Stub1:
+AttackAnimation_Slap:
+	anim_player    DUEL_ANIM_GLOW
+	anim_opponent  DUEL_ANIM_SLAP
+	anim_opponent  DUEL_ANIM_HIT
+	anim_normal    DUEL_ANIM_SMALL_SHAKE_X
+	anim_opponent  DUEL_ANIM_SHOW_DAMAGE
+	anim_end
+
+AttackAnimation_Guillotine:
+	anim_player    DUEL_ANIM_GLOW
+	anim_opponent  DUEL_ANIM_GUILLOTINE
+	anim_opponent  DUEL_ANIM_HIT
+	anim_normal    DUEL_ANIM_SMALL_SHAKE_X
+	anim_opponent  DUEL_ANIM_SHOW_DAMAGE
 	anim_end
 
 AttackAnimation_BenchHit:
@@ -805,8 +820,9 @@ AttackAnimation_SleepingGas:
 	anim_opponent       DUEL_ANIM_WHITE_GAS
 	anim_end
 
-AttackAnimation_QuestionMark:
-	anim_opponent       DUEL_ANIM_QUESTION_MARK
+AttackAnimation_Teleport:
+	anim_player    DUEL_ANIM_GLOW
+	anim_player    DUEL_ANIM_TELEPORT
 	anim_end
 
 AttackAnimation_ThunderPlayArea:
@@ -857,9 +873,12 @@ AttackAnimation_Expand:
 	anim_opponent       DUEL_ANIM_SHOW_DAMAGE
 	anim_end
 
-AttackAnimation_PoisonDamage:
-	anim_player         DUEL_ANIM_POISON
-	anim_player         DUEL_ANIM_SHOW_DAMAGE
+AttackAnimation_RazorLeaf:
+	anim_player    DUEL_ANIM_GLOW
+	anim_opponent  DUEL_ANIM_RAZOR_LEAF
+	anim_opponent  DUEL_ANIM_HIT
+	anim_normal    DUEL_ANIM_SMALL_SHAKE_X
+	anim_opponent  DUEL_ANIM_SHOW_DAMAGE
 	anim_end
 
 AttackAnimation_FullHeal:
@@ -867,9 +886,12 @@ AttackAnimation_FullHeal:
 	anim_normal         DUEL_ANIM_UPDATE_HUD
 	anim_end
 
-AttackAnimation_SleepUpdateHUD:
-	anim_player         DUEL_ANIM_SLEEP
-	anim_normal         DUEL_ANIM_UPDATE_HUD
+AttackAnimation_MegaPunch:
+	anim_player    DUEL_ANIM_GLOW
+	anim_opponent  DUEL_ANIM_MEGA_PUNCH
+	anim_opponent  DUEL_ANIM_HIT
+	anim_normal    DUEL_ANIM_SMALL_SHAKE_X
+	anim_opponent  DUEL_ANIM_SHOW_DAMAGE
 	anim_end
 
 AttackAnimation_SpitPoisonSuccess:
@@ -890,5 +912,19 @@ AttackAnimation_HealBothSides:
 	anim_opponent       DUEL_ANIM_HEAL
 	anim_end
 
-AttackAnimation_Stub2:
+AttackAnimation_LegSweep:
+	anim_player    DUEL_ANIM_GLOW
+	anim_opponent  DUEL_ANIM_KICK
+	anim_opponent  DUEL_ANIM_HIT
+	anim_normal    DUEL_ANIM_SMALL_SHAKE_X
+	anim_opponent  DUEL_ANIM_SHOW_DAMAGE
+	anim_end
+
+AttackAnimation_TerrorStrike:
+	anim_player    DUEL_ANIM_GLOW
+	anim_player    DUEL_ANIM_LEER
+	anim_normal    DUEL_ANIM_FLASH
+	anim_opponent  DUEL_ANIM_HIT
+	anim_normal    DUEL_ANIM_SMALL_SHAKE_X
+	anim_opponent  DUEL_ANIM_SHOW_DAMAGE
 	anim_end
