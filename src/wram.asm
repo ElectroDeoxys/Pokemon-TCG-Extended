@@ -1100,6 +1100,11 @@ wTempAIPokemonCard:: ; cdf3
 wCurCardCanKO:: ; cdf4
 	ds $1
 
+; stores HP difference between a pre-evolution
+; and its evolution, for AI damage calculations
+wEvolutionHPDifference:: ; cdf8
+       ds $1
+
 wSamePokemonCardID:: ; cdf9
 	ds $2
 

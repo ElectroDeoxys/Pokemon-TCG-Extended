@@ -153,6 +153,13 @@ AIDecideEvolution:
 	ld a, b
 	ld [wTempAI], a
 	ldh [hTempPlayAreaLocation_ff9d], a
+
+	; store HP difference between cards
+	ld a, [wLoadedCard1HP] ; evolution card
+	ld hl, wLoadedCard2HP ; pre-evolution card
+	sub [hl]
+	ld [wEvolutionHPDifference], a
+
 	ld a, $80
 	ld [wAIScore], a
 	call AIDecideSpecialEvolutions
@@ -248,9 +255,21 @@ AIDecideEvolution:
 	ld a, [wTempAI]
 	or a
 	jr nz, .check_mr_mime
+	; temporarily change HP
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	push af
+	push hl
+	ld b, a
+	ld a, [wEvolutionHPDifference]
+	add b
+	ld [hl], a
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call CheckIfDefendingPokemonCanKnockOut
+	pop hl
+	pop bc
+	ld [hl], b
 	jr nc, .check_mr_mime
 	ld a, 5
 	call AIDiscourage
