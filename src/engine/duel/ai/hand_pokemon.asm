@@ -350,7 +350,7 @@ AIDecideEvolution:
 	cphl MYSTERIOUS_FOSSIL
 	jr z, .mysterious_fossil
 	ld a, [wLoadedCard1AIInfo]
-	; bug, should mask out HAS_EVOLUTION flag first
+	and $0f
 	cp AI_INFO_ENCOURAGE_EVO
 	jr nz, .pikachu_deck
 	ld a, 2

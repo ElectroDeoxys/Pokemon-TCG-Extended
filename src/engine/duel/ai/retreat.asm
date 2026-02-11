@@ -711,7 +711,7 @@ AIDecideBenchPokemonToSwitchTo:
 ; lower AI score
 .check_if_has_bench_utility
 	ld a, [wLoadedCard1AIInfo]
-	; bug, should mask out HAS_EVOLUTION flag first
+	and $0f
 	cp AI_INFO_BENCH_UTILITY
 	jr nz, .mysterious_fossil_or_clefairy_doll
 	ld a, 2

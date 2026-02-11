@@ -1,9 +1,6 @@
 Sfx_VinePull_Ch1:
 	sfx_pan TRUE, TRUE
-	; bug, sfx_sweep_down duration can only go up to 7,
-	; a 9 here results in sweep with 1 in length
-	; sfx_sweep_down 9, 6
-	db $90, (9 << 4) | 6 | AUD1SWEEP_DOWN
+	sfx_sweep_down 7, 6
 	sfx_env 6, -3
 	sfx_duty 1
 	sfx_freq $7df

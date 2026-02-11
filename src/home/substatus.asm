@@ -126,7 +126,7 @@ HandleDamageReductionExceptSubstatus2::
 	ret
 
 .halve_damage
-	sla d ; bug, should be sra d
+	sra d
 	rr e
 	bit 0, e
 	ret z
@@ -147,7 +147,7 @@ HandleDamageReductionExceptSubstatus2::
 	ret
 
 .kabuto_armor
-	sla d ; bug, should be sra d
+	sra d
 	rr e
 	bit 0, e
 	ret z
