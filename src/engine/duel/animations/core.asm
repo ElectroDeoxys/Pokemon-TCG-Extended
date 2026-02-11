@@ -48,6 +48,8 @@ PlayLoadedDuelAnimation::
 
 	farcall ClearSpriteVRAMBuffer
 	call ZeroObjectPositions
+	ld a, $01
+	ld [wVBlankOAMCopyToggle], a
 
 	call GetAnimationData
 ; hl: pointer
