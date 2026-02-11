@@ -147,8 +147,12 @@ INCLUDE "data/card_pointers.asm"
 SECTION "Cards", ROMX
 INCLUDE "data/cards.asm"
 
-SECTION "Bank 20", ROMX
-INCLUDE "engine/bank20.asm"
+SECTION "Load Gfx", ROMX
+INCLUDE "engine/overworld/load_overworld.asm"
+INCLUDE "engine/gfx/load_gfx.asm"
+INCLUDE "engine/overworld/animation.asm"
+INCLUDE "engine/overworld/map_events.asm"
+INCLUDE "engine/gfx/sprite_null_animation.asm"
 
 SECTION "Gfx", ROMX
 INCLUDE "engine/gfx/gfx_table_pointers.asm"

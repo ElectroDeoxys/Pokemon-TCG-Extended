@@ -2055,7 +2055,7 @@ AIDecide_PokemonBreeder:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	ld c, a
-	lb de, $00, $00
+	lb de, $00, PLAY_AREA_ARENA
 
 ; find highest score in wce08
 .loop_score_1
@@ -2068,7 +2068,7 @@ AIDecide_PokemonBreeder:
 ; store this score to wce06
 	ld a, [hl]
 	ld [wce06], a
-; store this PLay Area location to wce07
+; store this Play Area location to wce07
 	ld a, e
 	ld [wce07], a
 
@@ -2172,7 +2172,7 @@ AIDecide_PokemonBreeder:
 ; store the score in wce06
 	ld a, b
 	ld [wce06], a
-; store this PLay Area location to wce07
+; store this Play Area location to wce07
 	ld a, e
 	ld [wce07], a
 

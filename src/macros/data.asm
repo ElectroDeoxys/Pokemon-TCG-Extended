@@ -74,7 +74,7 @@ MACRO? gfx
 ENDM
 
 MACRO? frame_table
-	db BANK(\1) - BANK("Bank 20") ; maybe use better reference for Bank20?
+	db BANK(\1) - BANK("Load Gfx")
 	dw \1
 ENDM
 

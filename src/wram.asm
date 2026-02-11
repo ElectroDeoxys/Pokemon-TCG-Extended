@@ -12,7 +12,9 @@ wTempCardCollection:: ; c000
 
 NEXTU
 
-wc000:: ; c000
+; used in DrawLabeledTextBox to draw the top border
+; of a label text box (with top border symbols and NPC name)
+wLabeledTextBoxTopBorder:: ; c000
 	ds $100
 
 NEXTU
@@ -533,7 +535,7 @@ wDuelistType:: ; cc0d
 wOpponentDeckID:: ; cc0e
 	ds $1
 
-wcc0f:: ; cc0f
+wUnused_cc0f:: ; cc0f
 	ds $1
 
 ; index (0-1) of the attack or Pokemon Power being used by the player's arena card
@@ -608,8 +610,9 @@ wAIMinDamage:: ; ccbb
 wAIMaxDamage:: ; ccbc
 	ds $1
 
-; only written, never read
-wccbd:: ; ccbd
+; holds amount of HP recovered in ApplyAndAnimateHPRecovery
+; only written to, never read
+wUnused_HPRecoverAmount:: ; ccbd
 	ds $2
 
 ; damage dealt by an attack to a target
@@ -631,7 +634,8 @@ wTempNonTurnDuelistCardID:: ; ccc4
 	ds $2
 
 ; the status condition of the defending Pokemon is loaded here after an attack
-wccc5:: ; ccc5
+; only written to, never read
+wUnused_DefendingPkmnStatus:: ; ccc5
 	ds $1
 
 ; *_ATTACK constants for selected attack
@@ -673,7 +677,8 @@ wStatusConditionQueue:: ; ccce
 wIsDamageToSelf:: ; cce6
 	ds $1
 
-wcce7:: ; cce7
+; set to 0, never used
+wUnused_cce7:: ; cce7
 	ds $1
 
 wDuelFinishParam:: ; cce8
@@ -687,7 +692,10 @@ wDeckName:: ; cce9
 wTempPlayAreaLocation_cceb:: ; cceb
 	ds $1
 
-wccec:: ; ccec
+; when sending attack data to opponent, is set to TRUE
+; seems to be used to avoid sending duplicate data
+; when using an attack through Metronome
+wSentAttackDataToLinkOpponent:: ; ccec
 	ds $1
 
 ; used by the effect functions to return the cause of an effect to fail
@@ -1051,7 +1059,8 @@ wAIRetreatFlags:: ; cdda
 wAITriedAttack:: ; cddb
 	ds $1
 
-wcddc:: ; cddc
+; set to 0, never used
+wUnused_cddc:: ; cddc
 	ds $1
 
 ; used to temporarily backup wPlayAreaAIScore values.
@@ -1952,19 +1961,15 @@ wBGMapCGBMode:: ; d23c
 wBGMapBank:: ; d23d
 	ds $1
 
-UNION
-
 ; palette loaded from Palette* data
 wLoadedPalData:: ; d23e
-	ds $50
 
-NEXTU
+; temporary frame data loaded in HandleAnimationFrame
+wLoadedFrameData:: ; d23e
 
 ; where BG map data or other compressed data is decompressed
 wDecompressionBuffer:: ; d23e
-	ds $40
-
-ENDU
+	ds $50
 
 wDecompressionRowWidth:: ; d28e
 	ds $1
@@ -2033,8 +2038,8 @@ wNumLoadedFramesetSubgroups:: ; d322
 
 ; holds the current state of each event
 ; each corresponding to a MAP_EVENT_* constant
-; if $0, doors are closed / deck machines are deactivated
-; if $1, doors are open / deck machines are activated
+; if FALSE, doors are closed / deck machines are deactivated
+; if TRUE, doors are open / deck machines are activated
 wOWMapEvents:: ; d323
 	ds NUM_MAP_EVENTS
 
@@ -2380,12 +2385,29 @@ wGeneralSaveDataByteCount:: ; d4c8
 ; stores tile offset in VRAM
 wVRAMTileOffset:: ; d4ca
 
-wd4ca:: ; d4ca
+; for LoadOBPalette
+; which object palette to load to (DMG)
+wWhichOBP:: ; d4ca
+
+; temporary storage of variables when
+; calculating booster chances of cards
+wTempBoosterChances:: ; d4ca
+
+; current frame to load when processing an animation
+wWhichAnimationFrame:: ; d4ca
 	ds $1
 
-; bottom bit stores which VRAM bank to draw certain gfx
+; for LoadOBPalette
+; which object palette index to load to (CGB)
+wWhichOBPalIndex:: ; d4cb
+
+; for LoadBGPalette
+; which background palette index to load to (CGB)
+wWhichBGPalIndex:: ; d4cb
+
+; stores which VRAM bank to draw certain gfx
 ; $0 = VRAM0, $1 = VRAM1
-wd4cb:: ; d4cb
+wWhichVRAMBank:: ; d4cb
 	ds $1
 
 	ds $3

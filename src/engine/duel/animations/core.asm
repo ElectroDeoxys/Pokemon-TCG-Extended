@@ -93,13 +93,12 @@ PlayLoadedDuelAnimation::
 	ld [wAnimationQueue], a ; push an animation to the queue
 
 	xor a
-	ld [wVRAMTileOffset], a
-	ld [wd4cb], a
-
+	ld [wWhichOBP], a ; OBP0
+	ld [wWhichOBPalIndex], a ; palette index 0
 	ld a, [hli] ; ANIM_PALETTE_ID
-	farcall LoadPaletteData
-	ld a, [hli] ; ANIM_SPRITE_ANIM_ID
+	farcall LoadOBPalette
 
+	ld a, [hli] ; ANIM_SPRITE_ANIM_ID
 	push af
 	ld a, [hli] ; ANIM_SPRITE_ANIM_FLAGS
 	ld [wAnimFlags], a
@@ -474,10 +473,10 @@ Func_1cb5e:
 	xor a
 	ld [wDamageCharAnimDelay], a
 	ld [wVRAMTileOffset], a
-	ld [wd4cb], a
+	ld [wWhichOBPalIndex], a
 
 	ld a, PALETTE_DUEL_DAMAGE
-	farcall LoadPaletteData
+	farcall LoadOBPalette
 
 	call DrawDamageAnimationNumbers
 	ld hl, wDuelAnimEffectiveness

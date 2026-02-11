@@ -1,59 +1,3 @@
-; loads the graphics and permissions for the current map
-; according to its Map Header configurations
-; if it's the Overworld Map, also prints the map name
-; and sets up the volcano animation
-LoadMapGfxAndPermissions:
-	call ClearSRAMBGMaps
-	xor a
-	ld [wTextBoxFrameType], a
-	call LoadMapTilesAndPals
-	farcall LoadPermissionMap
-	farcall Func_c9c7
-	call SafelyCopyBGMapFromSRAMToVRAM
-	farcall Func_c3ff
-	ld a, [wCurMap]
-	cp OVERWORLD_MAP
-	ret nz
-	farcall OverworldMap_PrintMapName
-	farcall OverworldMap_InitVolcanoSprite
-	ret
-
-; reloads the map tiles and permissions
-; after a textbox has been closed
-ReloadMapAfterTextClose:
-	call ClearSRAMBGMaps
-	lb bc, 0, 0
-	call LoadTilemap_ToSRAM
-	farcall Func_c9c7
-	call SafelyCopyBGMapFromSRAMToVRAM
-	farcall Func_c3ee
-	ret
-
-LoadMapTilesAndPals:
-	farcall LoadMapHeader
-	lb bc, 0, 0
-	call LoadTilemap_ToSRAM
-
-	ld a, LOW(v0Tiles1 / TILE_SIZE)
-	ld [wVRAMTileOffset], a
-	xor a ; VRAM0
-	ld [wd4cb], a
-	call LoadTilesetGfx
-
-	xor a ; LOW(v0Tiles2 / TILE_SIZE)
-	ld [wVRAMTileOffset], a
-	ld a, [wd291]
-	ld [wd4cb], a
-	ld a, [wCurMapInitialPalette]
-	call SetBGPAndLoadedPal
-	ld a, [wd291]
-	ld [wd4cb], a
-	ld a, [wCurMapPalette]
-	or a
-	call nz, SetBGPAndLoadedPal
-.asm_80076
-	ret
-
 ; loads the BG map corresponding to wCurTilemap to SRAM
 ; bc = starting coordinates
 LoadTilemap_ToSRAM:
@@ -355,7 +299,7 @@ ClearSRAMBGMaps:
 	pop hl
 	ret
 
-; l - map data offset (0,2,4,6,8 for banks 0,1,2,3,4)
+; l - GFXTABLE_* constant (banks 0,1,2,3,4)
 ; a - map index (inside of the given bank)
 GetMapDataPointer:
 	push bc
@@ -393,9 +337,9 @@ LoadGraphicsPointerFromHL:
 ; a = sprite index within the data map
 ; output:
 ; a = number of tiles in sprite
-Func_8025b:
+LoadSpriteGfx:
 	push hl
-	ld l, $4 ; Sprites
+	ld l, GFXTABLE_SPRITES
 	call GetMapDataPointer
 	call LoadGraphicsPointerFromHL
 	ld a, [hl] ; sprite number of tiles
@@ -409,7 +353,7 @@ Func_8025b:
 	ret
 
 ; loads graphics data pointed by wTempPointer in wTempPointerBank
-; to the VRAM bank according to wd4cb, in address pointed by wVRAMPointer
+; to the VRAM bank according to wWhichVRAMBank, in address pointed by wVRAMPointer
 LoadGfxDataFromTempPointerToVRAMBank:
 	call GetTileOffsetPointerAndSwitchVRAM
 	jr LoadGfxDataFromTempPointer
@@ -441,7 +385,7 @@ LoadGfxDataFromTempPointer:
 
 ; convert wVRAMTileOffset to address in VRAM
 ; and stores it in wVRAMPointer
-; switches VRAM according to wd4cb
+; switches VRAM according to wWhichVRAMBank
 GetTileOffsetPointerAndSwitchVRAM:
 ; address of the tile offset is wVRAMTileOffset * $10 + $8000
 	ld a, [wVRAMTileOffset]
@@ -454,15 +398,15 @@ GetTileOffsetPointerAndSwitchVRAM:
 	add HIGH(v0Tiles0) ; $80
 	ld [wVRAMPointer + 1], a
 
-; if bottom bit in wd4cb is not set = VRAM0
-; if bottom bit in wd4cb is set     = VRAM1
-	ld a, [wd4cb]
+; if bottom bit in wWhichVRAMBank is not set = VRAM0
+; if bottom bit in wWhichVRAMBank is set     = VRAM1
+	ld a, [wWhichVRAMBank]
 	and $1
 	jp BankswitchVRAM
 
 ; converts wVRAMTileOffset to address in VRAM
 ; and stores it in wVRAMPointer
-; switches VRAM according to wd4cb
+; switches VRAM according to wWhichVRAMBank
 ; then changes wVRAMPointer such that
 ; addresses to Tiles0 is changed to Tiles2
 GetTileOffsetPointerAndSwitchVRAM_Tiles0ToTiles2:
@@ -481,7 +425,7 @@ GetTileOffsetPointerAndSwitchVRAM_Tiles0ToTiles2:
 ; loads tileset gfx to VRAM corresponding to wCurTileset
 LoadTilesetGfx:
 	push hl
-	ld l, $02 ; Tilesets
+	ld l, GFXTABLE_TILESETS
 	ld a, [wCurTileset]
 	call GetMapDataPointer
 	call LoadGraphicsPointerFromHL
@@ -515,16 +459,16 @@ LoadTilesetGfx:
 ; used to sequentially copy gfx data in the order
 ; v0Tiles1 -> v0Tiles2 -> v1Tiles1 -> v1Tiles2
 
-	lb bc, $0, LOW(v0Tiles2 / TILE_SIZE) ; $00
+	lb bc, BANK("VRAM0"), LOW(v0Tiles2 / TILE_SIZE) ; $00
 	call .CopyGfxData
 	jr z, .done
-	lb bc, $0, LOW(v0Tiles1 / TILE_SIZE) ; $80
+	lb bc, BANK("VRAM0"), LOW(v0Tiles1 / TILE_SIZE) ; $80
 	call .CopyGfxData
 	jr z, .done
-	lb bc, $1, LOW(v1Tiles2 / TILE_SIZE) ; $00
+	lb bc, BANK("VRAM1"), LOW(v1Tiles2 / TILE_SIZE) ; $00
 	call .CopyGfxData
 	jr z, .done
-	lb bc, $1, LOW(v1Tiles1 / TILE_SIZE) ; $80
+	lb bc, BANK("VRAM1"), LOW(v1Tiles1 / TILE_SIZE) ; $80
 	call .CopyGfxData
 
 .done
@@ -537,14 +481,14 @@ LoadTilesetGfx:
 ; c must match with wVRAMTileOffset
 ; if c = $00, copies it to Tiles2
 ; if c = $80, copies it to Tiles1
-; b must match with VRAM bank in wd4cb
+; b must match with VRAM bank in wWhichVRAMBank
 ; prepares next call to this routine if data wasn't fully copied
 ; so that it copies to the right VRAM section
 .CopyGfxData
 	push hl
 	push bc
 	push de
-	ld a, [wd4cb]
+	ld a, [wWhichVRAMBank]
 	cp b
 	jr nz, .skip
 	ld a, [wVRAMTileOffset]
@@ -553,7 +497,7 @@ LoadTilesetGfx:
 	bit 7, a
 	jr nz, .skip
 
-; (wd4cb == b) and
+; (wWhichVRAMBank == b) and
 ; bit 7 in c is same as bit 7 in wVRAMTileOffset
 	ld a, c
 	add $80
@@ -591,7 +535,7 @@ LoadTilesetGfx:
 	push hl
 	ldh a, [hBankVRAM]
 	push af
-	ld a, [wd4cb]
+	ld a, [wWhichVRAMBank]
 	and $01
 	call BankswitchVRAM
 	call CopyGfxDataFromTempBank
@@ -623,9 +567,9 @@ LoadTilesetGfx:
 	pop af
 	; if it overflows
 	; (which means a tile group after Tiles2)
-	; then set wd4cb for VRAM1
-	ld a, [hl] ; wd4cb
-	adc $00
+	; then set wWhichVRAMBank for VRAM1
+	ld a, [hl] ; wWhichVRAMBank
+	adc 0
 	ld [hl], a
 
 .skip
@@ -639,7 +583,7 @@ LoadTilesetGfx:
 
 ; gets pointer to BG map with ID from wCurTilemap
 Func_803b9:
-	ld l, $00 ; Tilemaps
+	ld l, GFXTABLE_TILEMAPS
 	ld a, [wCurTilemap]
 	call GetMapDataPointer
 	call LoadGraphicsPointerFromHL
@@ -647,10 +591,13 @@ Func_803b9:
 	ld [wCurTileset], a
 	ret
 
-; sets BGP in wLoadedPalData (if any)
-; then loads the rest of the palette data
-; a = palette index to load
-SetBGPAndLoadedPal:
+; loads background palette (PALETTE_*) given in a
+; each palette has data for DMG BGP and for CGB RGB palettes
+; DMG:
+; - if palette has BGP data, load it
+; CGB:
+; - load palette starting from background palette index [wWhichBGPalIndex]
+LoadBGPalette:
 	push hl
 	push bc
 	push de
@@ -660,7 +607,7 @@ SetBGPAndLoadedPal:
 	or a
 	jr z, .skip_pal
 	ld c, a
-	ld a, [wd4cb]
+	ld a, [wWhichBGPalIndex]
 	ld b, a
 	call LoadPaletteDataFromHL
 .skip_pal
@@ -717,8 +664,13 @@ LoadPaletteDataFromHL:
 	pop hl
 	ret
 
-; loads palette index a
-LoadPaletteData:
+; loads object palette (PALETTE_*) given in a
+; each palette has data for DMG OBP and for CGB RGB palettes
+; DMG:
+; - if [wWhichOBP] is 1, then load to OBP1, otherwise start load to OBP0
+; CGB:
+; - load palette starting from object palette index [wWhichOBPalIndex]
+LoadOBPalette:
 	push hl
 	push bc
 	push de
@@ -731,7 +683,7 @@ LoadPaletteData:
 
 ; non-zero size, so load it from data
 	ld c, a
-	ld a, [wd4cb]
+	ld a, [wWhichOBPalIndex]
 	; ensure it's a palette index starting from wObjectPalettesCGB
 	or NUM_BACKGROUND_PALETTES
 	ld b, a
@@ -748,7 +700,7 @@ LoadPaletteDataToBuffer:
 	push hl
 	push bc
 	push de
-	ld l, $08 ; Palettes
+	ld l, GFXTABLE_PALETTES
 	call GetMapDataPointer
 	call LoadGraphicsPointerFromHL
 
@@ -768,441 +720,12 @@ LoadPaletteDataToBuffer:
 	pop hl
 	ret
 
-ClearNumLoadedFramesetSubgroups:
-	xor a
-	ld [wNumLoadedFramesetSubgroups], a
-	ret
-
-; for the current map, process the animation
-; data of its corresponding OW tiles
-DoMapOWFrame:
-	push hl
-	push bc
-	ld a, [wCurMap]
-	add a ; *2
-	ld c, a
-	ld b, $0
-	ld hl, MapOWFramesetPointers
-	add hl, bc
-	; got pointer for current map's frameset data
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call ProcessOWFrameset
-	pop bc
-	pop hl
-	ret
-
-; processes the OW frameset pointed by hl
-ProcessOWFrameset:
-	push hl
-	push bc
-	ld a, l
-	ld [wCurMapOWFrameset], a
-	ld a, h
-	ld [wCurMapOWFrameset + 1], a
-	xor a
-	ld [wNumLoadedFramesetSubgroups], a
-	call ClearOWFramesetSubgroups
-	ld c, 0
-.loop_subgroups
-	call LoadOWFramesetSubgroup
-	call GetOWFramesetSubgroupData
-	ld a, [wCurOWFrameDataOffset]
-	cp -1
-	jr z, .next_subgroup
-	ld a, [wNumLoadedFramesetSubgroups]
-	inc a
-	ld [wNumLoadedFramesetSubgroups], a
-	call LoadOWFrameTiles
-	call StoreOWFramesetSubgroup
-.next_subgroup
-	inc c
-	ld a, c
-	cp NUM_OW_FRAMESET_SUBGROUPS
-	jr c, .loop_subgroups
-	pop bc
-	pop hl
-	ret
-
-; for each of the loaded frameset subgroups
-; load their tiles and advance their durations
-DoLoadedFramesetSubgroupsFrame::
-	ld a, [wNumLoadedFramesetSubgroups]
-	or a
-	ret z
-	ld c, 0
-.loop_subgroups
-	call LoadOWFramesetSubgroup
-	cp -1
-	jr z, .next_subgroup
-	call LoadOWFrameTiles
-	call StoreOWFramesetSubgroup
-.next_subgroup
-	inc c
-	ld a, c
-	cp NUM_OW_FRAMESET_SUBGROUPS
-	jr c, .loop_subgroups
-	ret
-
-; from subgroup in register c, get
-; from OW frameset in hl its corresponding
-; data offset and duration
-GetOWFramesetSubgroupData:
-	push hl
-	push bc
-	push hl
-	ld b, $0
-	add hl, bc
-	ld c, [hl]
-	pop hl
-	add hl, bc
-	ld a, [hl] ; beginning of OW_FRAME
-	cp -1
-	jr z, .end_of_list ; skip if it's end of list
-	ld a, c ; store its addr offset
-	ld [wCurOWFrameDataOffset], a
-	xor a
-	ld [wCurOWFrameDuration], a
-.end_of_list
-	pop bc
-	pop hl
-	ret
-
-; if wCurOWFrameDuration == 0, processes next frame for OW map
-; by loading the tiles corresponding to current frame
-; if wCurOWFrameDuration != 0, then simply decrements it and returns
-LoadOWFrameTiles:
-	ld a, [wCurOWFrameDuration]
-	or a
-	jr z, .next_frame
-	dec a
-	ld [wCurOWFrameDuration], a
-	ret
-
-.next_frame
-	push hl
-	push de
-	push bc
-	; add wCurOWFrameDataOffset to pointer in wCurMapOWFrameset
-	ld a, [wCurOWFrameDataOffset]
-	ld c, a
-	ld a, [wCurMapOWFrameset]
-	add c
-	ld l, a
-	ld a, [wCurMapOWFrameset + 1]
-	adc 0
-	ld h, a
-
-	ld a, [hl]
-	ld [wCurOWFrameDuration], a
-.loop_ow_frames
-	call .LoadTile
-	ld de, OW_FRAME_STRUCT_SIZE
-	add hl, de ; next frame data
-	ld a, c
-	add e
-	ld c, a
-	; OW frames with 0 duration are processed
-	; at the same time as the previous frame data
-	ld a, [hl]
-	or a
-	jr z, .loop_ow_frames
-
-	cp -1
-	ld a, c
-	ld [wCurOWFrameDataOffset], a
-	jr nz, .done
-
-; there's no more frames to process for this map
-; reset the frame data offset
-	pop bc
-	push bc
-	ld a, [wCurOWFrameDuration]
-	push af
-	ld a, [wCurMapOWFrameset]
-	ld l, a
-	ld a, [wCurMapOWFrameset + 1]
-	ld h, a
-	call GetOWFramesetSubgroupData
-	pop af
-	ld [wCurOWFrameDuration], a
-
-.done
-	pop bc
-	pop de
-	pop hl
-	ret
-
-; load a single tile specified
-; by the OW frame data pointed by hl
-.LoadTile
-	push hl
-	push bc
-	push de
-	ldh a, [hBankVRAM]
-	push af
-	inc hl
-	ld a, [hli] ; tile number
-	xor $80
-	ld e, a
-	ld a, [hli] ; VRAM bank
-
-; get tile offset of register e
-; and load its address in de
-	push hl
-	call BankswitchVRAM
-	ld h, $00
-	ld l, e
-	add hl, hl ; *2
-	add hl, hl ; *4
-	add hl, hl ; *8
-	add hl, hl ; *16
-	ld de, v0Tiles1 ; or v1Tiles1
-	add hl, de
-	ld e, l
-	ld d, h
-	pop hl
-
-	ld a, [hli] ; bank of tileset
-	add BANK(MapOWFramesetPointers)
-	ld [wTempPointerBank], a
-	ld a, [hli] ; tileset addr lo byte
-	ld c, a
-	ld a, [hli] ; tileset addr hi byte
-	ld b, a
-	ld a, [hli] ; tile number lo byte
-	ld h, [hl]  ; tile number hi byte
-	ld l, a
-	add hl, hl ; *2
-	add hl, hl ; *4
-	add hl, hl ; *8
-	add hl, hl ; *16
-	add hl, bc
-	; copy tile from the tileset to VRAM addr
-	lb bc, 1, TILE_SIZE
-	call CopyGfxDataFromTempBank
-	pop af
-	call BankswitchVRAM
-	pop de
-	pop bc
-	pop hl
-	ret
-
-; fills wOWFramesetSubgroups with $ff
-ClearOWFramesetSubgroups:
-	push hl
-	push bc
-	ld hl, wOWFramesetSubgroups
-	ld c, NUM_OW_FRAMESET_SUBGROUPS * 2
-	ld a, $ff
-.loop
-	ld [hli], a
-	dec c
-	jr nz, .loop
-	pop bc
-	pop hl
-	ret
-
-; copies wOWFramesetSubgroups + 2*c
-; to wCurOWFrameDataOffset and wCurOWFrameDuration
-; also returns its current duration
-LoadOWFramesetSubgroup:
-	push hl
-	push bc
-	ld hl, wOWFramesetSubgroups
-	sla c
-	ld b, $00
-	add hl, bc
-	ld a, [hli]
-	ld [wCurOWFrameDataOffset], a
-	push af
-	ld a, [hl]
-	ld [wCurOWFrameDuration], a
-	pop af
-	pop bc
-	pop hl
-	ret
-
-; copies wCurOWFrameDataOffset and wCurOWFrameDuration
-; to wOWFramesetSubgroups + 2*c
-StoreOWFramesetSubgroup:
-	push hl
-	push bc
-	ld hl, wOWFramesetSubgroups
-	sla c
-	ld b, $00
-	add hl, bc
-	ld a, [wCurOWFrameDataOffset]
-	ld [hli], a
-	ld a, [wCurOWFrameDuration]
-	ld [hl], a
-	pop bc
-	pop hl
-	ret
-
-INCLUDE "data/map_ow_framesets.asm"
-
-; clears wOWMapEvents
-Func_80b7a:
-	push hl
-	push bc
-	ld c, $b
-	ld hl, wOWMapEvents
-	xor a
-.loop
-	ld [hli], a
-	dec c
-	jr nz, .loop
-	pop bc
-	pop hl
-	ret
-
-; a = MAP_EVENT_* constant
-Func_80b89:
-	push hl
-	push bc
-	push af
-	ld c, a
-	ld a, TRUE
-	ld [wWriteBGMapToSRAM], a
-	ld b, $0
-	ld hl, wOWMapEvents
-	add hl, bc
-	ld a, [hl]
-	or a
-	jr z, .asm_80ba0
-	ld a, c
-	call Func_80baa
-.asm_80ba0
-	pop af
-	pop bc
-	pop hl
-	ret
-
-Func_80ba4:
-	push af
-	xor a
-	ld [wWriteBGMapToSRAM], a
-	pop af
-;	fallthrough
-
-Func_80baa:
-	push hl
-	push bc
-	push de
-	ld c, a
-	ld a, [wCurTilemap]
-	push af
-	ld a, [wBGMapBank]
-	push af
-	ld a, [wBGMapWidth]
-	push af
-	ld a, [wBGMapHeight]
-	push af
-	ld a, [wBGMapPermissionDataPtr]
-	push af
-	ld a, [wBGMapPermissionDataPtr + 1]
-	push af
-
-	ld b, $0
-	ld hl, wOWMapEvents
-	add hl, bc
-	ld a, $1
-	ld [hl], a
-
-	ld a, c
-	add a
-	ld c, a
-	ld b, $0
-	ld hl, .TilemapPointers
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
-	ld a, [hl]
-	ld [wCurTilemap], a
-
-	push bc
-	call LoadTilemap
-	pop bc
-	srl b
-	ld a, c
-	rrca
-	and $0f
-	swap a ; * $10
-	add b
-	ld c, a
-	ld b, $0
-	ld hl, wPermissionMap
-	add hl, bc
-	farcall DecompressPermissionMap
-	pop af
-	ld [wBGMapPermissionDataPtr + 1], a
-	pop af
-	ld [wBGMapPermissionDataPtr], a
-	pop af
-	ld [wBGMapHeight], a
-	pop af
-	ld [wBGMapWidth], a
-	pop af
-	ld [wBGMapBank], a
-	pop af
-	ld [wCurTilemap], a
-	pop de
-	pop bc
-	pop hl
-	ret
-
-.TilemapPointers
-	table_width 2
-	dw .PokemonDomeDoor      ; MAP_EVENT_POKEMON_DOME_DOOR
-	dw .HallOfHonorDoor      ; MAP_EVENT_HALL_OF_HONOR_DOOR
-	dw .FightingDeckMachine  ; MAP_EVENT_FIGHTING_DECK_MACHINE
-	dw .RockDeckMachine      ; MAP_EVENT_ROCK_DECK_MACHINE
-	dw .WaterDeckMachine     ; MAP_EVENT_WATER_DECK_MACHINE
-	dw .LightningDeckMachine ; MAP_EVENT_LIGHTNING_DECK_MACHINE
-	dw .GrassDeckMachine     ; MAP_EVENT_GRASS_DECK_MACHINE
-	dw .PsychicDeckMachine   ; MAP_EVENT_PSYCHIC_DECK_MACHINE
-	dw .ScienceDeckMachine   ; MAP_EVENT_SCIENCE_DECK_MACHINE
-	dw .FireDeckMachine      ; MAP_EVENT_FIRE_DECK_MACHINE
-	dw .ChallengeMachine     ; MAP_EVENT_CHALLENGE_MACHINE
-	assert_table_length NUM_MAP_EVENTS
-
-; x coordinate, y coordinate, non-cgb tilemap, cgb tilemap
-.PokemonDomeDoor
-	db $16, $00, TILEMAP_POKEMON_DOME_DOOR_MAP_EVENT
-.HallOfHonorDoor
-	db $0e, $00, TILEMAP_HALL_OF_HONOR_DOOR_MAP_EVENT
-.FightingDeckMachine
-	db $06, $02, TILEMAP_DECK_MACHINE_MAP_EVENT
-.RockDeckMachine
-	db $0a, $02, TILEMAP_DECK_MACHINE_MAP_EVENT
-.WaterDeckMachine
-	db $0e, $02, TILEMAP_DECK_MACHINE_MAP_EVENT
-.LightningDeckMachine
-	db $12, $02, TILEMAP_DECK_MACHINE_MAP_EVENT
-.GrassDeckMachine
-	db $0e, $0a, TILEMAP_DECK_MACHINE_MAP_EVENT
-.PsychicDeckMachine
-	db $12, $0a, TILEMAP_DECK_MACHINE_MAP_EVENT
-.ScienceDeckMachine
-	db $0e, $12, TILEMAP_DECK_MACHINE_MAP_EVENT
-.FireDeckMachine
-	db $12, $12, TILEMAP_DECK_MACHINE_MAP_EVENT
-.ChallengeMachine
-	db $0a, $00, TILEMAP_CHALLENGE_MACHINE_MAP_EVENT
-
 ; draws [wCurPortrait] at coordinates bc, corresponding
 ; to portrait slot given in [wPortraitSlot] and
 ; emotion given in [wPortraitEmotion]
 _DrawPortrait::
 	push hl
-	ld l, $0a ; Portraits
+	ld l, GFXTABLE_PORTRAITS
 	ld a, [wCurPortrait]
 	call GetMapDataPointer
 	call LoadGraphicsPointerFromHL
@@ -1217,20 +740,14 @@ _DrawPortrait::
 	; adjusts wTempPointer according to emotion
 	; each emotion portrait is 0x240 bytes long
 	ld a, [wPortraitEmotion]
-	ld e, a
-	add a
-	add a
-	add a
-	add e  ; *$9
-	swap a
-	ld e, a
-	and $f0
-	ld l, a
-	ld a, e
-	and $0f
-	ld h, a ; *$90
-	add hl, hl ; *$120
-	add hl, hl ; *$240
+	or a
+	ld hl, 0
+	jr z, .got_emotion_ptr
+	dec a
+	ld hl, $240
+	jr z, .got_emotion_ptr
+	ld hl, $240 * 2
+.got_emotion_ptr
 	ld a, [wTempPointer]
 	ld e, a
 	ld a, [wTempPointer + 1]
@@ -1400,9 +917,3 @@ _DrawPortrait::
 	db PALETTE_STEPHANIE_PORTRAIT ; PORTRAIT_STEPHANIE
 	db PALETTE_AARON_PORTRAIT     ; PORTRAIT_AARON
 	assert_table_length NUM_PORTRAITS
-
-SpriteNullAnimationPointer::
-	dw SpriteNullAnimationFrame
-
-SpriteNullAnimationFrame:
-	db 0

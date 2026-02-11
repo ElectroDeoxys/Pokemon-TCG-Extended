@@ -54,7 +54,7 @@ PokemonDomeLoadMap:
 
 PokemonDomeCloseTextBox:
 	ld a, MAP_EVENT_HALL_OF_HONOR_DOOR
-	farcall Func_80b89
+	farcall ApplyOWMapEventChangeIfEventSet
 	ret
 
 Script_Courtney:

@@ -233,7 +233,7 @@ Func_c1b1:
 	ld [wTempPlayerDirection], a
 	call ClearEvents
 	call DetermineImakuniAndChallengeHall
-	farcall Func_80b7a
+	farcall ClearOWMapEvents
 	farcall ClearMasterBeatenList
 	farcall ChallengeMachine_Reset
 	xor a
@@ -676,10 +676,10 @@ Func_c49c:
 
 Func_c4b9:
 	xor a
-	ld [wVRAMTileOffset], a
-	ld [wd4cb], a
+	ld [wWhichOBP], a ; OBP0
+	ld [wWhichOBPalIndex], a ; palette index 0
 	ld a, PALETTE_29
-	farcall LoadPaletteData
+	farcall LoadOBPalette
 	ld a, SPRITE_ANIM_RED_NPC_UP
 	ld [wPlayerSpriteBaseAnimation], a
 

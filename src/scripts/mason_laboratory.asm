@@ -29,7 +29,7 @@ MasonLabLoadMap:
 
 MasonLabCloseTextBox:
 	ld a, MAP_EVENT_CHALLENGE_MACHINE
-	farcall Func_80b89
+	farcall ApplyOWMapEventChangeIfEventSet
 	ret
 
 ; Lets you access the Challenge Machine if available
@@ -274,7 +274,7 @@ Func_d703:
 	or a
 	ret z
 	ld a, MAP_EVENT_CHALLENGE_MACHINE
-	farcall Func_80ba4
+	farcall SetOWMapEvent
 	ret
 
 Preload_DrMason:
