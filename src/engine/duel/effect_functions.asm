@@ -7688,8 +7688,10 @@ MorphEffect:
 	ld a, [wLoadedCard2Stage]
 	or a
 	jr nz, .loop_deck ; skip non-Basic cards
+	push hl
 	ld hl, wLoadedCard2ID
 	cphl DITTO
+	pop hl
 	jr z, .loop_deck ; skip other Ditto cards
 	ldh a, [hTempCardIndex_ff98]
 	or a
