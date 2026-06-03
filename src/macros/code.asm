@@ -18,6 +18,9 @@ ENDM
 MACRO? farcall
 	rst $28
 	IF _NARG == 1
+		ASSERT WARN, BANK(\1) != 0, "Unnecessary farcall to home bank"
+		ASSERT WARN, BANK(\1) != BANK(@), "Unnecessary farcall to same bank"
+
 		db BANK(\1)
 		dw \1
 	ELSE
