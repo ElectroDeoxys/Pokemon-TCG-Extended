@@ -28,3 +28,13 @@ CallIndirect::
 
 CallHL::
 	jp hl
+
+; farcall b:hl
+FarCallHL::
+	ld a, [hBankROM]
+	push af
+	ld a, b
+	call BankswitchROM
+	call CallHL
+	pop af
+	jp BankswitchROM

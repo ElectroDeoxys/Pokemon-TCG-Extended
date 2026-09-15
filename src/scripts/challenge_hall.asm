@@ -556,7 +556,3 @@ Func_f5e9:
 	cp $00
 	jr nz, .asm_f5fa
 	ret
-
-Func_f602:
-	set_event_false EVENT_CHALLENGE_CUP_OPPONENT_CHOSEN
-	ret

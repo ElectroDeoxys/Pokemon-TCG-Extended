@@ -15,14 +15,14 @@ FireClubPressedA:
 
 SlowpokePaintingObjectTable:
 	db 16, 2, NORTH
-	dw Script_ee76
+	dab Script_ee76
 	db $00
 
 ; Given a table with data of the form:
 ;	X, Y, Dir, Script
 ; Searches to try to find a match, and starts a Script if possible
 FindExtraInteractableObjects:
-	ld de, 5
+	ld de, 6
 .loop
 	ld a, [hl]
 	or a
@@ -48,6 +48,8 @@ FindExtraInteractableObjects:
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
+	inc hl
+	ld a, [hl]
 	pop hl
 	call SetNextScript
 	scf

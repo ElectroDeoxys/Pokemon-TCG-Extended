@@ -96,7 +96,7 @@ OverworldModePointers:
 	dw UpdateOverworldMap
 	dw CallHandlePlayerMoveMode
 	dw SetScriptData
-	dw EnterScript
+	dw EnterFarScript
 
 UpdateOverworldMap:
 	farcall OverworldMap_Update
@@ -109,21 +109,14 @@ SetScriptData:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
 	farcall SetNewScriptNPC
+	ld [wNextScriptBank], a
 	ld a, c
 	ld [wNextScript], a
 	ld a, b
 	ld [wNextScript + 1], a
 	ld a, OWMODE_SCRIPT
 	ld [wOverworldMode], a
-;	fallthrough
-
-
-EnterScript:
-	ld hl, wNextScript
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
+	jp EnterFarScript
 
 ; closes dialogue window. seems to be for other things as well.
 CloseAdvancedDialogueBox:

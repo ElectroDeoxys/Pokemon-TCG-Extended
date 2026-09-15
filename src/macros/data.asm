@@ -36,7 +36,19 @@ MACRO? bigdw ; big-endian word
 ENDM
 
 MACRO? dab
-	dwb \1, BANK(\1)
+	IF ISCONST(\1)
+		dwb NULL, $0
+	ELSE
+		dwb \1, BANK(\1)
+	ENDC
+ENDM
+
+MACRO? dba
+	IF ISCONST(\1)
+		dbw $0, NULL
+	ELSE
+		dbw BANK(\1), \1
+	ENDC
 ENDM
 
 MACRO? rgb

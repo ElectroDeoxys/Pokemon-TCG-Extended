@@ -26,7 +26,7 @@ _PauseMenu_Status:
 
 	; draw each medal if collected
 	ld a, EVENT_MEDAL_FLAGS
-	farcall GetEventValue
+	call GetEventValue
 	ld b, a
 
 	push bc

@@ -22,6 +22,54 @@ SECTION "Overworld Scripting", ROMX
 INCLUDE "engine/overworld/overworld.asm"
 INCLUDE "engine/overworld/scripting.asm"
 
+SECTION "Scripts", ROMX
+INCLUDE "scripts/mason_laboratory.asm"
+INCLUDE "scripts/deck_machine_room.asm"
+
+INCLUDE "scripts/ishiharas_house.asm"
+
+INCLUDE "scripts/fighting_club_entrance.asm"
+INCLUDE "scripts/fighting_club_lobby.asm"
+INCLUDE "scripts/fighting_club.asm"
+
+INCLUDE "scripts/rock_club_entrance.asm"
+INCLUDE "scripts/rock_club_lobby.asm"
+INCLUDE "scripts/rock_club.asm"
+
+INCLUDE "scripts/water_club_entrance.asm"
+INCLUDE "scripts/water_club_lobby.asm"
+INCLUDE "scripts/water_club.asm"
+
+INCLUDE "scripts/lightning_club_entrance.asm"
+INCLUDE "scripts/lightning_club_lobby.asm"
+INCLUDE "scripts/lightning_club.asm"
+
+INCLUDE "scripts/grass_club_entrance.asm"
+INCLUDE "scripts/grass_club_lobby.asm"
+INCLUDE "scripts/grass_club.asm"
+
+INCLUDE "scripts/psychic_club_entrance.asm"
+INCLUDE "scripts/psychic_club_lobby.asm"
+INCLUDE "scripts/psychic_club.asm"
+
+INCLUDE "scripts/science_club_entrance.asm"
+INCLUDE "scripts/science_club_lobby.asm"
+INCLUDE "scripts/science_club.asm"
+
+INCLUDE "scripts/fire_club_entrance.asm"
+INCLUDE "scripts/fire_club_lobby.asm"
+INCLUDE "scripts/fire_club.asm"
+
+INCLUDE "scripts/challenge_hall_entrance.asm"
+INCLUDE "scripts/challenge_hall_lobby.asm"
+INCLUDE "scripts/challenge_hall.asm"
+
+INCLUDE "scripts/pokemon_dome_entrance.asm"
+INCLUDE "scripts/pokemon_dome.asm"
+INCLUDE "scripts/hall_of_honor.asm"
+
+INCLUDE "scripts/gift_center.asm"
+
 SECTION "Menus 2", ROMX
 INCLUDE "engine/menus/init_menu.asm"
 INCLUDE "engine/menus/status.asm"

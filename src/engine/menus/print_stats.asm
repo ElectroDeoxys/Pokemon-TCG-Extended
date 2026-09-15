@@ -17,7 +17,7 @@ LoadCollectedMedalTilemaps:
 	call PrintTextNoDelay
 	ld hl, MedalCoordsAndTilemaps
 	ld a, EVENT_MEDAL_FLAGS
-	farcall GetEventValue
+	call GetEventValue
 	or a
 	jr z, .done ; no medals?
 
@@ -225,7 +225,7 @@ PrintMedalCount:
 	push bc
 	farcall TryGiveMedalPCPacks
 	ld a, EVENT_MEDAL_COUNT
-	farcall GetEventValue
+	call GetEventValue
 	ld l, a
 	ld h, $00
 	call ConvertWordToNumericalDigits

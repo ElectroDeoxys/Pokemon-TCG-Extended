@@ -58,17 +58,18 @@ DEF NUM_OWMAP_NAMES EQU const_value
 ; Size of map data. See data/npc_map_data.asm and data/map_objects.asm
 ; for more info on what these represent
 DEF NPC_MAP_SIZE          EQU $06
-DEF MAP_OBJECT_SIZE       EQU $09
+DEF MAP_OBJECT_SIZE       EQU $0a
 
 ; Most of these aren't fully understood so the names aren't great
-DEF MAP_SCRIPT_NPCS          EQU $00
-DEF MAP_SCRIPT_POST_NPC      EQU $02
-DEF MAP_SCRIPT_OBJECTS       EQU $04
-DEF MAP_SCRIPT_PRESSED_A     EQU $06
-DEF MAP_SCRIPT_LOAD_MAP      EQU $08
-DEF MAP_SCRIPT_AFTER_DUEL    EQU $0a
-DEF MAP_SCRIPT_MOVED_PLAYER  EQU $0c
-DEF MAP_SCRIPT_CLOSE_TEXTBOX EQU $0e
+	const_def 0, 3
+	const MAP_SCRIPT_NPCS
+	const MAP_SCRIPT_POST_NPC
+	const MAP_SCRIPT_OBJECTS
+	const MAP_SCRIPT_PRESSED_A
+	const MAP_SCRIPT_LOAD_MAP
+	const MAP_SCRIPT_AFTER_DUEL
+	const MAP_SCRIPT_MOVED_PLAYER
+	const MAP_SCRIPT_CLOSE_TEXTBOX
 
 DEF NUM_MAP_SCRIPTS EQU 8
 

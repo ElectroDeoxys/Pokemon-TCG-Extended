@@ -12,346 +12,346 @@
 ; e: load map/closed text box
 
 MapScripts::
-	table_width NUM_MAP_SCRIPTS * 2
+	table_width NUM_MAP_SCRIPTS * 3
 
 ; OVERWORLD_MAP
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadOverworld
-	dw NULL
-	dw NULL
-	dw NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadOverworld
+	dab NULL
+	dab NULL
+	dab NULL
 
 ; MASON_LABORATORY
-	dw MasonLabNPCS
-	dw NULL
-	dw MasonLabObjects
-	dw MasonLabPressedA
-	dw MasonLabLoadMap
-	dw MasonLaboratoryAfterDuel
-	dw NULL
-	dw MasonLabCloseTextBox
+	dab MasonLabNPCS
+	dab NULL
+	dab MasonLabObjects
+	dab MasonLabPressedA
+	dab MasonLabLoadMap
+	dab MasonLaboratoryAfterDuel
+	dab NULL
+	dab MasonLabCloseTextBox
 
 ; DECK_MACHINE_ROOM
-	dw DeckMachineRoomNPCS
-	dw NULL
-	dw DeckMachineRoomObjects
-	dw NULL
-	dw NULL
-	dw DeckMachineRoomAfterDuel
-	dw NULL
-	dw DeckMachineRoomCloseTextBox
+	dab DeckMachineRoomNPCS
+	dab NULL
+	dab DeckMachineRoomObjects
+	dab NULL
+	dab NULL
+	dab DeckMachineRoomAfterDuel
+	dab NULL
+	dab DeckMachineRoomCloseTextBox
 
 ; ISHIHARAS_HOUSE
-	dw IshiharasHouseNPCS
-	dw NULL
-	dw IshiharasHouseObjects
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
+	dab IshiharasHouseNPCS
+	dab NULL
+	dab IshiharasHouseObjects
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
 
 ; FIGHTING_CLUB_ENTRANCE
-	dw FightingClubEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadClubEntrance
-	dw ClubEntranceAfterDuel
-	dw NULL
-	dw NULL
+	dab FightingClubEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadClubEntrance
+	dab ClubEntranceAfterDuel
+	dab NULL
+	dab NULL
 
 ; FIGHTING_CLUB_LOBBY
-	dw FightingClubLobbyNPCS
-	dw NULL
-	dw FightingClubLobbyObjects
-	dw NULL
-	dw NULL
-	dw FightingClubLobbyAfterDuel
-	dw NULL
-	dw NULL
+	dab FightingClubLobbyNPCS
+	dab NULL
+	dab FightingClubLobbyObjects
+	dab NULL
+	dab NULL
+	dab FightingClubLobbyAfterDuel
+	dab NULL
+	dab NULL
 
 ; FIGHTING_CLUB
-	dw FightingClubNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw FightingClubAfterDuel
-	dw NULL
-	dw NULL
+	dab FightingClubNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab FightingClubAfterDuel
+	dab NULL
+	dab NULL
 
 ; ROCK_CLUB_ENTRANCE
-	dw RockClubEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadClubEntrance
-	dw ClubEntranceAfterDuel
-	dw NULL
-	dw NULL
+	dab RockClubEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadClubEntrance
+	dab ClubEntranceAfterDuel
+	dab NULL
+	dab NULL
 
 ; ROCK_CLUB_LOBBY
-	dw RockClubLobbyNPCS
-	dw NULL
-	dw RockClubLobbyObjects
-	dw NULL
-	dw NULL
-	dw RockClubLobbyAfterDuel
-	dw NULL
-	dw NULL
+	dab RockClubLobbyNPCS
+	dab NULL
+	dab RockClubLobbyObjects
+	dab NULL
+	dab NULL
+	dab RockClubLobbyAfterDuel
+	dab NULL
+	dab NULL
 
 ; ROCK_CLUB
-	dw RockClubNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw RockClubAfterDuel
-	dw NULL
-	dw NULL
+	dab RockClubNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab RockClubAfterDuel
+	dab NULL
+	dab NULL
 
 ; WATER_CLUB_ENTRANCE
-	dw WaterClubEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadClubEntrance
-	dw ClubEntranceAfterDuel
-	dw NULL
-	dw NULL
+	dab WaterClubEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadClubEntrance
+	dab ClubEntranceAfterDuel
+	dab NULL
+	dab NULL
 
 ; WATER_CLUB_LOBBY
-	dw WaterClubLobbyNPCS
-	dw NULL
-	dw WaterClubLobbyObjects
-	dw NULL
-	dw NULL
-	dw WaterClubLobbyAfterDuel
-	dw NULL
-	dw NULL
+	dab WaterClubLobbyNPCS
+	dab NULL
+	dab WaterClubLobbyObjects
+	dab NULL
+	dab NULL
+	dab WaterClubLobbyAfterDuel
+	dab NULL
+	dab NULL
 
 ; WATER_CLUB
-	dw WaterClubNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw WaterClubAfterDuel
-	dw WaterClubMovePlayer
-	dw NULL
+	dab WaterClubNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab WaterClubAfterDuel
+	dab WaterClubMovePlayer
+	dab NULL
 
 ; LIGHTNING_CLUB_ENTRANCE
-	dw LightningClubEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadClubEntrance
-	dw ClubEntranceAfterDuel
-	dw NULL
-	dw NULL
+	dab LightningClubEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadClubEntrance
+	dab ClubEntranceAfterDuel
+	dab NULL
+	dab NULL
 
 ; LIGHTNING_CLUB_LOBBY
-	dw LightningClubLobbyNPCS
-	dw NULL
-	dw LightningClubLobbyObjects
-	dw NULL
-	dw NULL
-	dw LightningClubLobbyAfterDuel
-	dw NULL
-	dw NULL
+	dab LightningClubLobbyNPCS
+	dab NULL
+	dab LightningClubLobbyObjects
+	dab NULL
+	dab NULL
+	dab LightningClubLobbyAfterDuel
+	dab NULL
+	dab NULL
 
 ; LIGHTNING_CLUB
-	dw LightningClubNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LightningClubAfterDuel
-	dw NULL
-	dw NULL
+	dab LightningClubNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LightningClubAfterDuel
+	dab NULL
+	dab NULL
 
 ; GRASS_CLUB_ENTRANCE
-	dw GrassClubEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadClubEntrance
-	dw GrassClubEntranceAfterDuel
-	dw NULL
-	dw NULL
+	dab GrassClubEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadClubEntrance
+	dab GrassClubEntranceAfterDuel
+	dab NULL
+	dab NULL
 
 ; GRASS_CLUB_LOBBY
-	dw GrassClubLobbyNPCS
-	dw NULL
-	dw GrassClubLobbyObjects
-	dw NULL
-	dw NULL
-	dw GrassClubLobbyAfterDuel
-	dw NULL
-	dw NULL
+	dab GrassClubLobbyNPCS
+	dab NULL
+	dab GrassClubLobbyObjects
+	dab NULL
+	dab NULL
+	dab GrassClubLobbyAfterDuel
+	dab NULL
+	dab NULL
 
 ; GRASS_CLUB
-	dw GrassClubNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw GrassClubAfterDuel
-	dw NULL
-	dw NULL
+	dab GrassClubNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab GrassClubAfterDuel
+	dab NULL
+	dab NULL
 
 ; PSYCHIC_CLUB_ENTRANCE
-	dw PsychicClubEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadClubEntrance
-	dw ClubEntranceAfterDuel
-	dw NULL
-	dw NULL
+	dab PsychicClubEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadClubEntrance
+	dab ClubEntranceAfterDuel
+	dab NULL
+	dab NULL
 
 ; PSYCHIC_CLUB_LOBBY
-	dw PsychicClubLobbyNPCS
-	dw NULL
-	dw PsychicClubLobbyObjects
-	dw NULL
-	dw PsychicClubLobbyLoadMap
-	dw PsychicClubLobbyAfterDuel
-	dw NULL
-	dw NULL
+	dab PsychicClubLobbyNPCS
+	dab NULL
+	dab PsychicClubLobbyObjects
+	dab NULL
+	dab PsychicClubLobbyLoadMap
+	dab PsychicClubLobbyAfterDuel
+	dab NULL
+	dab NULL
 
 ; PSYCHIC_CLUB
-	dw PsychicClubNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw PsychicClubAfterDuel
-	dw NULL
-	dw NULL
+	dab PsychicClubNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab PsychicClubAfterDuel
+	dab NULL
+	dab NULL
 
 ; SCIENCE_CLUB_ENTRANCE
-	dw ScienceClubEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadClubEntrance
-	dw ClubEntranceAfterDuel
-	dw NULL
-	dw NULL
+	dab ScienceClubEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadClubEntrance
+	dab ClubEntranceAfterDuel
+	dab NULL
+	dab NULL
 
 ; SCIENCE_CLUB_LOBBY
-	dw ScienceClubLobbyNPCS
-	dw NULL
-	dw ScienceClubLobbyObjects
-	dw NULL
-	dw NULL
-	dw ScienceClubLobbyAfterDuel
-	dw NULL
-	dw NULL
+	dab ScienceClubLobbyNPCS
+	dab NULL
+	dab ScienceClubLobbyObjects
+	dab NULL
+	dab NULL
+	dab ScienceClubLobbyAfterDuel
+	dab NULL
+	dab NULL
 
 ; SCIENCE_CLUB
-	dw ScienceClubNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw ScienceClubAfterDuel
-	dw NULL
-	dw NULL
+	dab ScienceClubNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab ScienceClubAfterDuel
+	dab NULL
+	dab NULL
 
 ; FIRE_CLUB_ENTRANCE
-	dw FireClubEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw LoadClubEntrance
-	dw ClubEntranceAfterDuel
-	dw NULL
-	dw NULL
+	dab FireClubEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab LoadClubEntrance
+	dab ClubEntranceAfterDuel
+	dab NULL
+	dab NULL
 
 ; FIRE_CLUB_LOBBY
-	dw FireClubLobbyNPCS
-	dw NULL
-	dw FireClubLobbyObjects
-	dw FireClubPressedA
-	dw NULL
-	dw FireClubLobbyAfterDuel
-	dw NULL
-	dw NULL
+	dab FireClubLobbyNPCS
+	dab NULL
+	dab FireClubLobbyObjects
+	dab FireClubPressedA
+	dab NULL
+	dab FireClubLobbyAfterDuel
+	dab NULL
+	dab NULL
 
 ; FIRE_CLUB
-	dw FireClubNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw FireClubAfterDuel
-	dw NULL
-	dw NULL
+	dab FireClubNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab FireClubAfterDuel
+	dab NULL
+	dab NULL
 
 ; CHALLENGE_HALL_ENTRANCE
-	dw ChallengeHallEntranceNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
+	dab ChallengeHallEntranceNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
+	dab NULL
 
 ; CHALLENGE_HALL_LOBBY
-	dw ChallengeHallLobbyNPCS
-	dw NULL
-	dw ChallengeHallLobbyObjects
-	dw NULL
-	dw ChallengeHallLobbyLoadMap
-	dw NULL
-	dw NULL
-	dw NULL
+	dab ChallengeHallLobbyNPCS
+	dab NULL
+	dab ChallengeHallLobbyObjects
+	dab NULL
+	dab ChallengeHallLobbyLoadMap
+	dab NULL
+	dab NULL
+	dab NULL
 
 ; CHALLENGE_HALL
-	dw ChallengeHallNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw ChallengeHallLoadMap
-	dw ChallengeHallAfterDuel
-	dw NULL
-	dw NULL
+	dab ChallengeHallNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab ChallengeHallLoadMap
+	dab ChallengeHallAfterDuel
+	dab NULL
+	dab NULL
 
 ; POKEMON_DOME_ENTRANCE
-	dw PokemonDomeEntranceNPCS
-	dw NULL
-	dw PokemonDomeEntranceObjects
-	dw NULL
-	dw PokemonDomeEntranceLoadMap
-	dw NULL
-	dw NULL
-	dw PokemonDomeEntranceCloseTextBox
+	dab PokemonDomeEntranceNPCS
+	dab NULL
+	dab PokemonDomeEntranceObjects
+	dab NULL
+	dab PokemonDomeEntranceLoadMap
+	dab NULL
+	dab NULL
+	dab PokemonDomeEntranceCloseTextBox
 
 ; POKEMON_DOME
-	dw PokemonDomeNPCS
-	dw NULL
-	dw NULL
-	dw NULL
-	dw PokemonDomeLoadMap
-	dw PokemonDomeAfterDuel
-	dw PokemonDomeMovePlayer
-	dw PokemonDomeCloseTextBox
+	dab PokemonDomeNPCS
+	dab NULL
+	dab NULL
+	dab NULL
+	dab PokemonDomeLoadMap
+	dab PokemonDomeAfterDuel
+	dab PokemonDomeMovePlayer
+	dab PokemonDomeCloseTextBox
 
 ; HALL_OF_HONOR
-	dw HallOfHonorNPCS
-	dw NULL
-	dw HallOfHonorObjects
-	dw NULL
-	dw HallOfHonorLoadMap
-	dw NULL
-	dw NULL
-	dw NULL
+	dab HallOfHonorNPCS
+	dab NULL
+	dab HallOfHonorObjects
+	dab NULL
+	dab HallOfHonorLoadMap
+	dab NULL
+	dab NULL
+	dab NULL
 
 	assert_table_length NUM_MAPS

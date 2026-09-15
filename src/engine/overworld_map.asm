@@ -166,7 +166,7 @@ OverworldMap_GetOWMapID:
 	jr nz, .got_map
 	ld c, a
 	ld a, EVENT_ISHIHARAS_HOUSE_MENTIONED
-	farcall GetEventValue
+	call GetEventValue
 	or a
 	ld a, c
 	jr nz, .got_map
@@ -226,7 +226,7 @@ OverworldMap_InitCursorSprite:
 	ld [wOverworldMapCursorAnimation], a
 	call StartNewSpriteAnimation
 	ld a, EVENT_MASON_LAB_STATE
-	farcall GetEventValue
+	call GetEventValue
 	or a
 	jr nz, .visited_lab
 	ld c, SPRITE_ANIM_FLAGS

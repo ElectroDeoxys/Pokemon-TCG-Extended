@@ -42,9 +42,9 @@ MasonLabPressedA:
 
 ChallengeMachineObjectTable:
 	db 10, 4, NORTH
-	dw Script_ChallengeMachine
+	dab Script_ChallengeMachine
 	db 12, 4, NORTH
-	dw Script_ChallengeMachine
+	dab Script_ChallengeMachine
 	db $00
 
 Script_ChallengeMachine:

@@ -107,7 +107,7 @@ GameEvent_Credits::
 
 GetReceivedLegendaryCards::
 	ld a, EVENT_RECEIVED_LEGENDARY_CARDS
-	farcall GetEventValue
+	call GetEventValue
 	call EnableSRAM
 	ld [sReceivedLegendaryCards], a
 	jp DisableSRAM

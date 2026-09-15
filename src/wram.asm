@@ -1819,6 +1819,8 @@ wNPCDuelistDirection:: ; d0c5
 ; used to store the location of an overworld script, which is jumped to later
 wNextScript:: ; d0c6
 	ds $2
+wNextScriptBank::
+	ds $1
 
 wCurrentNPCNameTx:: ; d0c8
 	ds $2
@@ -1833,8 +1835,6 @@ wOBP0Backup:: ; d10c
 	ds $1
 
 wOBP1Backup:: ; d10d
-	ds $1
-
 	ds $1
 
 wReloadOverworldCallbackPtr:: ; d10f
@@ -2144,6 +2144,9 @@ wLoadedNPCs:: ; d34a
 wLoadedNPCTempIndex:: ; d3aa
 	ds $1
 
+wMapScriptBank::
+	ds $1
+
 wTempNPC:: ; d3ab
 	ds $1
 
@@ -2169,7 +2172,7 @@ wNPCAnimFlags:: ; d3b2
 wNPCSpriteID:: ; d3b3
 	ds $1
 
-	ds $2
+	ds $1
 
 ; ID of the NPC being interacted with in Script
 wScriptNPC:: ; d3b6

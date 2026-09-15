@@ -25,20 +25,21 @@ LoadNPCSpriteData:
 	pop hl
 	ret
 
-; Loads Name into wCurrentNPCNameTx and gets Script ptr into bc
+; Loads Name into wCurrentNPCNameTx and gets Script ptr into a:bc
 GetNPCNameAndScript:
 	push hl
 	call GetNPCHeaderPointer
-	ld bc, NPC_DATA_SCRIPT_PTR
+	ld bc, NPC_DATA_NAME_TEXT + 1
 	add hl, bc
-	ld c, [hl]
-	inc hl
-	ld b, [hl]
-	inc hl
-	ld a, [hli]
-	ld [wCurrentNPCNameTx], a
-	ld a, [hli]
+	ld a, [hld]
 	ld [wCurrentNPCNameTx + 1], a
+	ld a, [hld]
+	ld [wCurrentNPCNameTx], a
+	ld b, [hl]
+	dec hl
+	ld c, [hl]
+	dec hl
+	ld a, [hl]
 	pop hl
 	ret
 

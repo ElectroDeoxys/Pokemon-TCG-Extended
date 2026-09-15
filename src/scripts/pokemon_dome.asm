@@ -49,6 +49,7 @@ PokemonDomeLoadMap:
 	get_event_value EVENT_POKEMON_DOME_IN_MENU
 	or a
 	ret z
+	ld a, BANK(Script_f80b)
 	ld bc, Script_f80b
 	jp SetNextScript
 

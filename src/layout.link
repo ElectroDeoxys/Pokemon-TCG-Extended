@@ -37,6 +37,7 @@ ROMX $02
 	"Menus 1"
 ROMX $03
 	"Overworld Scripting"
+	"Scripts"
 ROMX $04
 	"Menus 2"
 	"Color"
