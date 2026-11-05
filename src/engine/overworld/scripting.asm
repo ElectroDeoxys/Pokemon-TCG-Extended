@@ -6,6 +6,7 @@ SetNextNPCAndScript:
 	farcall SetNewScriptNPC
 	pop bc
 	push hl
+	ld [wNextScriptBank], a
 	ld hl, wNextScript
 	ld [hl], c
 	inc hl

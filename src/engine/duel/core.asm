@@ -5316,6 +5316,7 @@ DisplayUsePokemonPowerScreen::
 	call EmptyScreen
 	call LoadDuelCardSymbolTiles
 	call LoadDuelCheckPokemonScreenTiles
+	call SetDefaultConsolePalettes
 	call PrintPlayAreaCardInformationAndLocation
 	lb de, 1, 4
 	call InitTextPrinting

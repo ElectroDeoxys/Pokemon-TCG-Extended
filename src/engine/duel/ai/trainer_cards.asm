@@ -16,8 +16,6 @@ _AIProcessHandTrainerCards:
 	ret z
 
 	push hl
-	ld a, [wAITrainerCardPhase]
-	ld d, a
 	ld hl, AITrainerCardLogic
 .loop_data
 	xor a
@@ -27,6 +25,8 @@ _AIProcessHandTrainerCards:
 	jp z, .pop_hl
 
 ; compare input to first byte in data and continue if equal.
+	ld d, a
+	ld a, [wAITrainerCardPhase]
 	cp d
 	jp nz, .inc_hl_by_6
 
@@ -58,7 +58,6 @@ _AIProcessHandTrainerCards:
 
 ; found Trainer card
 	push hl
-	push de
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 
@@ -77,7 +76,6 @@ _AIProcessHandTrainerCards:
 	jr c, .next_in_data
 
 ; call routine to decide whether to play Trainer card
-	pop de
 	pop hl
 	push hl
 	call CallIndirect
@@ -91,14 +89,12 @@ _AIProcessHandTrainerCards:
 	ld [wAITrainerCardParameter], a
 
 ; show Play Trainer Card screen
-	push de
 	push hl
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_PLAY_TRAINER
 	bank1call AIMakeDecision
 	pop hl
-	pop de
 	jr c, .inc_hl_by_2
 
 ; execute the effects of the Trainer card
@@ -143,7 +139,6 @@ _AIProcessHandTrainerCards:
 	jp .loop_data
 
 .next_in_data
-	pop de
 	pop hl
 	inc hl
 	inc hl
@@ -1965,6 +1960,7 @@ AIDecide_PokemonBreeder:
 ; stage 2 Pokemon cards
 	ld d, a
 	call LoadCardDataToBuffer1_FromDeckIndex
+	push de
 	ld a, [wLoadedCard1ID + 0]
 	ld e, a
 	ld a, [wLoadedCard1ID + 1]
@@ -1980,9 +1976,12 @@ AIDecide_PokemonBreeder:
 	cp16 ALAKAZAM
 	jr z, .found
 	cp16 GENGAR
-	jr nz, .loop_hand_1
+	jr z, .found
+	pop de
+	jr .loop_hand_1
 
 .found
+	pop de
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	push hl
 	call GetTurnDuelistVariable
